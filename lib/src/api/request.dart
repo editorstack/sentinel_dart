@@ -101,3 +101,15 @@ enum VerificationFactor {
   /// Sends a code to the user's phone number
   phoneCode,
 }
+
+/// Body for TOTP verification
+@freezed
+class TOTPVerifyBody with _$TOTPVerifyBody {
+  /// Creates a new instance of [TOTPVerifyBody] with the specified parameters.
+  const factory TOTPVerifyBody({
+    required String code,
+  }) = _TOTPVerifyBody;
+
+  /// Used to serialize [TOTPVerifyBody] object to and from JSON.
+  factory TOTPVerifyBody.fromJson(Map<String, dynamic> json) => _$TOTPVerifyBodyFromJson(json);
+}
