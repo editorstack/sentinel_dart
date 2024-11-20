@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_api.dart';
+part of 'sentinel_api.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

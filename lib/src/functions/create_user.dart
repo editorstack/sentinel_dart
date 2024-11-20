@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
-import 'package:sentinel/src/api/auth_api.dart';
+import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/database/database.dart';
 import 'package:sentinel/src/models/session.dart';
 import 'package:sentinel/src/models/user.dart';

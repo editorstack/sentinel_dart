@@ -3,7 +3,7 @@
 /// More dart docs go here.
 library sentinel;
 
-export 'src/api/auth_api.dart' show SentinelException;
+export 'src/api/sentinel_api.dart' show SentinelException;
 export 'src/models/device.dart' hide DeviceConverter;
 export 'src/models/factor.dart' hide FactorConverter;
 export 'src/models/session.dart' hide DSessionConverter, SessionConverter, Sessions;

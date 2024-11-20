@@ -1,4 +1,4 @@
-part of 'auth_api.dart';
+part of 'sentinel_api.dart';
 
 /// Body for signing up a new user
 @Freezed(unionKey: 'factor')

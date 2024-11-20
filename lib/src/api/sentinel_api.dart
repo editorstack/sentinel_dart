@@ -4,8 +4,8 @@ import 'package:retrofit/retrofit.dart';
 import 'package:sentinel/src/models/device.dart';
 import 'package:sentinel/src/models/session.dart';
 
-part 'auth_api.freezed.dart';
-part 'auth_api.g.dart';
+part 'sentinel_api.freezed.dart';
+part 'sentinel_api.g.dart';
 
 part 'request.dart';
 part 'exception.dart';
