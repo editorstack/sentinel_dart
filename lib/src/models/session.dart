@@ -1,10 +1,8 @@
 import 'package:drift/drift.dart' as drift;
 import 'package:drift/drift.dart' show KeyAction;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sentinel_dart/src/models/session.drift.dart';
-import 'package:sentinel_dart/src/models/user.dart';
-
-export 'session.drift.dart';
+import 'package:sentinel/src/models/session.drift.dart';
+import 'package:sentinel/src/models/user.dart';
 
 part 'session.freezed.dart';
 part 'session.g.dart';
@@ -35,8 +33,7 @@ class Session with _$Session {
   }) = _Session;
 
   /// Used to serialize [Session] object to and from JSON.
-  factory Session.fromJson(Map<String, Object?> json) =>
-      _$SessionFromJson(json);
+  factory Session.fromJson(Map<String, Object?> json) => _$SessionFromJson(json);
 }
 
 /// Represents the status of a user's session.
@@ -82,8 +79,7 @@ class UserSession with _$UserSession {
   }) = _UserSession;
 
   /// Used to serialize [UserSession] object to and from JSON.
-  factory UserSession.fromJson(Map<String, Object?> json) =>
-      _$UserSessionFromJson(json);
+  factory UserSession.fromJson(Map<String, Object?> json) => _$UserSessionFromJson(json);
 }
 
 /// Represents a user's' session in the Drift database.
