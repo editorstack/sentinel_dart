@@ -1,10 +1,8 @@
 import 'package:drift/drift.dart' as drift;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sentinel_dart/src/models/device.dart';
-import 'package:sentinel_dart/src/models/factor.dart';
-import 'package:sentinel_dart/src/models/user.drift.dart';
-
-export 'user.drift.dart';
+import 'package:sentinel/src/models/device.dart';
+import 'package:sentinel/src/models/factor.dart';
+import 'package:sentinel/src/models/user.drift.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -27,6 +25,7 @@ class User with _$User {
     required UserRole role,
     required String? image,
     required bool twoFactor,
+    required bool banned,
     required DateTime createdAt,
     required DateTime updatedAt,
     required List<Factor> factors,
@@ -45,8 +44,7 @@ class User with _$User {
   String get name => '${firstName ?? ''} ${lastName ?? ''}'.trim();
 
   /// Returns the initials of the user's name.
-  String get initials =>
-      '${firstName?.substring(0, 1) ?? ''}${lastName?.substring(0, 1) ?? ''}';
+  String get initials => '${firstName?.substring(0, 1) ?? ''}${lastName?.substring(0, 1) ?? ''}';
 }
 
 /// Represents the different types of users supported by the system.
@@ -93,6 +91,9 @@ class Users extends drift.Table {
   /// Whether two factor authentication is enabled for the user.
   drift.BoolColumn get twoFactor => boolean()();
 
+  /// Whether the user account is banned.
+  drift.BoolColumn get banned => boolean()();
+
   /// Date and time when the user account was created.
   drift.DateTimeColumn get createdAt => dateTime()();
 
@@ -110,7 +111,7 @@ class Users extends drift.Table {
 }
 
 /// Extension on [User] to provide conversion to [DUser].
-extension Converter on User {
+extension UserConverter on User {
   /// Converts an [User] instance to an [DUser] instance.
   ///
   /// Returns an [DUser] object that can be stored in the Drift database.
@@ -124,6 +125,7 @@ extension Converter on User {
       role: role,
       image: image,
       twoFactor: twoFactor,
+      banned: banned,
       createdAt: createdAt,
       updatedAt: updatedAt,
       factors: factors,
@@ -150,6 +152,7 @@ extension DUserConverter on DUser {
       role: role,
       image: image,
       twoFactor: twoFactor,
+      banned: banned,
       createdAt: createdAt,
       updatedAt: updatedAt,
       factors: factors,

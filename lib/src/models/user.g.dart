@@ -15,6 +15,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       role: $enumDecode(_$UserRoleEnumMap, json['role']),
       image: json['image'] as String?,
       twoFactor: json['twoFactor'] as bool,
+      banned: json['banned'] as bool,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       factors: (json['factors'] as List<dynamic>)
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'role': _$UserRoleEnumMap[instance.role]!,
       'image': instance.image,
       'twoFactor': instance.twoFactor,
+      'banned': instance.banned,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'factors': instance.factors.map((e) => e.toJson()).toList(),

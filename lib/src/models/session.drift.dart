@@ -1,8 +1,8 @@
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
-import 'package:sentinel_dart/src/models/session.drift.dart' as i1;
-import 'package:sentinel_dart/src/models/session.dart' as i2;
-import 'package:sentinel_dart/src/models/user.drift.dart' as i3;
+import 'package:sentinel/src/models/session.drift.dart' as i1;
+import 'package:sentinel/src/models/session.dart' as i2;
+import 'package:sentinel/src/models/user.drift.dart' as i3;
 import 'package:drift/internal/modular.dart' as i4;
 
 typedef $$SessionsTableCreateCompanionBuilder = i1.SessionsCompanion Function({

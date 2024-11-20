@@ -1,9 +1,9 @@
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
-import 'package:sentinel_dart/src/models/user.drift.dart' as i1;
-import 'package:sentinel_dart/src/models/user.dart' as i2;
-import 'package:sentinel_dart/src/models/factor.dart' as i3;
-import 'package:sentinel_dart/src/models/device.dart' as i4;
+import 'package:sentinel/src/models/user.drift.dart' as i1;
+import 'package:sentinel/src/models/user.dart' as i2;
+import 'package:sentinel/src/models/factor.dart' as i3;
+import 'package:sentinel/src/models/device.dart' as i4;
 
 typedef $$UsersTableCreateCompanionBuilder = i1.UsersCompanion Function({
   required String id,
@@ -14,6 +14,7 @@ typedef $$UsersTableCreateCompanionBuilder = i1.UsersCompanion Function({
   required i2.UserRole role,
   i0.Value<String?> image,
   required bool twoFactor,
+  required bool banned,
   required DateTime createdAt,
   required DateTime updatedAt,
   required List<i3.Factor> factors,
@@ -29,6 +30,7 @@ typedef $$UsersTableUpdateCompanionBuilder = i1.UsersCompanion Function({
   i0.Value<i2.UserRole> role,
   i0.Value<String?> image,
   i0.Value<bool> twoFactor,
+  i0.Value<bool> banned,
   i0.Value<DateTime> createdAt,
   i0.Value<DateTime> updatedAt,
   i0.Value<List<i3.Factor>> factors,
@@ -71,6 +73,9 @@ class $$UsersTableFilterComposer
 
   i0.ColumnFilters<bool> get twoFactor => $composableBuilder(
       column: $table.twoFactor, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<bool> get banned => $composableBuilder(
+      column: $table.banned, builder: (column) => i0.ColumnFilters(column));
 
   i0.ColumnFilters<DateTime> get createdAt => $composableBuilder(
       column: $table.createdAt, builder: (column) => i0.ColumnFilters(column));
@@ -125,6 +130,9 @@ class $$UsersTableOrderingComposer
       column: $table.twoFactor,
       builder: (column) => i0.ColumnOrderings(column));
 
+  i0.ColumnOrderings<bool> get banned => $composableBuilder(
+      column: $table.banned, builder: (column) => i0.ColumnOrderings(column));
+
   i0.ColumnOrderings<DateTime> get createdAt => $composableBuilder(
       column: $table.createdAt,
       builder: (column) => i0.ColumnOrderings(column));
@@ -173,6 +181,9 @@ class $$UsersTableAnnotationComposer
   i0.GeneratedColumn<bool> get twoFactor =>
       $composableBuilder(column: $table.twoFactor, builder: (column) => column);
 
+  i0.GeneratedColumn<bool> get banned =>
+      $composableBuilder(column: $table.banned, builder: (column) => column);
+
   i0.GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
 
@@ -220,6 +231,7 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             i0.Value<i2.UserRole> role = const i0.Value.absent(),
             i0.Value<String?> image = const i0.Value.absent(),
             i0.Value<bool> twoFactor = const i0.Value.absent(),
+            i0.Value<bool> banned = const i0.Value.absent(),
             i0.Value<DateTime> createdAt = const i0.Value.absent(),
             i0.Value<DateTime> updatedAt = const i0.Value.absent(),
             i0.Value<List<i3.Factor>> factors = const i0.Value.absent(),
@@ -235,6 +247,7 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             role: role,
             image: image,
             twoFactor: twoFactor,
+            banned: banned,
             createdAt: createdAt,
             updatedAt: updatedAt,
             factors: factors,
@@ -250,6 +263,7 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             required i2.UserRole role,
             i0.Value<String?> image = const i0.Value.absent(),
             required bool twoFactor,
+            required bool banned,
             required DateTime createdAt,
             required DateTime updatedAt,
             required List<i3.Factor> factors,
@@ -265,6 +279,7 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             role: role,
             image: image,
             twoFactor: twoFactor,
+            banned: banned,
             createdAt: createdAt,
             updatedAt: updatedAt,
             factors: factors,
@@ -350,6 +365,15 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
       requiredDuringInsert: true,
       defaultConstraints: i0.GeneratedColumn.constraintIsAlways(
           'CHECK ("twoFactor" IN (0, 1))'));
+  static const i0.VerificationMeta _bannedMeta =
+      const i0.VerificationMeta('banned');
+  @override
+  late final i0.GeneratedColumn<bool> banned = i0.GeneratedColumn<bool>(
+      'banned', aliasedName, false,
+      type: i0.DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          i0.GeneratedColumn.constraintIsAlways('CHECK ("banned" IN (0, 1))'));
   static const i0.VerificationMeta _createdAtMeta =
       const i0.VerificationMeta('createdAt');
   @override
@@ -386,6 +410,7 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
         role,
         image,
         twoFactor,
+        banned,
         createdAt,
         updatedAt,
         factors,
@@ -435,6 +460,12 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
     } else if (isInserting) {
       context.missing(_twoFactorMeta);
     }
+    if (data.containsKey('banned')) {
+      context.handle(_bannedMeta,
+          banned.isAcceptableOrUnknown(data['banned']!, _bannedMeta));
+    } else if (isInserting) {
+      context.missing(_bannedMeta);
+    }
     if (data.containsKey('createdAt')) {
       context.handle(_createdAtMeta,
           createdAt.isAcceptableOrUnknown(data['createdAt']!, _createdAtMeta));
@@ -474,6 +505,8 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
           .read(i0.DriftSqlType.string, data['${effectivePrefix}image']),
       twoFactor: attachedDatabase.typeMapping
           .read(i0.DriftSqlType.bool, data['${effectivePrefix}twoFactor'])!,
+      banned: attachedDatabase.typeMapping
+          .read(i0.DriftSqlType.bool, data['${effectivePrefix}banned'])!,
       createdAt: attachedDatabase.typeMapping
           .read(i0.DriftSqlType.dateTime, data['${effectivePrefix}createdAt'])!,
       updatedAt: attachedDatabase.typeMapping
@@ -525,6 +558,9 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
   /// Whether two factor authentication is enabled for the user.
   final bool twoFactor;
 
+  /// Whether the user account is banned.
+  final bool banned;
+
   /// Date and time when the user account was created.
   final DateTime createdAt;
 
@@ -545,6 +581,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
       required this.role,
       this.image,
       required this.twoFactor,
+      required this.banned,
       required this.createdAt,
       required this.updatedAt,
       required this.factors,
@@ -573,6 +610,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
       map['image'] = i0.Variable<String>(image);
     }
     map['twoFactor'] = i0.Variable<bool>(twoFactor);
+    map['banned'] = i0.Variable<bool>(banned);
     map['createdAt'] = i0.Variable<DateTime>(createdAt);
     map['updatedAt'] = i0.Variable<DateTime>(updatedAt);
     {
@@ -606,6 +644,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           ? const i0.Value.absent()
           : i0.Value(image),
       twoFactor: i0.Value(twoFactor),
+      banned: i0.Value(banned),
       createdAt: i0.Value(createdAt),
       updatedAt: i0.Value(updatedAt),
       factors: i0.Value(factors),
@@ -626,6 +665,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           .fromJson(serializer.fromJson<String>(json['role'])),
       image: serializer.fromJson<String?>(json['image']),
       twoFactor: serializer.fromJson<bool>(json['twoFactor']),
+      banned: serializer.fromJson<bool>(json['banned']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
       factors: serializer.fromJson<List<i3.Factor>>(json['factors']),
@@ -645,6 +685,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           serializer.toJson<String>(i1.$UsersTable.$converterrole.toJson(role)),
       'image': serializer.toJson<String?>(image),
       'twoFactor': serializer.toJson<bool>(twoFactor),
+      'banned': serializer.toJson<bool>(banned),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
       'factors': serializer.toJson<List<i3.Factor>>(factors),
@@ -661,6 +702,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           i2.UserRole? role,
           i0.Value<String?> image = const i0.Value.absent(),
           bool? twoFactor,
+          bool? banned,
           DateTime? createdAt,
           DateTime? updatedAt,
           List<i3.Factor>? factors,
@@ -674,6 +716,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
         role: role ?? this.role,
         image: image.present ? image.value : this.image,
         twoFactor: twoFactor ?? this.twoFactor,
+        banned: banned ?? this.banned,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
         factors: factors ?? this.factors,
@@ -690,6 +733,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
       role: data.role.present ? data.role.value : this.role,
       image: data.image.present ? data.image.value : this.image,
       twoFactor: data.twoFactor.present ? data.twoFactor.value : this.twoFactor,
+      banned: data.banned.present ? data.banned.value : this.banned,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
       factors: data.factors.present ? data.factors.value : this.factors,
@@ -708,6 +752,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           ..write('role: $role, ')
           ..write('image: $image, ')
           ..write('twoFactor: $twoFactor, ')
+          ..write('banned: $banned, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('factors: $factors, ')
@@ -718,7 +763,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
 
   @override
   int get hashCode => Object.hash(id, firstName, lastName, email, phoneNumber,
-      role, image, twoFactor, createdAt, updatedAt, factors, devices);
+      role, image, twoFactor, banned, createdAt, updatedAt, factors, devices);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -731,6 +776,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           other.role == this.role &&
           other.image == this.image &&
           other.twoFactor == this.twoFactor &&
+          other.banned == this.banned &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
           other.factors == this.factors &&
@@ -746,6 +792,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
   final i0.Value<i2.UserRole> role;
   final i0.Value<String?> image;
   final i0.Value<bool> twoFactor;
+  final i0.Value<bool> banned;
   final i0.Value<DateTime> createdAt;
   final i0.Value<DateTime> updatedAt;
   final i0.Value<List<i3.Factor>> factors;
@@ -760,6 +807,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     this.role = const i0.Value.absent(),
     this.image = const i0.Value.absent(),
     this.twoFactor = const i0.Value.absent(),
+    this.banned = const i0.Value.absent(),
     this.createdAt = const i0.Value.absent(),
     this.updatedAt = const i0.Value.absent(),
     this.factors = const i0.Value.absent(),
@@ -775,6 +823,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     required i2.UserRole role,
     this.image = const i0.Value.absent(),
     required bool twoFactor,
+    required bool banned,
     required DateTime createdAt,
     required DateTime updatedAt,
     required List<i3.Factor> factors,
@@ -783,6 +832,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
   })  : id = i0.Value(id),
         role = i0.Value(role),
         twoFactor = i0.Value(twoFactor),
+        banned = i0.Value(banned),
         createdAt = i0.Value(createdAt),
         updatedAt = i0.Value(updatedAt),
         factors = i0.Value(factors),
@@ -796,6 +846,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     i0.Expression<String>? role,
     i0.Expression<String>? image,
     i0.Expression<bool>? twoFactor,
+    i0.Expression<bool>? banned,
     i0.Expression<DateTime>? createdAt,
     i0.Expression<DateTime>? updatedAt,
     i0.Expression<String>? factors,
@@ -811,6 +862,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
       if (role != null) 'role': role,
       if (image != null) 'image': image,
       if (twoFactor != null) 'twoFactor': twoFactor,
+      if (banned != null) 'banned': banned,
       if (createdAt != null) 'createdAt': createdAt,
       if (updatedAt != null) 'updatedAt': updatedAt,
       if (factors != null) 'factors': factors,
@@ -828,6 +880,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
       i0.Value<i2.UserRole>? role,
       i0.Value<String?>? image,
       i0.Value<bool>? twoFactor,
+      i0.Value<bool>? banned,
       i0.Value<DateTime>? createdAt,
       i0.Value<DateTime>? updatedAt,
       i0.Value<List<i3.Factor>>? factors,
@@ -842,6 +895,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
       role: role ?? this.role,
       image: image ?? this.image,
       twoFactor: twoFactor ?? this.twoFactor,
+      banned: banned ?? this.banned,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       factors: factors ?? this.factors,
@@ -878,6 +932,9 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     if (twoFactor.present) {
       map['twoFactor'] = i0.Variable<bool>(twoFactor.value);
     }
+    if (banned.present) {
+      map['banned'] = i0.Variable<bool>(banned.value);
+    }
     if (createdAt.present) {
       map['createdAt'] = i0.Variable<DateTime>(createdAt.value);
     }
@@ -909,6 +966,7 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
           ..write('role: $role, ')
           ..write('image: $image, ')
           ..write('twoFactor: $twoFactor, ')
+          ..write('banned: $banned, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('factors: $factors, ')

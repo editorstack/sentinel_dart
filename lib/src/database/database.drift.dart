@@ -1,7 +1,7 @@
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
-import 'package:sentinel_dart/src/models/user.drift.dart' as i1;
-import 'package:sentinel_dart/src/models/session.drift.dart' as i2;
+import 'package:sentinel/src/models/user.drift.dart' as i1;
+import 'package:sentinel/src/models/session.drift.dart' as i2;
 
 abstract class $SentinelDatabase extends i0.GeneratedDatabase {
   $SentinelDatabase(i0.QueryExecutor e) : super(e);

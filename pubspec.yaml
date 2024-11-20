@@ -1,4 +1,4 @@
-name: sentinel_dart
+name: sentinel
 description: A starting point for Dart libraries or applications.
 version: 0.0.1
 homepage: https://editorstack.com
@@ -9,12 +9,14 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  dio: ^5.7.0
   drift: ^2.21.0
   drift_flutter: ^0.2.1
   flutter:
     sdk: flutter
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+  retrofit: ^4.4.1
 
 dev_dependencies:
   build_runner: ^2.4.13
@@ -24,4 +26,5 @@ dev_dependencies:
   freezed: ^2.5.7
   json_serializable: ^6.8.0
   mocktail: ^1.0.4
+  retrofit_generator: ^9.1.5
   very_good_analysis: ^6.0.0
