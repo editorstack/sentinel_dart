@@ -8,6 +8,7 @@ part 'sentinel_api.freezed.dart';
 part 'sentinel_api.g.dart';
 
 part 'request.dart';
+part 'response.dart';
 part 'exception.dart';
 
 /// Provides an interface for authentication and user management in sentinel.
@@ -56,4 +57,34 @@ abstract class SentinelApi {
   @DELETE('/auth/sessions/{sessionID}')
   @Headers({'Content-Type': 'application/json'})
   Future<bool> deleteSession(@Path() String sessionID);
+
+  /// Enables TOTP for the user
+  @POST('/auth/mfa/enable-totp')
+  @Headers({'Content-Type': 'application/json'})
+  Future<TOTPResponse> enableTOTP();
+
+  /// Verifies the TOTP code
+  @POST('/auth/mfa/verify-totp')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> verifyTOTP(@Body() TOTPVerifyBody body);
+
+  /// Disables TOTP for the user
+  @DELETE('/auth/mfa/disable-totp')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> disableTOTP();
+
+  /// Enables two factor for the user
+  @PATCH('/auth/mfa/enable-two-factor')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> enableTwoFactor();
+
+  /// Disables two factor for the user
+  @PATCH('/auth/mfa/disable-two-factor')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> disableTwoFactor();
+
+  /// Regenerates recovery codes for the user
+  @PATCH('/auth/mfa/regenerate-recovery-codes')
+  @Headers({'Content-Type': 'application/json'})
+  Future<List<String>> regenerateRecoveryCodes();
 }

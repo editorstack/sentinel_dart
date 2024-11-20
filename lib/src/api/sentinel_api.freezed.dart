@@ -1370,3 +1370,311 @@ abstract class _SignUpAttemptVerificationBody implements SignUpAttemptVerificati
 _$$SignUpAttemptVerificationBodyImplCopyWith<_$SignUpAttemptVerificationBodyImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
+
+TOTPVerifyBody _$TOTPVerifyBodyFromJson(Map<String, dynamic> json) {
+return _TOTPVerifyBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TOTPVerifyBody {
+
+ String get code => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this TOTPVerifyBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of TOTPVerifyBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$TOTPVerifyBodyCopyWith<TOTPVerifyBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $TOTPVerifyBodyCopyWith<$Res>  {
+  factory $TOTPVerifyBodyCopyWith(TOTPVerifyBody value, $Res Function(TOTPVerifyBody) then) = _$TOTPVerifyBodyCopyWithImpl<$Res, TOTPVerifyBody>;
+@useResult
+$Res call({
+ String code
+});
+
+
+
+}
+
+/// @nodoc
+class _$TOTPVerifyBodyCopyWithImpl<$Res,$Val extends TOTPVerifyBody> implements $TOTPVerifyBodyCopyWith<$Res> {
+  _$TOTPVerifyBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of TOTPVerifyBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? code = null,}) {
+  return _then(_value.copyWith(
+code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
+as String,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$TOTPVerifyBodyImplCopyWith<$Res> implements $TOTPVerifyBodyCopyWith<$Res> {
+  factory _$$TOTPVerifyBodyImplCopyWith(_$TOTPVerifyBodyImpl value, $Res Function(_$TOTPVerifyBodyImpl) then) = __$$TOTPVerifyBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String code
+});
+
+
+
+}
+
+/// @nodoc
+class __$$TOTPVerifyBodyImplCopyWithImpl<$Res> extends _$TOTPVerifyBodyCopyWithImpl<$Res, _$TOTPVerifyBodyImpl> implements _$$TOTPVerifyBodyImplCopyWith<$Res> {
+  __$$TOTPVerifyBodyImplCopyWithImpl(_$TOTPVerifyBodyImpl _value, $Res Function(_$TOTPVerifyBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of TOTPVerifyBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? code = null,}) {
+  return _then(_$TOTPVerifyBodyImpl(
+code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$TOTPVerifyBodyImpl  implements _TOTPVerifyBody {
+  const _$TOTPVerifyBodyImpl({required this.code});
+
+  factory _$TOTPVerifyBodyImpl.fromJson(Map<String, dynamic> json) => _$$TOTPVerifyBodyImplFromJson(json);
+
+@override final  String code;
+
+@override
+String toString() {
+  return 'TOTPVerifyBody(code: $code)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$TOTPVerifyBodyImpl&&(identical(other.code, code) || other.code == code));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,code);
+
+/// Create a copy of TOTPVerifyBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$TOTPVerifyBodyImplCopyWith<_$TOTPVerifyBodyImpl> get copyWith => __$$TOTPVerifyBodyImplCopyWithImpl<_$TOTPVerifyBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$TOTPVerifyBodyImplToJson(this, );
+}
+}
+
+
+abstract class _TOTPVerifyBody implements TOTPVerifyBody {
+  const factory _TOTPVerifyBody({required final  String code}) = _$TOTPVerifyBodyImpl;
+  
+
+  factory _TOTPVerifyBody.fromJson(Map<String, dynamic> json) = _$TOTPVerifyBodyImpl.fromJson;
+
+@override String get code;
+/// Create a copy of TOTPVerifyBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$TOTPVerifyBodyImplCopyWith<_$TOTPVerifyBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+TOTPResponse _$TOTPResponseFromJson(Map<String, dynamic> json) {
+return _TOTPResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TOTPResponse {
+
+ String get id => throw _privateConstructorUsedError; String get secret => throw _privateConstructorUsedError; String get uri => throw _privateConstructorUsedError; bool get verified => throw _privateConstructorUsedError; List<String> get recoveryCodes => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this TOTPResponse to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of TOTPResponse
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$TOTPResponseCopyWith<TOTPResponse> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $TOTPResponseCopyWith<$Res>  {
+  factory $TOTPResponseCopyWith(TOTPResponse value, $Res Function(TOTPResponse) then) = _$TOTPResponseCopyWithImpl<$Res, TOTPResponse>;
+@useResult
+$Res call({
+ String id, String secret, String uri, bool verified, List<String> recoveryCodes
+});
+
+
+
+}
+
+/// @nodoc
+class _$TOTPResponseCopyWithImpl<$Res,$Val extends TOTPResponse> implements $TOTPResponseCopyWith<$Res> {
+  _$TOTPResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of TOTPResponse
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? secret = null,Object? uri = null,Object? verified = null,Object? recoveryCodes = null,}) {
+  return _then(_value.copyWith(
+id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
+as String,secret: null == secret ? _value.secret : secret // ignore: cast_nullable_to_non_nullable
+as String,uri: null == uri ? _value.uri : uri // ignore: cast_nullable_to_non_nullable
+as String,verified: null == verified ? _value.verified : verified // ignore: cast_nullable_to_non_nullable
+as bool,recoveryCodes: null == recoveryCodes ? _value.recoveryCodes : recoveryCodes // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$TOTPResponseImplCopyWith<$Res> implements $TOTPResponseCopyWith<$Res> {
+  factory _$$TOTPResponseImplCopyWith(_$TOTPResponseImpl value, $Res Function(_$TOTPResponseImpl) then) = __$$TOTPResponseImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String id, String secret, String uri, bool verified, List<String> recoveryCodes
+});
+
+
+
+}
+
+/// @nodoc
+class __$$TOTPResponseImplCopyWithImpl<$Res> extends _$TOTPResponseCopyWithImpl<$Res, _$TOTPResponseImpl> implements _$$TOTPResponseImplCopyWith<$Res> {
+  __$$TOTPResponseImplCopyWithImpl(_$TOTPResponseImpl _value, $Res Function(_$TOTPResponseImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of TOTPResponse
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? secret = null,Object? uri = null,Object? verified = null,Object? recoveryCodes = null,}) {
+  return _then(_$TOTPResponseImpl(
+id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
+as String,secret: null == secret ? _value.secret : secret // ignore: cast_nullable_to_non_nullable
+as String,uri: null == uri ? _value.uri : uri // ignore: cast_nullable_to_non_nullable
+as String,verified: null == verified ? _value.verified : verified // ignore: cast_nullable_to_non_nullable
+as bool,recoveryCodes: null == recoveryCodes ? _value._recoveryCodes : recoveryCodes // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$TOTPResponseImpl  implements _TOTPResponse {
+  const _$TOTPResponseImpl({required this.id, required this.secret, required this.uri, required this.verified, required final  List<String> recoveryCodes}): _recoveryCodes = recoveryCodes;
+
+  factory _$TOTPResponseImpl.fromJson(Map<String, dynamic> json) => _$$TOTPResponseImplFromJson(json);
+
+@override final  String id;
+@override final  String secret;
+@override final  String uri;
+@override final  bool verified;
+ final  List<String> _recoveryCodes;
+@override List<String> get recoveryCodes {
+  if (_recoveryCodes is EqualUnmodifiableListView) return _recoveryCodes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_recoveryCodes);
+}
+
+
+@override
+String toString() {
+  return 'TOTPResponse(id: $id, secret: $secret, uri: $uri, verified: $verified, recoveryCodes: $recoveryCodes)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$TOTPResponseImpl&&(identical(other.id, id) || other.id == id)&&(identical(other.secret, secret) || other.secret == secret)&&(identical(other.uri, uri) || other.uri == uri)&&(identical(other.verified, verified) || other.verified == verified)&&const DeepCollectionEquality().equals(other._recoveryCodes, _recoveryCodes));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,secret,uri,verified,const DeepCollectionEquality().hash(_recoveryCodes));
+
+/// Create a copy of TOTPResponse
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$TOTPResponseImplCopyWith<_$TOTPResponseImpl> get copyWith => __$$TOTPResponseImplCopyWithImpl<_$TOTPResponseImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$TOTPResponseImplToJson(this, );
+}
+}
+
+
+abstract class _TOTPResponse implements TOTPResponse {
+  const factory _TOTPResponse({required final  String id, required final  String secret, required final  String uri, required final  bool verified, required final  List<String> recoveryCodes}) = _$TOTPResponseImpl;
+  
+
+  factory _TOTPResponse.fromJson(Map<String, dynamic> json) = _$TOTPResponseImpl.fromJson;
+
+@override String get id;@override String get secret;@override String get uri;@override bool get verified;@override List<String> get recoveryCodes;
+/// Create a copy of TOTPResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$TOTPResponseImplCopyWith<_$TOTPResponseImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
