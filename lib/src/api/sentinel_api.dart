@@ -31,4 +31,29 @@ abstract class SentinelApi {
   @POST('/auth/sign-up/attempt-verification')
   @Headers({'Content-Type': 'application/json'})
   Future<UserSession> signUpAttemptVerification(@Body() SignUpAttemptVerificationBody body);
+
+  /// Gets all sessions for the user
+  @GET('/auth/sessions/')
+  @Headers({'Content-Type': 'application/json'})
+  Future<List<Session>> getSessions();
+
+  /// Gets a session by ID
+  @GET('/auth/sessions/{sessionID}')
+  @Headers({'Content-Type': 'application/json'})
+  Future<Session?> getSession(@Path() String sessionID);
+
+  /// Deletes all sessions for the user
+  @DELETE('/auth/sessions/')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> deleteAllSessions();
+
+  /// Deletes other sessions for the user
+  @DELETE('/auth/sessions/others')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> deleteOtherSessions();
+
+  /// Deletes a session by ID
+  @DELETE('/auth/sessions/{sessionID}')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> deleteSession(@Path() String sessionID);
 }
