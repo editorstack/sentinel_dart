@@ -19,7 +19,7 @@ void main() {
 
   group('MFA -', () {
     group('Enable TOTP -', () {
-      test('when enabling TOTP throws an error, it should catch it and throw an SentinelException',
+      test('when enabling TOTP throws an error, it should catch it and throw a SentinelException',
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.enableTOTP()).thenAnswer(
@@ -51,7 +51,7 @@ void main() {
     });
 
     group('Verify TOTP -', () {
-      test('when verifying TOTP throws an error, it should catch it and throw an SentinelException',
+      test('when verifying TOTP throws an error, it should catch it and throw a SentinelException',
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.verifyTOTP(any())).thenAnswer(
@@ -76,7 +76,7 @@ void main() {
     });
 
     group('Disable TOTP -', () {
-      test('when disabling TOTP throws an error, it should catch it and throw an SentinelException',
+      test('when disabling TOTP throws an error, it should catch it and throw a SentinelException',
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.disableTOTP()).thenAnswer(
@@ -102,7 +102,7 @@ void main() {
 
     group('Enable two factor -', () {
       test(
-          'when enabling two factor throws an error, it should catch it and throw an SentinelException',
+          'when enabling two factor throws an error, it should catch it and throw a SentinelException',
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.enableTwoFactor()).thenAnswer(
@@ -128,7 +128,7 @@ void main() {
 
     group('Disable two factor -', () {
       test(
-          'when disabling two factor throws an error, it should catch it and throw an SentinelException',
+          'when disabling two factor throws an error, it should catch it and throw a SentinelException',
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.disableTwoFactor()).thenAnswer(
@@ -154,7 +154,7 @@ void main() {
 
     group('Regenerate recovery codes -', () {
       test(
-          'when regenerating recovery codes throws an error, it should catch it and throw an SentinelException',
+          'when regenerating recovery codes throws an error, it should catch it and throw a SentinelException',
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.regenerateRecoveryCodes()).thenAnswer(

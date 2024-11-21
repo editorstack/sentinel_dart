@@ -189,11 +189,9 @@ class EmailCodeSignUp {
 
   /// Sends a 6 digit code to the email address that is used for verifying the
   /// user's email address.
-  Future<bool> prepare() async {
+  Future<bool> prepareVerification() async {
     try {
-      return await _sentinel.signUpPrepareVerification(
-        const SignUpPrepareVerificationBody.emailCode(),
-      );
+      return await _sentinel.prepareSignUpVerification(const PrepareVerificationBody.emailCode());
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -201,16 +199,9 @@ class EmailCodeSignUp {
 
   /// Checks whether the provided code is valid and if so, verifies the user's
   /// email address.
-  Future<UserSession> verify({
-    required String code,
-  }) async {
+  Future<UserSession> attemptVerification({required String code}) async {
     try {
-      return await _sentinel.signUpAttemptVerification(
-        SignUpAttemptVerificationBody(
-          factor: VerificationFactor.emailCode,
-          code: code,
-        ),
-      );
+      return await _sentinel.attemptSignUpVerification(AttemptVerificationBody(code: code));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -234,11 +225,10 @@ class EmailLinkSignUp {
 
   /// Sends a redirect link to the email address that is used for verifying the
   /// user's email address.
-  Future<bool> prepare({String? redirectUrl}) async {
+  Future<bool> prepareVerification({required String redirectUrl}) async {
     try {
-      return await _sentinel.signUpPrepareVerification(
-        SignUpPrepareVerificationBody.emailLink(redirectUrl: redirectUrl),
-      );
+      return await _sentinel
+          .prepareSignUpVerification(PrepareVerificationBody.emailLink(redirectUrl: redirectUrl));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -262,11 +252,9 @@ class PhoneCodeSignUp {
 
   /// Sends a 6 digit code to the phone number that is used for verifying the
   /// user's phone number.
-  Future<bool> prepare() async {
+  Future<bool> prepareVerification() async {
     try {
-      return await _sentinel.signUpPrepareVerification(
-        const SignUpPrepareVerificationBody.phoneCode(),
-      );
+      return await _sentinel.prepareSignUpVerification(const PrepareVerificationBody.phoneCode());
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -274,14 +262,9 @@ class PhoneCodeSignUp {
 
   /// Checks whether the provided code is valid and if so, verifies the user's
   /// phone number.
-  Future<UserSession> verify({required String code}) async {
+  Future<UserSession> attemptVerification({required String code}) async {
     try {
-      return await _sentinel.signUpAttemptVerification(
-        SignUpAttemptVerificationBody(
-          factor: VerificationFactor.phoneCode,
-          code: code,
-        ),
-      );
+      return await _sentinel.attemptSignUpVerification(AttemptVerificationBody(code: code));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }

@@ -32,7 +32,7 @@ class FakeEmailLinkPrepareVerificationBody extends Fake
 class FakePhoneCodePrepareVerificationBody extends Fake
     implements PhoneCodePrepareVerificationBody {}
 
-class FakeSignUpAttemptVerificationBody extends Fake implements SignUpAttemptVerificationBody {}
+class FakeAttemptVerificationBody extends Fake implements AttemptVerificationBody {}
 
 void main() {
   late MockSentinelApi mockSentinelApi;
@@ -47,7 +47,7 @@ void main() {
     registerFallbackValue(FakeEmailCodePrepareVerificationBody());
     registerFallbackValue(FakeEmailLinkPrepareVerificationBody());
     registerFallbackValue(FakePhoneCodePrepareVerificationBody());
-    registerFallbackValue(FakeSignUpAttemptVerificationBody());
+    registerFallbackValue(FakeAttemptVerificationBody());
   });
   setUp(() {
     mockSentinelApi = MockSentinelApi();
@@ -86,7 +86,7 @@ void main() {
       );
 
       test(
-        'when sign up throws an error, it should catch it and throw an SentinelException',
+        'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
           final createUser = CreateUser(
@@ -107,7 +107,7 @@ void main() {
 
     group('With email and password -', () {
       test(
-        'when sign up throws an error, it should catch it and throw an SentinelException',
+        'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
           final createUser = CreateUser(
@@ -163,7 +163,7 @@ void main() {
 
     group('With phone and password -', () {
       test(
-        'when sign up throws an error, it should catch it and throw an SentinelException',
+        'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
           final createUser = CreateUser(
@@ -219,7 +219,7 @@ void main() {
 
     group('With email code -', () {
       test(
-        'when sign up throws an error, it should catch it and throw an SentinelException',
+        'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
           final createUser = CreateUser(
@@ -267,7 +267,7 @@ void main() {
       );
 
       test(
-        'when preparing email code verification throws an error, it should catch it and throw an SentinelException',
+        'when preparing email code verification throws an error, it should catch it and throw a SentinelException',
         () async {
           final createUser = CreateUser(
             mockSentinelApi,
@@ -276,12 +276,12 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpPrepareVerification(any()))
+          when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
           final signUp = await createUser.withEmailCode(email: kUser.email!);
 
-          expect(signUp.prepare, throwsA(isA<SentinelException>()));
+          expect(signUp.prepareVerification, throwsA(isA<SentinelException>()));
         },
       );
 
@@ -295,14 +295,14 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpPrepareVerification(any()))
+          when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
           final signUp = await createUser.withEmailCode(email: kUser.email!);
-          final prepared = await signUp.prepare();
+          final prepared = await signUp.prepareVerification();
 
           verify(
-            () => mockSentinelApi.signUpPrepareVerification(
+            () => mockSentinelApi.prepareSignUpVerification(
               any(that: isA<EmailCodePrepareVerificationBody>()),
             ),
           ).called(1);
@@ -311,7 +311,7 @@ void main() {
       );
 
       test(
-        'when verification is attempted and throws an error, it should catch it and throw an SentinelException',
+        'when verification is attempted and throws an error, it should catch it and throw a SentinelException',
         () async {
           final createUser = CreateUser(
             mockSentinelApi,
@@ -320,21 +320,21 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpAttemptVerification(any())).thenAnswer(
+          when(() => mockSentinelApi.attemptSignUpVerification(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
 
           final signUp = await createUser.withEmailCode(email: kUser.email!);
 
           expect(
-            () => signUp.verify(code: '000000'),
+            () => signUp.attemptVerification(code: '000000'),
             throwsA(isA<SentinelException>()),
           );
         },
       );
 
       test(
-        'when sign up verification is successfully, then it should not throw any error',
+        'when sign up verification is successful, then it should not throw any error',
         () async {
           final createUser = CreateUser(
             mockSentinelApi,
@@ -343,19 +343,15 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpAttemptVerification(any()))
+          when(() => mockSentinelApi.attemptSignUpVerification(any()))
               .thenAnswer((_) async => kUserSession);
 
           final signUp = await createUser.withEmailCode(email: kUser.email!);
-          final session = await signUp.verify(code: '000000');
+          final session = await signUp.attemptVerification(code: '000000');
 
           verify(
-            () => mockSentinelApi.signUpAttemptVerification(
-              const SignUpAttemptVerificationBody(
-                factor: VerificationFactor.emailCode,
-                code: '000000',
-              ),
-            ),
+            () => mockSentinelApi
+                .attemptSignUpVerification(const AttemptVerificationBody(code: '000000')),
           ).called(1);
           expect(session, kUserSession);
         },
@@ -364,7 +360,7 @@ void main() {
 
     group('With email link -', () {
       test(
-        'when sign up throws an error, it should catch it and throw an SentinelException',
+        'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
           final createUser = CreateUser(
@@ -412,7 +408,7 @@ void main() {
       );
 
       test(
-        'when preparing email link verification throws an error, it should catch it and throw an SentinelException',
+        'when preparing email link verification throws an error, it should catch it and throw a SentinelException',
         () async {
           final createUser = CreateUser(
             mockSentinelApi,
@@ -421,12 +417,15 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpPrepareVerification(any()))
+          when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
           final signUp = await createUser.withEmailLink(email: kUser.email!);
 
-          expect(signUp.prepare, throwsA(isA<SentinelException>()));
+          expect(
+            () => signUp.prepareVerification(redirectUrl: ''),
+            throwsA(isA<SentinelException>()),
+          );
         },
       );
 
@@ -440,14 +439,14 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpPrepareVerification(any()))
+          when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
           final signUp = await createUser.withEmailLink(email: kUser.email!);
-          final prepared = await signUp.prepare();
+          final prepared = await signUp.prepareVerification(redirectUrl: '');
 
           verify(
-            () => mockSentinelApi.signUpPrepareVerification(
+            () => mockSentinelApi.prepareSignUpVerification(
               any(that: isA<EmailLinkPrepareVerificationBody>()),
             ),
           ).called(1);
@@ -458,7 +457,7 @@ void main() {
 
     group('With phone code -', () {
       test(
-        'when sign up throws an error, it should catch it and throw an SentinelException',
+        'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
           final createUser = CreateUser(
@@ -506,7 +505,7 @@ void main() {
       );
 
       test(
-        'when preparing phone code verification throws an error, it should catch it and throw an SentinelException',
+        'when preparing phone code verification throws an error, it should catch it and throw a SentinelException',
         () async {
           final createUser = CreateUser(
             mockSentinelApi,
@@ -515,12 +514,12 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpPrepareVerification(any()))
+          when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
           final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
 
-          expect(signUp.prepare, throwsA(isA<SentinelException>()));
+          expect(signUp.prepareVerification, throwsA(isA<SentinelException>()));
         },
       );
 
@@ -534,14 +533,14 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpPrepareVerification(any()))
+          when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
           final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
-          final prepared = await signUp.prepare();
+          final prepared = await signUp.prepareVerification();
 
           verify(
-            () => mockSentinelApi.signUpPrepareVerification(
+            () => mockSentinelApi.prepareSignUpVerification(
               any(that: isA<PhoneCodePrepareVerificationBody>()),
             ),
           ).called(1);
@@ -550,7 +549,7 @@ void main() {
       );
 
       test(
-        'when verification is attempted and throws an error, it should catch it and throw an SentinelException',
+        'when verification is attempted and throws an error, it should catch it and throw a SentinelException',
         () async {
           final createUser = CreateUser(
             mockSentinelApi,
@@ -559,21 +558,21 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpAttemptVerification(any())).thenAnswer(
+          when(() => mockSentinelApi.attemptSignUpVerification(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
 
           final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
 
           expect(
-            () => signUp.verify(code: '000000'),
+            () => signUp.attemptVerification(code: '000000'),
             throwsA(isA<SentinelException>()),
           );
         },
       );
 
       test(
-        'when sign up verification is successfully, then it should not throw any error',
+        'when sign up verification is successful, then it should not throw any error',
         () async {
           final createUser = CreateUser(
             mockSentinelApi,
@@ -582,19 +581,15 @@ void main() {
             (_) {},
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
-          when(() => mockSentinelApi.signUpAttemptVerification(any()))
+          when(() => mockSentinelApi.attemptSignUpVerification(any()))
               .thenAnswer((_) async => kUserSession);
 
           final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
-          final session = await signUp.verify(code: '000000');
+          final session = await signUp.attemptVerification(code: '000000');
 
           verify(
-            () => mockSentinelApi.signUpAttemptVerification(
-              const SignUpAttemptVerificationBody(
-                factor: VerificationFactor.phoneCode,
-                code: '000000',
-              ),
-            ),
+            () => mockSentinelApi
+                .attemptSignUpVerification(const AttemptVerificationBody(code: '000000')),
           ).called(1);
           expect(session, kUserSession);
         },

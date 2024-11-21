@@ -856,7 +856,7 @@ _$$DeviceRequestImplCopyWith<_$DeviceRequestImpl> get copyWith => throw _private
 
 }
 
-SignUpPrepareVerificationBody _$SignUpPrepareVerificationBodyFromJson(Map<String, dynamic> json) {
+PrepareVerificationBody _$PrepareVerificationBodyFromJson(Map<String, dynamic> json) {
         switch (json['factor']) {
                   case 'emailCode':
           return EmailCodePrepareVerificationBody.fromJson(json);
@@ -866,44 +866,44 @@ SignUpPrepareVerificationBody _$SignUpPrepareVerificationBodyFromJson(Map<String
           return EmailLinkPrepareVerificationBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'SignUpPrepareVerificationBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'factor', 'PrepareVerificationBody', 'Invalid union type "${json['factor']}"!');
         }
       
 }
 
 /// @nodoc
-mixin _$SignUpPrepareVerificationBody {
+mixin _$PrepareVerificationBody {
 
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String? redirectUrl)  emailLink,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String? redirectUrl)?  emailLink,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String? redirectUrl)?  emailLink,required TResult orElse(),}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String redirectUrl)  emailLink,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String redirectUrl)?  emailLink,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String redirectUrl)?  emailLink,required TResult orElse(),}) => throw _privateConstructorUsedError;
 @optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( EmailCodePrepareVerificationBody value)  emailCode,required TResult Function( PhoneCodePrepareVerificationBody value)  phoneCode,required TResult Function( EmailLinkPrepareVerificationBody value)  emailLink,}) => throw _privateConstructorUsedError;
 @optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( EmailCodePrepareVerificationBody value)?  emailCode,TResult? Function( PhoneCodePrepareVerificationBody value)?  phoneCode,TResult? Function( EmailLinkPrepareVerificationBody value)?  emailLink,}) => throw _privateConstructorUsedError;
 @optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( EmailCodePrepareVerificationBody value)?  emailCode,TResult Function( PhoneCodePrepareVerificationBody value)?  phoneCode,TResult Function( EmailLinkPrepareVerificationBody value)?  emailLink,required TResult orElse(),}) => throw _privateConstructorUsedError;
-/// Serializes this SignUpPrepareVerificationBody to a JSON map.
+/// Serializes this PrepareVerificationBody to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
 }
 
 /// @nodoc
-abstract class $SignUpPrepareVerificationBodyCopyWith<$Res>  {
-  factory $SignUpPrepareVerificationBodyCopyWith(SignUpPrepareVerificationBody value, $Res Function(SignUpPrepareVerificationBody) then) = _$SignUpPrepareVerificationBodyCopyWithImpl<$Res, SignUpPrepareVerificationBody>;
+abstract class $PrepareVerificationBodyCopyWith<$Res>  {
+  factory $PrepareVerificationBodyCopyWith(PrepareVerificationBody value, $Res Function(PrepareVerificationBody) then) = _$PrepareVerificationBodyCopyWithImpl<$Res, PrepareVerificationBody>;
 
 
 
 }
 
 /// @nodoc
-class _$SignUpPrepareVerificationBodyCopyWithImpl<$Res,$Val extends SignUpPrepareVerificationBody> implements $SignUpPrepareVerificationBodyCopyWith<$Res> {
-  _$SignUpPrepareVerificationBodyCopyWithImpl(this._value, this._then);
+class _$PrepareVerificationBodyCopyWithImpl<$Res,$Val extends PrepareVerificationBody> implements $PrepareVerificationBodyCopyWith<$Res> {
+  _$PrepareVerificationBodyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-/// Create a copy of SignUpPrepareVerificationBody
+/// Create a copy of PrepareVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 
 
@@ -919,12 +919,12 @@ abstract class _$$EmailCodePrepareVerificationBodyImplCopyWith<$Res>  {
 }
 
 /// @nodoc
-class __$$EmailCodePrepareVerificationBodyImplCopyWithImpl<$Res> extends _$SignUpPrepareVerificationBodyCopyWithImpl<$Res, _$EmailCodePrepareVerificationBodyImpl> implements _$$EmailCodePrepareVerificationBodyImplCopyWith<$Res> {
+class __$$EmailCodePrepareVerificationBodyImplCopyWithImpl<$Res> extends _$PrepareVerificationBodyCopyWithImpl<$Res, _$EmailCodePrepareVerificationBodyImpl> implements _$$EmailCodePrepareVerificationBodyImplCopyWith<$Res> {
   __$$EmailCodePrepareVerificationBodyImplCopyWithImpl(_$EmailCodePrepareVerificationBodyImpl _value, $Res Function(_$EmailCodePrepareVerificationBodyImpl) _then)
       : super(_value, _then);
 
 
-/// Create a copy of SignUpPrepareVerificationBody
+/// Create a copy of PrepareVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 
 
@@ -947,7 +947,7 @@ final String $type;
 
 @override
 String toString() {
-  return 'SignUpPrepareVerificationBody.emailCode()';
+  return 'PrepareVerificationBody.emailCode()';
 }
 
 
@@ -962,15 +962,15 @@ int get hashCode => runtimeType.hashCode;
 
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String? redirectUrl)  emailLink,}) {
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String redirectUrl)  emailLink,}) {
   return emailCode();
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String? redirectUrl)?  emailLink,}) {
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String redirectUrl)?  emailLink,}) {
   return emailCode?.call();
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String? redirectUrl)?  emailLink,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String redirectUrl)?  emailLink,required TResult orElse(),}) {
   if (emailCode != null) {
     return emailCode();
   }
@@ -998,7 +998,7 @@ Map<String, dynamic> toJson() {
 }
 
 
-abstract class EmailCodePrepareVerificationBody implements SignUpPrepareVerificationBody {
+abstract class EmailCodePrepareVerificationBody implements PrepareVerificationBody {
   const factory EmailCodePrepareVerificationBody() = _$EmailCodePrepareVerificationBodyImpl;
   
 
@@ -1017,12 +1017,12 @@ abstract class _$$PhoneCodePrepareVerificationBodyImplCopyWith<$Res>  {
 }
 
 /// @nodoc
-class __$$PhoneCodePrepareVerificationBodyImplCopyWithImpl<$Res> extends _$SignUpPrepareVerificationBodyCopyWithImpl<$Res, _$PhoneCodePrepareVerificationBodyImpl> implements _$$PhoneCodePrepareVerificationBodyImplCopyWith<$Res> {
+class __$$PhoneCodePrepareVerificationBodyImplCopyWithImpl<$Res> extends _$PrepareVerificationBodyCopyWithImpl<$Res, _$PhoneCodePrepareVerificationBodyImpl> implements _$$PhoneCodePrepareVerificationBodyImplCopyWith<$Res> {
   __$$PhoneCodePrepareVerificationBodyImplCopyWithImpl(_$PhoneCodePrepareVerificationBodyImpl _value, $Res Function(_$PhoneCodePrepareVerificationBodyImpl) _then)
       : super(_value, _then);
 
 
-/// Create a copy of SignUpPrepareVerificationBody
+/// Create a copy of PrepareVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 
 
@@ -1045,7 +1045,7 @@ final String $type;
 
 @override
 String toString() {
-  return 'SignUpPrepareVerificationBody.phoneCode()';
+  return 'PrepareVerificationBody.phoneCode()';
 }
 
 
@@ -1060,15 +1060,15 @@ int get hashCode => runtimeType.hashCode;
 
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String? redirectUrl)  emailLink,}) {
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String redirectUrl)  emailLink,}) {
   return phoneCode();
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String? redirectUrl)?  emailLink,}) {
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String redirectUrl)?  emailLink,}) {
   return phoneCode?.call();
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String? redirectUrl)?  emailLink,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String redirectUrl)?  emailLink,required TResult orElse(),}) {
   if (phoneCode != null) {
     return phoneCode();
   }
@@ -1096,7 +1096,7 @@ Map<String, dynamic> toJson() {
 }
 
 
-abstract class PhoneCodePrepareVerificationBody implements SignUpPrepareVerificationBody {
+abstract class PhoneCodePrepareVerificationBody implements PrepareVerificationBody {
   const factory PhoneCodePrepareVerificationBody() = _$PhoneCodePrepareVerificationBodyImpl;
   
 
@@ -1111,7 +1111,7 @@ abstract class _$$EmailLinkPrepareVerificationBodyImplCopyWith<$Res>  {
   factory _$$EmailLinkPrepareVerificationBodyImplCopyWith(_$EmailLinkPrepareVerificationBodyImpl value, $Res Function(_$EmailLinkPrepareVerificationBodyImpl) then) = __$$EmailLinkPrepareVerificationBodyImplCopyWithImpl<$Res>;
 @useResult
 $Res call({
- String? redirectUrl
+ String redirectUrl
 });
 
 
@@ -1119,17 +1119,17 @@ $Res call({
 }
 
 /// @nodoc
-class __$$EmailLinkPrepareVerificationBodyImplCopyWithImpl<$Res> extends _$SignUpPrepareVerificationBodyCopyWithImpl<$Res, _$EmailLinkPrepareVerificationBodyImpl> implements _$$EmailLinkPrepareVerificationBodyImplCopyWith<$Res> {
+class __$$EmailLinkPrepareVerificationBodyImplCopyWithImpl<$Res> extends _$PrepareVerificationBodyCopyWithImpl<$Res, _$EmailLinkPrepareVerificationBodyImpl> implements _$$EmailLinkPrepareVerificationBodyImplCopyWith<$Res> {
   __$$EmailLinkPrepareVerificationBodyImplCopyWithImpl(_$EmailLinkPrepareVerificationBodyImpl _value, $Res Function(_$EmailLinkPrepareVerificationBodyImpl) _then)
       : super(_value, _then);
 
 
-/// Create a copy of SignUpPrepareVerificationBody
+/// Create a copy of PrepareVerificationBody
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? redirectUrl = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? redirectUrl = null,}) {
   return _then(_$EmailLinkPrepareVerificationBodyImpl(
-redirectUrl: freezed == redirectUrl ? _value.redirectUrl : redirectUrl // ignore: cast_nullable_to_non_nullable
-as String?,
+redirectUrl: null == redirectUrl ? _value.redirectUrl : redirectUrl // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -1144,7 +1144,7 @@ class _$EmailLinkPrepareVerificationBodyImpl  implements EmailLinkPrepareVerific
 
   factory _$EmailLinkPrepareVerificationBodyImpl.fromJson(Map<String, dynamic> json) => _$$EmailLinkPrepareVerificationBodyImplFromJson(json);
 
-@override final  String? redirectUrl;
+@override final  String redirectUrl;
 
 @JsonKey(name: 'factor')
 final String $type;
@@ -1152,7 +1152,7 @@ final String $type;
 
 @override
 String toString() {
-  return 'SignUpPrepareVerificationBody.emailLink(redirectUrl: $redirectUrl)';
+  return 'PrepareVerificationBody.emailLink(redirectUrl: $redirectUrl)';
 }
 
 
@@ -1165,7 +1165,7 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,redirectUrl);
 
-/// Create a copy of SignUpPrepareVerificationBody
+/// Create a copy of PrepareVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
@@ -1173,15 +1173,15 @@ int get hashCode => Object.hash(runtimeType,redirectUrl);
 _$$EmailLinkPrepareVerificationBodyImplCopyWith<_$EmailLinkPrepareVerificationBodyImpl> get copyWith => __$$EmailLinkPrepareVerificationBodyImplCopyWithImpl<_$EmailLinkPrepareVerificationBodyImpl>(this, _$identity);
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String? redirectUrl)  emailLink,}) {
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  emailCode,required TResult Function()  phoneCode,required TResult Function( String redirectUrl)  emailLink,}) {
   return emailLink(redirectUrl);
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String? redirectUrl)?  emailLink,}) {
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  emailCode,TResult? Function()?  phoneCode,TResult? Function( String redirectUrl)?  emailLink,}) {
   return emailLink?.call(redirectUrl);
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String? redirectUrl)?  emailLink,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  emailCode,TResult Function()?  phoneCode,TResult Function( String redirectUrl)?  emailLink,required TResult orElse(),}) {
   if (emailLink != null) {
     return emailLink(redirectUrl);
   }
@@ -1209,49 +1209,49 @@ Map<String, dynamic> toJson() {
 }
 
 
-abstract class EmailLinkPrepareVerificationBody implements SignUpPrepareVerificationBody {
-  const factory EmailLinkPrepareVerificationBody({required final  String? redirectUrl}) = _$EmailLinkPrepareVerificationBodyImpl;
+abstract class EmailLinkPrepareVerificationBody implements PrepareVerificationBody {
+  const factory EmailLinkPrepareVerificationBody({required final  String redirectUrl}) = _$EmailLinkPrepareVerificationBodyImpl;
   
 
   factory EmailLinkPrepareVerificationBody.fromJson(Map<String, dynamic> json) = _$EmailLinkPrepareVerificationBodyImpl.fromJson;
 
- String? get redirectUrl;
-/// Create a copy of SignUpPrepareVerificationBody
+ String get redirectUrl;
+/// Create a copy of PrepareVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 _$$EmailLinkPrepareVerificationBodyImplCopyWith<_$EmailLinkPrepareVerificationBodyImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
 
-SignUpAttemptVerificationBody _$SignUpAttemptVerificationBodyFromJson(Map<String, dynamic> json) {
-return _SignUpAttemptVerificationBody.fromJson(json);
+AttemptVerificationBody _$AttemptVerificationBodyFromJson(Map<String, dynamic> json) {
+return _AttemptVerificationBody.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SignUpAttemptVerificationBody {
+mixin _$AttemptVerificationBody {
 
- VerificationFactor get factor => throw _privateConstructorUsedError; String get code => throw _privateConstructorUsedError;
-
-
+ String get code => throw _privateConstructorUsedError;
 
 
 
 
-/// Serializes this SignUpAttemptVerificationBody to a JSON map.
+
+
+/// Serializes this AttemptVerificationBody to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-/// Create a copy of SignUpAttemptVerificationBody
+/// Create a copy of AttemptVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
-$SignUpAttemptVerificationBodyCopyWith<SignUpAttemptVerificationBody> get copyWith => throw _privateConstructorUsedError;
+$AttemptVerificationBodyCopyWith<AttemptVerificationBody> get copyWith => throw _privateConstructorUsedError;
 
 }
 
 /// @nodoc
-abstract class $SignUpAttemptVerificationBodyCopyWith<$Res>  {
-  factory $SignUpAttemptVerificationBodyCopyWith(SignUpAttemptVerificationBody value, $Res Function(SignUpAttemptVerificationBody) then) = _$SignUpAttemptVerificationBodyCopyWithImpl<$Res, SignUpAttemptVerificationBody>;
+abstract class $AttemptVerificationBodyCopyWith<$Res>  {
+  factory $AttemptVerificationBodyCopyWith(AttemptVerificationBody value, $Res Function(AttemptVerificationBody) then) = _$AttemptVerificationBodyCopyWithImpl<$Res, AttemptVerificationBody>;
 @useResult
 $Res call({
- VerificationFactor factor, String code
+ String code
 });
 
 
@@ -1259,20 +1259,19 @@ $Res call({
 }
 
 /// @nodoc
-class _$SignUpAttemptVerificationBodyCopyWithImpl<$Res,$Val extends SignUpAttemptVerificationBody> implements $SignUpAttemptVerificationBodyCopyWith<$Res> {
-  _$SignUpAttemptVerificationBodyCopyWithImpl(this._value, this._then);
+class _$AttemptVerificationBodyCopyWithImpl<$Res,$Val extends AttemptVerificationBody> implements $AttemptVerificationBodyCopyWith<$Res> {
+  _$AttemptVerificationBodyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-/// Create a copy of SignUpAttemptVerificationBody
+/// Create a copy of AttemptVerificationBody
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? factor = null,Object? code = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? code = null,}) {
   return _then(_value.copyWith(
-factor: null == factor ? _value.factor : factor // ignore: cast_nullable_to_non_nullable
-as VerificationFactor,code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
+code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
 as String,
   )as $Val);
 }
@@ -1281,11 +1280,11 @@ as String,
 
 
 /// @nodoc
-abstract class _$$SignUpAttemptVerificationBodyImplCopyWith<$Res> implements $SignUpAttemptVerificationBodyCopyWith<$Res> {
-  factory _$$SignUpAttemptVerificationBodyImplCopyWith(_$SignUpAttemptVerificationBodyImpl value, $Res Function(_$SignUpAttemptVerificationBodyImpl) then) = __$$SignUpAttemptVerificationBodyImplCopyWithImpl<$Res>;
+abstract class _$$AttemptVerificationBodyImplCopyWith<$Res> implements $AttemptVerificationBodyCopyWith<$Res> {
+  factory _$$AttemptVerificationBodyImplCopyWith(_$AttemptVerificationBodyImpl value, $Res Function(_$AttemptVerificationBodyImpl) then) = __$$AttemptVerificationBodyImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
- VerificationFactor factor, String code
+ String code
 });
 
 
@@ -1293,17 +1292,16 @@ $Res call({
 }
 
 /// @nodoc
-class __$$SignUpAttemptVerificationBodyImplCopyWithImpl<$Res> extends _$SignUpAttemptVerificationBodyCopyWithImpl<$Res, _$SignUpAttemptVerificationBodyImpl> implements _$$SignUpAttemptVerificationBodyImplCopyWith<$Res> {
-  __$$SignUpAttemptVerificationBodyImplCopyWithImpl(_$SignUpAttemptVerificationBodyImpl _value, $Res Function(_$SignUpAttemptVerificationBodyImpl) _then)
+class __$$AttemptVerificationBodyImplCopyWithImpl<$Res> extends _$AttemptVerificationBodyCopyWithImpl<$Res, _$AttemptVerificationBodyImpl> implements _$$AttemptVerificationBodyImplCopyWith<$Res> {
+  __$$AttemptVerificationBodyImplCopyWithImpl(_$AttemptVerificationBodyImpl _value, $Res Function(_$AttemptVerificationBodyImpl) _then)
       : super(_value, _then);
 
 
-/// Create a copy of SignUpAttemptVerificationBody
+/// Create a copy of AttemptVerificationBody
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? factor = null,Object? code = null,}) {
-  return _then(_$SignUpAttemptVerificationBodyImpl(
-factor: null == factor ? _value.factor : factor // ignore: cast_nullable_to_non_nullable
-as VerificationFactor,code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') @override $Res call({Object? code = null,}) {
+  return _then(_$AttemptVerificationBodyImpl(
+code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -1314,35 +1312,34 @@ as String,
 /// @nodoc
 @JsonSerializable()
 
-class _$SignUpAttemptVerificationBodyImpl  implements _SignUpAttemptVerificationBody {
-  const _$SignUpAttemptVerificationBodyImpl({required this.factor, required this.code});
+class _$AttemptVerificationBodyImpl  implements _AttemptVerificationBody {
+  const _$AttemptVerificationBodyImpl({required this.code});
 
-  factory _$SignUpAttemptVerificationBodyImpl.fromJson(Map<String, dynamic> json) => _$$SignUpAttemptVerificationBodyImplFromJson(json);
+  factory _$AttemptVerificationBodyImpl.fromJson(Map<String, dynamic> json) => _$$AttemptVerificationBodyImplFromJson(json);
 
-@override final  VerificationFactor factor;
 @override final  String code;
 
 @override
 String toString() {
-  return 'SignUpAttemptVerificationBody(factor: $factor, code: $code)';
+  return 'AttemptVerificationBody(code: $code)';
 }
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$SignUpAttemptVerificationBodyImpl&&(identical(other.factor, factor) || other.factor == factor)&&(identical(other.code, code) || other.code == code));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$AttemptVerificationBodyImpl&&(identical(other.code, code) || other.code == code));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,factor,code);
+int get hashCode => Object.hash(runtimeType,code);
 
-/// Create a copy of SignUpAttemptVerificationBody
+/// Create a copy of AttemptVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
-_$$SignUpAttemptVerificationBodyImplCopyWith<_$SignUpAttemptVerificationBodyImpl> get copyWith => __$$SignUpAttemptVerificationBodyImplCopyWithImpl<_$SignUpAttemptVerificationBodyImpl>(this, _$identity);
+_$$AttemptVerificationBodyImplCopyWith<_$AttemptVerificationBodyImpl> get copyWith => __$$AttemptVerificationBodyImplCopyWithImpl<_$AttemptVerificationBodyImpl>(this, _$identity);
 
 
 
@@ -1352,22 +1349,167 @@ _$$SignUpAttemptVerificationBodyImplCopyWith<_$SignUpAttemptVerificationBodyImpl
 
 @override
 Map<String, dynamic> toJson() {
-  return _$$SignUpAttemptVerificationBodyImplToJson(this, );
+  return _$$AttemptVerificationBodyImplToJson(this, );
 }
 }
 
 
-abstract class _SignUpAttemptVerificationBody implements SignUpAttemptVerificationBody {
-  const factory _SignUpAttemptVerificationBody({required final  VerificationFactor factor, required final  String code}) = _$SignUpAttemptVerificationBodyImpl;
+abstract class _AttemptVerificationBody implements AttemptVerificationBody {
+  const factory _AttemptVerificationBody({required final  String code}) = _$AttemptVerificationBodyImpl;
   
 
-  factory _SignUpAttemptVerificationBody.fromJson(Map<String, dynamic> json) = _$SignUpAttemptVerificationBodyImpl.fromJson;
+  factory _AttemptVerificationBody.fromJson(Map<String, dynamic> json) = _$AttemptVerificationBodyImpl.fromJson;
 
-@override VerificationFactor get factor;@override String get code;
-/// Create a copy of SignUpAttemptVerificationBody
+@override String get code;
+/// Create a copy of AttemptVerificationBody
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
-_$$SignUpAttemptVerificationBodyImplCopyWith<_$SignUpAttemptVerificationBodyImpl> get copyWith => throw _privateConstructorUsedError;
+_$$AttemptVerificationBodyImplCopyWith<_$AttemptVerificationBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+CreateFactorBody _$CreateFactorBodyFromJson(Map<String, dynamic> json) {
+return _CreateFactorBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CreateFactorBody {
+
+ String get identifier => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this CreateFactorBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of CreateFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$CreateFactorBodyCopyWith<CreateFactorBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $CreateFactorBodyCopyWith<$Res>  {
+  factory $CreateFactorBodyCopyWith(CreateFactorBody value, $Res Function(CreateFactorBody) then) = _$CreateFactorBodyCopyWithImpl<$Res, CreateFactorBody>;
+@useResult
+$Res call({
+ String identifier
+});
+
+
+
+}
+
+/// @nodoc
+class _$CreateFactorBodyCopyWithImpl<$Res,$Val extends CreateFactorBody> implements $CreateFactorBodyCopyWith<$Res> {
+  _$CreateFactorBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of CreateFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? identifier = null,}) {
+  return _then(_value.copyWith(
+identifier: null == identifier ? _value.identifier : identifier // ignore: cast_nullable_to_non_nullable
+as String,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$CreateFactorBodyImplCopyWith<$Res> implements $CreateFactorBodyCopyWith<$Res> {
+  factory _$$CreateFactorBodyImplCopyWith(_$CreateFactorBodyImpl value, $Res Function(_$CreateFactorBodyImpl) then) = __$$CreateFactorBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String identifier
+});
+
+
+
+}
+
+/// @nodoc
+class __$$CreateFactorBodyImplCopyWithImpl<$Res> extends _$CreateFactorBodyCopyWithImpl<$Res, _$CreateFactorBodyImpl> implements _$$CreateFactorBodyImplCopyWith<$Res> {
+  __$$CreateFactorBodyImplCopyWithImpl(_$CreateFactorBodyImpl _value, $Res Function(_$CreateFactorBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of CreateFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? identifier = null,}) {
+  return _then(_$CreateFactorBodyImpl(
+null == identifier ? _value.identifier : identifier // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$CreateFactorBodyImpl  implements _CreateFactorBody {
+  const _$CreateFactorBodyImpl(this.identifier);
+
+  factory _$CreateFactorBodyImpl.fromJson(Map<String, dynamic> json) => _$$CreateFactorBodyImplFromJson(json);
+
+@override final  String identifier;
+
+@override
+String toString() {
+  return 'CreateFactorBody(identifier: $identifier)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$CreateFactorBodyImpl&&(identical(other.identifier, identifier) || other.identifier == identifier));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,identifier);
+
+/// Create a copy of CreateFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$CreateFactorBodyImplCopyWith<_$CreateFactorBodyImpl> get copyWith => __$$CreateFactorBodyImplCopyWithImpl<_$CreateFactorBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$CreateFactorBodyImplToJson(this, );
+}
+}
+
+
+abstract class _CreateFactorBody implements CreateFactorBody {
+  const factory _CreateFactorBody(final  String identifier) = _$CreateFactorBodyImpl;
+  
+
+  factory _CreateFactorBody.fromJson(Map<String, dynamic> json) = _$CreateFactorBodyImpl.fromJson;
+
+@override String get identifier;
+/// Create a copy of CreateFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$CreateFactorBodyImplCopyWith<_$CreateFactorBodyImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
 
@@ -1676,5 +1818,165 @@ abstract class _TOTPResponse implements TOTPResponse {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$TOTPResponseImplCopyWith<_$TOTPResponseImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+UserFactorsResponse _$UserFactorsResponseFromJson(Map<String, dynamic> json) {
+return _UserFactorsResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UserFactorsResponse {
+
+ List<FirstFactor> get firstFactors => throw _privateConstructorUsedError; List<SecondFactor> get secondFactors => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this UserFactorsResponse to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of UserFactorsResponse
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$UserFactorsResponseCopyWith<UserFactorsResponse> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $UserFactorsResponseCopyWith<$Res>  {
+  factory $UserFactorsResponseCopyWith(UserFactorsResponse value, $Res Function(UserFactorsResponse) then) = _$UserFactorsResponseCopyWithImpl<$Res, UserFactorsResponse>;
+@useResult
+$Res call({
+ List<FirstFactor> firstFactors, List<SecondFactor> secondFactors
+});
+
+
+
+}
+
+/// @nodoc
+class _$UserFactorsResponseCopyWithImpl<$Res,$Val extends UserFactorsResponse> implements $UserFactorsResponseCopyWith<$Res> {
+  _$UserFactorsResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of UserFactorsResponse
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? firstFactors = null,Object? secondFactors = null,}) {
+  return _then(_value.copyWith(
+firstFactors: null == firstFactors ? _value.firstFactors : firstFactors // ignore: cast_nullable_to_non_nullable
+as List<FirstFactor>,secondFactors: null == secondFactors ? _value.secondFactors : secondFactors // ignore: cast_nullable_to_non_nullable
+as List<SecondFactor>,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$UserFactorsResponseImplCopyWith<$Res> implements $UserFactorsResponseCopyWith<$Res> {
+  factory _$$UserFactorsResponseImplCopyWith(_$UserFactorsResponseImpl value, $Res Function(_$UserFactorsResponseImpl) then) = __$$UserFactorsResponseImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ List<FirstFactor> firstFactors, List<SecondFactor> secondFactors
+});
+
+
+
+}
+
+/// @nodoc
+class __$$UserFactorsResponseImplCopyWithImpl<$Res> extends _$UserFactorsResponseCopyWithImpl<$Res, _$UserFactorsResponseImpl> implements _$$UserFactorsResponseImplCopyWith<$Res> {
+  __$$UserFactorsResponseImplCopyWithImpl(_$UserFactorsResponseImpl _value, $Res Function(_$UserFactorsResponseImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of UserFactorsResponse
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? firstFactors = null,Object? secondFactors = null,}) {
+  return _then(_$UserFactorsResponseImpl(
+firstFactors: null == firstFactors ? _value._firstFactors : firstFactors // ignore: cast_nullable_to_non_nullable
+as List<FirstFactor>,secondFactors: null == secondFactors ? _value._secondFactors : secondFactors // ignore: cast_nullable_to_non_nullable
+as List<SecondFactor>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$UserFactorsResponseImpl  implements _UserFactorsResponse {
+  const _$UserFactorsResponseImpl({required final  List<FirstFactor> firstFactors, required final  List<SecondFactor> secondFactors}): _firstFactors = firstFactors,_secondFactors = secondFactors;
+
+  factory _$UserFactorsResponseImpl.fromJson(Map<String, dynamic> json) => _$$UserFactorsResponseImplFromJson(json);
+
+ final  List<FirstFactor> _firstFactors;
+@override List<FirstFactor> get firstFactors {
+  if (_firstFactors is EqualUnmodifiableListView) return _firstFactors;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_firstFactors);
+}
+
+ final  List<SecondFactor> _secondFactors;
+@override List<SecondFactor> get secondFactors {
+  if (_secondFactors is EqualUnmodifiableListView) return _secondFactors;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_secondFactors);
+}
+
+
+@override
+String toString() {
+  return 'UserFactorsResponse(firstFactors: $firstFactors, secondFactors: $secondFactors)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$UserFactorsResponseImpl&&const DeepCollectionEquality().equals(other._firstFactors, _firstFactors)&&const DeepCollectionEquality().equals(other._secondFactors, _secondFactors));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_firstFactors),const DeepCollectionEquality().hash(_secondFactors));
+
+/// Create a copy of UserFactorsResponse
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$UserFactorsResponseImplCopyWith<_$UserFactorsResponseImpl> get copyWith => __$$UserFactorsResponseImplCopyWithImpl<_$UserFactorsResponseImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$UserFactorsResponseImplToJson(this, );
+}
+}
+
+
+abstract class _UserFactorsResponse implements UserFactorsResponse {
+  const factory _UserFactorsResponse({required final  List<FirstFactor> firstFactors, required final  List<SecondFactor> secondFactors}) = _$UserFactorsResponseImpl;
+  
+
+  factory _UserFactorsResponse.fromJson(Map<String, dynamic> json) = _$UserFactorsResponseImpl.fromJson;
+
+@override List<FirstFactor> get firstFactors;@override List<SecondFactor> get secondFactors;
+/// Create a copy of UserFactorsResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$UserFactorsResponseImplCopyWith<_$UserFactorsResponseImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

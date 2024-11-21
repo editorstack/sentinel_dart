@@ -207,10 +207,10 @@ FactorData _$FactorDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FactorData {
 
- DateTime? get confirmedAt => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? confirmedAt)  email,required TResult Function( String phone,  DateTime? confirmedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)  oAuth,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? confirmedAt)?  email,TResult? Function( String phone,  DateTime? confirmedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? confirmedAt)?  email,TResult Function( String phone,  DateTime? confirmedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,required TResult orElse(),}) => throw _privateConstructorUsedError;
+ DateTime? get verifiedAt => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? verifiedAt)  email,required TResult Function( String phone,  DateTime? verifiedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)  oAuth,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? verifiedAt)?  email,TResult? Function( String phone,  DateTime? verifiedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? verifiedAt)?  email,TResult Function( String phone,  DateTime? verifiedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,required TResult orElse(),}) => throw _privateConstructorUsedError;
 @optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( EmailIdentityData value)  email,required TResult Function( PhoneIdentityData value)  phone,required TResult Function( OAuthIdentityData value)  oAuth,}) => throw _privateConstructorUsedError;
 @optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( EmailIdentityData value)?  email,TResult? Function( PhoneIdentityData value)?  phone,TResult? Function( OAuthIdentityData value)?  oAuth,}) => throw _privateConstructorUsedError;
 @optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( EmailIdentityData value)?  email,TResult Function( PhoneIdentityData value)?  phone,TResult Function( OAuthIdentityData value)?  oAuth,required TResult orElse(),}) => throw _privateConstructorUsedError;
@@ -228,7 +228,7 @@ abstract class $FactorDataCopyWith<$Res>  {
   factory $FactorDataCopyWith(FactorData value, $Res Function(FactorData) then) = _$FactorDataCopyWithImpl<$Res, FactorData>;
 @useResult
 $Res call({
- DateTime? confirmedAt
+ DateTime? verifiedAt
 });
 
 
@@ -246,9 +246,9 @@ class _$FactorDataCopyWithImpl<$Res,$Val extends FactorData> implements $FactorD
 
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? confirmedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? verifiedAt = freezed,}) {
   return _then(_value.copyWith(
-confirmedAt: freezed == confirmedAt ? _value.confirmedAt : confirmedAt // ignore: cast_nullable_to_non_nullable
+verifiedAt: freezed == verifiedAt ? _value.verifiedAt : verifiedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   )as $Val);
 }
@@ -261,7 +261,7 @@ abstract class _$$EmailIdentityDataImplCopyWith<$Res> implements $FactorDataCopy
   factory _$$EmailIdentityDataImplCopyWith(_$EmailIdentityDataImpl value, $Res Function(_$EmailIdentityDataImpl) then) = __$$EmailIdentityDataImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
- String email, DateTime? confirmedAt
+ String email, DateTime? verifiedAt
 });
 
 
@@ -276,10 +276,10 @@ class __$$EmailIdentityDataImplCopyWithImpl<$Res> extends _$FactorDataCopyWithIm
 
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? confirmedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? verifiedAt = freezed,}) {
   return _then(_$EmailIdentityDataImpl(
 email: null == email ? _value.email : email // ignore: cast_nullable_to_non_nullable
-as String,confirmedAt: freezed == confirmedAt ? _value.confirmedAt : confirmedAt // ignore: cast_nullable_to_non_nullable
+as String,verifiedAt: freezed == verifiedAt ? _value.verifiedAt : verifiedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
 }
@@ -291,12 +291,12 @@ as DateTime?,
 @JsonSerializable()
 
 class _$EmailIdentityDataImpl  implements EmailIdentityData {
-  const _$EmailIdentityDataImpl({required this.email, this.confirmedAt, final  String? $type}): $type = $type ?? 'email';
+  const _$EmailIdentityDataImpl({required this.email, this.verifiedAt, final  String? $type}): $type = $type ?? 'email';
 
   factory _$EmailIdentityDataImpl.fromJson(Map<String, dynamic> json) => _$$EmailIdentityDataImplFromJson(json);
 
 @override final  String email;
-@override final  DateTime? confirmedAt;
+@override final  DateTime? verifiedAt;
 
 @JsonKey(name: 'factor')
 final String $type;
@@ -304,18 +304,18 @@ final String $type;
 
 @override
 String toString() {
-  return 'FactorData.email(email: $email, confirmedAt: $confirmedAt)';
+  return 'FactorData.email(email: $email, verifiedAt: $verifiedAt)';
 }
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$EmailIdentityDataImpl&&(identical(other.email, email) || other.email == email)&&(identical(other.confirmedAt, confirmedAt) || other.confirmedAt == confirmedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$EmailIdentityDataImpl&&(identical(other.email, email) || other.email == email)&&(identical(other.verifiedAt, verifiedAt) || other.verifiedAt == verifiedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,confirmedAt);
+int get hashCode => Object.hash(runtimeType,email,verifiedAt);
 
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
@@ -325,17 +325,17 @@ int get hashCode => Object.hash(runtimeType,email,confirmedAt);
 _$$EmailIdentityDataImplCopyWith<_$EmailIdentityDataImpl> get copyWith => __$$EmailIdentityDataImplCopyWithImpl<_$EmailIdentityDataImpl>(this, _$identity);
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? confirmedAt)  email,required TResult Function( String phone,  DateTime? confirmedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)  oAuth,}) {
-  return email(this.email,confirmedAt);
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? verifiedAt)  email,required TResult Function( String phone,  DateTime? verifiedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)  oAuth,}) {
+  return email(this.email,verifiedAt);
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? confirmedAt)?  email,TResult? Function( String phone,  DateTime? confirmedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,}) {
-  return email?.call(this.email,confirmedAt);
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? verifiedAt)?  email,TResult? Function( String phone,  DateTime? verifiedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,}) {
+  return email?.call(this.email,verifiedAt);
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? confirmedAt)?  email,TResult Function( String phone,  DateTime? confirmedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? verifiedAt)?  email,TResult Function( String phone,  DateTime? verifiedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,required TResult orElse(),}) {
   if (email != null) {
-    return email(this.email,confirmedAt);
+    return email(this.email,verifiedAt);
   }
   return orElse();
 }
@@ -362,12 +362,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class EmailIdentityData implements FactorData {
-  const factory EmailIdentityData({required final  String email, final  DateTime? confirmedAt}) = _$EmailIdentityDataImpl;
+  const factory EmailIdentityData({required final  String email, final  DateTime? verifiedAt}) = _$EmailIdentityDataImpl;
   
 
   factory EmailIdentityData.fromJson(Map<String, dynamic> json) = _$EmailIdentityDataImpl.fromJson;
 
- String get email;@override DateTime? get confirmedAt;
+ String get email;@override DateTime? get verifiedAt;
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
@@ -380,7 +380,7 @@ abstract class _$$PhoneIdentityDataImplCopyWith<$Res> implements $FactorDataCopy
   factory _$$PhoneIdentityDataImplCopyWith(_$PhoneIdentityDataImpl value, $Res Function(_$PhoneIdentityDataImpl) then) = __$$PhoneIdentityDataImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
- String phone, DateTime? confirmedAt
+ String phone, DateTime? verifiedAt
 });
 
 
@@ -395,10 +395,10 @@ class __$$PhoneIdentityDataImplCopyWithImpl<$Res> extends _$FactorDataCopyWithIm
 
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phone = null,Object? confirmedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phone = null,Object? verifiedAt = freezed,}) {
   return _then(_$PhoneIdentityDataImpl(
 phone: null == phone ? _value.phone : phone // ignore: cast_nullable_to_non_nullable
-as String,confirmedAt: freezed == confirmedAt ? _value.confirmedAt : confirmedAt // ignore: cast_nullable_to_non_nullable
+as String,verifiedAt: freezed == verifiedAt ? _value.verifiedAt : verifiedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
 }
@@ -410,12 +410,12 @@ as DateTime?,
 @JsonSerializable()
 
 class _$PhoneIdentityDataImpl  implements PhoneIdentityData {
-  const _$PhoneIdentityDataImpl({required this.phone, this.confirmedAt, final  String? $type}): $type = $type ?? 'phone';
+  const _$PhoneIdentityDataImpl({required this.phone, this.verifiedAt, final  String? $type}): $type = $type ?? 'phone';
 
   factory _$PhoneIdentityDataImpl.fromJson(Map<String, dynamic> json) => _$$PhoneIdentityDataImplFromJson(json);
 
 @override final  String phone;
-@override final  DateTime? confirmedAt;
+@override final  DateTime? verifiedAt;
 
 @JsonKey(name: 'factor')
 final String $type;
@@ -423,18 +423,18 @@ final String $type;
 
 @override
 String toString() {
-  return 'FactorData.phone(phone: $phone, confirmedAt: $confirmedAt)';
+  return 'FactorData.phone(phone: $phone, verifiedAt: $verifiedAt)';
 }
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PhoneIdentityDataImpl&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.confirmedAt, confirmedAt) || other.confirmedAt == confirmedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PhoneIdentityDataImpl&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.verifiedAt, verifiedAt) || other.verifiedAt == verifiedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,phone,confirmedAt);
+int get hashCode => Object.hash(runtimeType,phone,verifiedAt);
 
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
@@ -444,17 +444,17 @@ int get hashCode => Object.hash(runtimeType,phone,confirmedAt);
 _$$PhoneIdentityDataImplCopyWith<_$PhoneIdentityDataImpl> get copyWith => __$$PhoneIdentityDataImplCopyWithImpl<_$PhoneIdentityDataImpl>(this, _$identity);
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? confirmedAt)  email,required TResult Function( String phone,  DateTime? confirmedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)  oAuth,}) {
-  return phone(this.phone,confirmedAt);
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? verifiedAt)  email,required TResult Function( String phone,  DateTime? verifiedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)  oAuth,}) {
+  return phone(this.phone,verifiedAt);
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? confirmedAt)?  email,TResult? Function( String phone,  DateTime? confirmedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,}) {
-  return phone?.call(this.phone,confirmedAt);
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? verifiedAt)?  email,TResult? Function( String phone,  DateTime? verifiedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,}) {
+  return phone?.call(this.phone,verifiedAt);
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? confirmedAt)?  email,TResult Function( String phone,  DateTime? confirmedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? verifiedAt)?  email,TResult Function( String phone,  DateTime? verifiedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,required TResult orElse(),}) {
   if (phone != null) {
-    return phone(this.phone,confirmedAt);
+    return phone(this.phone,verifiedAt);
   }
   return orElse();
 }
@@ -481,12 +481,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class PhoneIdentityData implements FactorData {
-  const factory PhoneIdentityData({required final  String phone, final  DateTime? confirmedAt}) = _$PhoneIdentityDataImpl;
+  const factory PhoneIdentityData({required final  String phone, final  DateTime? verifiedAt}) = _$PhoneIdentityDataImpl;
   
 
   factory PhoneIdentityData.fromJson(Map<String, dynamic> json) = _$PhoneIdentityDataImpl.fromJson;
 
- String get phone;@override DateTime? get confirmedAt;
+ String get phone;@override DateTime? get verifiedAt;
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
@@ -499,7 +499,7 @@ abstract class _$$OAuthIdentityDataImplCopyWith<$Res> implements $FactorDataCopy
   factory _$$OAuthIdentityDataImplCopyWith(_$OAuthIdentityDataImpl value, $Res Function(_$OAuthIdentityDataImpl) then) = __$$OAuthIdentityDataImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
- OAuthProvider provider, String sub, String email, String? refreshToken, String? accessToken, DateTime? expiresAt, DateTime? confirmedAt
+ OAuthProvider provider, String sub, String email, String? refreshToken, String? accessToken, DateTime? expiresAt, DateTime? verifiedAt
 });
 
 
@@ -514,7 +514,7 @@ class __$$OAuthIdentityDataImplCopyWithImpl<$Res> extends _$FactorDataCopyWithIm
 
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? provider = null,Object? sub = null,Object? email = null,Object? refreshToken = freezed,Object? accessToken = freezed,Object? expiresAt = freezed,Object? confirmedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? provider = null,Object? sub = null,Object? email = null,Object? refreshToken = freezed,Object? accessToken = freezed,Object? expiresAt = freezed,Object? verifiedAt = freezed,}) {
   return _then(_$OAuthIdentityDataImpl(
 provider: null == provider ? _value.provider : provider // ignore: cast_nullable_to_non_nullable
 as OAuthProvider,sub: null == sub ? _value.sub : sub // ignore: cast_nullable_to_non_nullable
@@ -522,7 +522,7 @@ as String,email: null == email ? _value.email : email // ignore: cast_nullable_t
 as String,refreshToken: freezed == refreshToken ? _value.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
 as String?,accessToken: freezed == accessToken ? _value.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,expiresAt: freezed == expiresAt ? _value.expiresAt : expiresAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,confirmedAt: freezed == confirmedAt ? _value.confirmedAt : confirmedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,verifiedAt: freezed == verifiedAt ? _value.verifiedAt : verifiedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
 }
@@ -534,7 +534,7 @@ as DateTime?,
 @JsonSerializable()
 
 class _$OAuthIdentityDataImpl  implements OAuthIdentityData {
-  const _$OAuthIdentityDataImpl({required this.provider, required this.sub, required this.email, this.refreshToken, this.accessToken, this.expiresAt, this.confirmedAt, final  String? $type}): $type = $type ?? 'oAuth';
+  const _$OAuthIdentityDataImpl({required this.provider, required this.sub, required this.email, this.refreshToken, this.accessToken, this.expiresAt, this.verifiedAt, final  String? $type}): $type = $type ?? 'oAuth';
 
   factory _$OAuthIdentityDataImpl.fromJson(Map<String, dynamic> json) => _$$OAuthIdentityDataImplFromJson(json);
 
@@ -544,7 +544,7 @@ class _$OAuthIdentityDataImpl  implements OAuthIdentityData {
 @override final  String? refreshToken;
 @override final  String? accessToken;
 @override final  DateTime? expiresAt;
-@override final  DateTime? confirmedAt;
+@override final  DateTime? verifiedAt;
 
 @JsonKey(name: 'factor')
 final String $type;
@@ -552,18 +552,18 @@ final String $type;
 
 @override
 String toString() {
-  return 'FactorData.oAuth(provider: $provider, sub: $sub, email: $email, refreshToken: $refreshToken, accessToken: $accessToken, expiresAt: $expiresAt, confirmedAt: $confirmedAt)';
+  return 'FactorData.oAuth(provider: $provider, sub: $sub, email: $email, refreshToken: $refreshToken, accessToken: $accessToken, expiresAt: $expiresAt, verifiedAt: $verifiedAt)';
 }
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$OAuthIdentityDataImpl&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.sub, sub) || other.sub == sub)&&(identical(other.email, email) || other.email == email)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.confirmedAt, confirmedAt) || other.confirmedAt == confirmedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$OAuthIdentityDataImpl&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.sub, sub) || other.sub == sub)&&(identical(other.email, email) || other.email == email)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.verifiedAt, verifiedAt) || other.verifiedAt == verifiedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,provider,sub,email,refreshToken,accessToken,expiresAt,confirmedAt);
+int get hashCode => Object.hash(runtimeType,provider,sub,email,refreshToken,accessToken,expiresAt,verifiedAt);
 
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
@@ -573,17 +573,17 @@ int get hashCode => Object.hash(runtimeType,provider,sub,email,refreshToken,acce
 _$$OAuthIdentityDataImplCopyWith<_$OAuthIdentityDataImpl> get copyWith => __$$OAuthIdentityDataImplCopyWithImpl<_$OAuthIdentityDataImpl>(this, _$identity);
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? confirmedAt)  email,required TResult Function( String phone,  DateTime? confirmedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)  oAuth,}) {
-  return oAuth(provider,sub,this.email,refreshToken,accessToken,expiresAt,confirmedAt);
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  DateTime? verifiedAt)  email,required TResult Function( String phone,  DateTime? verifiedAt)  phone,required TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)  oAuth,}) {
+  return oAuth(provider,sub,this.email,refreshToken,accessToken,expiresAt,verifiedAt);
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? confirmedAt)?  email,TResult? Function( String phone,  DateTime? confirmedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,}) {
-  return oAuth?.call(provider,sub,this.email,refreshToken,accessToken,expiresAt,confirmedAt);
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  DateTime? verifiedAt)?  email,TResult? Function( String phone,  DateTime? verifiedAt)?  phone,TResult? Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,}) {
+  return oAuth?.call(provider,sub,this.email,refreshToken,accessToken,expiresAt,verifiedAt);
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? confirmedAt)?  email,TResult Function( String phone,  DateTime? confirmedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? confirmedAt)?  oAuth,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  DateTime? verifiedAt)?  email,TResult Function( String phone,  DateTime? verifiedAt)?  phone,TResult Function( OAuthProvider provider,  String sub,  String email,  String? refreshToken,  String? accessToken,  DateTime? expiresAt,  DateTime? verifiedAt)?  oAuth,required TResult orElse(),}) {
   if (oAuth != null) {
-    return oAuth(provider,sub,this.email,refreshToken,accessToken,expiresAt,confirmedAt);
+    return oAuth(provider,sub,this.email,refreshToken,accessToken,expiresAt,verifiedAt);
   }
   return orElse();
 }
@@ -610,12 +610,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class OAuthIdentityData implements FactorData {
-  const factory OAuthIdentityData({required final  OAuthProvider provider, required final  String sub, required final  String email, final  String? refreshToken, final  String? accessToken, final  DateTime? expiresAt, final  DateTime? confirmedAt}) = _$OAuthIdentityDataImpl;
+  const factory OAuthIdentityData({required final  OAuthProvider provider, required final  String sub, required final  String email, final  String? refreshToken, final  String? accessToken, final  DateTime? expiresAt, final  DateTime? verifiedAt}) = _$OAuthIdentityDataImpl;
   
 
   factory OAuthIdentityData.fromJson(Map<String, dynamic> json) = _$OAuthIdentityDataImpl.fromJson;
 
- OAuthProvider get provider; String get sub; String get email; String? get refreshToken; String? get accessToken; DateTime? get expiresAt;@override DateTime? get confirmedAt;
+ OAuthProvider get provider; String get sub; String get email; String? get refreshToken; String? get accessToken; DateTime? get expiresAt;@override DateTime? get verifiedAt;
 /// Create a copy of FactorData
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
