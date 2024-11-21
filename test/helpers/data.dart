@@ -1,5 +1,6 @@
 import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/models/device.dart';
+import 'package:sentinel/src/models/factor.dart';
 import 'package:sentinel/src/models/session.dart';
 import 'package:sentinel/src/models/user.dart';
 
@@ -14,7 +15,7 @@ final kUser = User(
   firstName: 'John',
   lastName: 'Doe',
   email: 'example@editorstack.com',
-  phoneNumber: '+910000000000',
+  phoneNumber: '918234567890',
   image: null,
   role: UserRole.user,
   twoFactor: false,
@@ -44,3 +45,14 @@ final kUserSession = UserSession(
 );
 
 final kSession = kUserSession.toSession();
+
+final kFactor = Factor(
+  id: 'fac_1',
+  userID: kUser.id,
+  providerUserID: kUser.id,
+  factor: FactorType.email,
+  identifier: 'example@editorstack.com',
+  data: FactorData.email(email: 'example@editorstack.com', verifiedAt: DateTime.now()),
+  createdAt: DateTime.now(),
+  lastSignedInAt: DateTime.now(),
+);

@@ -155,7 +155,7 @@ _$EmailLinkPrepareVerificationBodyImpl
     _$$EmailLinkPrepareVerificationBodyImplFromJson(
             Map<String, dynamic> json) =>
         _$EmailLinkPrepareVerificationBodyImpl(
-          redirectUrl: json['redirectUrl'] as String?,
+          redirectUrl: json['redirectUrl'] as String,
           $type: json['factor'] as String?,
         );
 
@@ -166,24 +166,29 @@ Map<String, dynamic> _$$EmailLinkPrepareVerificationBodyImplToJson(
       'factor': instance.$type,
     };
 
-_$SignUpAttemptVerificationBodyImpl
-    _$$SignUpAttemptVerificationBodyImplFromJson(Map<String, dynamic> json) =>
-        _$SignUpAttemptVerificationBodyImpl(
-          factor: $enumDecode(_$VerificationFactorEnumMap, json['factor']),
-          code: json['code'] as String,
-        );
+_$AttemptVerificationBodyImpl _$$AttemptVerificationBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AttemptVerificationBodyImpl(
+      code: json['code'] as String,
+    );
 
-Map<String, dynamic> _$$SignUpAttemptVerificationBodyImplToJson(
-        _$SignUpAttemptVerificationBodyImpl instance) =>
+Map<String, dynamic> _$$AttemptVerificationBodyImplToJson(
+        _$AttemptVerificationBodyImpl instance) =>
     <String, dynamic>{
-      'factor': _$VerificationFactorEnumMap[instance.factor]!,
       'code': instance.code,
     };
 
-const _$VerificationFactorEnumMap = {
-  VerificationFactor.emailCode: 'emailCode',
-  VerificationFactor.phoneCode: 'phoneCode',
-};
+_$CreateFactorBodyImpl _$$CreateFactorBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CreateFactorBodyImpl(
+      json['identifier'] as String,
+    );
+
+Map<String, dynamic> _$$CreateFactorBodyImplToJson(
+        _$CreateFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+    };
 
 _$TOTPVerifyBodyImpl _$$TOTPVerifyBodyImplFromJson(Map<String, dynamic> json) =>
     _$TOTPVerifyBodyImpl(
@@ -215,6 +220,50 @@ Map<String, dynamic> _$$TOTPResponseImplToJson(_$TOTPResponseImpl instance) =>
       'verified': instance.verified,
       'recoveryCodes': instance.recoveryCodes,
     };
+
+_$UserFactorsResponseImpl _$$UserFactorsResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UserFactorsResponseImpl(
+      firstFactors: (json['firstFactors'] as List<dynamic>)
+          .map((e) => $enumDecode(_$FirstFactorEnumMap, e))
+          .toList(),
+      secondFactors: (json['secondFactors'] as List<dynamic>)
+          .map((e) => $enumDecode(_$SecondFactorEnumMap, e))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$UserFactorsResponseImplToJson(
+        _$UserFactorsResponseImpl instance) =>
+    <String, dynamic>{
+      'firstFactors':
+          instance.firstFactors.map((e) => _$FirstFactorEnumMap[e]!).toList(),
+      'secondFactors':
+          instance.secondFactors.map((e) => _$SecondFactorEnumMap[e]!).toList(),
+    };
+
+const _$FirstFactorEnumMap = {
+  FirstFactor.password: 'password',
+  FirstFactor.emailCode: 'emailCode',
+  FirstFactor.emailLink: 'emailLink',
+  FirstFactor.phoneCode: 'phoneCode',
+  FirstFactor.apple: 'apple',
+  FirstFactor.discord: 'discord',
+  FirstFactor.dropbox: 'dropbox',
+  FirstFactor.facebook: 'facebook',
+  FirstFactor.github: 'github',
+  FirstFactor.google: 'google',
+  FirstFactor.microsoft: 'microsoft',
+  FirstFactor.spotify: 'spotify',
+  FirstFactor.twitch: 'twitch',
+  FirstFactor.x: 'x',
+};
+
+const _$SecondFactorEnumMap = {
+  SecondFactor.emailCode: 'emailCode',
+  SecondFactor.phoneCode: 'phoneCode',
+  SecondFactor.totp: 'totp',
+  SecondFactor.backupCode: 'backupCode',
+};
 
 // **************************************************************************
 // RetrofitGenerator
@@ -271,8 +320,7 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> signUpPrepareVerification(
-      SignUpPrepareVerificationBody body) async {
+  Future<bool> prepareSignUpVerification(PrepareVerificationBody body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
@@ -307,8 +355,8 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<UserSession> signUpAttemptVerification(
-      SignUpAttemptVerificationBody body) async {
+  Future<UserSession> attemptSignUpVerification(
+      AttemptVerificationBody body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
@@ -335,6 +383,187 @@ class _SentinelApi implements SentinelApi {
     late UserSession _value;
     try {
       _value = UserSession.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<UserFactorsResponse> getUserFactors(String identifier) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'identifier': identifier};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<UserFactorsResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/factors/user-factors',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UserFactorsResponse _value;
+    try {
+      _value = UserFactorsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<Factor> createFactor(CreateFactorBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<Factor>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/factors/identifier',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late Factor _value;
+    try {
+      _value = Factor.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> prepareFactorVerification(
+    String factorID,
+    PrepareVerificationBody body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/factors/${factorID}/prepare-verification',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<User> attemptFactorVerification(
+    String factorID,
+    AttemptVerificationBody body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<User>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/factors/${factorID}/attempt-verification',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late User _value;
+    try {
+      _value = User.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> deleteFactor(String factorID) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<bool>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/factors/${factorID}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

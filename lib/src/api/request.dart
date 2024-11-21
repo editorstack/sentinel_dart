@@ -60,37 +60,34 @@ class DeviceRequest with _$DeviceRequest {
   factory DeviceRequest.fromJson(Map<String, dynamic> json) => _$DeviceRequestFromJson(json);
 }
 
-/// Body for preparing verification for sign up
+/// Body for preparing verification for sign up and factor
 @Freezed(unionKey: 'factor')
-sealed class SignUpPrepareVerificationBody with _$SignUpPrepareVerificationBody {
-  /// Prepares verification for an email code sign up
-  const factory SignUpPrepareVerificationBody.emailCode() = EmailCodePrepareVerificationBody;
+sealed class PrepareVerificationBody with _$PrepareVerificationBody {
+  /// Prepares verification for an email code sign up and factor
+  const factory PrepareVerificationBody.emailCode() = EmailCodePrepareVerificationBody;
 
-  /// Prepares verification for a phone code sign up
-  const factory SignUpPrepareVerificationBody.phoneCode() = PhoneCodePrepareVerificationBody;
+  /// Prepares verification for a phone code sign up and factor
+  const factory PrepareVerificationBody.phoneCode() = PhoneCodePrepareVerificationBody;
 
-  /// Prepares verification for an email link sign up
-  const factory SignUpPrepareVerificationBody.emailLink({
-    required String? redirectUrl,
+  /// Prepares verification for an email link sign up and factor
+  const factory PrepareVerificationBody.emailLink({
+    required String redirectUrl,
   }) = EmailLinkPrepareVerificationBody;
 
-  /// Used to serialize [SignUpPrepareVerificationBody] object to and from JSON.
-  factory SignUpPrepareVerificationBody.fromJson(Map<String, dynamic> json) =>
-      _$SignUpPrepareVerificationBodyFromJson(json);
+  /// Used to serialize [PrepareVerificationBody] object to and from JSON.
+  factory PrepareVerificationBody.fromJson(Map<String, dynamic> json) =>
+      _$PrepareVerificationBodyFromJson(json);
 }
 
-/// Body for attempting verification for sign up
-@Freezed(unionKey: 'factor')
-class SignUpAttemptVerificationBody with _$SignUpAttemptVerificationBody {
+/// Body for attempting verification for sign up and factor
+@freezed
+class AttemptVerificationBody with _$AttemptVerificationBody {
   /// Attempts verification for an email code sign up
-  const factory SignUpAttemptVerificationBody({
-    required VerificationFactor factor,
-    required String code,
-  }) = _SignUpAttemptVerificationBody;
+  const factory AttemptVerificationBody({required String code}) = _AttemptVerificationBody;
 
-  /// Used to serialize [SignUpAttemptVerificationBody] object to and from JSON.
-  factory SignUpAttemptVerificationBody.fromJson(Map<String, dynamic> json) =>
-      _$SignUpAttemptVerificationBodyFromJson(json);
+  /// Used to serialize [AttemptVerificationBody] object to and from JSON.
+  factory AttemptVerificationBody.fromJson(Map<String, dynamic> json) =>
+      _$AttemptVerificationBodyFromJson(json);
 }
 
 /// Factor for verification
@@ -100,6 +97,16 @@ enum VerificationFactor {
 
   /// Sends a code to the user's phone number
   phoneCode,
+}
+
+/// Body for creating a factor
+@freezed
+class CreateFactorBody with _$CreateFactorBody {
+  /// Creates a new instance of [CreateFactorBody] with the specified parameters.
+  const factory CreateFactorBody(String identifier) = _CreateFactorBody;
+
+  /// Used to serialize [CreateFactorBody] object to and from JSON.
+  factory CreateFactorBody.fromJson(Map<String, dynamic> json) => _$CreateFactorBodyFromJson(json);
 }
 
 /// Body for TOTP verification

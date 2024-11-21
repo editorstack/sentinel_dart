@@ -88,13 +88,13 @@ sealed class FactorData with _$FactorData {
   /// Represents identity data for email-based authentication.
   const factory FactorData.email({
     required String email,
-    DateTime? confirmedAt,
+    DateTime? verifiedAt,
   }) = EmailIdentityData;
 
   /// Represents identity data for phone number-based authentication.
   const factory FactorData.phone({
     required String phone,
-    DateTime? confirmedAt,
+    DateTime? verifiedAt,
   }) = PhoneIdentityData;
 
   /// Represents identity data for OAuth-based authentication.
@@ -105,12 +105,11 @@ sealed class FactorData with _$FactorData {
     String? refreshToken,
     String? accessToken,
     DateTime? expiresAt,
-    DateTime? confirmedAt,
+    DateTime? verifiedAt,
   }) = OAuthIdentityData;
 
   /// Used to serialize [FactorData] object to and from JSON.
-  factory FactorData.fromJson(Map<String, Object?> json) =>
-      _$FactorDataFromJson(json);
+  factory FactorData.fromJson(Map<String, Object?> json) => _$FactorDataFromJson(json);
 }
 
 /// Converter for [Factor] enumeration.

@@ -2,7 +2,9 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sentinel/src/models/device.dart';
+import 'package:sentinel/src/models/factor.dart';
 import 'package:sentinel/src/models/session.dart';
+import 'package:sentinel/src/models/user.dart';
 
 part 'sentinel_api.freezed.dart';
 part 'sentinel_api.g.dart';
@@ -26,12 +28,43 @@ abstract class SentinelApi {
   /// Prepares verification for sign up
   @POST('/auth/sign-up/prepare-verification')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> signUpPrepareVerification(@Body() SignUpPrepareVerificationBody body);
+  Future<bool> prepareSignUpVerification(@Body() PrepareVerificationBody body);
 
   /// Attempts verification for sign up
   @POST('/auth/sign-up/attempt-verification')
   @Headers({'Content-Type': 'application/json'})
-  Future<UserSession> signUpAttemptVerification(@Body() SignUpAttemptVerificationBody body);
+  Future<UserSession> attemptSignUpVerification(@Body() AttemptVerificationBody body);
+
+  /// Gets all the available factors to sign in for the user
+  @GET('/auth/factors/user-factors')
+  @Headers({'Content-Type': 'application/json'})
+  Future<UserFactorsResponse> getUserFactors(@Query('identifier') String identifier);
+
+  /// Creates a new factor for the user
+  @POST('/auth/factors/identifier')
+  @Headers({'Content-Type': 'application/json'})
+  Future<Factor> createFactor(@Body() CreateFactorBody body);
+
+  /// Prepares factor for verification
+  @POST('/auth/factors/{factorID}/prepare-verification')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> prepareFactorVerification(
+    @Path() String factorID,
+    @Body() PrepareVerificationBody body,
+  );
+
+  /// Attempts verification for factor
+  @POST('/auth/factors/{factorID}/attempt-verification')
+  @Headers({'Content-Type': 'application/json'})
+  Future<User> attemptFactorVerification(
+    @Path() String factorID,
+    @Body() AttemptVerificationBody body,
+  );
+
+  /// Deletes a factor
+  @DELETE('/auth/factors/{factorID}')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> deleteFactor(@Path() String factorID);
 
   /// Gets all sessions for the user
   @GET('/auth/sessions/')

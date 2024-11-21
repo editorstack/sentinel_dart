@@ -16,8 +16,7 @@ void main() {
     });
 
     group('Get session -', () {
-      test(
-          'when getting session throws an error, it should catch it and throw an SentinelException',
+      test('when getting session throws an error, it should catch it and throw a SentinelException',
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.getSession(any())).thenAnswer(
@@ -43,7 +42,7 @@ void main() {
 
     group('Get sessions -', () {
       test(
-          'when getting sessions throws an error, it should catch it and throw an SentinelException',
+          'when getting sessions throws an error, it should catch it and throw a SentinelException',
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.getSessions()).thenAnswer(
@@ -69,7 +68,7 @@ void main() {
 
     group('Delete all sessions -', () {
       test(
-          'when deleting all sessions throws an error, it should catch it and throw an SentinelException',
+          'when deleting all sessions throws an error, it should catch it and throw a SentinelException',
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.deleteAllSessions()).thenAnswer(
@@ -95,7 +94,7 @@ void main() {
 
     group('Delete other sessions -', () {
       test(
-          'when deleting other sessions throws an error, it should catch it and throw an SentinelException',
+          'when deleting other sessions throws an error, it should catch it and throw a SentinelException',
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.deleteOtherSessions()).thenAnswer(
@@ -121,7 +120,7 @@ void main() {
 
     group('Delete session -', () {
       test(
-          'when deleting session throws an error, it should catch it and throw an SentinelException',
+          'when deleting session throws an error, it should catch it and throw a SentinelException',
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.deleteSession(any())).thenAnswer(

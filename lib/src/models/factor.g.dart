@@ -39,9 +39,9 @@ _$EmailIdentityDataImpl _$$EmailIdentityDataImplFromJson(
         Map<String, dynamic> json) =>
     _$EmailIdentityDataImpl(
       email: json['email'] as String,
-      confirmedAt: json['confirmedAt'] == null
+      verifiedAt: json['verifiedAt'] == null
           ? null
-          : DateTime.parse(json['confirmedAt'] as String),
+          : DateTime.parse(json['verifiedAt'] as String),
       $type: json['factor'] as String?,
     );
 
@@ -49,7 +49,7 @@ Map<String, dynamic> _$$EmailIdentityDataImplToJson(
         _$EmailIdentityDataImpl instance) =>
     <String, dynamic>{
       'email': instance.email,
-      'confirmedAt': instance.confirmedAt?.toIso8601String(),
+      'verifiedAt': instance.verifiedAt?.toIso8601String(),
       'factor': instance.$type,
     };
 
@@ -57,9 +57,9 @@ _$PhoneIdentityDataImpl _$$PhoneIdentityDataImplFromJson(
         Map<String, dynamic> json) =>
     _$PhoneIdentityDataImpl(
       phone: json['phone'] as String,
-      confirmedAt: json['confirmedAt'] == null
+      verifiedAt: json['verifiedAt'] == null
           ? null
-          : DateTime.parse(json['confirmedAt'] as String),
+          : DateTime.parse(json['verifiedAt'] as String),
       $type: json['factor'] as String?,
     );
 
@@ -67,7 +67,7 @@ Map<String, dynamic> _$$PhoneIdentityDataImplToJson(
         _$PhoneIdentityDataImpl instance) =>
     <String, dynamic>{
       'phone': instance.phone,
-      'confirmedAt': instance.confirmedAt?.toIso8601String(),
+      'verifiedAt': instance.verifiedAt?.toIso8601String(),
       'factor': instance.$type,
     };
 
@@ -82,9 +82,9 @@ _$OAuthIdentityDataImpl _$$OAuthIdentityDataImplFromJson(
       expiresAt: json['expiresAt'] == null
           ? null
           : DateTime.parse(json['expiresAt'] as String),
-      confirmedAt: json['confirmedAt'] == null
+      verifiedAt: json['verifiedAt'] == null
           ? null
-          : DateTime.parse(json['confirmedAt'] as String),
+          : DateTime.parse(json['verifiedAt'] as String),
       $type: json['factor'] as String?,
     );
 
@@ -97,7 +97,7 @@ Map<String, dynamic> _$$OAuthIdentityDataImplToJson(
       'refreshToken': instance.refreshToken,
       'accessToken': instance.accessToken,
       'expiresAt': instance.expiresAt?.toIso8601String(),
-      'confirmedAt': instance.confirmedAt?.toIso8601String(),
+      'verifiedAt': instance.verifiedAt?.toIso8601String(),
       'factor': instance.$type,
     };
 
