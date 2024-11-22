@@ -1368,6 +1368,453 @@ _$$AttemptVerificationBodyImplCopyWith<_$AttemptVerificationBodyImpl> get copyWi
 
 }
 
+UpdateUserBody _$UpdateUserBodyFromJson(Map<String, dynamic> json) {
+return _UpdateUserBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UpdateUserBody {
+
+ String? get firstName => throw _privateConstructorUsedError; String? get lastName => throw _privateConstructorUsedError; String? get emailFactorID => throw _privateConstructorUsedError; String? get phoneNumberFactorID => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this UpdateUserBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of UpdateUserBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$UpdateUserBodyCopyWith<UpdateUserBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $UpdateUserBodyCopyWith<$Res>  {
+  factory $UpdateUserBodyCopyWith(UpdateUserBody value, $Res Function(UpdateUserBody) then) = _$UpdateUserBodyCopyWithImpl<$Res, UpdateUserBody>;
+@useResult
+$Res call({
+ String? firstName, String? lastName, String? emailFactorID, String? phoneNumberFactorID
+});
+
+
+
+}
+
+/// @nodoc
+class _$UpdateUserBodyCopyWithImpl<$Res,$Val extends UpdateUserBody> implements $UpdateUserBodyCopyWith<$Res> {
+  _$UpdateUserBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of UpdateUserBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? firstName = freezed,Object? lastName = freezed,Object? emailFactorID = freezed,Object? phoneNumberFactorID = freezed,}) {
+  return _then(_value.copyWith(
+firstName: freezed == firstName ? _value.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as String?,lastName: freezed == lastName ? _value.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String?,emailFactorID: freezed == emailFactorID ? _value.emailFactorID : emailFactorID // ignore: cast_nullable_to_non_nullable
+as String?,phoneNumberFactorID: freezed == phoneNumberFactorID ? _value.phoneNumberFactorID : phoneNumberFactorID // ignore: cast_nullable_to_non_nullable
+as String?,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$UpdateUserBodyImplCopyWith<$Res> implements $UpdateUserBodyCopyWith<$Res> {
+  factory _$$UpdateUserBodyImplCopyWith(_$UpdateUserBodyImpl value, $Res Function(_$UpdateUserBodyImpl) then) = __$$UpdateUserBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String? firstName, String? lastName, String? emailFactorID, String? phoneNumberFactorID
+});
+
+
+
+}
+
+/// @nodoc
+class __$$UpdateUserBodyImplCopyWithImpl<$Res> extends _$UpdateUserBodyCopyWithImpl<$Res, _$UpdateUserBodyImpl> implements _$$UpdateUserBodyImplCopyWith<$Res> {
+  __$$UpdateUserBodyImplCopyWithImpl(_$UpdateUserBodyImpl _value, $Res Function(_$UpdateUserBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of UpdateUserBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? firstName = freezed,Object? lastName = freezed,Object? emailFactorID = freezed,Object? phoneNumberFactorID = freezed,}) {
+  return _then(_$UpdateUserBodyImpl(
+firstName: freezed == firstName ? _value.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as String?,lastName: freezed == lastName ? _value.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String?,emailFactorID: freezed == emailFactorID ? _value.emailFactorID : emailFactorID // ignore: cast_nullable_to_non_nullable
+as String?,phoneNumberFactorID: freezed == phoneNumberFactorID ? _value.phoneNumberFactorID : phoneNumberFactorID // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$UpdateUserBodyImpl  implements _UpdateUserBody {
+  const _$UpdateUserBodyImpl({this.firstName, this.lastName, this.emailFactorID, this.phoneNumberFactorID});
+
+  factory _$UpdateUserBodyImpl.fromJson(Map<String, dynamic> json) => _$$UpdateUserBodyImplFromJson(json);
+
+@override final  String? firstName;
+@override final  String? lastName;
+@override final  String? emailFactorID;
+@override final  String? phoneNumberFactorID;
+
+@override
+String toString() {
+  return 'UpdateUserBody(firstName: $firstName, lastName: $lastName, emailFactorID: $emailFactorID, phoneNumberFactorID: $phoneNumberFactorID)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$UpdateUserBodyImpl&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.emailFactorID, emailFactorID) || other.emailFactorID == emailFactorID)&&(identical(other.phoneNumberFactorID, phoneNumberFactorID) || other.phoneNumberFactorID == phoneNumberFactorID));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,firstName,lastName,emailFactorID,phoneNumberFactorID);
+
+/// Create a copy of UpdateUserBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$UpdateUserBodyImplCopyWith<_$UpdateUserBodyImpl> get copyWith => __$$UpdateUserBodyImplCopyWithImpl<_$UpdateUserBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$UpdateUserBodyImplToJson(this, );
+}
+}
+
+
+abstract class _UpdateUserBody implements UpdateUserBody {
+  const factory _UpdateUserBody({final  String? firstName, final  String? lastName, final  String? emailFactorID, final  String? phoneNumberFactorID}) = _$UpdateUserBodyImpl;
+  
+
+  factory _UpdateUserBody.fromJson(Map<String, dynamic> json) = _$UpdateUserBodyImpl.fromJson;
+
+@override String? get firstName;@override String? get lastName;@override String? get emailFactorID;@override String? get phoneNumberFactorID;
+/// Create a copy of UpdateUserBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$UpdateUserBodyImplCopyWith<_$UpdateUserBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+ChangePasswordBody _$ChangePasswordBodyFromJson(Map<String, dynamic> json) {
+return _ChangePasswordBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ChangePasswordBody {
+
+ String get currentPassword => throw _privateConstructorUsedError; String get newPassword => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this ChangePasswordBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of ChangePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$ChangePasswordBodyCopyWith<ChangePasswordBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $ChangePasswordBodyCopyWith<$Res>  {
+  factory $ChangePasswordBodyCopyWith(ChangePasswordBody value, $Res Function(ChangePasswordBody) then) = _$ChangePasswordBodyCopyWithImpl<$Res, ChangePasswordBody>;
+@useResult
+$Res call({
+ String currentPassword, String newPassword
+});
+
+
+
+}
+
+/// @nodoc
+class _$ChangePasswordBodyCopyWithImpl<$Res,$Val extends ChangePasswordBody> implements $ChangePasswordBodyCopyWith<$Res> {
+  _$ChangePasswordBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of ChangePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? currentPassword = null,Object? newPassword = null,}) {
+  return _then(_value.copyWith(
+currentPassword: null == currentPassword ? _value.currentPassword : currentPassword // ignore: cast_nullable_to_non_nullable
+as String,newPassword: null == newPassword ? _value.newPassword : newPassword // ignore: cast_nullable_to_non_nullable
+as String,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$ChangePasswordBodyImplCopyWith<$Res> implements $ChangePasswordBodyCopyWith<$Res> {
+  factory _$$ChangePasswordBodyImplCopyWith(_$ChangePasswordBodyImpl value, $Res Function(_$ChangePasswordBodyImpl) then) = __$$ChangePasswordBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String currentPassword, String newPassword
+});
+
+
+
+}
+
+/// @nodoc
+class __$$ChangePasswordBodyImplCopyWithImpl<$Res> extends _$ChangePasswordBodyCopyWithImpl<$Res, _$ChangePasswordBodyImpl> implements _$$ChangePasswordBodyImplCopyWith<$Res> {
+  __$$ChangePasswordBodyImplCopyWithImpl(_$ChangePasswordBodyImpl _value, $Res Function(_$ChangePasswordBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of ChangePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? currentPassword = null,Object? newPassword = null,}) {
+  return _then(_$ChangePasswordBodyImpl(
+currentPassword: null == currentPassword ? _value.currentPassword : currentPassword // ignore: cast_nullable_to_non_nullable
+as String,newPassword: null == newPassword ? _value.newPassword : newPassword // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$ChangePasswordBodyImpl  implements _ChangePasswordBody {
+  const _$ChangePasswordBodyImpl({required this.currentPassword, required this.newPassword});
+
+  factory _$ChangePasswordBodyImpl.fromJson(Map<String, dynamic> json) => _$$ChangePasswordBodyImplFromJson(json);
+
+@override final  String currentPassword;
+@override final  String newPassword;
+
+@override
+String toString() {
+  return 'ChangePasswordBody(currentPassword: $currentPassword, newPassword: $newPassword)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$ChangePasswordBodyImpl&&(identical(other.currentPassword, currentPassword) || other.currentPassword == currentPassword)&&(identical(other.newPassword, newPassword) || other.newPassword == newPassword));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,currentPassword,newPassword);
+
+/// Create a copy of ChangePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$ChangePasswordBodyImplCopyWith<_$ChangePasswordBodyImpl> get copyWith => __$$ChangePasswordBodyImplCopyWithImpl<_$ChangePasswordBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$ChangePasswordBodyImplToJson(this, );
+}
+}
+
+
+abstract class _ChangePasswordBody implements ChangePasswordBody {
+  const factory _ChangePasswordBody({required final  String currentPassword, required final  String newPassword}) = _$ChangePasswordBodyImpl;
+  
+
+  factory _ChangePasswordBody.fromJson(Map<String, dynamic> json) = _$ChangePasswordBodyImpl.fromJson;
+
+@override String get currentPassword;@override String get newPassword;
+/// Create a copy of ChangePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$ChangePasswordBodyImplCopyWith<_$ChangePasswordBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+RemovePasswordBody _$RemovePasswordBodyFromJson(Map<String, dynamic> json) {
+return _RemovePasswordBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$RemovePasswordBody {
+
+ String get currentPassword => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this RemovePasswordBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of RemovePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$RemovePasswordBodyCopyWith<RemovePasswordBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $RemovePasswordBodyCopyWith<$Res>  {
+  factory $RemovePasswordBodyCopyWith(RemovePasswordBody value, $Res Function(RemovePasswordBody) then) = _$RemovePasswordBodyCopyWithImpl<$Res, RemovePasswordBody>;
+@useResult
+$Res call({
+ String currentPassword
+});
+
+
+
+}
+
+/// @nodoc
+class _$RemovePasswordBodyCopyWithImpl<$Res,$Val extends RemovePasswordBody> implements $RemovePasswordBodyCopyWith<$Res> {
+  _$RemovePasswordBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of RemovePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? currentPassword = null,}) {
+  return _then(_value.copyWith(
+currentPassword: null == currentPassword ? _value.currentPassword : currentPassword // ignore: cast_nullable_to_non_nullable
+as String,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$RemovePasswordBodyImplCopyWith<$Res> implements $RemovePasswordBodyCopyWith<$Res> {
+  factory _$$RemovePasswordBodyImplCopyWith(_$RemovePasswordBodyImpl value, $Res Function(_$RemovePasswordBodyImpl) then) = __$$RemovePasswordBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String currentPassword
+});
+
+
+
+}
+
+/// @nodoc
+class __$$RemovePasswordBodyImplCopyWithImpl<$Res> extends _$RemovePasswordBodyCopyWithImpl<$Res, _$RemovePasswordBodyImpl> implements _$$RemovePasswordBodyImplCopyWith<$Res> {
+  __$$RemovePasswordBodyImplCopyWithImpl(_$RemovePasswordBodyImpl _value, $Res Function(_$RemovePasswordBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of RemovePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? currentPassword = null,}) {
+  return _then(_$RemovePasswordBodyImpl(
+currentPassword: null == currentPassword ? _value.currentPassword : currentPassword // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$RemovePasswordBodyImpl  implements _RemovePasswordBody {
+  const _$RemovePasswordBodyImpl({required this.currentPassword});
+
+  factory _$RemovePasswordBodyImpl.fromJson(Map<String, dynamic> json) => _$$RemovePasswordBodyImplFromJson(json);
+
+@override final  String currentPassword;
+
+@override
+String toString() {
+  return 'RemovePasswordBody(currentPassword: $currentPassword)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$RemovePasswordBodyImpl&&(identical(other.currentPassword, currentPassword) || other.currentPassword == currentPassword));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,currentPassword);
+
+/// Create a copy of RemovePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$RemovePasswordBodyImplCopyWith<_$RemovePasswordBodyImpl> get copyWith => __$$RemovePasswordBodyImplCopyWithImpl<_$RemovePasswordBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$RemovePasswordBodyImplToJson(this, );
+}
+}
+
+
+abstract class _RemovePasswordBody implements RemovePasswordBody {
+  const factory _RemovePasswordBody({required final  String currentPassword}) = _$RemovePasswordBodyImpl;
+  
+
+  factory _RemovePasswordBody.fromJson(Map<String, dynamic> json) = _$RemovePasswordBodyImpl.fromJson;
+
+@override String get currentPassword;
+/// Create a copy of RemovePasswordBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$RemovePasswordBodyImplCopyWith<_$RemovePasswordBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
 CreateFactorBody _$CreateFactorBodyFromJson(Map<String, dynamic> json) {
 return _CreateFactorBody.fromJson(json);
 }

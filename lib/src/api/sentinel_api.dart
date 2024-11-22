@@ -35,6 +35,31 @@ abstract class SentinelApi {
   @Headers({'Content-Type': 'application/json'})
   Future<UserSession> attemptSignUpVerification(@Body() AttemptVerificationBody body);
 
+  /// Get user details
+  @GET('/auth/me')
+  @Headers({'Content-Type': 'application/json'})
+  Future<User> getUser();
+
+  /// Update user details
+  @PATCH('/auth/me')
+  @Headers({'Content-Type': 'application/json'})
+  Future<User> updateUser(@Body() UpdateUserBody body);
+
+  /// Change password
+  @PATCH('/auth/me/change-password')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> changePassword(@Body() ChangePasswordBody body);
+
+  /// Remove password
+  @PATCH('/auth/me/remove-password')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> removePassword(@Body() RemovePasswordBody body);
+
+  /// Delete user
+  @DELETE('/auth/me')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> deleteUser();
+
   /// Gets all the available factors to sign in for the user
   @GET('/auth/factors/user-factors')
   @Headers({'Content-Type': 'application/json'})

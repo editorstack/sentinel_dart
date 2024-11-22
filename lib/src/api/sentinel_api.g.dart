@@ -178,6 +178,49 @@ Map<String, dynamic> _$$AttemptVerificationBodyImplToJson(
       'code': instance.code,
     };
 
+_$UpdateUserBodyImpl _$$UpdateUserBodyImplFromJson(Map<String, dynamic> json) =>
+    _$UpdateUserBodyImpl(
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
+      emailFactorID: json['emailFactorID'] as String?,
+      phoneNumberFactorID: json['phoneNumberFactorID'] as String?,
+    );
+
+Map<String, dynamic> _$$UpdateUserBodyImplToJson(
+        _$UpdateUserBodyImpl instance) =>
+    <String, dynamic>{
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'emailFactorID': instance.emailFactorID,
+      'phoneNumberFactorID': instance.phoneNumberFactorID,
+    };
+
+_$ChangePasswordBodyImpl _$$ChangePasswordBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ChangePasswordBodyImpl(
+      currentPassword: json['currentPassword'] as String,
+      newPassword: json['newPassword'] as String,
+    );
+
+Map<String, dynamic> _$$ChangePasswordBodyImplToJson(
+        _$ChangePasswordBodyImpl instance) =>
+    <String, dynamic>{
+      'currentPassword': instance.currentPassword,
+      'newPassword': instance.newPassword,
+    };
+
+_$RemovePasswordBodyImpl _$$RemovePasswordBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$RemovePasswordBodyImpl(
+      currentPassword: json['currentPassword'] as String,
+    );
+
+Map<String, dynamic> _$$RemovePasswordBodyImplToJson(
+        _$RemovePasswordBodyImpl instance) =>
+    <String, dynamic>{
+      'currentPassword': instance.currentPassword,
+    };
+
 _$CreateFactorBodyImpl _$$CreateFactorBodyImplFromJson(
         Map<String, dynamic> json) =>
     _$CreateFactorBodyImpl(
@@ -383,6 +426,181 @@ class _SentinelApi implements SentinelApi {
     late UserSession _value;
     try {
       _value = UserSession.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<User> getUser() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<User>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/me',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late User _value;
+    try {
+      _value = User.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<User> updateUser(UpdateUserBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<User>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/me',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late User _value;
+    try {
+      _value = User.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> changePassword(ChangePasswordBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/me/change-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> removePassword(RemovePasswordBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/me/remove-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> deleteUser() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<bool>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/me',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
