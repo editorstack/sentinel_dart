@@ -99,6 +99,46 @@ enum VerificationFactor {
   phoneCode,
 }
 
+/// Body for updating user details
+@freezed
+class UpdateUserBody with _$UpdateUserBody {
+  /// Creates a new instance of [UpdateUserBody] with the specified parameters.
+  const factory UpdateUserBody({
+    String? firstName,
+    String? lastName,
+    String? emailFactorID,
+    String? phoneNumberFactorID,
+  }) = _UpdateUserBody;
+
+  /// Used to serialize [UpdateUserBody] object to and from JSON.
+  factory UpdateUserBody.fromJson(Map<String, dynamic> json) => _$UpdateUserBodyFromJson(json);
+}
+
+/// Body to change password
+@freezed
+class ChangePasswordBody with _$ChangePasswordBody {
+  /// Creates a new instance of [ChangePasswordBody] with the specified parameters.
+  const factory ChangePasswordBody({
+    required String currentPassword,
+    required String newPassword,
+  }) = _ChangePasswordBody;
+
+  /// Used to serialize [ChangePasswordBody] object to and from JSON.
+  factory ChangePasswordBody.fromJson(Map<String, dynamic> json) =>
+      _$ChangePasswordBodyFromJson(json);
+}
+
+/// Body to remove password
+@freezed
+class RemovePasswordBody with _$RemovePasswordBody {
+  /// Creates a new instance of [RemovePasswordBody] with the specified parameters.
+  const factory RemovePasswordBody({required String currentPassword}) = _RemovePasswordBody;
+
+  /// Used to serialize [RemovePasswordBody] object to and from JSON.
+  factory RemovePasswordBody.fromJson(Map<String, dynamic> json) =>
+      _$RemovePasswordBodyFromJson(json);
+}
+
 /// Body for creating a factor
 @freezed
 class CreateFactorBody with _$CreateFactorBody {
