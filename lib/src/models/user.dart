@@ -22,7 +22,6 @@ class User with _$User {
     required String? lastName,
     required String? email,
     required String? phoneNumber,
-    required UserRole role,
     required String? image,
     required bool twoFactor,
     required bool banned,
@@ -45,15 +44,6 @@ class User with _$User {
 
   /// Returns the initials of the user's name.
   String get initials => '${firstName?.substring(0, 1) ?? ''}${lastName?.substring(0, 1) ?? ''}';
-}
-
-/// Represents the different types of users supported by the system.
-enum UserRole {
-  /// Represents an administrator user.
-  admin,
-
-  /// Represents a regular user.
-  user,
 }
 
 /// Represents an authenticated user for Drift database storage.
@@ -81,9 +71,6 @@ class Users extends drift.Table {
 
   /// User's phone number, if provided.
   drift.TextColumn get phoneNumber => text().nullable()();
-
-  /// User's role in the system.
-  drift.TextColumn get role => textEnum<UserRole>()();
 
   /// User's profile image URL, if provided.
   drift.TextColumn get image => text().nullable()();
@@ -122,7 +109,6 @@ extension UserConverter on User {
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber,
-      role: role,
       image: image,
       twoFactor: twoFactor,
       banned: banned,
@@ -149,7 +135,6 @@ extension DUserConverter on DUser {
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber,
-      role: role,
       image: image,
       twoFactor: twoFactor,
       banned: banned,

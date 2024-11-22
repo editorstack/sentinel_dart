@@ -1,9 +1,9 @@
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
 import 'package:sentinel/src/models/user.drift.dart' as i1;
-import 'package:sentinel/src/models/user.dart' as i2;
-import 'package:sentinel/src/models/factor.dart' as i3;
-import 'package:sentinel/src/models/device.dart' as i4;
+import 'package:sentinel/src/models/factor.dart' as i2;
+import 'package:sentinel/src/models/device.dart' as i3;
+import 'package:sentinel/src/models/user.dart' as i4;
 
 typedef $$UsersTableCreateCompanionBuilder = i1.UsersCompanion Function({
   required String id,
@@ -11,14 +11,13 @@ typedef $$UsersTableCreateCompanionBuilder = i1.UsersCompanion Function({
   i0.Value<String?> lastName,
   i0.Value<String?> email,
   i0.Value<String?> phoneNumber,
-  required i2.UserRole role,
   i0.Value<String?> image,
   required bool twoFactor,
   required bool banned,
   required DateTime createdAt,
   required DateTime updatedAt,
-  required List<i3.Factor> factors,
-  required List<i4.Device> devices,
+  required List<i2.Factor> factors,
+  required List<i3.Device> devices,
   i0.Value<int> rowid,
 });
 typedef $$UsersTableUpdateCompanionBuilder = i1.UsersCompanion Function({
@@ -27,14 +26,13 @@ typedef $$UsersTableUpdateCompanionBuilder = i1.UsersCompanion Function({
   i0.Value<String?> lastName,
   i0.Value<String?> email,
   i0.Value<String?> phoneNumber,
-  i0.Value<i2.UserRole> role,
   i0.Value<String?> image,
   i0.Value<bool> twoFactor,
   i0.Value<bool> banned,
   i0.Value<DateTime> createdAt,
   i0.Value<DateTime> updatedAt,
-  i0.Value<List<i3.Factor>> factors,
-  i0.Value<List<i4.Device>> devices,
+  i0.Value<List<i2.Factor>> factors,
+  i0.Value<List<i3.Device>> devices,
   i0.Value<int> rowid,
 });
 
@@ -63,11 +61,6 @@ class $$UsersTableFilterComposer
       column: $table.phoneNumber,
       builder: (column) => i0.ColumnFilters(column));
 
-  i0.ColumnWithTypeConverterFilters<i2.UserRole, i2.UserRole, String>
-      get role => $composableBuilder(
-          column: $table.role,
-          builder: (column) => i0.ColumnWithTypeConverterFilters(column));
-
   i0.ColumnFilters<String> get image => $composableBuilder(
       column: $table.image, builder: (column) => i0.ColumnFilters(column));
 
@@ -83,12 +76,12 @@ class $$UsersTableFilterComposer
   i0.ColumnFilters<DateTime> get updatedAt => $composableBuilder(
       column: $table.updatedAt, builder: (column) => i0.ColumnFilters(column));
 
-  i0.ColumnWithTypeConverterFilters<List<i3.Factor>, List<i3.Factor>, String>
+  i0.ColumnWithTypeConverterFilters<List<i2.Factor>, List<i2.Factor>, String>
       get factors => $composableBuilder(
           column: $table.factors,
           builder: (column) => i0.ColumnWithTypeConverterFilters(column));
 
-  i0.ColumnWithTypeConverterFilters<List<i4.Device>, List<i4.Device>, String>
+  i0.ColumnWithTypeConverterFilters<List<i3.Device>, List<i3.Device>, String>
       get devices => $composableBuilder(
           column: $table.devices,
           builder: (column) => i0.ColumnWithTypeConverterFilters(column));
@@ -119,9 +112,6 @@ class $$UsersTableOrderingComposer
   i0.ColumnOrderings<String> get phoneNumber => $composableBuilder(
       column: $table.phoneNumber,
       builder: (column) => i0.ColumnOrderings(column));
-
-  i0.ColumnOrderings<String> get role => $composableBuilder(
-      column: $table.role, builder: (column) => i0.ColumnOrderings(column));
 
   i0.ColumnOrderings<String> get image => $composableBuilder(
       column: $table.image, builder: (column) => i0.ColumnOrderings(column));
@@ -172,9 +162,6 @@ class $$UsersTableAnnotationComposer
   i0.GeneratedColumn<String> get phoneNumber => $composableBuilder(
       column: $table.phoneNumber, builder: (column) => column);
 
-  i0.GeneratedColumnWithTypeConverter<i2.UserRole, String> get role =>
-      $composableBuilder(column: $table.role, builder: (column) => column);
-
   i0.GeneratedColumn<String> get image =>
       $composableBuilder(column: $table.image, builder: (column) => column);
 
@@ -190,10 +177,10 @@ class $$UsersTableAnnotationComposer
   i0.GeneratedColumn<DateTime> get updatedAt =>
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
 
-  i0.GeneratedColumnWithTypeConverter<List<i3.Factor>, String> get factors =>
+  i0.GeneratedColumnWithTypeConverter<List<i2.Factor>, String> get factors =>
       $composableBuilder(column: $table.factors, builder: (column) => column);
 
-  i0.GeneratedColumnWithTypeConverter<List<i4.Device>, String> get devices =>
+  i0.GeneratedColumnWithTypeConverter<List<i3.Device>, String> get devices =>
       $composableBuilder(column: $table.devices, builder: (column) => column);
 }
 
@@ -228,14 +215,13 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             i0.Value<String?> lastName = const i0.Value.absent(),
             i0.Value<String?> email = const i0.Value.absent(),
             i0.Value<String?> phoneNumber = const i0.Value.absent(),
-            i0.Value<i2.UserRole> role = const i0.Value.absent(),
             i0.Value<String?> image = const i0.Value.absent(),
             i0.Value<bool> twoFactor = const i0.Value.absent(),
             i0.Value<bool> banned = const i0.Value.absent(),
             i0.Value<DateTime> createdAt = const i0.Value.absent(),
             i0.Value<DateTime> updatedAt = const i0.Value.absent(),
-            i0.Value<List<i3.Factor>> factors = const i0.Value.absent(),
-            i0.Value<List<i4.Device>> devices = const i0.Value.absent(),
+            i0.Value<List<i2.Factor>> factors = const i0.Value.absent(),
+            i0.Value<List<i3.Device>> devices = const i0.Value.absent(),
             i0.Value<int> rowid = const i0.Value.absent(),
           }) =>
               i1.UsersCompanion(
@@ -244,7 +230,6 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             lastName: lastName,
             email: email,
             phoneNumber: phoneNumber,
-            role: role,
             image: image,
             twoFactor: twoFactor,
             banned: banned,
@@ -260,14 +245,13 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             i0.Value<String?> lastName = const i0.Value.absent(),
             i0.Value<String?> email = const i0.Value.absent(),
             i0.Value<String?> phoneNumber = const i0.Value.absent(),
-            required i2.UserRole role,
             i0.Value<String?> image = const i0.Value.absent(),
             required bool twoFactor,
             required bool banned,
             required DateTime createdAt,
             required DateTime updatedAt,
-            required List<i3.Factor> factors,
-            required List<i4.Device> devices,
+            required List<i2.Factor> factors,
+            required List<i3.Device> devices,
             i0.Value<int> rowid = const i0.Value.absent(),
           }) =>
               i1.UsersCompanion.insert(
@@ -276,7 +260,6 @@ class $$UsersTableTableManager extends i0.RootTableManager<
             lastName: lastName,
             email: email,
             phoneNumber: phoneNumber,
-            role: role,
             image: image,
             twoFactor: twoFactor,
             banned: banned,
@@ -309,7 +292,7 @@ typedef $$UsersTableProcessedTableManager = i0.ProcessedTableManager<
     i1.DUser,
     i0.PrefetchHooks Function()>;
 
-class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
+class $UsersTable extends i4.Users with i0.TableInfo<$UsersTable, i1.DUser> {
   @override
   final i0.GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -343,13 +326,6 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
   late final i0.GeneratedColumn<String> phoneNumber =
       i0.GeneratedColumn<String>('phoneNumber', aliasedName, true,
           type: i0.DriftSqlType.string, requiredDuringInsert: false);
-  static const i0.VerificationMeta _roleMeta =
-      const i0.VerificationMeta('role');
-  @override
-  late final i0.GeneratedColumnWithTypeConverter<i2.UserRole, String> role =
-      i0.GeneratedColumn<String>('role', aliasedName, false,
-              type: i0.DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<i2.UserRole>(i1.$UsersTable.$converterrole);
   static const i0.VerificationMeta _imageMeta =
       const i0.VerificationMeta('image');
   @override
@@ -389,17 +365,17 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
   static const i0.VerificationMeta _factorsMeta =
       const i0.VerificationMeta('factors');
   @override
-  late final i0.GeneratedColumnWithTypeConverter<List<i3.Factor>, String>
+  late final i0.GeneratedColumnWithTypeConverter<List<i2.Factor>, String>
       factors = i0.GeneratedColumn<String>('factors', aliasedName, false,
               type: i0.DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<List<i3.Factor>>(i1.$UsersTable.$converterfactors);
+          .withConverter<List<i2.Factor>>(i1.$UsersTable.$converterfactors);
   static const i0.VerificationMeta _devicesMeta =
       const i0.VerificationMeta('devices');
   @override
-  late final i0.GeneratedColumnWithTypeConverter<List<i4.Device>, String>
+  late final i0.GeneratedColumnWithTypeConverter<List<i3.Device>, String>
       devices = i0.GeneratedColumn<String>('devices', aliasedName, false,
               type: i0.DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<List<i4.Device>>(i1.$UsersTable.$converterdevices);
+          .withConverter<List<i3.Device>>(i1.$UsersTable.$converterdevices);
   @override
   List<i0.GeneratedColumn> get $columns => [
         id,
@@ -407,7 +383,6 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
         lastName,
         email,
         phoneNumber,
-        role,
         image,
         twoFactor,
         banned,
@@ -449,7 +424,6 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
           phoneNumber.isAcceptableOrUnknown(
               data['phoneNumber']!, _phoneNumberMeta));
     }
-    context.handle(_roleMeta, const i0.VerificationResult.success());
     if (data.containsKey('image')) {
       context.handle(
           _imageMeta, image.isAcceptableOrUnknown(data['image']!, _imageMeta));
@@ -499,8 +473,6 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
           .read(i0.DriftSqlType.string, data['${effectivePrefix}email']),
       phoneNumber: attachedDatabase.typeMapping
           .read(i0.DriftSqlType.string, data['${effectivePrefix}phoneNumber']),
-      role: i1.$UsersTable.$converterrole.fromSql(attachedDatabase.typeMapping
-          .read(i0.DriftSqlType.string, data['${effectivePrefix}role'])!),
       image: attachedDatabase.typeMapping
           .read(i0.DriftSqlType.string, data['${effectivePrefix}image']),
       twoFactor: attachedDatabase.typeMapping
@@ -525,12 +497,10 @@ class $UsersTable extends i2.Users with i0.TableInfo<$UsersTable, i1.DUser> {
     return $UsersTable(attachedDatabase, alias);
   }
 
-  static i0.JsonTypeConverter2<i2.UserRole, String, String> $converterrole =
-      const i0.EnumNameConverter<i2.UserRole>(i2.UserRole.values);
-  static i0.TypeConverter<List<i3.Factor>, String> $converterfactors =
-      const i3.FactorConverter();
-  static i0.TypeConverter<List<i4.Device>, String> $converterdevices =
-      const i4.DeviceConverter();
+  static i0.TypeConverter<List<i2.Factor>, String> $converterfactors =
+      const i2.FactorConverter();
+  static i0.TypeConverter<List<i3.Device>, String> $converterdevices =
+      const i3.DeviceConverter();
 }
 
 class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
@@ -549,9 +519,6 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
   /// User's phone number, if provided.
   final String? phoneNumber;
 
-  /// User's role in the system.
-  final i2.UserRole role;
-
   /// User's profile image URL, if provided.
   final String? image;
 
@@ -568,17 +535,16 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
   final DateTime updatedAt;
 
   /// List of associated factors for the user.
-  final List<i3.Factor> factors;
+  final List<i2.Factor> factors;
 
   /// List of associated devices for the user.
-  final List<i4.Device> devices;
+  final List<i3.Device> devices;
   const DUser(
       {required this.id,
       this.firstName,
       this.lastName,
       this.email,
       this.phoneNumber,
-      required this.role,
       this.image,
       required this.twoFactor,
       required this.banned,
@@ -601,10 +567,6 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
     }
     if (!nullToAbsent || phoneNumber != null) {
       map['phoneNumber'] = i0.Variable<String>(phoneNumber);
-    }
-    {
-      map['role'] =
-          i0.Variable<String>(i1.$UsersTable.$converterrole.toSql(role));
     }
     if (!nullToAbsent || image != null) {
       map['image'] = i0.Variable<String>(image);
@@ -639,7 +601,6 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
       phoneNumber: phoneNumber == null && nullToAbsent
           ? const i0.Value.absent()
           : i0.Value(phoneNumber),
-      role: i0.Value(role),
       image: image == null && nullToAbsent
           ? const i0.Value.absent()
           : i0.Value(image),
@@ -661,15 +622,13 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
       lastName: serializer.fromJson<String?>(json['lastName']),
       email: serializer.fromJson<String?>(json['email']),
       phoneNumber: serializer.fromJson<String?>(json['phoneNumber']),
-      role: i1.$UsersTable.$converterrole
-          .fromJson(serializer.fromJson<String>(json['role'])),
       image: serializer.fromJson<String?>(json['image']),
       twoFactor: serializer.fromJson<bool>(json['twoFactor']),
       banned: serializer.fromJson<bool>(json['banned']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
-      factors: serializer.fromJson<List<i3.Factor>>(json['factors']),
-      devices: serializer.fromJson<List<i4.Device>>(json['devices']),
+      factors: serializer.fromJson<List<i2.Factor>>(json['factors']),
+      devices: serializer.fromJson<List<i3.Device>>(json['devices']),
     );
   }
   @override
@@ -681,15 +640,13 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
       'lastName': serializer.toJson<String?>(lastName),
       'email': serializer.toJson<String?>(email),
       'phoneNumber': serializer.toJson<String?>(phoneNumber),
-      'role':
-          serializer.toJson<String>(i1.$UsersTable.$converterrole.toJson(role)),
       'image': serializer.toJson<String?>(image),
       'twoFactor': serializer.toJson<bool>(twoFactor),
       'banned': serializer.toJson<bool>(banned),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
-      'factors': serializer.toJson<List<i3.Factor>>(factors),
-      'devices': serializer.toJson<List<i4.Device>>(devices),
+      'factors': serializer.toJson<List<i2.Factor>>(factors),
+      'devices': serializer.toJson<List<i3.Device>>(devices),
     };
   }
 
@@ -699,21 +656,19 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           i0.Value<String?> lastName = const i0.Value.absent(),
           i0.Value<String?> email = const i0.Value.absent(),
           i0.Value<String?> phoneNumber = const i0.Value.absent(),
-          i2.UserRole? role,
           i0.Value<String?> image = const i0.Value.absent(),
           bool? twoFactor,
           bool? banned,
           DateTime? createdAt,
           DateTime? updatedAt,
-          List<i3.Factor>? factors,
-          List<i4.Device>? devices}) =>
+          List<i2.Factor>? factors,
+          List<i3.Device>? devices}) =>
       i1.DUser(
         id: id ?? this.id,
         firstName: firstName.present ? firstName.value : this.firstName,
         lastName: lastName.present ? lastName.value : this.lastName,
         email: email.present ? email.value : this.email,
         phoneNumber: phoneNumber.present ? phoneNumber.value : this.phoneNumber,
-        role: role ?? this.role,
         image: image.present ? image.value : this.image,
         twoFactor: twoFactor ?? this.twoFactor,
         banned: banned ?? this.banned,
@@ -730,7 +685,6 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
       email: data.email.present ? data.email.value : this.email,
       phoneNumber:
           data.phoneNumber.present ? data.phoneNumber.value : this.phoneNumber,
-      role: data.role.present ? data.role.value : this.role,
       image: data.image.present ? data.image.value : this.image,
       twoFactor: data.twoFactor.present ? data.twoFactor.value : this.twoFactor,
       banned: data.banned.present ? data.banned.value : this.banned,
@@ -749,7 +703,6 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           ..write('lastName: $lastName, ')
           ..write('email: $email, ')
           ..write('phoneNumber: $phoneNumber, ')
-          ..write('role: $role, ')
           ..write('image: $image, ')
           ..write('twoFactor: $twoFactor, ')
           ..write('banned: $banned, ')
@@ -763,7 +716,7 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
 
   @override
   int get hashCode => Object.hash(id, firstName, lastName, email, phoneNumber,
-      role, image, twoFactor, banned, createdAt, updatedAt, factors, devices);
+      image, twoFactor, banned, createdAt, updatedAt, factors, devices);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -773,7 +726,6 @@ class DUser extends i0.DataClass implements i0.Insertable<i1.DUser> {
           other.lastName == this.lastName &&
           other.email == this.email &&
           other.phoneNumber == this.phoneNumber &&
-          other.role == this.role &&
           other.image == this.image &&
           other.twoFactor == this.twoFactor &&
           other.banned == this.banned &&
@@ -789,14 +741,13 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
   final i0.Value<String?> lastName;
   final i0.Value<String?> email;
   final i0.Value<String?> phoneNumber;
-  final i0.Value<i2.UserRole> role;
   final i0.Value<String?> image;
   final i0.Value<bool> twoFactor;
   final i0.Value<bool> banned;
   final i0.Value<DateTime> createdAt;
   final i0.Value<DateTime> updatedAt;
-  final i0.Value<List<i3.Factor>> factors;
-  final i0.Value<List<i4.Device>> devices;
+  final i0.Value<List<i2.Factor>> factors;
+  final i0.Value<List<i3.Device>> devices;
   final i0.Value<int> rowid;
   const UsersCompanion({
     this.id = const i0.Value.absent(),
@@ -804,7 +755,6 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     this.lastName = const i0.Value.absent(),
     this.email = const i0.Value.absent(),
     this.phoneNumber = const i0.Value.absent(),
-    this.role = const i0.Value.absent(),
     this.image = const i0.Value.absent(),
     this.twoFactor = const i0.Value.absent(),
     this.banned = const i0.Value.absent(),
@@ -820,17 +770,15 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     this.lastName = const i0.Value.absent(),
     this.email = const i0.Value.absent(),
     this.phoneNumber = const i0.Value.absent(),
-    required i2.UserRole role,
     this.image = const i0.Value.absent(),
     required bool twoFactor,
     required bool banned,
     required DateTime createdAt,
     required DateTime updatedAt,
-    required List<i3.Factor> factors,
-    required List<i4.Device> devices,
+    required List<i2.Factor> factors,
+    required List<i3.Device> devices,
     this.rowid = const i0.Value.absent(),
   })  : id = i0.Value(id),
-        role = i0.Value(role),
         twoFactor = i0.Value(twoFactor),
         banned = i0.Value(banned),
         createdAt = i0.Value(createdAt),
@@ -843,7 +791,6 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     i0.Expression<String>? lastName,
     i0.Expression<String>? email,
     i0.Expression<String>? phoneNumber,
-    i0.Expression<String>? role,
     i0.Expression<String>? image,
     i0.Expression<bool>? twoFactor,
     i0.Expression<bool>? banned,
@@ -859,7 +806,6 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
       if (lastName != null) 'lastName': lastName,
       if (email != null) 'email': email,
       if (phoneNumber != null) 'phoneNumber': phoneNumber,
-      if (role != null) 'role': role,
       if (image != null) 'image': image,
       if (twoFactor != null) 'twoFactor': twoFactor,
       if (banned != null) 'banned': banned,
@@ -877,14 +823,13 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
       i0.Value<String?>? lastName,
       i0.Value<String?>? email,
       i0.Value<String?>? phoneNumber,
-      i0.Value<i2.UserRole>? role,
       i0.Value<String?>? image,
       i0.Value<bool>? twoFactor,
       i0.Value<bool>? banned,
       i0.Value<DateTime>? createdAt,
       i0.Value<DateTime>? updatedAt,
-      i0.Value<List<i3.Factor>>? factors,
-      i0.Value<List<i4.Device>>? devices,
+      i0.Value<List<i2.Factor>>? factors,
+      i0.Value<List<i3.Device>>? devices,
       i0.Value<int>? rowid}) {
     return i1.UsersCompanion(
       id: id ?? this.id,
@@ -892,7 +837,6 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      role: role ?? this.role,
       image: image ?? this.image,
       twoFactor: twoFactor ?? this.twoFactor,
       banned: banned ?? this.banned,
@@ -921,10 +865,6 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
     }
     if (phoneNumber.present) {
       map['phoneNumber'] = i0.Variable<String>(phoneNumber.value);
-    }
-    if (role.present) {
-      map['role'] =
-          i0.Variable<String>(i1.$UsersTable.$converterrole.toSql(role.value));
     }
     if (image.present) {
       map['image'] = i0.Variable<String>(image.value);
@@ -963,7 +903,6 @@ class UsersCompanion extends i0.UpdateCompanion<i1.DUser> {
           ..write('lastName: $lastName, ')
           ..write('email: $email, ')
           ..write('phoneNumber: $phoneNumber, ')
-          ..write('role: $role, ')
           ..write('image: $image, ')
           ..write('twoFactor: $twoFactor, ')
           ..write('banned: $banned, ')

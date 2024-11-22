@@ -12,7 +12,6 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       lastName: json['lastName'] as String?,
       email: json['email'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
-      role: $enumDecode(_$UserRoleEnumMap, json['role']),
       image: json['image'] as String?,
       twoFactor: json['twoFactor'] as bool,
       banned: json['banned'] as bool,
@@ -33,7 +32,6 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'lastName': instance.lastName,
       'email': instance.email,
       'phoneNumber': instance.phoneNumber,
-      'role': _$UserRoleEnumMap[instance.role]!,
       'image': instance.image,
       'twoFactor': instance.twoFactor,
       'banned': instance.banned,
@@ -42,8 +40,3 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'factors': instance.factors.map((e) => e.toJson()).toList(),
       'devices': instance.devices.map((e) => e.toJson()).toList(),
     };
-
-const _$UserRoleEnumMap = {
-  UserRole.admin: 'admin',
-  UserRole.user: 'user',
-};

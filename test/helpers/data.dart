@@ -17,7 +17,6 @@ final kUser = User(
   email: 'example@editorstack.com',
   phoneNumber: '918234567890',
   image: null,
-  role: UserRole.user,
   twoFactor: false,
   banned: false,
   createdAt: DateTime.now(),
