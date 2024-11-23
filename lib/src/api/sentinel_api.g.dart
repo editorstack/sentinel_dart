@@ -10,14 +10,14 @@ _$AnonymousSignUpBodyImpl _$$AnonymousSignUpBodyImplFromJson(
         Map<String, dynamic> json) =>
     _$AnonymousSignUpBodyImpl(
       device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['factor'] as String?,
+      $type: json['strategy'] as String?,
     );
 
 Map<String, dynamic> _$$AnonymousSignUpBodyImplToJson(
         _$AnonymousSignUpBodyImpl instance) =>
     <String, dynamic>{
       'device': instance.device.toJson(),
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PasswordSignUpBodyImpl _$$PasswordSignUpBodyImplFromJson(
@@ -28,7 +28,7 @@ _$PasswordSignUpBodyImpl _$$PasswordSignUpBodyImplFromJson(
       device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
       identifier: json['identifier'] as String,
       password: json['password'] as String,
-      $type: json['factor'] as String?,
+      $type: json['strategy'] as String?,
     );
 
 Map<String, dynamic> _$$PasswordSignUpBodyImplToJson(
@@ -39,7 +39,7 @@ Map<String, dynamic> _$$PasswordSignUpBodyImplToJson(
       'device': instance.device.toJson(),
       'identifier': instance.identifier,
       'password': instance.password,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailCodeSignUpBodyImpl _$$EmailCodeSignUpBodyImplFromJson(
@@ -49,7 +49,7 @@ _$EmailCodeSignUpBodyImpl _$$EmailCodeSignUpBodyImplFromJson(
       lastName: json['lastName'] as String?,
       device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
       identifier: json['identifier'] as String,
-      $type: json['factor'] as String?,
+      $type: json['strategy'] as String?,
     );
 
 Map<String, dynamic> _$$EmailCodeSignUpBodyImplToJson(
@@ -59,7 +59,7 @@ Map<String, dynamic> _$$EmailCodeSignUpBodyImplToJson(
       'lastName': instance.lastName,
       'device': instance.device.toJson(),
       'identifier': instance.identifier,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailLinkSignUpBodyImpl _$$EmailLinkSignUpBodyImplFromJson(
@@ -69,7 +69,7 @@ _$EmailLinkSignUpBodyImpl _$$EmailLinkSignUpBodyImplFromJson(
       lastName: json['lastName'] as String?,
       device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
       identifier: json['identifier'] as String,
-      $type: json['factor'] as String?,
+      $type: json['strategy'] as String?,
     );
 
 Map<String, dynamic> _$$EmailLinkSignUpBodyImplToJson(
@@ -79,7 +79,7 @@ Map<String, dynamic> _$$EmailLinkSignUpBodyImplToJson(
       'lastName': instance.lastName,
       'device': instance.device.toJson(),
       'identifier': instance.identifier,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodeSignUpBodyImpl _$$PhoneCodeSignUpBodyImplFromJson(
@@ -89,7 +89,7 @@ _$PhoneCodeSignUpBodyImpl _$$PhoneCodeSignUpBodyImplFromJson(
       lastName: json['lastName'] as String?,
       device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
       identifier: json['identifier'] as String,
-      $type: json['factor'] as String?,
+      $type: json['strategy'] as String?,
     );
 
 Map<String, dynamic> _$$PhoneCodeSignUpBodyImplToJson(
@@ -99,7 +99,7 @@ Map<String, dynamic> _$$PhoneCodeSignUpBodyImplToJson(
       'lastName': instance.lastName,
       'device': instance.device.toJson(),
       'identifier': instance.identifier,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$DeviceRequestImpl _$$DeviceRequestImplFromJson(Map<String, dynamic> json) =>
@@ -129,26 +129,26 @@ _$EmailCodePrepareVerificationBodyImpl
     _$$EmailCodePrepareVerificationBodyImplFromJson(
             Map<String, dynamic> json) =>
         _$EmailCodePrepareVerificationBodyImpl(
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodePrepareVerificationBodyImplToJson(
         _$EmailCodePrepareVerificationBodyImpl instance) =>
     <String, dynamic>{
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodePrepareVerificationBodyImpl
     _$$PhoneCodePrepareVerificationBodyImplFromJson(
             Map<String, dynamic> json) =>
         _$PhoneCodePrepareVerificationBodyImpl(
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodePrepareVerificationBodyImplToJson(
         _$PhoneCodePrepareVerificationBodyImpl instance) =>
     <String, dynamic>{
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailLinkPrepareVerificationBodyImpl
@@ -156,14 +156,14 @@ _$EmailLinkPrepareVerificationBodyImpl
             Map<String, dynamic> json) =>
         _$EmailLinkPrepareVerificationBodyImpl(
           redirectUrl: json['redirectUrl'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailLinkPrepareVerificationBodyImplToJson(
         _$EmailLinkPrepareVerificationBodyImpl instance) =>
     <String, dynamic>{
       'redirectUrl': instance.redirectUrl,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$AttemptVerificationBodyImpl _$$AttemptVerificationBodyImplFromJson(
@@ -184,7 +184,7 @@ _$EmailCodePrepareFirstFactorBodyImpl
           identifier: json['identifier'] as String,
           device:
               DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodePrepareFirstFactorBodyImplToJson(
@@ -192,7 +192,7 @@ Map<String, dynamic> _$$EmailCodePrepareFirstFactorBodyImplToJson(
     <String, dynamic>{
       'identifier': instance.identifier,
       'device': instance.device.toJson(),
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodePrepareFirstFactorBodyImpl
@@ -201,7 +201,7 @@ _$PhoneCodePrepareFirstFactorBodyImpl
           identifier: json['identifier'] as String,
           device:
               DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodePrepareFirstFactorBodyImplToJson(
@@ -209,7 +209,7 @@ Map<String, dynamic> _$$PhoneCodePrepareFirstFactorBodyImplToJson(
     <String, dynamic>{
       'identifier': instance.identifier,
       'device': instance.device.toJson(),
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailLinkPrepareFirstFactorBodyImpl
@@ -219,7 +219,7 @@ _$EmailLinkPrepareFirstFactorBodyImpl
           redirectUrl: json['redirectUrl'] as String,
           device:
               DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailLinkPrepareFirstFactorBodyImplToJson(
@@ -228,7 +228,7 @@ Map<String, dynamic> _$$EmailLinkPrepareFirstFactorBodyImplToJson(
       'identifier': instance.identifier,
       'redirectUrl': instance.redirectUrl,
       'device': instance.device.toJson(),
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PasswordAttemptFirstFactorBodyImpl
@@ -238,7 +238,7 @@ _$PasswordAttemptFirstFactorBodyImpl
           password: json['password'] as String,
           device:
               DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PasswordAttemptFirstFactorBodyImplToJson(
@@ -247,35 +247,35 @@ Map<String, dynamic> _$$PasswordAttemptFirstFactorBodyImplToJson(
       'identifier': instance.identifier,
       'password': instance.password,
       'device': instance.device.toJson(),
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailCodeAttemptFirstFactorBodyImpl
     _$$EmailCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
         _$EmailCodeAttemptFirstFactorBodyImpl(
           code: json['code'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodeAttemptFirstFactorBodyImplToJson(
         _$EmailCodeAttemptFirstFactorBodyImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodeAttemptFirstFactorBodyImpl
     _$$PhoneCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
         _$PhoneCodeAttemptFirstFactorBodyImpl(
           code: json['code'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodeAttemptFirstFactorBodyImplToJson(
         _$PhoneCodeAttemptFirstFactorBodyImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailCodePrepareSecondFactorBodyImpl
@@ -283,14 +283,14 @@ _$EmailCodePrepareSecondFactorBodyImpl
             Map<String, dynamic> json) =>
         _$EmailCodePrepareSecondFactorBodyImpl(
           json['email'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodePrepareSecondFactorBodyImplToJson(
         _$EmailCodePrepareSecondFactorBodyImpl instance) =>
     <String, dynamic>{
       'email': instance.email,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodePrepareSecondFactorBodyImpl
@@ -298,14 +298,14 @@ _$PhoneCodePrepareSecondFactorBodyImpl
             Map<String, dynamic> json) =>
         _$PhoneCodePrepareSecondFactorBodyImpl(
           json['phoneNumber'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodePrepareSecondFactorBodyImplToJson(
         _$PhoneCodePrepareSecondFactorBodyImpl instance) =>
     <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailCodeAttemptSecondFactorBodyImpl
@@ -314,7 +314,7 @@ _$EmailCodeAttemptSecondFactorBodyImpl
         _$EmailCodeAttemptSecondFactorBodyImpl(
           code: json['code'] as String,
           identifier: json['identifier'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodeAttemptSecondFactorBodyImplToJson(
@@ -322,7 +322,7 @@ Map<String, dynamic> _$$EmailCodeAttemptSecondFactorBodyImplToJson(
     <String, dynamic>{
       'code': instance.code,
       'identifier': instance.identifier,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodeAttemptSecondFactorBodyImpl
@@ -331,7 +331,7 @@ _$PhoneCodeAttemptSecondFactorBodyImpl
         _$PhoneCodeAttemptSecondFactorBodyImpl(
           code: json['code'] as String,
           identifier: json['identifier'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodeAttemptSecondFactorBodyImplToJson(
@@ -339,21 +339,21 @@ Map<String, dynamic> _$$PhoneCodeAttemptSecondFactorBodyImplToJson(
     <String, dynamic>{
       'code': instance.code,
       'identifier': instance.identifier,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$TOTPAttemptSecondFactorBodyImpl _$$TOTPAttemptSecondFactorBodyImplFromJson(
         Map<String, dynamic> json) =>
     _$TOTPAttemptSecondFactorBodyImpl(
       json['code'] as String,
-      $type: json['factor'] as String?,
+      $type: json['strategy'] as String?,
     );
 
 Map<String, dynamic> _$$TOTPAttemptSecondFactorBodyImplToJson(
         _$TOTPAttemptSecondFactorBodyImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$RecoveryCodeAttemptSecondFactorBodyImpl
@@ -361,14 +361,14 @@ _$RecoveryCodeAttemptSecondFactorBodyImpl
             Map<String, dynamic> json) =>
         _$RecoveryCodeAttemptSecondFactorBodyImpl(
           json['code'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$RecoveryCodeAttemptSecondFactorBodyImplToJson(
         _$RecoveryCodeAttemptSecondFactorBodyImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PrepareResetPasswordBodyImpl _$$PrepareResetPasswordBodyImplFromJson(
@@ -404,14 +404,14 @@ _$EmailCodePrepareReAuthenticationBodyImpl
             Map<String, dynamic> json) =>
         _$EmailCodePrepareReAuthenticationBodyImpl(
           json['email'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodePrepareReAuthenticationBodyImplToJson(
         _$EmailCodePrepareReAuthenticationBodyImpl instance) =>
     <String, dynamic>{
       'email': instance.email,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodePrepareReAuthenticationBodyImpl
@@ -419,14 +419,14 @@ _$PhoneCodePrepareReAuthenticationBodyImpl
             Map<String, dynamic> json) =>
         _$PhoneCodePrepareReAuthenticationBodyImpl(
           json['phoneNumber'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodePrepareReAuthenticationBodyImplToJson(
         _$PhoneCodePrepareReAuthenticationBodyImpl instance) =>
     <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PasswordAttemptReAuthenticationBodyImpl
@@ -435,7 +435,7 @@ _$PasswordAttemptReAuthenticationBodyImpl
         _$PasswordAttemptReAuthenticationBodyImpl(
           identifier: json['identifier'] as String,
           password: json['password'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PasswordAttemptReAuthenticationBodyImplToJson(
@@ -443,7 +443,7 @@ Map<String, dynamic> _$$PasswordAttemptReAuthenticationBodyImplToJson(
     <String, dynamic>{
       'identifier': instance.identifier,
       'password': instance.password,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$EmailCodeAttemptReAuthenticationBodyImpl
@@ -452,7 +452,7 @@ _$EmailCodeAttemptReAuthenticationBodyImpl
         _$EmailCodeAttemptReAuthenticationBodyImpl(
           code: json['code'] as String,
           identifier: json['identifier'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodeAttemptReAuthenticationBodyImplToJson(
@@ -460,7 +460,7 @@ Map<String, dynamic> _$$EmailCodeAttemptReAuthenticationBodyImplToJson(
     <String, dynamic>{
       'code': instance.code,
       'identifier': instance.identifier,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$PhoneCodeAttemptReAuthenticationBodyImpl
@@ -469,7 +469,7 @@ _$PhoneCodeAttemptReAuthenticationBodyImpl
         _$PhoneCodeAttemptReAuthenticationBodyImpl(
           code: json['code'] as String,
           identifier: json['identifier'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodeAttemptReAuthenticationBodyImplToJson(
@@ -477,21 +477,21 @@ Map<String, dynamic> _$$PhoneCodeAttemptReAuthenticationBodyImplToJson(
     <String, dynamic>{
       'code': instance.code,
       'identifier': instance.identifier,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$TOTPAttemptReAuthenticationBodyImpl
     _$$TOTPAttemptReAuthenticationBodyImplFromJson(Map<String, dynamic> json) =>
         _$TOTPAttemptReAuthenticationBodyImpl(
           json['code'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$TOTPAttemptReAuthenticationBodyImplToJson(
         _$TOTPAttemptReAuthenticationBodyImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$RecoveryCodeAttemptReAuthenticationBodyImpl
@@ -499,14 +499,14 @@ _$RecoveryCodeAttemptReAuthenticationBodyImpl
             Map<String, dynamic> json) =>
         _$RecoveryCodeAttemptReAuthenticationBodyImpl(
           json['code'] as String,
-          $type: json['factor'] as String?,
+          $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$RecoveryCodeAttemptReAuthenticationBodyImplToJson(
         _$RecoveryCodeAttemptReAuthenticationBodyImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'factor': instance.$type,
+      'strategy': instance.$type,
     };
 
 _$UpdateUserBodyImpl _$$UpdateUserBodyImplFromJson(Map<String, dynamic> json) =>
