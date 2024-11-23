@@ -45,7 +45,7 @@ void main() {
           const res = UserFactorsResponse(firstFactors: [], secondFactors: []);
           when(() => mockSentinelApi.getUserFactors(any())).thenAnswer((_) async => res);
 
-          final response = await factors.getEmailFactors(kUser.email!);
+          final response = await factors.getEmailFactors(email: kUser.email!);
 
           expect(response, res);
         },
@@ -60,7 +60,7 @@ void main() {
           );
 
           expect(
-            () => factors.getEmailFactors(kUser.email!),
+            () => factors.getEmailFactors(email: kUser.email!),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -76,7 +76,7 @@ void main() {
           const res = UserFactorsResponse(firstFactors: [], secondFactors: []);
           when(() => mockSentinelApi.getUserFactors(any())).thenAnswer((_) async => res);
 
-          final response = await factors.getPhoneNumberFactors('918234567890');
+          final response = await factors.getPhoneNumberFactors(phoneNumber: '918234567890');
 
           expect(response, res);
         },
@@ -91,7 +91,7 @@ void main() {
           );
 
           expect(
-            () => factors.getPhoneNumberFactors('911234567890'),
+            () => factors.getPhoneNumberFactors(phoneNumber: '911234567890'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -107,7 +107,7 @@ void main() {
         );
 
         expect(
-          () => factors.addEmail(kUser.email!),
+          () => factors.addEmail(email: kUser.email!),
           throwsA(isA<SentinelException>()),
         );
       });
@@ -116,22 +116,22 @@ void main() {
         final factors = Factors(mockSentinelApi);
 
         when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
-        final factor = await factors.addEmail(kUser.email!);
-        expect(factor, isA<FactorEmail>());
+        final factor = await factors.addEmail(email: kUser.email!);
+        expect(factor, kFactor);
       });
 
       test(
         'when preparing email code verification throws an error, it should catch it and throw a SentinelException',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.prepareFactorVerification(any(), any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
-          final factor = await factors.addEmail(kUser.email!);
-
           expect(
-            () => factor.prepareVerification(emailFactor: EmailVerificationFactor.code),
+            () => factors.prepareEmailVerification(
+              factorID: '',
+              strategy: EmailVerificationStrategy.code,
+            ),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -141,13 +141,12 @@ void main() {
         'when factor verification is prepared successfully then it should not throw any error',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.prepareFactorVerification(any(), any()))
               .thenAnswer((_) async => true);
 
-          final factor = await factors.addEmail(kUser.email!);
-          final prepared = await factor.prepareVerification(
-            emailFactor: EmailVerificationFactor.code,
+          final prepared = await factors.prepareEmailVerification(
+            factorID: '',
+            strategy: EmailVerificationStrategy.code,
           );
 
           verify(
@@ -158,13 +157,12 @@ void main() {
           ).called(1);
           expect(prepared, true);
 
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.prepareFactorVerification(any(), any()))
               .thenAnswer((_) async => true);
 
-          final factor2 = await factors.addEmail(kUser.email!);
-          final prepared2 = await factor2.prepareVerification(
-            emailFactor: EmailVerificationFactor.link,
+          final prepared2 = await factors.prepareEmailVerification(
+            factorID: '',
+            strategy: EmailVerificationStrategy.link,
             redirectUrl: '',
           );
 
@@ -182,15 +180,12 @@ void main() {
         'when verification is attempted and throws an error, it should catch it and throw a SentinelException',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.attemptFactorVerification(any(), any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
 
-          final factor = await factors.addEmail(kUser.email!);
-
           expect(
-            () => factor.attemptVerification(code: '000000'),
+            () => factors.attemptEmailVerification(factorID: '', code: '000000'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -200,12 +195,10 @@ void main() {
         'when factor verification is successful, then it should not throw any error',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.attemptFactorVerification(any(), any()))
               .thenAnswer((_) async => kUser);
 
-          final factor = await factors.addEmail(kUser.email!);
-          final user = await factor.attemptVerification(code: '000000');
+          final user = await factors.attemptEmailVerification(factorID: '', code: '000000');
 
           verify(
             () => mockSentinelApi.attemptFactorVerification(
@@ -228,7 +221,7 @@ void main() {
         );
 
         expect(
-          () => factors.addPhoneNumber(kUser.phoneNumber!),
+          () => factors.addPhoneNumber(phoneNumber: kUser.phoneNumber!),
           throwsA(isA<SentinelException>()),
         );
       });
@@ -237,22 +230,19 @@ void main() {
         final factors = Factors(mockSentinelApi);
 
         when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
-        final factor = await factors.addPhoneNumber(kUser.phoneNumber!);
-        expect(factor, isA<FactorPhoneNumber>());
+        final factor = await factors.addPhoneNumber(phoneNumber: kUser.phoneNumber!);
+        expect(factor, kFactor);
       });
 
       test(
         'when preparing email code verification throws an error, it should catch it and throw a SentinelException',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.prepareFactorVerification(any(), any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
-          final factor = await factors.addPhoneNumber(kUser.phoneNumber!);
-
           expect(
-            factor.prepareVerification,
+            () => factors.preparePhoneNumberVerification(factorID: ''),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -262,12 +252,10 @@ void main() {
         'when factor verification is prepared successfully then it should not throw any error',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.prepareFactorVerification(any(), any()))
               .thenAnswer((_) async => true);
 
-          final factor = await factors.addPhoneNumber(kUser.phoneNumber!);
-          final prepared = await factor.prepareVerification();
+          final prepared = await factors.preparePhoneNumberVerification(factorID: '');
 
           verify(
             () => mockSentinelApi.prepareFactorVerification(
@@ -283,15 +271,12 @@ void main() {
         'when verification is attempted and throws an error, it should catch it and throw a SentinelException',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.attemptFactorVerification(any(), any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
 
-          final factor = await factors.addPhoneNumber(kUser.phoneNumber!);
-
           expect(
-            () => factor.attemptVerification(code: '000000'),
+            () => factors.attemptPhoneNumberVerification(factorID: '', code: '000000'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -301,12 +286,10 @@ void main() {
         'when factor verification is successful, then it should not throw any error',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
           when(() => mockSentinelApi.attemptFactorVerification(any(), any()))
               .thenAnswer((_) async => kUser);
 
-          final factor = await factors.addPhoneNumber(kUser.phoneNumber!);
-          final user = await factor.attemptVerification(code: '000000');
+          final user = await factors.attemptPhoneNumberVerification(factorID: '', code: '000000');
 
           verify(
             () => mockSentinelApi.attemptFactorVerification(
@@ -329,7 +312,7 @@ void main() {
           );
 
           expect(
-            () => factors.deleteFactor('id'),
+            () => factors.deleteFactor(factorID: 'id'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -341,7 +324,7 @@ void main() {
           final factors = Factors(mockSentinelApi);
           when(() => mockSentinelApi.deleteFactor(any())).thenAnswer((_) async => true);
 
-          final deleted = await factors.deleteFactor('id');
+          final deleted = await factors.deleteFactor(factorID: 'id');
 
           verify(() => mockSentinelApi.deleteFactor('id')).called(1);
           expect(deleted, true);

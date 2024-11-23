@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sentinel/src/api/sentinel_api.dart';
@@ -23,7 +24,7 @@ void main() {
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.enableTOTP()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -55,7 +56,7 @@ void main() {
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.verifyTOTP(any())).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -80,7 +81,7 @@ void main() {
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.disableTOTP()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -106,7 +107,7 @@ void main() {
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.enableTwoFactor()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -132,7 +133,7 @@ void main() {
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.disableTwoFactor()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -158,7 +159,7 @@ void main() {
           () async {
         final mfa = MFA(mockSentinelApi);
         when(() => mockSentinelApi.regenerateRecoveryCodes()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(

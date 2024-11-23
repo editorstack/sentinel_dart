@@ -10,7 +10,7 @@ class Sessions {
   final SentinelApi _sentinel;
 
   /// Get a specific session
-  Future<Session?> getSession(String sessionID) async {
+  Future<Session?> getSession({required String sessionID}) async {
     try {
       return await _sentinel.getSession(sessionID);
     } catch (e) {
@@ -47,7 +47,7 @@ class Sessions {
   }
 
   /// Delete a specific session
-  Future<bool> deleteSession(String sessionID) async {
+  Future<bool> deleteSession({required String sessionID}) async {
     try {
       return await _sentinel.deleteSession(sessionID);
     } catch (e) {

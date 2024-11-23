@@ -178,6 +178,337 @@ Map<String, dynamic> _$$AttemptVerificationBodyImplToJson(
       'code': instance.code,
     };
 
+_$EmailCodePrepareFirstFactorBodyImpl
+    _$$EmailCodePrepareFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$EmailCodePrepareFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailCodePrepareFirstFactorBodyImplToJson(
+        _$EmailCodePrepareFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'device': instance.device.toJson(),
+      'factor': instance.$type,
+    };
+
+_$PhoneCodePrepareFirstFactorBodyImpl
+    _$$PhoneCodePrepareFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$PhoneCodePrepareFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PhoneCodePrepareFirstFactorBodyImplToJson(
+        _$PhoneCodePrepareFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'device': instance.device.toJson(),
+      'factor': instance.$type,
+    };
+
+_$EmailLinkPrepareFirstFactorBodyImpl
+    _$$EmailLinkPrepareFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$EmailLinkPrepareFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
+          redirectUrl: json['redirectUrl'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailLinkPrepareFirstFactorBodyImplToJson(
+        _$EmailLinkPrepareFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'redirectUrl': instance.redirectUrl,
+      'device': instance.device.toJson(),
+      'factor': instance.$type,
+    };
+
+_$PasswordAttemptFirstFactorBodyImpl
+    _$$PasswordAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$PasswordAttemptFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
+          password: json['password'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PasswordAttemptFirstFactorBodyImplToJson(
+        _$PasswordAttemptFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'password': instance.password,
+      'device': instance.device.toJson(),
+      'factor': instance.$type,
+    };
+
+_$EmailCodeAttemptFirstFactorBodyImpl
+    _$$EmailCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$EmailCodeAttemptFirstFactorBodyImpl(
+          code: json['code'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailCodeAttemptFirstFactorBodyImplToJson(
+        _$EmailCodeAttemptFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'factor': instance.$type,
+    };
+
+_$PhoneCodeAttemptFirstFactorBodyImpl
+    _$$PhoneCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$PhoneCodeAttemptFirstFactorBodyImpl(
+          code: json['code'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PhoneCodeAttemptFirstFactorBodyImplToJson(
+        _$PhoneCodeAttemptFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'factor': instance.$type,
+    };
+
+_$EmailCodePrepareSecondFactorBodyImpl
+    _$$EmailCodePrepareSecondFactorBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$EmailCodePrepareSecondFactorBodyImpl(
+          json['email'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailCodePrepareSecondFactorBodyImplToJson(
+        _$EmailCodePrepareSecondFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'factor': instance.$type,
+    };
+
+_$PhoneCodePrepareSecondFactorBodyImpl
+    _$$PhoneCodePrepareSecondFactorBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$PhoneCodePrepareSecondFactorBodyImpl(
+          json['phoneNumber'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PhoneCodePrepareSecondFactorBodyImplToJson(
+        _$PhoneCodePrepareSecondFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'phoneNumber': instance.phoneNumber,
+      'factor': instance.$type,
+    };
+
+_$EmailCodeAttemptSecondFactorBodyImpl
+    _$$EmailCodeAttemptSecondFactorBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$EmailCodeAttemptSecondFactorBodyImpl(
+          code: json['code'] as String,
+          identifier: json['identifier'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailCodeAttemptSecondFactorBodyImplToJson(
+        _$EmailCodeAttemptSecondFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'identifier': instance.identifier,
+      'factor': instance.$type,
+    };
+
+_$PhoneCodeAttemptSecondFactorBodyImpl
+    _$$PhoneCodeAttemptSecondFactorBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$PhoneCodeAttemptSecondFactorBodyImpl(
+          code: json['code'] as String,
+          identifier: json['identifier'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PhoneCodeAttemptSecondFactorBodyImplToJson(
+        _$PhoneCodeAttemptSecondFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'identifier': instance.identifier,
+      'factor': instance.$type,
+    };
+
+_$TOTPAttemptSecondFactorBodyImpl _$$TOTPAttemptSecondFactorBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TOTPAttemptSecondFactorBodyImpl(
+      json['code'] as String,
+      $type: json['factor'] as String?,
+    );
+
+Map<String, dynamic> _$$TOTPAttemptSecondFactorBodyImplToJson(
+        _$TOTPAttemptSecondFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'factor': instance.$type,
+    };
+
+_$RecoveryCodeAttemptSecondFactorBodyImpl
+    _$$RecoveryCodeAttemptSecondFactorBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$RecoveryCodeAttemptSecondFactorBodyImpl(
+          json['code'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$RecoveryCodeAttemptSecondFactorBodyImplToJson(
+        _$RecoveryCodeAttemptSecondFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'factor': instance.$type,
+    };
+
+_$PrepareResetPasswordBodyImpl _$$PrepareResetPasswordBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PrepareResetPasswordBodyImpl(
+      json['identifier'] as String,
+    );
+
+Map<String, dynamic> _$$PrepareResetPasswordBodyImplToJson(
+        _$PrepareResetPasswordBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+    };
+
+_$AttemptResetPasswordBodyImpl _$$AttemptResetPasswordBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AttemptResetPasswordBodyImpl(
+      identifier: json['identifier'] as String,
+      code: json['code'] as String,
+      password: json['password'] as String,
+    );
+
+Map<String, dynamic> _$$AttemptResetPasswordBodyImplToJson(
+        _$AttemptResetPasswordBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'code': instance.code,
+      'password': instance.password,
+    };
+
+_$EmailCodePrepareReAuthenticationBodyImpl
+    _$$EmailCodePrepareReAuthenticationBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$EmailCodePrepareReAuthenticationBodyImpl(
+          json['email'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailCodePrepareReAuthenticationBodyImplToJson(
+        _$EmailCodePrepareReAuthenticationBodyImpl instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'factor': instance.$type,
+    };
+
+_$PhoneCodePrepareReAuthenticationBodyImpl
+    _$$PhoneCodePrepareReAuthenticationBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$PhoneCodePrepareReAuthenticationBodyImpl(
+          json['phoneNumber'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PhoneCodePrepareReAuthenticationBodyImplToJson(
+        _$PhoneCodePrepareReAuthenticationBodyImpl instance) =>
+    <String, dynamic>{
+      'phoneNumber': instance.phoneNumber,
+      'factor': instance.$type,
+    };
+
+_$PasswordAttemptReAuthenticationBodyImpl
+    _$$PasswordAttemptReAuthenticationBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$PasswordAttemptReAuthenticationBodyImpl(
+          identifier: json['identifier'] as String,
+          password: json['password'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PasswordAttemptReAuthenticationBodyImplToJson(
+        _$PasswordAttemptReAuthenticationBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'password': instance.password,
+      'factor': instance.$type,
+    };
+
+_$EmailCodeAttemptReAuthenticationBodyImpl
+    _$$EmailCodeAttemptReAuthenticationBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$EmailCodeAttemptReAuthenticationBodyImpl(
+          code: json['code'] as String,
+          identifier: json['identifier'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailCodeAttemptReAuthenticationBodyImplToJson(
+        _$EmailCodeAttemptReAuthenticationBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'identifier': instance.identifier,
+      'factor': instance.$type,
+    };
+
+_$PhoneCodeAttemptReAuthenticationBodyImpl
+    _$$PhoneCodeAttemptReAuthenticationBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$PhoneCodeAttemptReAuthenticationBodyImpl(
+          code: json['code'] as String,
+          identifier: json['identifier'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$PhoneCodeAttemptReAuthenticationBodyImplToJson(
+        _$PhoneCodeAttemptReAuthenticationBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'identifier': instance.identifier,
+      'factor': instance.$type,
+    };
+
+_$TOTPAttemptReAuthenticationBodyImpl
+    _$$TOTPAttemptReAuthenticationBodyImplFromJson(Map<String, dynamic> json) =>
+        _$TOTPAttemptReAuthenticationBodyImpl(
+          json['code'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$TOTPAttemptReAuthenticationBodyImplToJson(
+        _$TOTPAttemptReAuthenticationBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'factor': instance.$type,
+    };
+
+_$RecoveryCodeAttemptReAuthenticationBodyImpl
+    _$$RecoveryCodeAttemptReAuthenticationBodyImplFromJson(
+            Map<String, dynamic> json) =>
+        _$RecoveryCodeAttemptReAuthenticationBodyImpl(
+          json['code'] as String,
+          $type: json['factor'] as String?,
+        );
+
+Map<String, dynamic> _$$RecoveryCodeAttemptReAuthenticationBodyImplToJson(
+        _$RecoveryCodeAttemptReAuthenticationBodyImpl instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'factor': instance.$type,
+    };
+
 _$UpdateUserBodyImpl _$$UpdateUserBodyImplFromJson(Map<String, dynamic> json) =>
     _$UpdateUserBodyImpl(
       firstName: json['firstName'] as String?,
@@ -426,6 +757,286 @@ class _SentinelApi implements SentinelApi {
     late UserSession _value;
     try {
       _value = UserSession.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<UserSession> prepareFirstFactor(PrepareFirstFactorBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<UserSession>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/prepare-first-factor',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UserSession _value;
+    try {
+      _value = UserSession.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<UserSession> attemptFirstFactor(AttemptFirstFactorBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<UserSession>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/attempt-first-factor',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UserSession _value;
+    try {
+      _value = UserSession.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> prepareSecondFactor(PrepareSecondFactorBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/prepare-second-factor',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<UserSession> attemptSecondFactor(AttemptSecondFactorBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<UserSession>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/attempt-second-factor',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UserSession _value;
+    try {
+      _value = UserSession.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> prepareResetPassword(PrepareResetPasswordBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/prepare-reset-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> attemptResetPassword(AttemptResetPasswordBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/attempt-reset-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> prepareReAuthentication(PrepareReAuthenticationBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/prepare-re-authentication',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<bool> attemptReAuthentication(AttemptReAuthenticationBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/auth/sign-in/attempt-re-authentication',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
+    try {
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

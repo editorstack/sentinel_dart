@@ -90,8 +90,175 @@ class AttemptVerificationBody with _$AttemptVerificationBody {
       _$AttemptVerificationBodyFromJson(json);
 }
 
-/// Factor for verification
-enum VerificationFactor {
+/// Body for preparing first factor
+@Freezed(unionKey: 'factor')
+sealed class PrepareFirstFactorBody with _$PrepareFirstFactorBody {
+  /// Prepares first factor for an email code sign in
+  const factory PrepareFirstFactorBody.emailCode({
+    required String identifier,
+    required DeviceRequest device,
+  }) = EmailCodePrepareFirstFactorBody;
+
+  /// Prepares first factor for a phone code sign in
+  const factory PrepareFirstFactorBody.phoneCode({
+    required String identifier,
+    required DeviceRequest device,
+  }) = PhoneCodePrepareFirstFactorBody;
+
+  /// Prepares first factor for an email link sign in
+  const factory PrepareFirstFactorBody.emailLink({
+    required String identifier,
+    required String redirectUrl,
+    required DeviceRequest device,
+  }) = EmailLinkPrepareFirstFactorBody;
+
+  /// Used to serialize [PrepareFirstFactorBody] object to and from JSON.
+  factory PrepareFirstFactorBody.fromJson(Map<String, dynamic> json) =>
+      _$PrepareFirstFactorBodyFromJson(json);
+}
+
+/// Body for attempting first factor
+@Freezed(unionKey: 'factor')
+sealed class AttemptFirstFactorBody with _$AttemptFirstFactorBody {
+  /// Attempts first factor for password sign in
+  const factory AttemptFirstFactorBody.password({
+    required String identifier,
+    required String password,
+    required DeviceRequest device,
+  }) = PasswordAttemptFirstFactorBody;
+
+  /// Attempts first factor for email code sign in
+  const factory AttemptFirstFactorBody.emailCode({required String code}) =
+      EmailCodeAttemptFirstFactorBody;
+
+  /// Attempts first factor for phone code sign in
+  const factory AttemptFirstFactorBody.phoneCode({required String code}) =
+      PhoneCodeAttemptFirstFactorBody;
+
+  /// Used to serialize [AttemptFirstFactorBody] object to and from JSON.
+  factory AttemptFirstFactorBody.fromJson(Map<String, dynamic> json) =>
+      _$AttemptFirstFactorBodyFromJson(json);
+}
+
+/// Body for preparing second factor
+@Freezed(unionKey: 'factor')
+sealed class PrepareSecondFactorBody with _$PrepareSecondFactorBody {
+  /// Prepares second factor for an email code sign in
+  const factory PrepareSecondFactorBody.emailCode(String email) = EmailCodePrepareSecondFactorBody;
+
+  /// Prepares second factor for a phone code sign in
+  const factory PrepareSecondFactorBody.phoneCode(String phoneNumber) =
+      PhoneCodePrepareSecondFactorBody;
+
+  /// Used to serialize [PrepareSecondFactorBody] object to and from JSON.
+  factory PrepareSecondFactorBody.fromJson(Map<String, dynamic> json) =>
+      _$PrepareSecondFactorBodyFromJson(json);
+}
+
+/// Body for attempting second factor
+@Freezed(unionKey: 'factor')
+sealed class AttemptSecondFactorBody with _$AttemptSecondFactorBody {
+  /// Attempts second factor for an email code sign in
+  const factory AttemptSecondFactorBody.emailCode({
+    required String code,
+    required String identifier,
+  }) = EmailCodeAttemptSecondFactorBody;
+
+  /// Attempts second factor for a phone code sign in
+  const factory AttemptSecondFactorBody.phoneCode({
+    required String code,
+    required String identifier,
+  }) = PhoneCodeAttemptSecondFactorBody;
+
+  /// Attempts second factor for a totp sign in
+  const factory AttemptSecondFactorBody.totp(String code) = TOTPAttemptSecondFactorBody;
+
+  /// Attempts second factor for a recovery code sign in
+  const factory AttemptSecondFactorBody.recoveryCode(String code) =
+      RecoveryCodeAttemptSecondFactorBody;
+
+  /// Used to serialize [AttemptSecondFactorBody] object to and from JSON.
+  factory AttemptSecondFactorBody.fromJson(Map<String, dynamic> json) =>
+      _$AttemptSecondFactorBodyFromJson(json);
+}
+
+/// Body for preparing reset password
+@freezed
+class PrepareResetPasswordBody with _$PrepareResetPasswordBody {
+  /// Creates a new instance of [PrepareResetPasswordBody] with the specified parameters.
+  const factory PrepareResetPasswordBody(String identifier) = _PrepareResetPasswordBody;
+
+  /// Used to serialize [PrepareResetPasswordBody] object to and from JSON.
+  factory PrepareResetPasswordBody.fromJson(Map<String, dynamic> json) =>
+      _$PrepareResetPasswordBodyFromJson(json);
+}
+
+/// Body for attempting reset password
+@freezed
+class AttemptResetPasswordBody with _$AttemptResetPasswordBody {
+  /// Creates a new instance of [AttemptResetPasswordBody] with the specified parameters.
+  const factory AttemptResetPasswordBody({
+    required String identifier,
+    required String code,
+    required String password,
+  }) = _AttemptResetPasswordBody;
+
+  /// Used to serialize [AttemptResetPasswordBody] object to and from JSON.
+  factory AttemptResetPasswordBody.fromJson(Map<String, dynamic> json) =>
+      _$AttemptResetPasswordBodyFromJson(json);
+}
+
+/// Body for preparing re-authentication
+@Freezed(unionKey: 'factor')
+sealed class PrepareReAuthenticationBody with _$PrepareReAuthenticationBody {
+  /// Prepares re-authentication for an email code sign in
+  const factory PrepareReAuthenticationBody.emailCode(String email) =
+      EmailCodePrepareReAuthenticationBody;
+
+  /// Prepares re-authentication for a phone code sign in
+  const factory PrepareReAuthenticationBody.phoneCode(String phoneNumber) =
+      PhoneCodePrepareReAuthenticationBody;
+
+  /// Used to serialize [PrepareReAuthenticationBody] object to and from JSON.
+  factory PrepareReAuthenticationBody.fromJson(Map<String, dynamic> json) =>
+      _$PrepareReAuthenticationBodyFromJson(json);
+}
+
+/// Body for attempting re-authentication
+@Freezed(unionKey: 'factor')
+sealed class AttemptReAuthenticationBody with _$AttemptReAuthenticationBody {
+  /// Attempts re-authentication for a password sign in
+  const factory AttemptReAuthenticationBody.password({
+    required String identifier,
+    required String password,
+  }) = PasswordAttemptReAuthenticationBody;
+
+  /// Attempts re-authentication for an email code sign in
+  const factory AttemptReAuthenticationBody.emailCode({
+    required String code,
+    required String identifier,
+  }) = EmailCodeAttemptReAuthenticationBody;
+
+  /// Attempts re-authentication for a phone code sign in
+  const factory AttemptReAuthenticationBody.phoneCode({
+    required String code,
+    required String identifier,
+  }) = PhoneCodeAttemptReAuthenticationBody;
+
+  /// Attempts re-authentication for a totp sign in
+  const factory AttemptReAuthenticationBody.totp(String code) = TOTPAttemptReAuthenticationBody;
+
+  /// Attempts re-authentication for a recovery code sign in
+  const factory AttemptReAuthenticationBody.recoveryCode(String code) =
+      RecoveryCodeAttemptReAuthenticationBody;
+
+  /// Used to serialize [AttemptReAuthenticationBody] object to and from JSON.
+  factory AttemptReAuthenticationBody.fromJson(Map<String, dynamic> json) =>
+      _$AttemptReAuthenticationBodyFromJson(json);
+}
+
+/// Strategy for verification
+enum CodeVerificationStrategy {
   /// Sends a 6 digit code to the user's email address
   emailCode,
 
@@ -159,4 +326,13 @@ class TOTPVerifyBody with _$TOTPVerifyBody {
 
   /// Used to serialize [TOTPVerifyBody] object to and from JSON.
   factory TOTPVerifyBody.fromJson(Map<String, dynamic> json) => _$TOTPVerifyBodyFromJson(json);
+}
+
+/// Verification factor for email factor
+enum EmailVerificationStrategy {
+  /// Verification code sent to the email address
+  code,
+
+  /// Verification link sent to the email address
+  link,
 }

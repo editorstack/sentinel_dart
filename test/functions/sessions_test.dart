@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sentinel/src/api/sentinel_api.dart';
@@ -20,11 +21,11 @@ void main() {
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.getSession(any())).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
-          () async => session.getSession('current'),
+          () async => session.getSession(sessionID: 'current'),
           throwsA(isA<SentinelException>()),
         );
       });
@@ -33,7 +34,7 @@ void main() {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.getSession(any())).thenAnswer((_) async => kSession);
 
-        final rSession = await session.getSession('current');
+        final rSession = await session.getSession(sessionID: 'current');
 
         verify(() => mockSentinelApi.getSession(any(that: isA<String>()))).called(1);
         expect(rSession, kSession);
@@ -46,7 +47,7 @@ void main() {
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.getSessions()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -72,7 +73,7 @@ void main() {
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.deleteAllSessions()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -98,7 +99,7 @@ void main() {
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.deleteOtherSessions()).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
@@ -124,11 +125,11 @@ void main() {
           () async {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.deleteSession(any())).thenAnswer(
-          (_) async => throw Exception('error'),
+          (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
-          () => session.deleteSession('current'),
+          () => session.deleteSession(sessionID: 'current'),
           throwsA(isA<SentinelException>()),
         );
       });
@@ -137,7 +138,7 @@ void main() {
         final session = Sessions(mockSentinelApi);
         when(() => mockSentinelApi.deleteSession(any())).thenAnswer((_) async => true);
 
-        final deleted = await session.deleteSession('current');
+        final deleted = await session.deleteSession(sessionID: 'current');
 
         verify(() => mockSentinelApi.deleteSession(any(that: isA<String>()))).called(1);
         expect(deleted, true);
