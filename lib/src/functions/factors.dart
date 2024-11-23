@@ -12,7 +12,7 @@ class Factors {
 
   /// Returns all the factors that are available for a user to sign in with
   /// using the email address
-  Future<UserFactorsResponse> getEmailFactors(String email) async {
+  Future<UserFactorsResponse> getEmailFactors({required String email}) async {
     try {
       return await _sentinel.getUserFactors(email);
     } catch (e) {
@@ -22,16 +22,16 @@ class Factors {
 
   /// Returns all the factors that are available for a user to sign in with
   /// using the phone number
-  Future<UserFactorsResponse> getPhoneNumberFactors(String phone) async {
+  Future<UserFactorsResponse> getPhoneNumberFactors({required String phoneNumber}) async {
     try {
-      return await _sentinel.getUserFactors(phone);
+      return await _sentinel.getUserFactors(phoneNumber);
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
   /// Adds a new email for the current user
-  Future<Factor> addEmail(String email) async {
+  Future<Factor> addEmail({required String email}) async {
     try {
       return await _sentinel.createFactor(CreateFactorBody(email));
     } catch (e) {
@@ -72,7 +72,7 @@ class Factors {
   }
 
   /// Adds a new phone number for the current user
-  Future<Factor> addPhoneNumber(String phoneNumber) async {
+  Future<Factor> addPhoneNumber({required String phoneNumber}) async {
     try {
       return await _sentinel.createFactor(CreateFactorBody(phoneNumber));
     } catch (e) {
@@ -108,7 +108,7 @@ class Factors {
   }
 
   /// Deletes a factor for the current user
-  Future<bool> deleteFactor(String factorID) async {
+  Future<bool> deleteFactor({required String factorID}) async {
     try {
       return await _sentinel.deleteFactor(factorID);
     } catch (e) {

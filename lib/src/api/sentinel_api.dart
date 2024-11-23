@@ -35,6 +35,46 @@ abstract class SentinelApi {
   @Headers({'Content-Type': 'application/json'})
   Future<UserSession> attemptSignUpVerification(@Body() AttemptVerificationBody body);
 
+  /// Prepares first factor for sign in
+  @POST('/auth/sign-in/prepare-first-factor')
+  @Headers({'Content-Type': 'application/json'})
+  Future<UserSession> prepareFirstFactor(@Body() PrepareFirstFactorBody body);
+
+  /// Attempts first factor for sign in
+  @POST('/auth/sign-in/attempt-first-factor')
+  @Headers({'Content-Type': 'application/json'})
+  Future<UserSession> attemptFirstFactor(@Body() AttemptFirstFactorBody body);
+
+  /// Prepares second factor for sign in
+  @POST('/auth/sign-in/prepare-second-factor')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> prepareSecondFactor(@Body() PrepareSecondFactorBody body);
+
+  /// Attempts second factor for sign in
+  @POST('/auth/sign-in/attempt-second-factor')
+  @Headers({'Content-Type': 'application/json'})
+  Future<UserSession> attemptSecondFactor(@Body() AttemptSecondFactorBody body);
+
+  /// Prepares reset password for sign in
+  @POST('/auth/sign-in/prepare-reset-password')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> prepareResetPassword(@Body() PrepareResetPasswordBody body);
+
+  /// Attempts reset password for sign in
+  @POST('/auth/sign-in/attempt-reset-password')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> attemptResetPassword(@Body() AttemptResetPasswordBody body);
+
+  /// Prepares re-authentication for sign in
+  @POST('/auth/sign-in/prepare-re-authentication')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> prepareReAuthentication(@Body() PrepareReAuthenticationBody body);
+
+  /// Attempts re-authentication for sign in
+  @POST('/auth/sign-in/attempt-re-authentication')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> attemptReAuthentication(@Body() AttemptReAuthenticationBody body);
+
   /// Get user details
   @GET('/auth/me')
   @Headers({'Content-Type': 'application/json'})

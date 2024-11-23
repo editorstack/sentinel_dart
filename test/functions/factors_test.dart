@@ -45,7 +45,7 @@ void main() {
           const res = UserFactorsResponse(firstFactors: [], secondFactors: []);
           when(() => mockSentinelApi.getUserFactors(any())).thenAnswer((_) async => res);
 
-          final response = await factors.getEmailFactors(kUser.email!);
+          final response = await factors.getEmailFactors(email: kUser.email!);
 
           expect(response, res);
         },
@@ -60,7 +60,7 @@ void main() {
           );
 
           expect(
-            () => factors.getEmailFactors(kUser.email!),
+            () => factors.getEmailFactors(email: kUser.email!),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -76,7 +76,7 @@ void main() {
           const res = UserFactorsResponse(firstFactors: [], secondFactors: []);
           when(() => mockSentinelApi.getUserFactors(any())).thenAnswer((_) async => res);
 
-          final response = await factors.getPhoneNumberFactors('918234567890');
+          final response = await factors.getPhoneNumberFactors(phoneNumber: '918234567890');
 
           expect(response, res);
         },
@@ -91,7 +91,7 @@ void main() {
           );
 
           expect(
-            () => factors.getPhoneNumberFactors('911234567890'),
+            () => factors.getPhoneNumberFactors(phoneNumber: '911234567890'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -107,7 +107,7 @@ void main() {
         );
 
         expect(
-          () => factors.addEmail(kUser.email!),
+          () => factors.addEmail(email: kUser.email!),
           throwsA(isA<SentinelException>()),
         );
       });
@@ -116,7 +116,7 @@ void main() {
         final factors = Factors(mockSentinelApi);
 
         when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
-        final factor = await factors.addEmail(kUser.email!);
+        final factor = await factors.addEmail(email: kUser.email!);
         expect(factor, kFactor);
       });
 
@@ -129,7 +129,9 @@ void main() {
 
           expect(
             () => factors.prepareEmailVerification(
-                factorID: '', strategy: EmailVerificationStrategy.code),
+              factorID: '',
+              strategy: EmailVerificationStrategy.code,
+            ),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -219,7 +221,7 @@ void main() {
         );
 
         expect(
-          () => factors.addPhoneNumber(kUser.phoneNumber!),
+          () => factors.addPhoneNumber(phoneNumber: kUser.phoneNumber!),
           throwsA(isA<SentinelException>()),
         );
       });
@@ -228,7 +230,7 @@ void main() {
         final factors = Factors(mockSentinelApi);
 
         when(() => mockSentinelApi.createFactor(any())).thenAnswer((_) async => kFactor);
-        final factor = await factors.addPhoneNumber(kUser.phoneNumber!);
+        final factor = await factors.addPhoneNumber(phoneNumber: kUser.phoneNumber!);
         expect(factor, kFactor);
       });
 
@@ -310,7 +312,7 @@ void main() {
           );
 
           expect(
-            () => factors.deleteFactor('id'),
+            () => factors.deleteFactor(factorID: 'id'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -322,7 +324,7 @@ void main() {
           final factors = Factors(mockSentinelApi);
           when(() => mockSentinelApi.deleteFactor(any())).thenAnswer((_) async => true);
 
-          final deleted = await factors.deleteFactor('id');
+          final deleted = await factors.deleteFactor(factorID: 'id');
 
           verify(() => mockSentinelApi.deleteFactor('id')).called(1);
           expect(deleted, true);

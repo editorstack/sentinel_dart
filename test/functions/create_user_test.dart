@@ -415,7 +415,9 @@ void main() {
 
           expect(
             () => createUser.prepareEmailVerification(
-                strategy: EmailVerificationStrategy.link, redirectUrl: ''),
+              strategy: EmailVerificationStrategy.link,
+              redirectUrl: '',
+            ),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -434,7 +436,9 @@ void main() {
               .thenAnswer((_) async => true);
 
           final prepared = await createUser.prepareEmailVerification(
-              strategy: EmailVerificationStrategy.link, redirectUrl: '');
+            strategy: EmailVerificationStrategy.link,
+            redirectUrl: '',
+          );
 
           verify(
             () => mockSentinelApi.prepareSignUpVerification(
