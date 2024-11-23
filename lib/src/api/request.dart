@@ -1,7 +1,7 @@
 part of 'sentinel_api.dart';
 
 /// Body for signing up a new user
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class SignUpBody with _$SignUpBody {
   /// Anonymous sign up
   const factory SignUpBody.anonymous({
@@ -61,7 +61,7 @@ class DeviceRequest with _$DeviceRequest {
 }
 
 /// Body for preparing verification for sign up and factor
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class PrepareVerificationBody with _$PrepareVerificationBody {
   /// Prepares verification for an email code sign up and factor
   const factory PrepareVerificationBody.emailCode() = EmailCodePrepareVerificationBody;
@@ -91,7 +91,7 @@ class AttemptVerificationBody with _$AttemptVerificationBody {
 }
 
 /// Body for preparing first factor
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class PrepareFirstFactorBody with _$PrepareFirstFactorBody {
   /// Prepares first factor for an email code sign in
   const factory PrepareFirstFactorBody.emailCode({
@@ -118,7 +118,7 @@ sealed class PrepareFirstFactorBody with _$PrepareFirstFactorBody {
 }
 
 /// Body for attempting first factor
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class AttemptFirstFactorBody with _$AttemptFirstFactorBody {
   /// Attempts first factor for password sign in
   const factory AttemptFirstFactorBody.password({
@@ -141,7 +141,7 @@ sealed class AttemptFirstFactorBody with _$AttemptFirstFactorBody {
 }
 
 /// Body for preparing second factor
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class PrepareSecondFactorBody with _$PrepareSecondFactorBody {
   /// Prepares second factor for an email code sign in
   const factory PrepareSecondFactorBody.emailCode(String email) = EmailCodePrepareSecondFactorBody;
@@ -156,7 +156,7 @@ sealed class PrepareSecondFactorBody with _$PrepareSecondFactorBody {
 }
 
 /// Body for attempting second factor
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class AttemptSecondFactorBody with _$AttemptSecondFactorBody {
   /// Attempts second factor for an email code sign in
   const factory AttemptSecondFactorBody.emailCode({
@@ -209,7 +209,7 @@ class AttemptResetPasswordBody with _$AttemptResetPasswordBody {
 }
 
 /// Body for preparing re-authentication
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class PrepareReAuthenticationBody with _$PrepareReAuthenticationBody {
   /// Prepares re-authentication for an email code sign in
   const factory PrepareReAuthenticationBody.emailCode(String email) =
@@ -225,7 +225,7 @@ sealed class PrepareReAuthenticationBody with _$PrepareReAuthenticationBody {
 }
 
 /// Body for attempting re-authentication
-@Freezed(unionKey: 'factor')
+@Freezed(unionKey: 'strategy')
 sealed class AttemptReAuthenticationBody with _$AttemptReAuthenticationBody {
   /// Attempts re-authentication for a password sign in
   const factory AttemptReAuthenticationBody.password({
@@ -320,9 +320,7 @@ class CreateFactorBody with _$CreateFactorBody {
 @freezed
 class TOTPVerifyBody with _$TOTPVerifyBody {
   /// Creates a new instance of [TOTPVerifyBody] with the specified parameters.
-  const factory TOTPVerifyBody({
-    required String code,
-  }) = _TOTPVerifyBody;
+  const factory TOTPVerifyBody({required String code}) = _TOTPVerifyBody;
 
   /// Used to serialize [TOTPVerifyBody] object to and from JSON.
   factory TOTPVerifyBody.fromJson(Map<String, dynamic> json) => _$TOTPVerifyBodyFromJson(json);

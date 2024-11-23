@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SignUpBody _$SignUpBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'anonymous':
           return AnonymousSignUpBody.fromJson(json);
                 case 'password':
@@ -28,7 +28,7 @@ SignUpBody _$SignUpBodyFromJson(Map<String, dynamic> json) {
           return PhoneCodeSignUpBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'SignUpBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'SignUpBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -134,7 +134,7 @@ class _$AnonymousSignUpBodyImpl  implements AnonymousSignUpBody {
 
 @override final  DeviceRequest device;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -259,7 +259,7 @@ class _$PasswordSignUpBodyImpl  implements PasswordSignUpBody {
 @override final  String identifier;
 @override final  String password;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -382,7 +382,7 @@ class _$EmailCodeSignUpBodyImpl  implements EmailCodeSignUpBody {
 @override final  DeviceRequest device;
 @override final  String identifier;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -505,7 +505,7 @@ class _$EmailLinkSignUpBodyImpl  implements EmailLinkSignUpBody {
 @override final  DeviceRequest device;
 @override final  String identifier;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -628,7 +628,7 @@ class _$PhoneCodeSignUpBodyImpl  implements PhoneCodeSignUpBody {
 @override final  DeviceRequest device;
 @override final  String identifier;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -857,7 +857,7 @@ _$$DeviceRequestImplCopyWith<_$DeviceRequestImpl> get copyWith => throw _private
 }
 
 PrepareVerificationBody _$PrepareVerificationBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'emailCode':
           return EmailCodePrepareVerificationBody.fromJson(json);
                 case 'phoneCode':
@@ -866,7 +866,7 @@ PrepareVerificationBody _$PrepareVerificationBodyFromJson(Map<String, dynamic> j
           return EmailLinkPrepareVerificationBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'PrepareVerificationBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'PrepareVerificationBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -941,7 +941,7 @@ class _$EmailCodePrepareVerificationBodyImpl  implements EmailCodePrepareVerific
 
 
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -1039,7 +1039,7 @@ class _$PhoneCodePrepareVerificationBodyImpl  implements PhoneCodePrepareVerific
 
 
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -1146,7 +1146,7 @@ class _$EmailLinkPrepareVerificationBodyImpl  implements EmailLinkPrepareVerific
 
 @override final  String redirectUrl;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -1369,7 +1369,7 @@ _$$AttemptVerificationBodyImplCopyWith<_$AttemptVerificationBodyImpl> get copyWi
 }
 
 PrepareFirstFactorBody _$PrepareFirstFactorBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'emailCode':
           return EmailCodePrepareFirstFactorBody.fromJson(json);
                 case 'phoneCode':
@@ -1378,7 +1378,7 @@ PrepareFirstFactorBody _$PrepareFirstFactorBodyFromJson(Map<String, dynamic> jso
           return EmailLinkPrepareFirstFactorBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'PrepareFirstFactorBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'PrepareFirstFactorBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -1487,7 +1487,7 @@ class _$EmailCodePrepareFirstFactorBodyImpl  implements EmailCodePrepareFirstFac
 @override final  String identifier;
 @override final  DeviceRequest device;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -1606,7 +1606,7 @@ class _$PhoneCodePrepareFirstFactorBodyImpl  implements PhoneCodePrepareFirstFac
 @override final  String identifier;
 @override final  DeviceRequest device;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -1727,7 +1727,7 @@ class _$EmailLinkPrepareFirstFactorBodyImpl  implements EmailLinkPrepareFirstFac
 @override final  String redirectUrl;
 @override final  DeviceRequest device;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -1805,7 +1805,7 @@ _$$EmailLinkPrepareFirstFactorBodyImplCopyWith<_$EmailLinkPrepareFirstFactorBody
 }
 
 AttemptFirstFactorBody _$AttemptFirstFactorBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'password':
           return PasswordAttemptFirstFactorBody.fromJson(json);
                 case 'emailCode':
@@ -1814,7 +1814,7 @@ AttemptFirstFactorBody _$AttemptFirstFactorBodyFromJson(Map<String, dynamic> jso
           return PhoneCodeAttemptFirstFactorBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'AttemptFirstFactorBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'AttemptFirstFactorBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -1911,7 +1911,7 @@ class _$PasswordAttemptFirstFactorBodyImpl  implements PasswordAttemptFirstFacto
 @override final  String password;
 @override final  DeviceRequest device;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2028,7 +2028,7 @@ class _$EmailCodeAttemptFirstFactorBodyImpl  implements EmailCodeAttemptFirstFac
 
 @override final  String code;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2145,7 +2145,7 @@ class _$PhoneCodeAttemptFirstFactorBodyImpl  implements PhoneCodeAttemptFirstFac
 
 @override final  String code;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2223,14 +2223,14 @@ _$$PhoneCodeAttemptFirstFactorBodyImplCopyWith<_$PhoneCodeAttemptFirstFactorBody
 }
 
 PrepareSecondFactorBody _$PrepareSecondFactorBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'emailCode':
           return EmailCodePrepareSecondFactorBody.fromJson(json);
                 case 'phoneCode':
           return PhoneCodePrepareSecondFactorBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'PrepareSecondFactorBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'PrepareSecondFactorBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -2314,7 +2314,7 @@ class _$EmailCodePrepareSecondFactorBodyImpl  implements EmailCodePrepareSecondF
 
 @override final  String email;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2431,7 +2431,7 @@ class _$PhoneCodePrepareSecondFactorBodyImpl  implements PhoneCodePrepareSecondF
 
 @override final  String phoneNumber;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2509,7 +2509,7 @@ _$$PhoneCodePrepareSecondFactorBodyImplCopyWith<_$PhoneCodePrepareSecondFactorBo
 }
 
 AttemptSecondFactorBody _$AttemptSecondFactorBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'emailCode':
           return EmailCodeAttemptSecondFactorBody.fromJson(json);
                 case 'phoneCode':
@@ -2520,7 +2520,7 @@ AttemptSecondFactorBody _$AttemptSecondFactorBodyFromJson(Map<String, dynamic> j
           return RecoveryCodeAttemptSecondFactorBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'AttemptSecondFactorBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'AttemptSecondFactorBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -2619,7 +2619,7 @@ class _$EmailCodeAttemptSecondFactorBodyImpl  implements EmailCodeAttemptSecondF
 @override final  String code;
 @override final  String identifier;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2738,7 +2738,7 @@ class _$PhoneCodeAttemptSecondFactorBodyImpl  implements PhoneCodeAttemptSecondF
 @override final  String code;
 @override final  String identifier;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2855,7 +2855,7 @@ class _$TOTPAttemptSecondFactorBodyImpl  implements TOTPAttemptSecondFactorBody 
 
 @override final  String code;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -2972,7 +2972,7 @@ class _$RecoveryCodeAttemptSecondFactorBodyImpl  implements RecoveryCodeAttemptS
 
 @override final  String code;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -3346,14 +3346,14 @@ _$$AttemptResetPasswordBodyImplCopyWith<_$AttemptResetPasswordBodyImpl> get copy
 }
 
 PrepareReAuthenticationBody _$PrepareReAuthenticationBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'emailCode':
           return EmailCodePrepareReAuthenticationBody.fromJson(json);
                 case 'phoneCode':
           return PhoneCodePrepareReAuthenticationBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'PrepareReAuthenticationBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'PrepareReAuthenticationBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -3437,7 +3437,7 @@ class _$EmailCodePrepareReAuthenticationBodyImpl  implements EmailCodePrepareReA
 
 @override final  String email;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -3554,7 +3554,7 @@ class _$PhoneCodePrepareReAuthenticationBodyImpl  implements PhoneCodePrepareReA
 
 @override final  String phoneNumber;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -3632,7 +3632,7 @@ _$$PhoneCodePrepareReAuthenticationBodyImplCopyWith<_$PhoneCodePrepareReAuthenti
 }
 
 AttemptReAuthenticationBody _$AttemptReAuthenticationBodyFromJson(Map<String, dynamic> json) {
-        switch (json['factor']) {
+        switch (json['strategy']) {
                   case 'password':
           return PasswordAttemptReAuthenticationBody.fromJson(json);
                 case 'emailCode':
@@ -3645,7 +3645,7 @@ AttemptReAuthenticationBody _$AttemptReAuthenticationBodyFromJson(Map<String, dy
           return RecoveryCodeAttemptReAuthenticationBody.fromJson(json);
         
           default:
-            throw CheckedFromJsonException(json, 'factor', 'AttemptReAuthenticationBody', 'Invalid union type "${json['factor']}"!');
+            throw CheckedFromJsonException(json, 'strategy', 'AttemptReAuthenticationBody', 'Invalid union type "${json['strategy']}"!');
         }
       
 }
@@ -3731,7 +3731,7 @@ class _$PasswordAttemptReAuthenticationBodyImpl  implements PasswordAttemptReAut
 @override final  String identifier;
 @override final  String password;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -3850,7 +3850,7 @@ class _$EmailCodeAttemptReAuthenticationBodyImpl  implements EmailCodeAttemptReA
 @override final  String code;
 @override final  String identifier;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -3969,7 +3969,7 @@ class _$PhoneCodeAttemptReAuthenticationBodyImpl  implements PhoneCodeAttemptReA
 @override final  String code;
 @override final  String identifier;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -4086,7 +4086,7 @@ class _$TOTPAttemptReAuthenticationBodyImpl  implements TOTPAttemptReAuthenticat
 
 @override final  String code;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
@@ -4203,7 +4203,7 @@ class _$RecoveryCodeAttemptReAuthenticationBodyImpl  implements RecoveryCodeAtte
 
 @override final  String code;
 
-@JsonKey(name: 'factor')
+@JsonKey(name: 'strategy')
 final String $type;
 
 
