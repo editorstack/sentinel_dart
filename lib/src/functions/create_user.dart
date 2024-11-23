@@ -90,7 +90,7 @@ class CreateUser {
   }
 
   /// Creates a new user with a given email using a code to verify and sign in.
-  Future<EmailCodeSignUp> withEmailCode({
+  Future<UserSession> withEmailCode({
     required String email,
     String? firstName,
     String? lastName,
@@ -110,14 +110,41 @@ class CreateUser {
       await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
-      return EmailCodeSignUp(session, _sentinel);
+      return session;
+    } catch (e) {
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
+    }
+  }
+
+  /// Prepares verification for sign up with a given email using a code
+  Future<bool> prepareEmailVerification({
+    required EmailVerificationStrategy strategy,
+    String? redirectUrl,
+  }) async {
+    try {
+      return await _sentinel.prepareSignUpVerification(
+        switch (strategy) {
+          EmailVerificationStrategy.code => const PrepareVerificationBody.emailCode(),
+          EmailVerificationStrategy.link =>
+            PrepareVerificationBody.emailLink(redirectUrl: redirectUrl!),
+        },
+      );
+    } catch (e) {
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
+    }
+  }
+
+  /// Attempts verification for sign up with a given email using a code
+  Future<UserSession> attemptEmailVerification({required String code}) async {
+    try {
+      return await _sentinel.attemptSignUpVerification(AttemptVerificationBody(code: code));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
   /// Creates a new user with a given email using a link to verify and sign in.
-  Future<EmailLinkSignUp> withEmailLink({
+  Future<UserSession> withEmailLink({
     required String email,
     String? firstName,
     String? lastName,
@@ -137,7 +164,7 @@ class CreateUser {
       await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
-      return EmailLinkSignUp(session, _sentinel);
+      return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -145,7 +172,7 @@ class CreateUser {
 
   /// Creates a new user with a given phone number using a code to verify and
   /// sign in.
-  Future<PhoneCodeSignUp> withPhoneCode({
+  Future<UserSession> withPhoneNumberCode({
     required String phoneNumber,
     String? firstName,
     String? lastName,
@@ -165,94 +192,14 @@ class CreateUser {
       await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
-      return PhoneCodeSignUp(session, _sentinel);
-    } catch (e) {
-      throw SentinelException(exceptionMessage(e is DioException ? e : null));
-    }
-  }
-}
-
-/// Response for creating a new user with an email code
-class EmailCodeSignUp {
-  /// Response for creating a new user with an email code
-  EmailCodeSignUp(this.session, SentinelApi sentinel)
-      : user = session.user,
-        _sentinel = sentinel;
-
-  /// The session for the newly created user
-  final UserSession session;
-
-  /// The user details of the newly created user
-  final User user;
-
-  final SentinelApi _sentinel;
-
-  /// Sends a 6 digit code to the email address that is used for verifying the
-  /// user's email address.
-  Future<bool> prepareVerification() async {
-    try {
-      return await _sentinel.prepareSignUpVerification(const PrepareVerificationBody.emailCode());
+      return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
-  /// Checks whether the provided code is valid and if so, verifies the user's
-  /// email address.
-  Future<UserSession> attemptVerification({required String code}) async {
-    try {
-      return await _sentinel.attemptSignUpVerification(AttemptVerificationBody(code: code));
-    } catch (e) {
-      throw SentinelException(exceptionMessage(e is DioException ? e : null));
-    }
-  }
-}
-
-/// Response for creating a new user with an email link
-class EmailLinkSignUp {
-  /// Response for creating a new user with an email link
-  EmailLinkSignUp(this.session, SentinelApi sentinel)
-      : user = session.user,
-        _sentinel = sentinel;
-
-  /// The session for the newly created user
-  final UserSession session;
-
-  /// The user details of the newly created user
-  final User user;
-
-  final SentinelApi _sentinel;
-
-  /// Sends a redirect link to the email address that is used for verifying the
-  /// user's email address.
-  Future<bool> prepareVerification({required String redirectUrl}) async {
-    try {
-      return await _sentinel
-          .prepareSignUpVerification(PrepareVerificationBody.emailLink(redirectUrl: redirectUrl));
-    } catch (e) {
-      throw SentinelException(exceptionMessage(e is DioException ? e : null));
-    }
-  }
-}
-
-/// Response for creating a new user with a phone code
-class PhoneCodeSignUp {
-  /// Response for creating a new user with a phone code
-  PhoneCodeSignUp(this.session, SentinelApi sentinel)
-      : user = session.user,
-        _sentinel = sentinel;
-
-  /// The session for the newly created user
-  final UserSession session;
-
-  /// The user details of the newly created user
-  final User user;
-
-  final SentinelApi _sentinel;
-
-  /// Sends a 6 digit code to the phone number that is used for verifying the
-  /// user's phone number.
-  Future<bool> prepareVerification() async {
+  /// Prepares verification for sign up with a given phone number using a code
+  Future<bool> preparePhoneNumberVerification() async {
     try {
       return await _sentinel.prepareSignUpVerification(const PrepareVerificationBody.phoneCode());
     } catch (e) {
@@ -260,9 +207,8 @@ class PhoneCodeSignUp {
     }
   }
 
-  /// Checks whether the provided code is valid and if so, verifies the user's
-  /// phone number.
-  Future<UserSession> attemptVerification({required String code}) async {
+  /// Attempts verification for sign up with a given phone number using a code
+  Future<UserSession> attemptPhoneNumberVerification({required String code}) async {
     try {
       return await _sentinel.attemptSignUpVerification(AttemptVerificationBody(code: code));
     } catch (e) {

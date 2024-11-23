@@ -31,56 +31,26 @@ class Factors {
   }
 
   /// Adds a new email for the current user
-  Future<FactorEmail> addEmail(String email) async {
+  Future<Factor> addEmail(String email) async {
     try {
-      final factor = await _sentinel.createFactor(CreateFactorBody(email));
-      return FactorEmail(factor, _sentinel);
+      return await _sentinel.createFactor(CreateFactorBody(email));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
-
-  /// Adds a new phone number for the current user
-  Future<FactorPhoneNumber> addPhoneNumber(String phoneNumber) async {
-    try {
-      final factor = await _sentinel.createFactor(CreateFactorBody(phoneNumber));
-      return FactorPhoneNumber(factor, _sentinel);
-    } catch (e) {
-      throw SentinelException(exceptionMessage(e is DioException ? e : null));
-    }
-  }
-
-  /// Deletes a factor for the current user
-  Future<bool> deleteFactor(String factorID) async {
-    try {
-      return await _sentinel.deleteFactor(factorID);
-    } catch (e) {
-      throw SentinelException(exceptionMessage(e is DioException ? e : null));
-    }
-  }
-}
-
-/// Response for adding a new email factor
-class FactorEmail {
-  /// Creates a new instance of [FactorEmail]
-  const FactorEmail(this.factor, this._sentinel);
-
-  /// The factor of the email that was added
-  final Factor factor;
-
-  final SentinelApi _sentinel;
 
   /// Prepares verification for the email factor
-  Future<bool> prepareVerification({
-    required EmailVerificationFactor emailFactor,
+  Future<bool> prepareEmailVerification({
+    required String factorID,
+    required EmailVerificationStrategy strategy,
     String? redirectUrl,
   }) async {
     try {
       return await _sentinel.prepareFactorVerification(
-        factor.id,
-        switch (emailFactor) {
-          EmailVerificationFactor.code => const PrepareVerificationBody.emailCode(),
-          EmailVerificationFactor.link =>
+        factorID,
+        switch (strategy) {
+          EmailVerificationStrategy.code => const PrepareVerificationBody.emailCode(),
+          EmailVerificationStrategy.link =>
             PrepareVerificationBody.emailLink(redirectUrl: redirectUrl!),
         },
       );
@@ -90,42 +60,31 @@ class FactorEmail {
   }
 
   /// Attempts verification for the email factor
-  Future<User> attemptVerification({required String code}) async {
+  Future<User> attemptEmailVerification({required String factorID, required String code}) async {
     try {
       return await _sentinel.attemptFactorVerification(
-        factor.id,
+        factorID,
         AttemptVerificationBody(code: code),
       );
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
-}
 
-/// Verification factor for email factor
-enum EmailVerificationFactor {
-  /// Verification code sent to the email address
-  code,
-
-  /// Verification link sent to the email address
-  link,
-}
-
-/// Response for adding a new phone number factor
-class FactorPhoneNumber {
-  /// Creates a new instance of [FactorPhoneNumber]
-  const FactorPhoneNumber(this.factor, this._sentinel);
-
-  /// The factor of the phone number that was added
-  final Factor factor;
-
-  final SentinelApi _sentinel;
+  /// Adds a new phone number for the current user
+  Future<Factor> addPhoneNumber(String phoneNumber) async {
+    try {
+      return await _sentinel.createFactor(CreateFactorBody(phoneNumber));
+    } catch (e) {
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
+    }
+  }
 
   /// Prepares verification for the phone number factor
-  Future<bool> prepareVerification() async {
+  Future<bool> preparePhoneNumberVerification({required String factorID}) async {
     try {
       return await _sentinel.prepareFactorVerification(
-        factor.id,
+        factorID,
         const PrepareVerificationBody.phoneCode(),
       );
     } catch (e) {
@@ -134,12 +93,24 @@ class FactorPhoneNumber {
   }
 
   /// Attempts verification for the phone number factor
-  Future<User> attemptVerification({required String code}) async {
+  Future<User> attemptPhoneNumberVerification({
+    required String factorID,
+    required String code,
+  }) async {
     try {
       return await _sentinel.attemptFactorVerification(
-        factor.id,
+        factorID,
         AttemptVerificationBody(code: code),
       );
+    } catch (e) {
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
+    }
+  }
+
+  /// Deletes a factor for the current user
+  Future<bool> deleteFactor(String factorID) async {
+    try {
+      return await _sentinel.deleteFactor(factorID);
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }

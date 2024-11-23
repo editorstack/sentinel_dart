@@ -256,7 +256,7 @@ void main() {
 
           verify(() => mockSentinelApi.signUp(any(that: isA<EmailCodeSignUpBody>()))).called(1);
           expect(tokenChanged, 1);
-          expect(signUp, isA<EmailCodeSignUp>());
+          expect(signUp, kUserSession);
 
           final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
           expect(dUser?.id, kUser.id);
@@ -275,13 +275,13 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
-          final signUp = await createUser.withEmailCode(email: kUser.email!);
-
-          expect(signUp.prepareVerification, throwsA(isA<SentinelException>()));
+          expect(
+            () => createUser.prepareEmailVerification(strategy: EmailVerificationStrategy.code),
+            throwsA(isA<SentinelException>()),
+          );
         },
       );
 
@@ -294,12 +294,11 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
-          final signUp = await createUser.withEmailCode(email: kUser.email!);
-          final prepared = await signUp.prepareVerification();
+          final prepared =
+              await createUser.prepareEmailVerification(strategy: EmailVerificationStrategy.code);
 
           verify(
             () => mockSentinelApi.prepareSignUpVerification(
@@ -319,15 +318,12 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.attemptSignUpVerification(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
 
-          final signUp = await createUser.withEmailCode(email: kUser.email!);
-
           expect(
-            () => signUp.attemptVerification(code: '000000'),
+            () => createUser.attemptEmailVerification(code: '000000'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -342,12 +338,10 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.attemptSignUpVerification(any()))
               .thenAnswer((_) async => kUserSession);
 
-          final signUp = await createUser.withEmailCode(email: kUser.email!);
-          final session = await signUp.attemptVerification(code: '000000');
+          final session = await createUser.attemptEmailVerification(code: '000000');
 
           verify(
             () => mockSentinelApi
@@ -397,7 +391,7 @@ void main() {
 
           verify(() => mockSentinelApi.signUp(any(that: isA<EmailLinkSignUpBody>()))).called(1);
           expect(tokenChanged, 1);
-          expect(signUp, isA<EmailLinkSignUp>());
+          expect(signUp, kUserSession);
 
           final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
           expect(dUser?.id, kUser.id);
@@ -416,14 +410,12 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
-          final signUp = await createUser.withEmailLink(email: kUser.email!);
-
           expect(
-            () => signUp.prepareVerification(redirectUrl: ''),
+            () => createUser.prepareEmailVerification(
+                strategy: EmailVerificationStrategy.link, redirectUrl: ''),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -438,12 +430,11 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
-          final signUp = await createUser.withEmailLink(email: kUser.email!);
-          final prepared = await signUp.prepareVerification(redirectUrl: '');
+          final prepared = await createUser.prepareEmailVerification(
+              strategy: EmailVerificationStrategy.link, redirectUrl: '');
 
           verify(
             () => mockSentinelApi.prepareSignUpVerification(
@@ -471,7 +462,7 @@ void main() {
           );
 
           expect(
-            () => createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!),
+            () => createUser.withPhoneNumberCode(phoneNumber: kUser.phoneNumber!),
             throwsA(isA<SentinelException>()),
           );
           expect(tokenChanged, 0);
@@ -490,11 +481,11 @@ void main() {
           );
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
 
-          final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
+          final signUp = await createUser.withPhoneNumberCode(phoneNumber: kUser.phoneNumber!);
 
           verify(() => mockSentinelApi.signUp(any(that: isA<PhoneCodeSignUpBody>()))).called(1);
           expect(tokenChanged, 1);
-          expect(signUp, isA<PhoneCodeSignUp>());
+          expect(signUp, kUserSession);
 
           final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
           expect(dUser?.id, kUser.id);
@@ -513,13 +504,10 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
-          final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
-
-          expect(signUp.prepareVerification, throwsA(isA<SentinelException>()));
+          expect(createUser.preparePhoneNumberVerification, throwsA(isA<SentinelException>()));
         },
       );
 
@@ -532,12 +520,10 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
-          final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
-          final prepared = await signUp.prepareVerification();
+          final prepared = await createUser.preparePhoneNumberVerification();
 
           verify(
             () => mockSentinelApi.prepareSignUpVerification(
@@ -557,15 +543,12 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.attemptSignUpVerification(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
 
-          final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
-
           expect(
-            () => signUp.attemptVerification(code: '000000'),
+            () => createUser.attemptPhoneNumberVerification(code: '000000'),
             throwsA(isA<SentinelException>()),
           );
         },
@@ -580,12 +563,10 @@ void main() {
             deviceInfo,
             (_) {},
           );
-          when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
           when(() => mockSentinelApi.attemptSignUpVerification(any()))
               .thenAnswer((_) async => kUserSession);
 
-          final signUp = await createUser.withPhoneCode(phoneNumber: kUser.phoneNumber!);
-          final session = await signUp.attemptVerification(code: '000000');
+          final session = await createUser.attemptPhoneNumberVerification(code: '000000');
 
           verify(
             () => mockSentinelApi

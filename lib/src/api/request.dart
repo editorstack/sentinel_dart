@@ -160,3 +160,12 @@ class TOTPVerifyBody with _$TOTPVerifyBody {
   /// Used to serialize [TOTPVerifyBody] object to and from JSON.
   factory TOTPVerifyBody.fromJson(Map<String, dynamic> json) => _$TOTPVerifyBodyFromJson(json);
 }
+
+/// Verification factor for email factor
+enum EmailVerificationStrategy {
+  /// Verification code sent to the email address
+  code,
+
+  /// Verification link sent to the email address
+  link,
+}
