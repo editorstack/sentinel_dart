@@ -46,7 +46,6 @@ Map<String, dynamic> _$$SessionImplToJson(_$SessionImpl instance) =>
 
 const _$SessionStatusEnumMap = {
   SessionStatus.verification: 'verification',
-  SessionStatus.needsFirstFactor: 'needsFirstFactor',
   SessionStatus.needsSecondFactor: 'needsSecondFactor',
   SessionStatus.active: 'active',
 };

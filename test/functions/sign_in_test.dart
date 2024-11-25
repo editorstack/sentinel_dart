@@ -80,12 +80,7 @@ void main() {
         'when signing in with email and password throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -105,12 +100,7 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(
-          mockSentinelApi,
-          database,
-          deviceInfo,
-          (_) => tokenChanged++,
-        );
+        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer((_) async => kUserSession);
         final session = await signIn.withEmailAndPassword(
           email: kUser.email!,
@@ -137,12 +127,7 @@ void main() {
         'when signing in with phone and password throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -162,12 +147,7 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(
-          mockSentinelApi,
-          database,
-          deviceInfo,
-          (_) => tokenChanged++,
-        );
+        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer((_) async => kUserSession);
         final session = await signIn.withPhoneAndPassword(
           phoneNumber: kUser.phoneNumber!,
@@ -194,12 +174,7 @@ void main() {
         'when signing in with email code throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -216,56 +191,43 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(
-          mockSentinelApi,
-          database,
-          deviceInfo,
-          (_) => tokenChanged++,
-        );
-        when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => kUserSession);
-        final session = await signIn.withEmailCode(email: kUser.email!);
+        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => true);
+        final prepared = await signIn.withEmailCode(email: kUser.email!);
 
         verify(
           () =>
               mockSentinelApi.prepareFirstFactor(any(that: isA<EmailCodePrepareFirstFactorBody>())),
         ).called(1);
-        expect(tokenChanged, 1);
-        expect(session, kUserSession);
-
-        final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
-        expect(dUser?.id, kUser.id);
-
-        final dSession = (await database.managers.sessions.getSingleOrNull())?.toObject();
-        expect(dSession?.id, kSession.id);
+        expect(tokenChanged, 0);
+        expect(prepared, true);
       });
 
       test(
         'when attempt email code verification throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          var tokenChanged = 0;
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
 
           expect(
-            () => signIn.verifyEmailCode(code: '000000'),
+            () => signIn.verifyEmailCode(email: kUser.email!, code: '000000'),
             throwsA(isA<SentinelException>()),
           );
+          expect(tokenChanged, 0);
         },
       );
 
       test(
         'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
         () async {
-          final signIn = SignIn(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          var tokenChanged = 0;
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any()))
               .thenAnswer((_) async => kUserSession);
-          final session = await signIn.verifyEmailCode(code: '000000');
+          final session = await signIn.verifyEmailCode(email: kUser.email!, code: '000000');
 
           verify(
             () => mockSentinelApi.attemptFirstFactor(
@@ -274,8 +236,12 @@ void main() {
           ).called(1);
           expect(session, kUserSession);
 
+          final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
+          expect(dUser?.id, kUser.id);
+
           final dSession = (await database.managers.sessions.getSingleOrNull())?.toObject();
           expect(dSession?.id, kSession.id);
+          expect(tokenChanged, 1);
         },
       );
     });
@@ -285,12 +251,7 @@ void main() {
         'when signing in with email link throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -307,27 +268,16 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(
-          mockSentinelApi,
-          database,
-          deviceInfo,
-          (_) => tokenChanged++,
-        );
-        when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => kUserSession);
-        final session = await signIn.withEmailLink(email: kUser.email!, redirectUrl: '');
+        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => true);
+        final prepared = await signIn.withEmailLink(email: kUser.email!, redirectUrl: '');
 
         verify(
           () =>
               mockSentinelApi.prepareFirstFactor(any(that: isA<EmailLinkPrepareFirstFactorBody>())),
         ).called(1);
-        expect(tokenChanged, 1);
-        expect(session, kUserSession);
-
-        final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
-        expect(dUser?.id, kUser.id);
-
-        final dSession = (await database.managers.sessions.getSingleOrNull())?.toObject();
-        expect(dSession?.id, kSession.id);
+        expect(tokenChanged, 0);
+        expect(prepared, true);
       });
     });
 
@@ -336,12 +286,7 @@ void main() {
         'when signing in with phone code throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -358,55 +303,43 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(
-          mockSentinelApi,
-          database,
-          deviceInfo,
-          (_) => tokenChanged++,
-        );
-        when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => kUserSession);
-        final session = await signIn.withPhoneCode(phoneNumber: kUser.phoneNumber!);
+        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => true);
+        final prepared = await signIn.withPhoneCode(phoneNumber: kUser.phoneNumber!);
 
         verify(
           () =>
               mockSentinelApi.prepareFirstFactor(any(that: isA<PhoneCodePrepareFirstFactorBody>())),
         ).called(1);
-        expect(tokenChanged, 1);
-        expect(session, kUserSession);
-
-        final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
-        expect(dUser?.id, kUser.id);
-
-        final dSession = (await database.managers.sessions.getSingleOrNull())?.toObject();
-        expect(dSession?.id, kSession.id);
+        expect(tokenChanged, 0);
+        expect(prepared, true);
       });
 
       test(
           'when attempt phone code verification throws an error, it should catch it and throw a SentinelException',
           () async {
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+        var tokenChanged = 0;
+        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
           (_) async => throw DioException(requestOptions: RequestOptions()),
         );
 
         expect(
-          () => signIn.verifyPhoneCode(code: '000000'),
+          () => signIn.verifyPhoneCode(phoneNumber: kUser.phoneNumber!, code: '000000'),
           throwsA(isA<SentinelException>()),
         );
+        expect(tokenChanged, 0);
       });
 
       test(
         'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
         () async {
-          final signIn = SignIn(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          var tokenChanged = 0;
+          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any()))
               .thenAnswer((_) async => kUserSession);
-          final session = await signIn.verifyPhoneCode(code: '000000');
+          final session =
+              await signIn.verifyPhoneCode(phoneNumber: kUser.phoneNumber!, code: '000000');
 
           verify(
             () => mockSentinelApi.attemptFirstFactor(
@@ -415,8 +348,12 @@ void main() {
           ).called(1);
           expect(session, kUserSession);
 
+          final dUser = (await database.managers.users.getSingleOrNull())?.toObject();
+          expect(dUser?.id, kUser.id);
+
           final dSession = (await database.managers.sessions.getSingleOrNull())?.toObject();
           expect(dSession?.id, kSession.id);
+          expect(tokenChanged, 1);
         },
       );
     });

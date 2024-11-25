@@ -128,12 +128,18 @@ sealed class AttemptFirstFactorBody with _$AttemptFirstFactorBody {
   }) = PasswordAttemptFirstFactorBody;
 
   /// Attempts first factor for email code sign in
-  const factory AttemptFirstFactorBody.emailCode({required String code}) =
-      EmailCodeAttemptFirstFactorBody;
+  const factory AttemptFirstFactorBody.emailCode({
+    required String identifier,
+    required String code,
+    required DeviceRequest device,
+  }) = EmailCodeAttemptFirstFactorBody;
 
   /// Attempts first factor for phone code sign in
-  const factory AttemptFirstFactorBody.phoneCode({required String code}) =
-      PhoneCodeAttemptFirstFactorBody;
+  const factory AttemptFirstFactorBody.phoneCode({
+    required String identifier,
+    required String code,
+    required DeviceRequest device,
+  }) = PhoneCodeAttemptFirstFactorBody;
 
   /// Used to serialize [AttemptFirstFactorBody] object to and from JSON.
   factory AttemptFirstFactorBody.fromJson(Map<String, dynamic> json) =>

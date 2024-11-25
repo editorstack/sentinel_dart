@@ -253,28 +253,38 @@ Map<String, dynamic> _$$PasswordAttemptFirstFactorBodyImplToJson(
 _$EmailCodeAttemptFirstFactorBodyImpl
     _$$EmailCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
         _$EmailCodeAttemptFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
           code: json['code'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
           $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$EmailCodeAttemptFirstFactorBodyImplToJson(
         _$EmailCodeAttemptFirstFactorBodyImpl instance) =>
     <String, dynamic>{
+      'identifier': instance.identifier,
       'code': instance.code,
+      'device': instance.device.toJson(),
       'strategy': instance.$type,
     };
 
 _$PhoneCodeAttemptFirstFactorBodyImpl
     _$$PhoneCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
         _$PhoneCodeAttemptFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
           code: json['code'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
           $type: json['strategy'] as String?,
         );
 
 Map<String, dynamic> _$$PhoneCodeAttemptFirstFactorBodyImplToJson(
         _$PhoneCodeAttemptFirstFactorBodyImpl instance) =>
     <String, dynamic>{
+      'identifier': instance.identifier,
       'code': instance.code,
+      'device': instance.device.toJson(),
       'strategy': instance.$type,
     };
 
@@ -765,13 +775,13 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<UserSession> prepareFirstFactor(PrepareFirstFactorBody body) async {
+  Future<bool> prepareFirstFactor(PrepareFirstFactorBody body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     final _data = body;
-    final _options = _setStreamType<UserSession>(Options(
+    final _options = _setStreamType<bool>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -788,10 +798,10 @@ class _SentinelApi implements SentinelApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserSession _value;
+    final _result = await _dio.fetch<bool>(_options);
+    late bool _value;
     try {
-      _value = UserSession.fromJson(_result.data!);
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

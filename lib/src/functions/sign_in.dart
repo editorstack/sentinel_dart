@@ -66,30 +66,28 @@ class SignIn {
   }
 
   /// Signs in a user using the email code
-  Future<UserSession> withEmailCode({required String email}) async {
+  Future<bool> withEmailCode({required String email}) async {
     try {
       final device = await _deviceInfo();
-      final session = await _sentinel.prepareFirstFactor(
+      return await _sentinel.prepareFirstFactor(
         PrepareFirstFactorBody.emailCode(identifier: email, device: device),
       );
-
-      await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
-      _tokenChanged(session.token);
-
-      return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
   /// Verifies email code sign in
-  Future<UserSession> verifyEmailCode({required String code}) async {
+  Future<UserSession> verifyEmailCode({required String email, required String code}) async {
     try {
-      final session =
-          await _sentinel.attemptFirstFactor(AttemptFirstFactorBody.emailCode(code: code));
+      final device = await _deviceInfo();
+      final session = await _sentinel.attemptFirstFactor(
+        AttemptFirstFactorBody.emailCode(identifier: email, code: code, device: device),
+      );
+      _tokenChanged(session.token);
 
       await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.users.insertOnConflictUpdate(session.user.toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -97,58 +95,50 @@ class SignIn {
   }
 
   /// Signs in a user using the email link
-  Future<UserSession> withEmailLink({
+  Future<bool> withEmailLink({
     required String email,
     required String redirectUrl,
   }) async {
     try {
       final device = await _deviceInfo();
-      final session = await _sentinel.prepareFirstFactor(
+      return await _sentinel.prepareFirstFactor(
         PrepareFirstFactorBody.emailLink(
           identifier: email,
           redirectUrl: redirectUrl,
           device: device,
         ),
       );
-
-      await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
-      _tokenChanged(session.token);
-
-      return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
   /// Signs in a user using the phone number code
-  Future<UserSession> withPhoneCode({required String phoneNumber}) async {
+  Future<bool> withPhoneCode({required String phoneNumber}) async {
     try {
       final device = await _deviceInfo();
-      final session = await _sentinel.prepareFirstFactor(
+      return await _sentinel.prepareFirstFactor(
         PrepareFirstFactorBody.phoneCode(
           identifier: phoneNumber,
           device: device,
         ),
       );
-
-      await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
-      _tokenChanged(session.token);
-
-      return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
   /// Verifies phone code sign in
-  Future<UserSession> verifyPhoneCode({required String code}) async {
+  Future<UserSession> verifyPhoneCode({required String phoneNumber, required String code}) async {
     try {
-      final session =
-          await _sentinel.attemptFirstFactor(AttemptFirstFactorBody.phoneCode(code: code));
+      final device = await _deviceInfo();
+      final session = await _sentinel.attemptFirstFactor(
+        AttemptFirstFactorBody.phoneCode(identifier: phoneNumber, code: code, device: device),
+      );
+      _tokenChanged(session.token);
 
       await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.users.insertOnConflictUpdate(session.user.toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
