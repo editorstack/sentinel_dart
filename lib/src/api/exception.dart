@@ -7,6 +7,9 @@ class SentinelException implements Exception {
 
   /// The error message.
   final String message;
+
+  /// Returns whether the exception is an unauthenticated exception.
+  bool get isUnauthenticated => message == 'unauthenticated';
 }
 
 /// Returns the error message from a [DioException].
