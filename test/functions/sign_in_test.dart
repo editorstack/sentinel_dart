@@ -80,7 +80,8 @@ void main() {
         'when signing in with email and password throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -100,7 +101,7 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer((_) async => kUserSession);
         final session = await signIn.withEmailAndPassword(
           email: kUser.email!,
@@ -127,7 +128,8 @@ void main() {
         'when signing in with phone and password throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -147,7 +149,7 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer((_) async => kUserSession);
         final session = await signIn.withPhoneAndPassword(
           phoneNumber: kUser.phoneNumber!,
@@ -174,7 +176,8 @@ void main() {
         'when signing in with email code throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -191,7 +194,7 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => true);
         final prepared = await signIn.withEmailCode(email: kUser.email!);
 
@@ -207,7 +210,8 @@ void main() {
         'when attempt email code verification throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -224,7 +228,8 @@ void main() {
         'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any()))
               .thenAnswer((_) async => kUserSession);
           final session = await signIn.verifyEmailCode(email: kUser.email!, code: '000000');
@@ -251,7 +256,8 @@ void main() {
         'when signing in with email link throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -268,7 +274,7 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => true);
         final prepared = await signIn.withEmailLink(email: kUser.email!, redirectUrl: '');
 
@@ -286,7 +292,8 @@ void main() {
         'when signing in with phone code throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -303,7 +310,7 @@ void main() {
           'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.prepareFirstFactor(any())).thenAnswer((_) async => true);
         final prepared = await signIn.withPhoneCode(phoneNumber: kUser.phoneNumber!);
 
@@ -319,7 +326,7 @@ void main() {
           'when attempt phone code verification throws an error, it should catch it and throw a SentinelException',
           () async {
         var tokenChanged = 0;
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
         when(() => mockSentinelApi.attemptFirstFactor(any())).thenAnswer(
           (_) async => throw DioException(requestOptions: RequestOptions()),
         );
@@ -335,7 +342,8 @@ void main() {
         'when signed in successfully, user and session should be stored in the local database, session token should change and user session should be returned',
         () async {
           var tokenChanged = 0;
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
+          final signIn =
+              SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.attemptFirstFactor(any()))
               .thenAnswer((_) async => kUserSession);
           final session =
@@ -362,7 +370,7 @@ void main() {
       test(
         'when preparing second factor for emailCode throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSecondFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -380,7 +388,7 @@ void main() {
       test(
         'when preparing second factor for phoneCode throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSecondFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -398,7 +406,7 @@ void main() {
       test(
           'when preparing for second factor emailCode is successful, it should not throw any error',
           () async {
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
         when(() => mockSentinelApi.prepareSecondFactor(any())).thenAnswer((_) async => true);
 
         final prepared = await signIn.prepareCodeSecondFactor(
@@ -417,7 +425,7 @@ void main() {
       test(
           'when preparing for second factor phoneCode is successful, it should not throw any error',
           () async {
-        final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+        final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
         when(() => mockSentinelApi.prepareSecondFactor(any())).thenAnswer((_) async => true);
 
         final prepared = await signIn.prepareCodeSecondFactor(
@@ -438,7 +446,7 @@ void main() {
       test(
         'when attempting second factor for emailCode throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -457,7 +465,7 @@ void main() {
       test(
         'when attempting second factor for phoneCode throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -476,7 +484,7 @@ void main() {
       test(
         'when attempting second factor for emailCode is successful, it should not throw any error',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any()))
               .thenAnswer((_) async => kUserSession);
 
@@ -498,7 +506,7 @@ void main() {
       test(
         'when attempting second factor for phoneCode is successful, it should not throw any error',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any()))
               .thenAnswer((_) async => kUserSession);
 
@@ -522,7 +530,7 @@ void main() {
       test(
         'when attempting second factor for totp throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -537,7 +545,7 @@ void main() {
       test(
         'when attempting second factor for totp is successful, it should not throw any error',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any()))
               .thenAnswer((_) async => kUserSession);
 
@@ -557,7 +565,7 @@ void main() {
       test(
         'when attempting second factor for recoveryCode throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -572,7 +580,7 @@ void main() {
       test(
         'when attempting second factor for recoveryCode is successful, it should not throw any error',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSecondFactor(any()))
               .thenAnswer((_) async => kUserSession);
 
@@ -592,7 +600,7 @@ void main() {
       test(
         'when preparing reset password throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareResetPassword(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -607,7 +615,7 @@ void main() {
       test(
         'when preparing reset password is successful, it should not throw any error',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareResetPassword(any())).thenAnswer((_) async => true);
 
           final prepared = await signIn.prepareResetPassword(identifier: kUser.email!);
@@ -626,7 +634,7 @@ void main() {
       test(
         'when attempting reset password throws an error, it should catch it and throw a SentinelException',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptResetPassword(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -645,7 +653,7 @@ void main() {
       test(
         'when attempting reset password is successful, it should not throw any error',
         () async {
-          final signIn = SignIn(mockSentinelApi, database, deviceInfo, (_) {});
+          final signIn = SignIn(mockSentinelApi, Dio(), database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptResetPassword(any())).thenAnswer((_) async => true);
 
           final prepared = await signIn.attemptResetPassword(

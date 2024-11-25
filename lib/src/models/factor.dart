@@ -62,8 +62,14 @@ enum OAuthProvider {
   /// GitHub's OAuth provider
   github,
 
+  /// GitLab's OAuth provider
+  gitlab,
+
   /// Google's OAuth provider
   google,
+
+  /// LinkedIn's OAuth provider
+  linkedin,
 
   /// Microsoft's OAuth provider
   microsoft,
