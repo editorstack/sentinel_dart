@@ -141,6 +141,11 @@ abstract class SentinelApi {
   @Headers({'Content-Type': 'application/json'})
   Future<Session?> getSession(@Path() String sessionID);
 
+  /// Extends a session
+  @PATCH('/auth/sessions/extend')
+  @Headers({'Content-Type': 'application/json'})
+  Future<bool> extendSession();
+
   /// Deletes all sessions for the user
   @DELETE('/auth/sessions/')
   @Headers({'Content-Type': 'application/json'})
