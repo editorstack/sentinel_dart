@@ -8,3 +8,4 @@ export 'src/models/device.dart' hide DeviceConverter;
 export 'src/models/factor.dart' hide FactorConverter;
 export 'src/models/session.dart' hide DSessionConverter, SessionConverter, Sessions;
 export 'src/models/user.dart' hide DUserConverter, UserConverter, Users;
+export 'src/sentinel.dart' show Sentinel;
