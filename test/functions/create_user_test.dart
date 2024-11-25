@@ -63,12 +63,8 @@ void main() {
         'when signed up successfully, user and session should be stored in the local database, session token should change and user session should be returned',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
 
           final userSession = await createUser.anonymously();
@@ -89,12 +85,8 @@ void main() {
         'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -110,12 +102,8 @@ void main() {
         'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -135,12 +123,8 @@ void main() {
         'when signed up successfully, user and session should be stored in the local database, session token should change and user session should be returned',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
 
           final userSession = await createUser.withEmailAndPassword(
@@ -166,12 +150,8 @@ void main() {
         'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -191,12 +171,8 @@ void main() {
         'when signed up successfully, user and session should be stored in the local database, session token should change and user session should be returned',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
 
           final userSession = await createUser.withPhoneAndPassword(
@@ -222,12 +198,8 @@ void main() {
         'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -244,12 +216,8 @@ void main() {
         'when signed up successfully, user and session should be stored in the local database, session token should change and EmailCodeSignUp should be returned',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
 
           final signUp = await createUser.withEmailCode(email: kUser.email!);
@@ -269,12 +237,7 @@ void main() {
       test(
         'when preparing email code verification throws an error, it should catch it and throw a SentinelException',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
@@ -288,12 +251,7 @@ void main() {
       test(
         'when sign up verification is prepared successfully then it should not throw any error',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
@@ -312,12 +270,7 @@ void main() {
       test(
         'when verification is attempted and throws an error, it should catch it and throw a SentinelException',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSignUpVerification(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -332,12 +285,7 @@ void main() {
       test(
         'when sign up verification is successful, then it should not throw any error',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSignUpVerification(any()))
               .thenAnswer((_) async => kUserSession);
 
@@ -357,12 +305,8 @@ void main() {
         'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -379,12 +323,8 @@ void main() {
         'when signed up successfully, user and session should be stored in the local database, session token should change and EmailLinkSignUp should be returned',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
 
           final signUp = await createUser.withEmailLink(email: kUser.email!);
@@ -404,12 +344,7 @@ void main() {
       test(
         'when preparing email link verification throws an error, it should catch it and throw a SentinelException',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
@@ -426,12 +361,7 @@ void main() {
       test(
         'when sign up verification is prepared successfully then it should not throw any error',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
@@ -455,12 +385,8 @@ void main() {
         'when sign up throws an error, it should catch it and throw a SentinelException',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -477,12 +403,8 @@ void main() {
         'when signed up successfully, user and session should be stored in the local database, session token should change and PhoneCodeSignUp should be returned',
         () async {
           var tokenChanged = 0;
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) => tokenChanged++,
-          );
+          final createUser =
+              CreateUser(mockSentinelApi, database, deviceInfo, (_) => tokenChanged++);
           when(() => mockSentinelApi.signUp(any())).thenAnswer((_) async => kUserSession);
 
           final signUp = await createUser.withPhoneNumberCode(phoneNumber: kUser.phoneNumber!);
@@ -502,12 +424,7 @@ void main() {
       test(
         'when preparing phone code verification throws an error, it should catch it and throw a SentinelException',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => throw DioException(requestOptions: RequestOptions()));
 
@@ -518,12 +435,7 @@ void main() {
       test(
         'when sign up verification is prepared successfully then it should not throw any error',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.prepareSignUpVerification(any()))
               .thenAnswer((_) async => true);
 
@@ -541,12 +453,7 @@ void main() {
       test(
         'when verification is attempted and throws an error, it should catch it and throw a SentinelException',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSignUpVerification(any())).thenAnswer(
             (_) async => throw DioException(requestOptions: RequestOptions()),
           );
@@ -561,12 +468,7 @@ void main() {
       test(
         'when sign up verification is successful, then it should not throw any error',
         () async {
-          final createUser = CreateUser(
-            mockSentinelApi,
-            database,
-            deviceInfo,
-            (_) {},
-          );
+          final createUser = CreateUser(mockSentinelApi, database, deviceInfo, (_) {});
           when(() => mockSentinelApi.attemptSignUpVerification(any()))
               .thenAnswer((_) async => kUserSession);
 

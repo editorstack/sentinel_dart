@@ -41,10 +41,6 @@ enum SessionStatus {
   /// The user is logged in but the identifier has to be verified.
   verification,
 
-  /// The user is logged in but has to be verified using a first factor such as
-  /// phoneCode, emailCode or emailLink.
-  needsFirstFactor,
-
   /// The user is logged in but has to be verified using a second factor such as
   /// phoneCode, emailCode or totp.
   needsSecondFactor,

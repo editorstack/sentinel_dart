@@ -38,7 +38,7 @@ abstract class SentinelApi {
   /// Prepares first factor for sign in
   @POST('/auth/sign-in/prepare-first-factor')
   @Headers({'Content-Type': 'application/json'})
-  Future<UserSession> prepareFirstFactor(@Body() PrepareFirstFactorBody body);
+  Future<bool> prepareFirstFactor(@Body() PrepareFirstFactorBody body);
 
   /// Attempts first factor for sign in
   @POST('/auth/sign-in/attempt-first-factor')
