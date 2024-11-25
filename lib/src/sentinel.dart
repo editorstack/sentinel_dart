@@ -23,15 +23,36 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 const _autoRefreshTickDuration = Duration(seconds: 10);
 const _autoRefreshTickThreshold = 3;
 
+/// The main class for interacting with the Sentinel authentication system.
+///
+/// This class provides methods for initializing the Sentinel system, managing
+/// user sessions, and handling real-time updates.
+/// Sentinel.
+///
+/// The main class for interacting with the Sentinel authentication system.
+///
+/// This class provides methods for initializing the Sentinel system, managing
+/// user sessions, and handling real-time updates.
+///
+/// It must be initialized before used, otherwise an error is thrown.
+///
+/// ```dart
+/// await Sentinel.initialize(...)
+/// ```
+///
 class Sentinel {
-  factory Sentinel() {
-    _instance ??= Sentinel._internal();
-    return _instance!;
+  Sentinel._();
+
+  /// Gets the current sentinel instance.
+  ///
+  /// An [AssertionError] is thrown if sentinel isn't initialized yet.
+  /// Call [Sentinel.initialize] to initialize it.
+  static Sentinel get instance {
+    assert(_instance._initialized, 'Sentinel has not been initialized');
+    return _instance;
   }
 
-  Sentinel._internal();
-
-  static Sentinel? _instance;
+  static final Sentinel _instance = Sentinel._();
   Dio? _dio;
   SentinelDatabase? _database;
   SentinelApi? _sentinel;
@@ -39,66 +60,55 @@ class Sentinel {
   User? _user;
   Session? _session;
 
+  /// Details of the currently authenticated user.
   User? get user => _user;
+
+  /// Details of the current session.
   Session? get session => _session;
 
+  /// Functions to manage user sessions.
   late final Sessions sessions;
+
+  /// Functions to create new users.
   late final CreateUser createUser;
+
+  /// Functions to sign in users.
   late final SignIn signIn;
+
+  /// Functions to manage factors.
   late final Factors factors;
+
+  /// Functions to manage multi-factor authentication.
   late final MFA mfa;
+
+  /// Functions to re-authenticate users.
   late final ReAuthentication reAuthenticate;
+
+  /// Functions to manage users.
   late final Users users;
 
   late io.Socket _socket;
 
-  late String? applicationID;
+  bool _initialized = false;
 
-  Future<void> _initSocket(Session session) async {
-    final device = await deviceInfo();
-
-    _socket.io.options?['extraHeaders'] = {
-      'authtoken': 'Bearer ${session.token}',
-      'deviceid': device.deviceID,
-      'appid': session.appID,
-    };
-
-    _socket
-      ..on(RealtimeChannels.saveAuth, (data) async {
-        final user = User.fromJson(data as Map<String, dynamic>);
-        await _database!.users.insertOnConflictUpdate(user.toDrift());
-      })
-      ..on(RealtimeChannels.deleteAuth, (_) async {
-        await _database!.users.deleteAll();
-      })
-      ..on(RealtimeChannels.saveSession, (data) async {
-        final session = UserSession.fromJson(data as Map<String, dynamic>);
-        await _database!.users.insertOnConflictUpdate(session.user.toDrift());
-        await _database!.sessions.insertOnConflictUpdate(session.toSession().toDrift());
-      })
-      ..on('error', (_) {
-        _database!.users.deleteAll();
-      })
-      ..connect();
+  /// Initializes the Sentinel system with the given [dio] client, [url], and [applicationID].
+  ///
+  /// This method sets up the necessary API clients, database connections, and
+  /// real-time socket connections.
+  static Future<Sentinel> initialize({
+    required Dio dio,
+    required String url,
+    required String applicationID,
+  }) async {
+    await _instance._init(dio: dio, url: url, applicationID: applicationID);
+    return _instance;
   }
 
-  Stream<User?> userChanges() {
-    _validate();
-    return _database!.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
-  }
-
-  Stream<Session?> sessionChanges() {
-    _validate();
-    return _database!.managers.sessions
-        .watch(limit: 1)
-        .map((event) => event.firstOrNull?.toObject());
-  }
-
-  StreamSubscription<User?>? _authSubscription;
-  StreamSubscription<Session?>? _sessionSubscription;
-
-  Future<void> initialize(
-      {required Dio dio, required String url, required String applicationID}) async {
+  Future<void> _init({
+    required Dio dio,
+    required String url,
+    required String applicationID,
+  }) async {
     dio.options.baseUrl = url;
     dio.options.headers['X-Editorstack-App-ID'] = applicationID;
     _dio = dio;
@@ -131,7 +141,7 @@ class Sentinel {
       try {
         _session = await sessions.getSession(sessionID: 'current');
         _user = await users.getUserDetails();
-        _startAutoRefresh();
+        await _startAutoRefresh();
       } catch (e) {
         await _database!.users.deleteAll();
       }
@@ -140,7 +150,7 @@ class Sentinel {
     _updateToken(_session?.token);
 
     if (_session != null) {
-      _initSocket(_session!);
+      await _initSocket(_session!);
     }
 
     _authSubscription = userChanges().listen((user) => _user = user);
@@ -156,12 +166,15 @@ class Sentinel {
       _updateToken(session?.token);
       _session = session;
     });
+    _initialized = true;
   }
 
+  /// Disposes of the Sentinel system, cleaning up any resources.
   void dispose() {
     _authSubscription?.cancel();
     _sessionSubscription?.cancel();
     _socket.dispose();
+    _initialized = false;
   }
 
   void _updateToken(String? token) {
@@ -209,7 +222,6 @@ class Sentinel {
         (expiresAt.difference(now).inMilliseconds / _autoRefreshTickDuration.inMilliseconds)
             .floor();
 
-    // Only tick if the next tick comes after the retry threshold
     if (expiresInTicks <= _autoRefreshTickThreshold) {
       try {
         await _sentinel!.extendSession();
@@ -220,6 +232,51 @@ class Sentinel {
       }
     }
   }
+
+  Future<void> _initSocket(Session session) async {
+    final device = await deviceInfo();
+
+    _socket.io.options?['extraHeaders'] = {
+      'authtoken': 'Bearer ${session.token}',
+      'deviceid': device.deviceID,
+      'appid': session.appID,
+    };
+
+    _socket
+      ..on(RealtimeChannels.saveAuth, (data) async {
+        final user = User.fromJson(data as Map<String, dynamic>);
+        await _database!.users.insertOnConflictUpdate(user.toDrift());
+      })
+      ..on(RealtimeChannels.deleteAuth, (_) async {
+        await _database!.users.deleteAll();
+      })
+      ..on(RealtimeChannels.saveSession, (data) async {
+        final session = UserSession.fromJson(data as Map<String, dynamic>);
+        await _database!.users.insertOnConflictUpdate(session.user.toDrift());
+        await _database!.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      })
+      ..on('error', (_) {
+        _database!.users.deleteAll();
+      })
+      ..connect();
+  }
+
+  /// Returns a stream of changes to the authenticated user.
+  Stream<User?> userChanges() {
+    _validate();
+    return _database!.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
+  }
+
+  /// Returns a stream of changes to the current session.
+  Stream<Session?> sessionChanges() {
+    _validate();
+    return _database!.managers.sessions
+        .watch(limit: 1)
+        .map((event) => event.firstOrNull?.toObject());
+  }
+
+  StreamSubscription<User?>? _authSubscription;
+  StreamSubscription<Session?>? _sessionSubscription;
 }
 
 /// Returns the device information for the current platform.
