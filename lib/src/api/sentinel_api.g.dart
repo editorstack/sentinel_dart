@@ -683,7 +683,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-up/',
+          '/sentinel/sign-up/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -718,7 +718,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-up/prepare-verification',
+          '/sentinel/sign-up/prepare-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -754,7 +754,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-up/attempt-verification',
+          '/sentinel/sign-up/attempt-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -789,7 +789,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-first-factor',
+          '/sentinel/sign-in/prepare-first-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -824,7 +824,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-first-factor',
+          '/sentinel/sign-in/attempt-first-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -859,7 +859,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-second-factor',
+          '/sentinel/sign-in/prepare-second-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -894,7 +894,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-second-factor',
+          '/sentinel/sign-in/attempt-second-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -929,7 +929,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-reset-password',
+          '/sentinel/sign-in/prepare-reset-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -964,7 +964,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-reset-password',
+          '/sentinel/sign-in/attempt-reset-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -999,7 +999,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-re-authentication',
+          '/sentinel/sign-in/prepare-re-authentication',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1034,7 +1034,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-re-authentication',
+          '/sentinel/sign-in/attempt-re-authentication',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1069,7 +1069,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me',
+          '/sentinel/me',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1104,7 +1104,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me',
+          '/sentinel/me',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1139,7 +1139,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me/change-password',
+          '/sentinel/me/change-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1174,7 +1174,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me/remove-password',
+          '/sentinel/me/remove-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1209,7 +1209,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me',
+          '/sentinel/me',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1244,7 +1244,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/user-factors',
+          '/sentinel/factors/user-factors',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1279,7 +1279,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/identifier',
+          '/sentinel/factors/identifier',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1317,7 +1317,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/${factorID}/prepare-verification',
+          '/sentinel/factors/${factorID}/prepare-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1355,7 +1355,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/${factorID}/attempt-verification',
+          '/sentinel/factors/${factorID}/attempt-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1390,7 +1390,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/${factorID}',
+          '/sentinel/factors/${factorID}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1425,7 +1425,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/',
+          '/sentinel/sessions/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1462,7 +1462,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/${sessionID}',
+          '/sentinel/sessions/${sessionID}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1497,7 +1497,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/extend',
+          '/sentinel/sessions/extend',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1532,7 +1532,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/',
+          '/sentinel/sessions/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1567,7 +1567,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/others',
+          '/sentinel/sessions/others',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1602,7 +1602,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/${sessionID}',
+          '/sentinel/sessions/${sessionID}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1637,7 +1637,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/enable-totp',
+          '/sentinel/mfa/enable-totp',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1672,7 +1672,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/verify-totp',
+          '/sentinel/mfa/verify-totp',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1707,7 +1707,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/disable-totp',
+          '/sentinel/mfa/disable-totp',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1742,7 +1742,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/enable-two-factor',
+          '/sentinel/mfa/enable-two-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1777,7 +1777,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/disable-two-factor',
+          '/sentinel/mfa/disable-two-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1812,7 +1812,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/regenerate-recovery-codes',
+          '/sentinel/mfa/regenerate-recovery-codes',
           queryParameters: queryParameters,
           data: _data,
         )
