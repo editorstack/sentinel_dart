@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cuid2/cuid2.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:sentinel/src/api/realtime.dart';
 import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/database/database.dart';
@@ -18,6 +20,7 @@ import 'package:sentinel/src/functions/users.dart';
 import 'package:sentinel/src/models/device.dart';
 import 'package:sentinel/src/models/session.dart' hide Sessions;
 import 'package:sentinel/src/models/user.dart' hide Users;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 const _autoRefreshTickDuration = Duration(seconds: 10);
@@ -46,7 +49,7 @@ class Sentinel {
   /// Gets the current sentinel instance.
   ///
   /// An [AssertionError] is thrown if sentinel isn't initialized yet.
-  /// Call [Sentinel.initialize] to initialize it.
+  /// Call [Sentinel.initialize] to initialize the [Sentinel] instance.
   static Sentinel get instance {
     assert(_instance._initialized, 'Sentinel has not been initialized');
     return _instance;
@@ -282,6 +285,24 @@ class Sentinel {
 /// Returns the device information for the current platform.
 Future<DeviceRequest> deviceInfo() async {
   final deviceInfo = DeviceInfoPlugin();
+
+  if (kIsWeb) {
+    final webInfo = await deviceInfo.webBrowserInfo;
+    final storage = await SharedPreferences.getInstance();
+
+    var deviceID = storage.getString('deviceID');
+
+    if (deviceID == null) {
+      deviceID = cuid();
+      await storage.setString('deviceID', deviceID);
+    }
+
+    return DeviceRequest(
+      deviceID: deviceID,
+      name: webInfo.userAgent!,
+      type: DeviceType.web,
+    );
+  }
 
   if (Platform.isAndroid) {
     final androidInfo = await deviceInfo.androidInfo;
