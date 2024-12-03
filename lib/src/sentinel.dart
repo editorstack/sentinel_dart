@@ -115,7 +115,7 @@ class Sentinel {
     dio.options.baseUrl = url;
     dio.options.headers['X-Editorstack-App-ID'] = applicationID;
     _dio = dio;
-    _database = SentinelDatabase(driftDatabase(name: 'studioAuth'));
+    _database = SentinelDatabase(driftDatabase(name: 'sentinel'));
     _sentinel = SentinelApi(dio);
 
     sessions = Sessions(_sentinel!);
@@ -147,20 +147,22 @@ class Sentinel {
         await _startAutoRefresh();
       } catch (e) {
         await _database!.users.deleteAll();
+        _user = null;
+        await _database!.sessions.deleteAll();
+        _session = null;
       }
     }
 
     _updateToken(_session?.token);
 
-    if (_session != null) {
-      await _initSocket(_session!);
-    }
+    await _initSocket(_session);
 
     _authSubscription = userChanges().listen((user) => _user = user);
     _sessionSubscription = sessionChanges().listen((session) {
       if (_session?.token != session?.token) {
         if (session == null) {
           _socket.disconnect();
+          _initSocket();
         } else {
           _socket.disconnect();
           _initSocket(session);
@@ -236,19 +238,24 @@ class Sentinel {
     }
   }
 
-  Future<void> _initSocket(Session session) async {
+  Future<void> _initSocket([Session? session]) async {
     final device = await deviceInfo();
 
-    _socket.io.options?['extraHeaders'] = {
-      'authtoken': 'Bearer ${session.token}',
-      'deviceid': device.deviceID,
-      'appid': session.appID,
-    };
+    _socket.io.options?['extraHeaders'] = session != null
+        ? {
+            'authtoken': 'Bearer ${session.token}',
+            'appid': session.appID,
+          }
+        : {
+            'deviceid': device.deviceID,
+          };
 
     _socket
       ..on(RealtimeChannels.saveAuth, (data) async {
         final user = User.fromJson(data as Map<String, dynamic>);
-        await _database!.users.insertOnConflictUpdate(user.toDrift());
+        if (_user == null || _user!.id == user.id) {
+          await _database!.users.insertOnConflictUpdate(user.toDrift());
+        }
       })
       ..on(RealtimeChannels.deleteAuth, (_) async {
         await _database!.users.deleteAll();

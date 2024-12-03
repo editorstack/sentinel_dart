@@ -55,7 +55,7 @@ class User with _$User {
 @drift.DataClassName('DUser')
 class Users extends drift.Table {
   @override
-  String get tableName => 'studioUser';
+  String get tableName => 'user';
 
   /// Unique identifier for the user.
   drift.TextColumn get id => text()();

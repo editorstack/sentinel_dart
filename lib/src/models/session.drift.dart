@@ -95,8 +95,8 @@ class $$SessionsTableFilterComposer
     final i3.$$UsersTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.userID,
-        referencedTable: i4.ReadDatabaseContainer($db)
-            .resultSet<i3.$UsersTable>('studioUser'),
+        referencedTable:
+            i4.ReadDatabaseContainer($db).resultSet<i3.$UsersTable>('user'),
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
@@ -104,7 +104,7 @@ class $$SessionsTableFilterComposer
             i3.$$UsersTableFilterComposer(
               $db: $db,
               $table: i4.ReadDatabaseContainer($db)
-                  .resultSet<i3.$UsersTable>('studioUser'),
+                  .resultSet<i3.$UsersTable>('user'),
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -170,8 +170,8 @@ class $$SessionsTableOrderingComposer
     final i3.$$UsersTableOrderingComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.userID,
-        referencedTable: i4.ReadDatabaseContainer($db)
-            .resultSet<i3.$UsersTable>('studioUser'),
+        referencedTable:
+            i4.ReadDatabaseContainer($db).resultSet<i3.$UsersTable>('user'),
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
@@ -179,7 +179,7 @@ class $$SessionsTableOrderingComposer
             i3.$$UsersTableOrderingComposer(
               $db: $db,
               $table: i4.ReadDatabaseContainer($db)
-                  .resultSet<i3.$UsersTable>('studioUser'),
+                  .resultSet<i3.$UsersTable>('user'),
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -241,8 +241,8 @@ class $$SessionsTableAnnotationComposer
     final i3.$$UsersTableAnnotationComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.userID,
-        referencedTable: i4.ReadDatabaseContainer($db)
-            .resultSet<i3.$UsersTable>('studioUser'),
+        referencedTable:
+            i4.ReadDatabaseContainer($db).resultSet<i3.$UsersTable>('user'),
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
@@ -250,7 +250,7 @@ class $$SessionsTableAnnotationComposer
             i3.$$UsersTableAnnotationComposer(
               $db: $db,
               $table: i4.ReadDatabaseContainer($db)
-                  .resultSet<i3.$UsersTable>('studioUser'),
+                  .resultSet<i3.$UsersTable>('user'),
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -401,7 +401,7 @@ class $SessionsTable extends i2.Sessions
       type: i0.DriftSqlType.string,
       requiredDuringInsert: true,
       defaultConstraints: i0.GeneratedColumn.constraintIsAlways(
-          'REFERENCES studioUser (id) ON DELETE CASCADE'));
+          'REFERENCES user (id) ON UPDATE CASCADE ON DELETE CASCADE'));
   static const i0.VerificationMeta _deviceIDMeta =
       const i0.VerificationMeta('deviceID');
   @override
@@ -490,7 +490,7 @@ class $SessionsTable extends i2.Sessions
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'studioSession';
+  static const String $name = 'session';
   @override
   i0.VerificationContext validateIntegrity(i0.Insertable<i1.DSession> instance,
       {bool isInserting = false}) {

@@ -19,10 +19,17 @@ abstract class $SentinelDatabase extends i0.GeneratedDatabase {
       const i0.StreamQueryUpdateRules(
         [
           i0.WritePropagation(
-            on: i0.TableUpdateQuery.onTableName('studioUser',
+            on: i0.TableUpdateQuery.onTableName('user',
                 limitUpdateKind: i0.UpdateKind.delete),
             result: [
-              i0.TableUpdate('studioSession', kind: i0.UpdateKind.delete),
+              i0.TableUpdate('session', kind: i0.UpdateKind.delete),
+            ],
+          ),
+          i0.WritePropagation(
+            on: i0.TableUpdateQuery.onTableName('user',
+                limitUpdateKind: i0.UpdateKind.update),
+            result: [
+              i0.TableUpdate('session', kind: i0.UpdateKind.update),
             ],
           ),
         ],

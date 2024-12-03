@@ -10,6 +10,9 @@ class SentinelException implements Exception {
 
   /// Returns whether the exception is an unauthenticated exception.
   bool get isUnauthenticated => message == 'unauthenticated';
+
+  @override
+  String toString() => 'SentinelException: $message';
 }
 
 /// Returns the error message from a [DioException].

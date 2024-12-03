@@ -85,7 +85,7 @@ class UserSession with _$UserSession {
 @drift.DataClassName('DSession')
 class Sessions extends drift.Table {
   @override
-  String get tableName => 'studioSession';
+  String get tableName => 'session';
 
   /// The unique identifier for the session.
   drift.TextColumn get id => text()();

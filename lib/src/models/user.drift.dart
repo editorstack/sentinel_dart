@@ -396,7 +396,7 @@ class $UsersTable extends i4.Users with i0.TableInfo<$UsersTable, i1.DUser> {
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'studioUser';
+  static const String $name = 'user';
   @override
   i0.VerificationContext validateIntegrity(i0.Insertable<i1.DUser> instance,
       {bool isInserting = false}) {
