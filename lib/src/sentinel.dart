@@ -115,7 +115,21 @@ class Sentinel {
     dio.options.baseUrl = url;
     dio.options.headers['X-Editorstack-App-ID'] = applicationID;
     _dio = dio;
-    _database = SentinelDatabase(driftDatabase(name: 'sentinel'));
+    _database = SentinelDatabase(
+      driftDatabase(
+        name: 'sentinel',
+        web: DriftWebOptions(
+          sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+          driftWorker: Uri.parse('drift_worker.js'),
+          onResult: (result) {
+            if (result.missingFeatures.isNotEmpty) {
+              debugPrint('Using ${result.chosenImplementation} due to unsupported '
+                  'browser features: ${result.missingFeatures}');
+            }
+          },
+        ),
+      ),
+    );
     _sentinel = SentinelApi(dio);
 
     sessions = Sessions(_sentinel!);
@@ -250,6 +264,15 @@ class Sentinel {
             'deviceid': device.deviceID,
           };
 
+    _socket.io.options?['query'] = session != null
+        ? {
+            'authtoken': 'Bearer ${session.token}',
+            'appid': session.appID,
+          }
+        : {
+            'deviceid': device.deviceID,
+          };
+
     _socket
       ..on(RealtimeChannels.saveAuth, (data) async {
         final user = User.fromJson(data as Map<String, dynamic>);
@@ -265,7 +288,7 @@ class Sentinel {
         await _database!.users.insertOnConflictUpdate(session.user.toDrift());
         await _database!.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       })
-      ..on('error', (_) {
+      ..on('error', (error) {
         _database!.users.deleteAll();
       })
       ..connect();

@@ -1,9 +1,7 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
-import 'package:flutter/foundation.dart';
 import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/database/database.dart';
 import 'package:sentinel/src/models/factor.dart';
@@ -177,19 +175,8 @@ class SignIn {
         '${scopes != null ? '&${scopes.map((s) => 'scopes=$s').join('&')}' : ''}',
       );
 
-      final isAndroid = !kIsWeb && Platform.isAndroid;
-      var launchMode = LaunchMode.platformDefault;
-
-      // Google login has to be performed on external browser window on Android
-      if (provider == OAuthProvider.google && isAndroid) {
-        launchMode = LaunchMode.externalApplication;
-      }
-
-      final result = await launchUrl(
-        url,
-        mode: launchMode,
-        webOnlyWindowName: '_self',
-      );
+      final result =
+          await launchUrl(url, mode: LaunchMode.externalApplication, webOnlyWindowName: '_self');
       return result;
     } catch (e) {
       log(e.toString());
