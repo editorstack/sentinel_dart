@@ -219,9 +219,6 @@ class Sentinel {
       _autoRefreshTickDuration,
       (Timer t) => _autoRefreshTokenTick(),
     );
-
-    await Future.delayed(Duration.zero, () {});
-    await _autoRefreshTokenTick();
   }
 
   void _stopAutoRefresh() {
