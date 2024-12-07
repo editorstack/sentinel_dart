@@ -85,6 +85,11 @@ abstract class SentinelApi {
   @Headers({'Content-Type': 'application/json'})
   Future<User> updateUser(@Body() UpdateUserBody body);
 
+  /// Update user image
+  @PATCH('/sentinel/me/image')
+  @Headers({'Content-Type': 'application/json'})
+  Future<String?> updateUserImage(@Body() UpdateUserImageBody body);
+
   /// Change password
   @PATCH('/sentinel/me/change-password')
   @Headers({'Content-Type': 'application/json'})

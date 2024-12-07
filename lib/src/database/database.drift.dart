@@ -25,13 +25,6 @@ abstract class $SentinelDatabase extends i0.GeneratedDatabase {
               i0.TableUpdate('session', kind: i0.UpdateKind.delete),
             ],
           ),
-          i0.WritePropagation(
-            on: i0.TableUpdateQuery.onTableName('user',
-                limitUpdateKind: i0.UpdateKind.update),
-            result: [
-              i0.TableUpdate('session', kind: i0.UpdateKind.update),
-            ],
-          ),
         ],
       );
 }

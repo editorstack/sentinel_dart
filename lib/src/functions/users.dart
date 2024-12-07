@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
+import 'package:mime/mime.dart';
 import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/database/database.dart';
 import 'package:sentinel/src/models/user.dart';
@@ -72,6 +75,63 @@ class Users {
   Future<bool> removePassword({required String password}) async {
     try {
       return await _sentinel.removePassword(RemovePasswordBody(currentPassword: password));
+    } catch (e) {
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
+    }
+  }
+
+  /// Update user's image
+  Future<bool> updateImage(File image, [void Function(int sent, int total)? onProgress]) async {
+    try {
+      final fileType = lookupMimeType(image.path);
+      final contentLength = image.lengthSync();
+
+      final url = await _sentinel.updateUserImage(
+        UpdateUserImageBody(
+          image: ImageBody(type: fileType!, length: contentLength),
+        ),
+      );
+
+      final multipartFile = await MultipartFile.fromFile(image.path);
+      final formData = FormData.fromMap({
+        'file': multipartFile,
+      });
+      final options = Options(
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Content-Length': contentLength.toString(),
+        },
+      );
+
+      await Dio().put<void>(
+        url!,
+        data: formData,
+        options: options,
+        onSendProgress: onProgress,
+      );
+
+      return true;
+    } catch (e) {
+      final message = e is DioException
+          ? switch (e.type) {
+              DioExceptionType.connectionTimeout => 'connection_timeout',
+              DioExceptionType.sendTimeout => 'send_timeout',
+              DioExceptionType.receiveTimeout => 'receive_timeout',
+              DioExceptionType.cancel => 'upload_cancelled',
+              DioExceptionType.connectionError => 'network_connection_error',
+              _ => null,
+            }
+          : null;
+
+      throw SentinelException(message ?? exceptionMessage(e is DioException ? e : null));
+    }
+  }
+
+  /// Remove user's image
+  Future<bool> removeImage() async {
+    try {
+      await _sentinel.updateUserImage(const UpdateUserImageBody(image: null));
+      return true;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }

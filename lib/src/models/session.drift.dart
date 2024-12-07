@@ -401,7 +401,7 @@ class $SessionsTable extends i2.Sessions
       type: i0.DriftSqlType.string,
       requiredDuringInsert: true,
       defaultConstraints: i0.GeneratedColumn.constraintIsAlways(
-          'REFERENCES user (id) ON UPDATE CASCADE ON DELETE CASCADE'));
+          'REFERENCES user (id) ON DELETE CASCADE'));
   static const i0.VerificationMeta _deviceIDMeta =
       const i0.VerificationMeta('deviceID');
   @override

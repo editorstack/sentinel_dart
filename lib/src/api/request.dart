@@ -287,6 +287,32 @@ class UpdateUserBody with _$UpdateUserBody {
   factory UpdateUserBody.fromJson(Map<String, dynamic> json) => _$UpdateUserBodyFromJson(json);
 }
 
+/// Body for updating user image
+@freezed
+class UpdateUserImageBody with _$UpdateUserImageBody {
+  /// Creates a new instance of [UpdateUserImageBody] with the specified parameters.
+  const factory UpdateUserImageBody({
+    required ImageBody? image,
+  }) = _UpdateUserImageBody;
+
+  /// Used to serialize [UpdateUserImageBody] object to and from JSON.
+  factory UpdateUserImageBody.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserImageBodyFromJson(json);
+}
+
+/// Body for updating user image
+@freezed
+class ImageBody with _$ImageBody {
+  /// Creates a new instance of [ImageBody] with the specified parameters.
+  const factory ImageBody({
+    required String type,
+    required int length,
+  }) = _ImageBody;
+
+  /// Used to serialize [ImageBody] object to and from JSON.
+  factory ImageBody.fromJson(Map<String, dynamic> json) => _$ImageBodyFromJson(json);
+}
+
 /// Body to change password
 @freezed
 class ChangePasswordBody with _$ChangePasswordBody {

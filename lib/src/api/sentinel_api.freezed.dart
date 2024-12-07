@@ -4456,6 +4456,311 @@ _$$UpdateUserBodyImplCopyWith<_$UpdateUserBodyImpl> get copyWith => throw _priva
 
 }
 
+UpdateUserImageBody _$UpdateUserImageBodyFromJson(Map<String, dynamic> json) {
+return _UpdateUserImageBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UpdateUserImageBody {
+
+ ImageBody? get image => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this UpdateUserImageBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$UpdateUserImageBodyCopyWith<UpdateUserImageBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $UpdateUserImageBodyCopyWith<$Res>  {
+  factory $UpdateUserImageBodyCopyWith(UpdateUserImageBody value, $Res Function(UpdateUserImageBody) then) = _$UpdateUserImageBodyCopyWithImpl<$Res, UpdateUserImageBody>;
+@useResult
+$Res call({
+ ImageBody? image
+});
+
+
+$ImageBodyCopyWith<$Res>? get image;
+}
+
+/// @nodoc
+class _$UpdateUserImageBodyCopyWithImpl<$Res,$Val extends UpdateUserImageBody> implements $UpdateUserImageBodyCopyWith<$Res> {
+  _$UpdateUserImageBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? image = freezed,}) {
+  return _then(_value.copyWith(
+image: freezed == image ? _value.image : image // ignore: cast_nullable_to_non_nullable
+as ImageBody?,
+  )as $Val);
+}
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ImageBodyCopyWith<$Res>? get image {
+    if (_value.image == null) {
+    return null;
+  }
+
+  return $ImageBodyCopyWith<$Res>(_value.image!, (value) {
+    return _then(_value.copyWith(image: value) as $Val);
+  });
+}
+}
+
+
+/// @nodoc
+abstract class _$$UpdateUserImageBodyImplCopyWith<$Res> implements $UpdateUserImageBodyCopyWith<$Res> {
+  factory _$$UpdateUserImageBodyImplCopyWith(_$UpdateUserImageBodyImpl value, $Res Function(_$UpdateUserImageBodyImpl) then) = __$$UpdateUserImageBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ ImageBody? image
+});
+
+
+@override $ImageBodyCopyWith<$Res>? get image;
+}
+
+/// @nodoc
+class __$$UpdateUserImageBodyImplCopyWithImpl<$Res> extends _$UpdateUserImageBodyCopyWithImpl<$Res, _$UpdateUserImageBodyImpl> implements _$$UpdateUserImageBodyImplCopyWith<$Res> {
+  __$$UpdateUserImageBodyImplCopyWithImpl(_$UpdateUserImageBodyImpl _value, $Res Function(_$UpdateUserImageBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? image = freezed,}) {
+  return _then(_$UpdateUserImageBodyImpl(
+image: freezed == image ? _value.image : image // ignore: cast_nullable_to_non_nullable
+as ImageBody?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$UpdateUserImageBodyImpl  implements _UpdateUserImageBody {
+  const _$UpdateUserImageBodyImpl({required this.image});
+
+  factory _$UpdateUserImageBodyImpl.fromJson(Map<String, dynamic> json) => _$$UpdateUserImageBodyImplFromJson(json);
+
+@override final  ImageBody? image;
+
+@override
+String toString() {
+  return 'UpdateUserImageBody(image: $image)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$UpdateUserImageBodyImpl&&(identical(other.image, image) || other.image == image));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,image);
+
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$UpdateUserImageBodyImplCopyWith<_$UpdateUserImageBodyImpl> get copyWith => __$$UpdateUserImageBodyImplCopyWithImpl<_$UpdateUserImageBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$UpdateUserImageBodyImplToJson(this, );
+}
+}
+
+
+abstract class _UpdateUserImageBody implements UpdateUserImageBody {
+  const factory _UpdateUserImageBody({required final  ImageBody? image}) = _$UpdateUserImageBodyImpl;
+  
+
+  factory _UpdateUserImageBody.fromJson(Map<String, dynamic> json) = _$UpdateUserImageBodyImpl.fromJson;
+
+@override ImageBody? get image;
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$UpdateUserImageBodyImplCopyWith<_$UpdateUserImageBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+ImageBody _$ImageBodyFromJson(Map<String, dynamic> json) {
+return _ImageBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ImageBody {
+
+ String get type => throw _privateConstructorUsedError; int get length => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this ImageBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$ImageBodyCopyWith<ImageBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $ImageBodyCopyWith<$Res>  {
+  factory $ImageBodyCopyWith(ImageBody value, $Res Function(ImageBody) then) = _$ImageBodyCopyWithImpl<$Res, ImageBody>;
+@useResult
+$Res call({
+ String type, int length
+});
+
+
+
+}
+
+/// @nodoc
+class _$ImageBodyCopyWithImpl<$Res,$Val extends ImageBody> implements $ImageBodyCopyWith<$Res> {
+  _$ImageBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? length = null,}) {
+  return _then(_value.copyWith(
+type: null == type ? _value.type : type // ignore: cast_nullable_to_non_nullable
+as String,length: null == length ? _value.length : length // ignore: cast_nullable_to_non_nullable
+as int,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$ImageBodyImplCopyWith<$Res> implements $ImageBodyCopyWith<$Res> {
+  factory _$$ImageBodyImplCopyWith(_$ImageBodyImpl value, $Res Function(_$ImageBodyImpl) then) = __$$ImageBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String type, int length
+});
+
+
+
+}
+
+/// @nodoc
+class __$$ImageBodyImplCopyWithImpl<$Res> extends _$ImageBodyCopyWithImpl<$Res, _$ImageBodyImpl> implements _$$ImageBodyImplCopyWith<$Res> {
+  __$$ImageBodyImplCopyWithImpl(_$ImageBodyImpl _value, $Res Function(_$ImageBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? length = null,}) {
+  return _then(_$ImageBodyImpl(
+type: null == type ? _value.type : type // ignore: cast_nullable_to_non_nullable
+as String,length: null == length ? _value.length : length // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$ImageBodyImpl  implements _ImageBody {
+  const _$ImageBodyImpl({required this.type, required this.length});
+
+  factory _$ImageBodyImpl.fromJson(Map<String, dynamic> json) => _$$ImageBodyImplFromJson(json);
+
+@override final  String type;
+@override final  int length;
+
+@override
+String toString() {
+  return 'ImageBody(type: $type, length: $length)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$ImageBodyImpl&&(identical(other.type, type) || other.type == type)&&(identical(other.length, length) || other.length == length));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type,length);
+
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$ImageBodyImplCopyWith<_$ImageBodyImpl> get copyWith => __$$ImageBodyImplCopyWithImpl<_$ImageBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$ImageBodyImplToJson(this, );
+}
+}
+
+
+abstract class _ImageBody implements ImageBody {
+  const factory _ImageBody({required final  String type, required final  int length}) = _$ImageBodyImpl;
+  
+
+  factory _ImageBody.fromJson(Map<String, dynamic> json) = _$ImageBodyImpl.fromJson;
+
+@override String get type;@override int get length;
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$ImageBodyImplCopyWith<_$ImageBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
 ChangePasswordBody _$ChangePasswordBodyFromJson(Map<String, dynamic> json) {
 return _ChangePasswordBody.fromJson(json);
 }

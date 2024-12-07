@@ -536,6 +536,32 @@ Map<String, dynamic> _$$UpdateUserBodyImplToJson(
       'phoneNumberFactorID': instance.phoneNumberFactorID,
     };
 
+_$UpdateUserImageBodyImpl _$$UpdateUserImageBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UpdateUserImageBodyImpl(
+      image: json['image'] == null
+          ? null
+          : ImageBody.fromJson(json['image'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$UpdateUserImageBodyImplToJson(
+        _$UpdateUserImageBodyImpl instance) =>
+    <String, dynamic>{
+      'image': instance.image?.toJson(),
+    };
+
+_$ImageBodyImpl _$$ImageBodyImplFromJson(Map<String, dynamic> json) =>
+    _$ImageBodyImpl(
+      type: json['type'] as String,
+      length: (json['length'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$ImageBodyImplToJson(_$ImageBodyImpl instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'length': instance.length,
+    };
+
 _$ChangePasswordBodyImpl _$$ChangePasswordBodyImplFromJson(
         Map<String, dynamic> json) =>
     _$ChangePasswordBodyImpl(
@@ -1117,6 +1143,41 @@ class _SentinelApi implements SentinelApi {
     late User _value;
     try {
       _value = User.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<String?> updateUserImage(UpdateUserImageBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<String>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/sentinel/me/image',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<String>(_options);
+    late String? _value;
+    try {
+      _value = _result.data;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
