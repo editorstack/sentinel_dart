@@ -146,7 +146,7 @@ extension SessionConverter on Session {
   ///
   /// Returns an [DSession] object that can be stored in the Drift
   /// database.
-  DSession toDrift() {
+  SessionsCompanion toDrift() {
     return DSession(
       id: id,
       appID: appID,
@@ -162,7 +162,7 @@ extension SessionConverter on Session {
       expiresAt: expiresAt,
       createdAt: createdAt,
       updatedAt: updatedAt,
-    );
+    ).toCompanion(false);
   }
 }
 

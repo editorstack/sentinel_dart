@@ -158,6 +158,8 @@ class Sentinel {
       try {
         _session = await sessions.getSession(sessionID: 'current');
         _user = await users.getUserDetails();
+        if (_user != null) await _database!.users.insertOnConflictUpdate(_user!.toDrift());
+        if (_session != null) await _database!.sessions.insertOnConflictUpdate(_session!.toDrift());
         await _startAutoRefresh();
       } catch (e) {
         await _database!.users.deleteAll();

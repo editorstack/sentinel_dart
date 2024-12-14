@@ -92,20 +92,16 @@ class Users {
         ),
       );
 
-      final multipartFile = await MultipartFile.fromFile(image.path);
-      final formData = FormData.fromMap({
-        'file': multipartFile,
-      });
       final options = Options(
         headers: {
-          'Content-Type': 'multipart/form-data',
-          'Content-Length': contentLength.toString(),
+          'Content-Type': 'application/octet-stream',
+          'Content-Length': contentLength,
         },
       );
 
       await Dio().put<void>(
         url!,
-        data: formData,
+        data: image.openRead(),
         options: options,
         onSendProgress: onProgress,
       );

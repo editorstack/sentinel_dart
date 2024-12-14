@@ -1158,7 +1158,7 @@ class _SentinelApi implements SentinelApi {
     _headers.removeWhere((k, v) => v == null);
     final _data = body;
     final _options = _setStreamType<String>(Options(
-      method: 'PATCH',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'application/json',
@@ -1437,13 +1437,13 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> deleteFactor(String factorID) async {
+  Future<User> deleteFactor(String factorID) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(Options(
+    final _options = _setStreamType<User>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
@@ -1460,10 +1460,10 @@ class _SentinelApi implements SentinelApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late User _value;
     try {
-      _value = _result.data!;
+      _value = User.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

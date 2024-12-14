@@ -322,12 +322,12 @@ void main() {
         'when deleting factor is successful, it should not throw any error',
         () async {
           final factors = Factors(mockSentinelApi);
-          when(() => mockSentinelApi.deleteFactor(any())).thenAnswer((_) async => true);
+          when(() => mockSentinelApi.deleteFactor(any())).thenAnswer((_) async => kUser);
 
           final deleted = await factors.deleteFactor(factorID: 'id');
 
           verify(() => mockSentinelApi.deleteFactor('id')).called(1);
-          expect(deleted, true);
+          expect(deleted, kUser);
         },
       );
     });

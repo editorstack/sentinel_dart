@@ -86,7 +86,7 @@ abstract class SentinelApi {
   Future<User> updateUser(@Body() UpdateUserBody body);
 
   /// Update user image
-  @PATCH('/sentinel/me/image')
+  @POST('/sentinel/me/image')
   @Headers({'Content-Type': 'application/json'})
   Future<String?> updateUserImage(@Body() UpdateUserImageBody body);
 
@@ -134,7 +134,7 @@ abstract class SentinelApi {
   /// Deletes a factor
   @DELETE('/sentinel/factors/{factorID}')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> deleteFactor(@Path() String factorID);
+  Future<User> deleteFactor(@Path() String factorID);
 
   /// Gets all sessions for the user
   @GET('/sentinel/sessions/')
