@@ -108,18 +108,7 @@ class Users {
 
       return true;
     } catch (e) {
-      final message = e is DioException
-          ? switch (e.type) {
-              DioExceptionType.connectionTimeout => 'connection_timeout',
-              DioExceptionType.sendTimeout => 'send_timeout',
-              DioExceptionType.receiveTimeout => 'receive_timeout',
-              DioExceptionType.cancel => 'upload_cancelled',
-              DioExceptionType.connectionError => 'network_connection_error',
-              _ => null,
-            }
-          : null;
-
-      throw SentinelException(message ?? exceptionMessage(e is DioException ? e : null));
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
@@ -138,7 +127,6 @@ class Users {
     try {
       final res = await _sentinel.deleteUser();
       await _database.users.deleteAll();
-      await _database.sessions.deleteAll();
       return res;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -154,7 +142,6 @@ class Users {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     } finally {
       await _database.users.deleteAll();
-      await _database.sessions.deleteAll();
     }
   }
 }

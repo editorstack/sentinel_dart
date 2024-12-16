@@ -55,10 +55,12 @@ class Sentinel {
     return _instance;
   }
 
+  bool _initialized = false;
   static final Sentinel _instance = Sentinel._();
-  Dio? _dio;
-  SentinelDatabase? _database;
-  SentinelApi? _sentinel;
+
+  late Dio _dio;
+  late SentinelDatabase _database;
+  late SentinelApi _sentinel;
 
   User? _user;
   Session? _session;
@@ -91,8 +93,6 @@ class Sentinel {
   late final Users users;
 
   late io.Socket _socket;
-
-  bool _initialized = false;
 
   /// Initializes the Sentinel system with the given [dio] client, [url], and [applicationID].
   ///
@@ -132,16 +132,16 @@ class Sentinel {
     );
     _sentinel = SentinelApi(dio);
 
-    sessions = Sessions(_sentinel!);
-    createUser = CreateUser(_sentinel!, _database!, deviceInfo, _updateToken);
-    signIn = SignIn(_sentinel!, _dio!, _database!, deviceInfo, _updateToken);
-    factors = Factors(_sentinel!);
-    mfa = MFA(_sentinel!);
-    reAuthenticate = ReAuthentication(_sentinel!);
-    users = Users(_sentinel!, _database!);
+    sessions = Sessions(_sentinel);
+    createUser = CreateUser(_sentinel, _database, deviceInfo, _updateToken);
+    signIn = SignIn(_sentinel, _dio, _database, deviceInfo, _updateToken);
+    factors = Factors(_sentinel);
+    mfa = MFA(_sentinel);
+    reAuthenticate = ReAuthentication(_sentinel);
+    users = Users(_sentinel, _database);
 
     _socket = io.io(
-      _dio!.options.baseUrl,
+      _dio.options.baseUrl,
       io.OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect()
@@ -149,8 +149,8 @@ class Sentinel {
           .build(),
     );
 
-    _session = (await _database!.sessions.select().getSingleOrNull())?.toObject();
-    _user = (await _database!.users.select().getSingleOrNull())?.toObject();
+    _session = (await _database.sessions.select().getSingleOrNull())?.toObject();
+    _user = (await _database.users.select().getSingleOrNull())?.toObject();
 
     _updateToken(_session?.token);
 
@@ -158,13 +158,12 @@ class Sentinel {
       try {
         _session = await sessions.getSession(sessionID: 'current');
         _user = await users.getUserDetails();
-        if (_user != null) await _database!.users.insertOnConflictUpdate(_user!.toDrift());
-        if (_session != null) await _database!.sessions.insertOnConflictUpdate(_session!.toDrift());
+        if (_user != null) await _database.users.insertOnConflictUpdate(_user!.toDrift());
+        if (_session != null) await _database.sessions.insertOnConflictUpdate(_session!.toDrift());
         await _startAutoRefresh();
       } catch (e) {
-        await _database!.users.deleteAll();
+        await _database.users.deleteAll();
         _user = null;
-        await _database!.sessions.deleteAll();
         _session = null;
       }
     }
@@ -191,24 +190,18 @@ class Sentinel {
   }
 
   /// Disposes of the Sentinel system, cleaning up any resources.
-  void dispose() {
-    _authSubscription?.cancel();
-    _sessionSubscription?.cancel();
+  Future<void> dispose() async {
+    await _authSubscription?.cancel();
+    await _sessionSubscription?.cancel();
     _socket.dispose();
     _initialized = false;
   }
 
   void _updateToken(String? token) {
     if (token != null && token.isNotEmpty) {
-      _dio?.options.headers['Authorization'] = 'Bearer $token';
+      _dio.options.headers['Authorization'] = 'Bearer $token';
     } else {
-      _dio?.options.headers.remove('Authorization');
-    }
-  }
-
-  void _validate() {
-    if (_dio == null || _database == null || _sentinel == null) {
-      throw Exception('Sentinel has not been initialized');
+      _dio.options.headers.remove('Authorization');
     }
   }
 
@@ -242,11 +235,11 @@ class Sentinel {
 
     if (expiresInTicks <= _autoRefreshTickThreshold) {
       try {
-        await _sentinel!.extendSession();
+        await _sentinel.extendSession();
       } catch (e) {
         final exception = SentinelException(exceptionMessage(e is DioException ? e : null));
         _stopAutoRefresh();
-        if (exception.isUnauthenticated) await _database!.managers.users.delete();
+        if (exception.isUnauthenticated) await _database.managers.users.delete();
       }
     }
   }
@@ -276,33 +269,31 @@ class Sentinel {
       ..on(RealtimeChannels.saveAuth, (data) async {
         final user = User.fromJson(data as Map<String, dynamic>);
         if (_user == null || _user!.id == user.id) {
-          await _database!.users.insertOnConflictUpdate(user.toDrift());
+          await _database.users.insertOnConflictUpdate(user.toDrift());
         }
       })
       ..on(RealtimeChannels.deleteAuth, (_) async {
-        await _database!.users.deleteAll();
+        await _database.users.deleteAll();
       })
       ..on(RealtimeChannels.saveSession, (data) async {
         final session = UserSession.fromJson(data as Map<String, dynamic>);
-        await _database!.users.insertOnConflictUpdate(session.user.toDrift());
-        await _database!.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+        await _database.users.insertOnConflictUpdate(session.user.toDrift());
+        await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       })
       ..on('error', (error) {
-        _database!.users.deleteAll();
+        _database.users.deleteAll();
       })
       ..connect();
   }
 
   /// Returns a stream of changes to the authenticated user.
   Stream<User?> userChanges() {
-    _validate();
-    return _database!.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
+    return _database.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
   }
 
   /// Returns a stream of changes to the current session.
   Stream<Session?> sessionChanges() {
-    _validate();
-    return _database!.managers.sessions
+    return _database.managers.sessions
         .watch(limit: 1)
         .map((event) => event.firstOrNull?.toObject());
   }

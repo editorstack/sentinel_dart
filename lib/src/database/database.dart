@@ -11,4 +11,13 @@ class SentinelDatabase extends $SentinelDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  @override
+  drift.MigrationStrategy get migration {
+    return drift.MigrationStrategy(
+      beforeOpen: (_) async {
+        await customStatement('PRAGMA foreign_keys = ON');
+      },
+    );
+  }
 }

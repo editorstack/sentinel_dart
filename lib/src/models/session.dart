@@ -78,7 +78,7 @@ class UserSession with _$UserSession {
   factory UserSession.fromJson(Map<String, Object?> json) => _$UserSessionFromJson(json);
 }
 
-/// Represents a user's' session in the Drift database.
+/// Represents a user's session in the Drift database.
 ///
 /// This class is used to store session information in the Drift database,
 /// allowing for efficient querying and persistence of session data.

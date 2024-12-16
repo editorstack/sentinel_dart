@@ -16,7 +16,7 @@ part 'exception.dart';
 /// Provides an interface for authentication and user management in sentinel.
 @RestApi()
 abstract class SentinelApi {
-  /// Creates an instance of AuthApi with the given Dio client and optional base
+  /// Creates an instance of [SentinelApi] with the given Dio client and optional base
   /// URL.
   factory SentinelApi(Dio dio, {String? baseUrl}) = _SentinelApi;
 
