@@ -144,6 +144,7 @@ class Sentinel {
     _socket = io.io(
       _dio.options.baseUrl,
       io.OptionBuilder()
+          .enableForceNewConnection()
           .setTransports(['websocket'])
           .setPath('/sentinel/socket.io')
           .disableAutoConnect()
@@ -252,7 +253,7 @@ class Sentinel {
     _socket.io.options?['extraHeaders'] = session != null
         ? {
             'authtoken': 'Bearer ${session.token}',
-            'appid': session.appID,
+            'applicationid': session.appID,
           }
         : {
             'deviceid': device.deviceID,
@@ -261,7 +262,7 @@ class Sentinel {
     _socket.io.options?['query'] = session != null
         ? {
             'authtoken': 'Bearer ${session.token}',
-            'appid': session.appID,
+            'applicationid': session.appID,
           }
         : {
             'deviceid': device.deviceID,
