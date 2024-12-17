@@ -128,6 +128,7 @@ class Sentinel {
             }
           },
         ),
+        native: const DriftNativeOptions(shareAcrossIsolates: true),
       ),
     );
     _sentinel = SentinelApi(dio);
