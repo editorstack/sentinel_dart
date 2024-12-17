@@ -145,6 +145,7 @@ class Sentinel {
       _dio.options.baseUrl,
       io.OptionBuilder()
           .setTransports(['websocket'])
+          .setPath('/sentinel/socket.io')
           .disableAutoConnect()
           .enableReconnection()
           .build(),
