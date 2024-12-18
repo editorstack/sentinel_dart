@@ -269,6 +269,25 @@ Map<String, dynamic> _$$EmailCodeAttemptFirstFactorBodyImplToJson(
       'strategy': instance.$type,
     };
 
+_$EmailLinkAttemptFirstFactorBodyImpl
+    _$$EmailLinkAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$EmailLinkAttemptFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
+          code: json['code'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
+          $type: json['strategy'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailLinkAttemptFirstFactorBodyImplToJson(
+        _$EmailLinkAttemptFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'code': instance.code,
+      'device': instance.device.toJson(),
+      'strategy': instance.$type,
+    };
+
 _$PhoneCodeAttemptFirstFactorBodyImpl
     _$$PhoneCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
         _$PhoneCodeAttemptFirstFactorBodyImpl(

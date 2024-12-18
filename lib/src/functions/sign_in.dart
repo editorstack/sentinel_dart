@@ -118,6 +118,23 @@ class SignIn {
     }
   }
 
+  /// Verifies email link sign in
+  Future<UserSession> verifyEmailLink({required String email, required String code}) async {
+    try {
+      final device = await _deviceInfo();
+      final session = await _sentinel.attemptFirstFactor(
+        AttemptFirstFactorBody.emailLink(identifier: email, code: code, device: device),
+      );
+      _tokenChanged(session.token);
+
+      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.users.insertOnConflictUpdate(session.user.toDrift());
+      return session;
+    } catch (e) {
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
+    }
+  }
+
   /// Signs in a user using the phone number code
   Future<bool> withPhoneCode({required String phoneNumber}) async {
     try {

@@ -134,6 +134,13 @@ sealed class AttemptFirstFactorBody with _$AttemptFirstFactorBody {
     required DeviceRequest device,
   }) = EmailCodeAttemptFirstFactorBody;
 
+  /// Attempts first factor for email code sign in
+  const factory AttemptFirstFactorBody.emailLink({
+    required String identifier,
+    required String code,
+    required DeviceRequest device,
+  }) = EmailLinkAttemptFirstFactorBody;
+
   /// Attempts first factor for phone code sign in
   const factory AttemptFirstFactorBody.phoneCode({
     required String identifier,
