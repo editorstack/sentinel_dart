@@ -1,3 +1,4 @@
+// dart format width=80
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
 import 'package:sentinel/src/models/user.drift.dart' as i1;
@@ -18,10 +19,10 @@ abstract class $SentinelDatabase extends i0.GeneratedDatabase {
       const i0.StreamQueryUpdateRules(
         [
           i0.WritePropagation(
-            on: i0.TableUpdateQuery.onTableName('studioUser',
+            on: i0.TableUpdateQuery.onTableName('user',
                 limitUpdateKind: i0.UpdateKind.delete),
             result: [
-              i0.TableUpdate('studioSession', kind: i0.UpdateKind.delete),
+              i0.TableUpdate('session', kind: i0.UpdateKind.delete),
             ],
           ),
         ],

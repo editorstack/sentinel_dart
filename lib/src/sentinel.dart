@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cuid2/cuid2.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:sentinel/src/api/realtime.dart';
 import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/database/database.dart';
@@ -18,6 +20,7 @@ import 'package:sentinel/src/functions/users.dart';
 import 'package:sentinel/src/models/device.dart';
 import 'package:sentinel/src/models/session.dart' hide Sessions;
 import 'package:sentinel/src/models/user.dart' hide Users;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 const _autoRefreshTickDuration = Duration(seconds: 10);
@@ -46,16 +49,18 @@ class Sentinel {
   /// Gets the current sentinel instance.
   ///
   /// An [AssertionError] is thrown if sentinel isn't initialized yet.
-  /// Call [Sentinel.initialize] to initialize it.
+  /// Call [Sentinel.initialize] to initialize the [Sentinel] instance.
   static Sentinel get instance {
     assert(_instance._initialized, 'Sentinel has not been initialized');
     return _instance;
   }
 
+  bool _initialized = false;
   static final Sentinel _instance = Sentinel._();
-  Dio? _dio;
-  SentinelDatabase? _database;
-  SentinelApi? _sentinel;
+
+  late Dio _dio;
+  late SentinelDatabase _database;
+  late SentinelApi _sentinel;
 
   User? _user;
   Session? _session;
@@ -89,8 +94,6 @@ class Sentinel {
 
   late io.Socket _socket;
 
-  bool _initialized = false;
-
   /// Initializes the Sentinel system with the given [dio] client, [url], and [applicationID].
   ///
   /// This method sets up the necessary API clients, database connections, and
@@ -112,28 +115,45 @@ class Sentinel {
     dio.options.baseUrl = url;
     dio.options.headers['X-Editorstack-App-ID'] = applicationID;
     _dio = dio;
-    _database = SentinelDatabase(driftDatabase(name: 'studioAuth'));
+    _database = SentinelDatabase(
+      driftDatabase(
+        name: 'sentinel',
+        web: DriftWebOptions(
+          sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+          driftWorker: Uri.parse('drift_worker.js'),
+          onResult: (result) {
+            if (result.missingFeatures.isNotEmpty) {
+              debugPrint('Using ${result.chosenImplementation} due to unsupported '
+                  'browser features: ${result.missingFeatures}');
+            }
+          },
+        ),
+        native: const DriftNativeOptions(shareAcrossIsolates: true),
+      ),
+    );
     _sentinel = SentinelApi(dio);
 
-    sessions = Sessions(_sentinel!);
-    createUser = CreateUser(_sentinel!, _database!, deviceInfo, _updateToken);
-    signIn = SignIn(_sentinel!, _dio!, _database!, deviceInfo, _updateToken);
-    factors = Factors(_sentinel!);
-    mfa = MFA(_sentinel!);
-    reAuthenticate = ReAuthentication(_sentinel!);
-    users = Users(_sentinel!, _database!);
+    sessions = Sessions(_sentinel);
+    createUser = CreateUser(_sentinel, _database, deviceInfo, _updateToken);
+    signIn = SignIn(_sentinel, _dio, _database, deviceInfo, _updateToken);
+    factors = Factors(_sentinel);
+    mfa = MFA(_sentinel);
+    reAuthenticate = ReAuthentication(_sentinel);
+    users = Users(_sentinel, _database);
 
     _socket = io.io(
-      _dio!.options.baseUrl,
+      _dio.options.baseUrl,
       io.OptionBuilder()
+          .enableForceNewConnection()
           .setTransports(['websocket'])
+          .setPath('/sentinel/socket.io')
           .disableAutoConnect()
           .enableReconnection()
           .build(),
     );
 
-    _session = (await _database!.sessions.select().getSingleOrNull())?.toObject();
-    _user = (await _database!.users.select().getSingleOrNull())?.toObject();
+    _session = (await _database.sessions.select().getSingleOrNull())?.toObject();
+    _user = (await _database.users.select().getSingleOrNull())?.toObject();
 
     _updateToken(_session?.token);
 
@@ -141,23 +161,26 @@ class Sentinel {
       try {
         _session = await sessions.getSession(sessionID: 'current');
         _user = await users.getUserDetails();
+        if (_user != null) await _database.users.insertOnConflictUpdate(_user!.toDrift());
+        if (_session != null) await _database.sessions.insertOnConflictUpdate(_session!.toDrift());
         await _startAutoRefresh();
       } catch (e) {
-        await _database!.users.deleteAll();
+        await _database.users.deleteAll();
+        _user = null;
+        _session = null;
       }
     }
 
     _updateToken(_session?.token);
 
-    if (_session != null) {
-      await _initSocket(_session!);
-    }
+    await _initSocket(_session);
 
     _authSubscription = userChanges().listen((user) => _user = user);
     _sessionSubscription = sessionChanges().listen((session) {
       if (_session?.token != session?.token) {
         if (session == null) {
           _socket.disconnect();
+          _initSocket();
         } else {
           _socket.disconnect();
           _initSocket(session);
@@ -170,24 +193,18 @@ class Sentinel {
   }
 
   /// Disposes of the Sentinel system, cleaning up any resources.
-  void dispose() {
-    _authSubscription?.cancel();
-    _sessionSubscription?.cancel();
+  Future<void> dispose() async {
+    await _authSubscription?.cancel();
+    await _sessionSubscription?.cancel();
     _socket.dispose();
     _initialized = false;
   }
 
   void _updateToken(String? token) {
     if (token != null && token.isNotEmpty) {
-      _dio?.options.headers['Authorization'] = 'Bearer $token';
+      _dio.options.headers['Authorization'] = 'Bearer $token';
     } else {
-      _dio?.options.headers.remove('Authorization');
-    }
-  }
-
-  void _validate() {
-    if (_dio == null || _database == null || _sentinel == null) {
-      throw Exception('Sentinel has not been initialized');
+      _dio.options.headers.remove('Authorization');
     }
   }
 
@@ -200,9 +217,6 @@ class Sentinel {
       _autoRefreshTickDuration,
       (Timer t) => _autoRefreshTokenTick(),
     );
-
-    await Future.delayed(Duration.zero, () {});
-    await _autoRefreshTokenTick();
   }
 
   void _stopAutoRefresh() {
@@ -224,53 +238,65 @@ class Sentinel {
 
     if (expiresInTicks <= _autoRefreshTickThreshold) {
       try {
-        await _sentinel!.extendSession();
+        await _sentinel.extendSession();
       } catch (e) {
         final exception = SentinelException(exceptionMessage(e is DioException ? e : null));
         _stopAutoRefresh();
-        if (exception.isUnauthenticated) await _database!.managers.users.delete();
+        if (exception.isUnauthenticated) await _database.managers.users.delete();
       }
     }
   }
 
-  Future<void> _initSocket(Session session) async {
+  Future<void> _initSocket([Session? session]) async {
     final device = await deviceInfo();
 
-    _socket.io.options?['extraHeaders'] = {
-      'authtoken': 'Bearer ${session.token}',
-      'deviceid': device.deviceID,
-      'appid': session.appID,
-    };
+    _socket.io.options?['extraHeaders'] = session != null
+        ? {
+            'authtoken': 'Bearer ${session.token}',
+            'applicationid': session.appID,
+          }
+        : {
+            'deviceid': device.deviceID,
+          };
+
+    _socket.io.options?['query'] = session != null
+        ? {
+            'authtoken': 'Bearer ${session.token}',
+            'applicationid': session.appID,
+          }
+        : {
+            'deviceid': device.deviceID,
+          };
 
     _socket
       ..on(RealtimeChannels.saveAuth, (data) async {
         final user = User.fromJson(data as Map<String, dynamic>);
-        await _database!.users.insertOnConflictUpdate(user.toDrift());
+        if (_user == null || _user!.id == user.id) {
+          await _database.users.insertOnConflictUpdate(user.toDrift());
+        }
       })
       ..on(RealtimeChannels.deleteAuth, (_) async {
-        await _database!.users.deleteAll();
+        await _database.users.deleteAll();
       })
       ..on(RealtimeChannels.saveSession, (data) async {
         final session = UserSession.fromJson(data as Map<String, dynamic>);
-        await _database!.users.insertOnConflictUpdate(session.user.toDrift());
-        await _database!.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+        await _database.users.insertOnConflictUpdate(session.user.toDrift());
+        await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       })
-      ..on('error', (_) {
-        _database!.users.deleteAll();
+      ..on('error', (error) {
+        _database.users.deleteAll();
       })
       ..connect();
   }
 
   /// Returns a stream of changes to the authenticated user.
   Stream<User?> userChanges() {
-    _validate();
-    return _database!.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
+    return _database.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
   }
 
   /// Returns a stream of changes to the current session.
   Stream<Session?> sessionChanges() {
-    _validate();
-    return _database!.managers.sessions
+    return _database.managers.sessions
         .watch(limit: 1)
         .map((event) => event.firstOrNull?.toObject());
   }
@@ -282,6 +308,33 @@ class Sentinel {
 /// Returns the device information for the current platform.
 Future<DeviceRequest> deviceInfo() async {
   final deviceInfo = DeviceInfoPlugin();
+
+  if (kIsWeb) {
+    final webInfo = await deviceInfo.webBrowserInfo;
+    final storage = await SharedPreferences.getInstance();
+
+    var deviceID = storage.getString('deviceID');
+
+    if (deviceID == null) {
+      deviceID = cuid();
+      await storage.setString('deviceID', deviceID);
+    }
+
+    return DeviceRequest(
+      deviceID: deviceID,
+      name: switch (webInfo.browserName) {
+        BrowserName.chrome => 'Chrome',
+        BrowserName.firefox => 'Firefox',
+        BrowserName.safari => 'Safari',
+        BrowserName.edge => 'Edge',
+        BrowserName.opera => 'Opera',
+        BrowserName.msie => 'Microsoft Internet Explorer',
+        BrowserName.samsungInternet => 'Samsung Internet',
+        BrowserName.unknown => 'Unknown',
+      },
+      type: DeviceType.web,
+    );
+  }
 
   if (Platform.isAndroid) {
     final androidInfo = await deviceInfo.androidInfo;

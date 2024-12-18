@@ -269,6 +269,25 @@ Map<String, dynamic> _$$EmailCodeAttemptFirstFactorBodyImplToJson(
       'strategy': instance.$type,
     };
 
+_$EmailLinkAttemptFirstFactorBodyImpl
+    _$$EmailLinkAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
+        _$EmailLinkAttemptFirstFactorBodyImpl(
+          identifier: json['identifier'] as String,
+          code: json['code'] as String,
+          device:
+              DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
+          $type: json['strategy'] as String?,
+        );
+
+Map<String, dynamic> _$$EmailLinkAttemptFirstFactorBodyImplToJson(
+        _$EmailLinkAttemptFirstFactorBodyImpl instance) =>
+    <String, dynamic>{
+      'identifier': instance.identifier,
+      'code': instance.code,
+      'device': instance.device.toJson(),
+      'strategy': instance.$type,
+    };
+
 _$PhoneCodeAttemptFirstFactorBodyImpl
     _$$PhoneCodeAttemptFirstFactorBodyImplFromJson(Map<String, dynamic> json) =>
         _$PhoneCodeAttemptFirstFactorBodyImpl(
@@ -536,6 +555,32 @@ Map<String, dynamic> _$$UpdateUserBodyImplToJson(
       'phoneNumberFactorID': instance.phoneNumberFactorID,
     };
 
+_$UpdateUserImageBodyImpl _$$UpdateUserImageBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UpdateUserImageBodyImpl(
+      image: json['image'] == null
+          ? null
+          : ImageBody.fromJson(json['image'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$UpdateUserImageBodyImplToJson(
+        _$UpdateUserImageBodyImpl instance) =>
+    <String, dynamic>{
+      'image': instance.image?.toJson(),
+    };
+
+_$ImageBodyImpl _$$ImageBodyImplFromJson(Map<String, dynamic> json) =>
+    _$ImageBodyImpl(
+      type: json['type'] as String,
+      length: (json['length'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$ImageBodyImplToJson(_$ImageBodyImpl instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'length': instance.length,
+    };
+
 _$ChangePasswordBodyImpl _$$ChangePasswordBodyImplFromJson(
         Map<String, dynamic> json) =>
     _$ChangePasswordBodyImpl(
@@ -683,7 +728,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-up/',
+          '/sentinel/sign-up/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -718,7 +763,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-up/prepare-verification',
+          '/sentinel/sign-up/prepare-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -754,7 +799,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-up/attempt-verification',
+          '/sentinel/sign-up/attempt-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -789,7 +834,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-first-factor',
+          '/sentinel/sign-in/prepare-first-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -824,7 +869,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-first-factor',
+          '/sentinel/sign-in/attempt-first-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -859,7 +904,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-second-factor',
+          '/sentinel/sign-in/prepare-second-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -894,7 +939,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-second-factor',
+          '/sentinel/sign-in/attempt-second-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -929,7 +974,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-reset-password',
+          '/sentinel/sign-in/prepare-reset-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -964,7 +1009,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-reset-password',
+          '/sentinel/sign-in/attempt-reset-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -999,7 +1044,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/prepare-re-authentication',
+          '/sentinel/sign-in/prepare-re-authentication',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1034,7 +1079,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sign-in/attempt-re-authentication',
+          '/sentinel/sign-in/attempt-re-authentication',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1069,7 +1114,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me',
+          '/sentinel/me',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1104,7 +1149,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me',
+          '/sentinel/me',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1117,6 +1162,41 @@ class _SentinelApi implements SentinelApi {
     late User _value;
     try {
       _value = User.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<String?> updateUserImage(UpdateUserImageBody body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<String>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/json',
+    )
+        .compose(
+          _dio.options,
+          '/sentinel/me/image',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<String>(_options);
+    late String? _value;
+    try {
+      _value = _result.data;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1139,7 +1219,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me/change-password',
+          '/sentinel/me/change-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1174,7 +1254,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me/remove-password',
+          '/sentinel/me/remove-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1209,7 +1289,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/me',
+          '/sentinel/me',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1244,7 +1324,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/user-factors',
+          '/sentinel/factors/user-factors',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1279,7 +1359,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/identifier',
+          '/sentinel/factors/identifier',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1317,7 +1397,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/${factorID}/prepare-verification',
+          '/sentinel/factors/${factorID}/prepare-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1355,7 +1435,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/${factorID}/attempt-verification',
+          '/sentinel/factors/${factorID}/attempt-verification',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1376,13 +1456,13 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> deleteFactor(String factorID) async {
+  Future<User> deleteFactor(String factorID) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(Options(
+    final _options = _setStreamType<User>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
@@ -1390,7 +1470,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/factors/${factorID}',
+          '/sentinel/factors/${factorID}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1399,10 +1479,10 @@ class _SentinelApi implements SentinelApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late User _value;
     try {
-      _value = _result.data!;
+      _value = User.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1425,7 +1505,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/',
+          '/sentinel/sessions/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1462,7 +1542,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/${sessionID}',
+          '/sentinel/sessions/${sessionID}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1497,7 +1577,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/extend',
+          '/sentinel/sessions/extend',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1532,7 +1612,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/',
+          '/sentinel/sessions/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1567,7 +1647,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/others',
+          '/sentinel/sessions/others',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1602,7 +1682,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/sessions/${sessionID}',
+          '/sentinel/sessions/${sessionID}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1637,7 +1717,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/enable-totp',
+          '/sentinel/mfa/enable-totp',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1672,7 +1752,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/verify-totp',
+          '/sentinel/mfa/verify-totp',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1707,7 +1787,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/disable-totp',
+          '/sentinel/mfa/disable-totp',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1742,7 +1822,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/enable-two-factor',
+          '/sentinel/mfa/enable-two-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1777,7 +1857,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/disable-two-factor',
+          '/sentinel/mfa/disable-two-factor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1812,7 +1892,7 @@ class _SentinelApi implements SentinelApi {
     )
         .compose(
           _dio.options,
-          '/auth/mfa/regenerate-recovery-codes',
+          '/sentinel/mfa/regenerate-recovery-codes',
           queryParameters: queryParameters,
           data: _data,
         )

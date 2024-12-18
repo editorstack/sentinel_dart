@@ -1810,6 +1810,8 @@ AttemptFirstFactorBody _$AttemptFirstFactorBodyFromJson(Map<String, dynamic> jso
           return PasswordAttemptFirstFactorBody.fromJson(json);
                 case 'emailCode':
           return EmailCodeAttemptFirstFactorBody.fromJson(json);
+                case 'emailLink':
+          return EmailLinkAttemptFirstFactorBody.fromJson(json);
                 case 'phoneCode':
           return PhoneCodeAttemptFirstFactorBody.fromJson(json);
         
@@ -1823,12 +1825,12 @@ AttemptFirstFactorBody _$AttemptFirstFactorBodyFromJson(Map<String, dynamic> jso
 mixin _$AttemptFirstFactorBody {
 
  String get identifier => throw _privateConstructorUsedError; DeviceRequest get device => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) => throw _privateConstructorUsedError;
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailLink,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( EmailLinkAttemptFirstFactorBody value)  emailLink,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) => throw _privateConstructorUsedError;
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) => throw _privateConstructorUsedError;
 /// Serializes this AttemptFirstFactorBody to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 /// Create a copy of AttemptFirstFactorBody
@@ -1952,30 +1954,30 @@ int get hashCode => Object.hash(runtimeType,identifier,password,device);
 _$$PasswordAttemptFirstFactorBodyImplCopyWith<_$PasswordAttemptFirstFactorBodyImpl> get copyWith => __$$PasswordAttemptFirstFactorBodyImplCopyWithImpl<_$PasswordAttemptFirstFactorBodyImpl>(this, _$identity);
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) {
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailLink,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) {
   return password(identifier,this.password,device);
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) {
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) {
   return password?.call(identifier,this.password,device);
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) {
   if (password != null) {
     return password(identifier,this.password,device);
   }
   return orElse();
 }
 @override
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) {
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( EmailLinkAttemptFirstFactorBody value)  emailLink,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) {
   return password(this);
 }
 @override
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) {
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) {
   return password?.call(this);
 }
 @override
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) {
   if (password != null) {
     return password(this);
   }
@@ -2073,30 +2075,30 @@ int get hashCode => Object.hash(runtimeType,identifier,code,device);
 _$$EmailCodeAttemptFirstFactorBodyImplCopyWith<_$EmailCodeAttemptFirstFactorBodyImpl> get copyWith => __$$EmailCodeAttemptFirstFactorBodyImplCopyWithImpl<_$EmailCodeAttemptFirstFactorBodyImpl>(this, _$identity);
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) {
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailLink,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) {
   return emailCode(identifier,code,device);
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) {
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) {
   return emailCode?.call(identifier,code,device);
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) {
   if (emailCode != null) {
     return emailCode(identifier,code,device);
   }
   return orElse();
 }
 @override
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) {
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( EmailLinkAttemptFirstFactorBody value)  emailLink,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) {
   return emailCode(this);
 }
 @override
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) {
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) {
   return emailCode?.call(this);
 }
 @override
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) {
   if (emailCode != null) {
     return emailCode(this);
   }
@@ -2120,6 +2122,127 @@ abstract class EmailCodeAttemptFirstFactorBody implements AttemptFirstFactorBody
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$EmailCodeAttemptFirstFactorBodyImplCopyWith<_$EmailCodeAttemptFirstFactorBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class _$$EmailLinkAttemptFirstFactorBodyImplCopyWith<$Res> implements $AttemptFirstFactorBodyCopyWith<$Res> {
+  factory _$$EmailLinkAttemptFirstFactorBodyImplCopyWith(_$EmailLinkAttemptFirstFactorBodyImpl value, $Res Function(_$EmailLinkAttemptFirstFactorBodyImpl) then) = __$$EmailLinkAttemptFirstFactorBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String identifier, String code, DeviceRequest device
+});
+
+
+@override $DeviceRequestCopyWith<$Res> get device;
+}
+
+/// @nodoc
+class __$$EmailLinkAttemptFirstFactorBodyImplCopyWithImpl<$Res> extends _$AttemptFirstFactorBodyCopyWithImpl<$Res, _$EmailLinkAttemptFirstFactorBodyImpl> implements _$$EmailLinkAttemptFirstFactorBodyImplCopyWith<$Res> {
+  __$$EmailLinkAttemptFirstFactorBodyImplCopyWithImpl(_$EmailLinkAttemptFirstFactorBodyImpl _value, $Res Function(_$EmailLinkAttemptFirstFactorBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of AttemptFirstFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? identifier = null,Object? code = null,Object? device = null,}) {
+  return _then(_$EmailLinkAttemptFirstFactorBodyImpl(
+identifier: null == identifier ? _value.identifier : identifier // ignore: cast_nullable_to_non_nullable
+as String,code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
+as String,device: null == device ? _value.device : device // ignore: cast_nullable_to_non_nullable
+as DeviceRequest,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$EmailLinkAttemptFirstFactorBodyImpl  implements EmailLinkAttemptFirstFactorBody {
+  const _$EmailLinkAttemptFirstFactorBodyImpl({required this.identifier, required this.code, required this.device, final  String? $type}): $type = $type ?? 'emailLink';
+
+  factory _$EmailLinkAttemptFirstFactorBodyImpl.fromJson(Map<String, dynamic> json) => _$$EmailLinkAttemptFirstFactorBodyImplFromJson(json);
+
+@override final  String identifier;
+@override final  String code;
+@override final  DeviceRequest device;
+
+@JsonKey(name: 'strategy')
+final String $type;
+
+
+@override
+String toString() {
+  return 'AttemptFirstFactorBody.emailLink(identifier: $identifier, code: $code, device: $device)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$EmailLinkAttemptFirstFactorBodyImpl&&(identical(other.identifier, identifier) || other.identifier == identifier)&&(identical(other.code, code) || other.code == code)&&(identical(other.device, device) || other.device == device));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,identifier,code,device);
+
+/// Create a copy of AttemptFirstFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$EmailLinkAttemptFirstFactorBodyImplCopyWith<_$EmailLinkAttemptFirstFactorBodyImpl> get copyWith => __$$EmailLinkAttemptFirstFactorBodyImplCopyWithImpl<_$EmailLinkAttemptFirstFactorBodyImpl>(this, _$identity);
+
+@override
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailLink,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) {
+  return emailLink(identifier,code,device);
+}
+@override
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) {
+  return emailLink?.call(identifier,code,device);
+}
+@override
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) {
+  if (emailLink != null) {
+    return emailLink(identifier,code,device);
+  }
+  return orElse();
+}
+@override
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( EmailLinkAttemptFirstFactorBody value)  emailLink,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) {
+  return emailLink(this);
+}
+@override
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) {
+  return emailLink?.call(this);
+}
+@override
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) {
+  if (emailLink != null) {
+    return emailLink(this);
+  }
+  return orElse();
+}
+@override
+Map<String, dynamic> toJson() {
+  return _$$EmailLinkAttemptFirstFactorBodyImplToJson(this, );
+}
+}
+
+
+abstract class EmailLinkAttemptFirstFactorBody implements AttemptFirstFactorBody {
+  const factory EmailLinkAttemptFirstFactorBody({required final  String identifier, required final  String code, required final  DeviceRequest device}) = _$EmailLinkAttemptFirstFactorBodyImpl;
+  
+
+  factory EmailLinkAttemptFirstFactorBody.fromJson(Map<String, dynamic> json) = _$EmailLinkAttemptFirstFactorBodyImpl.fromJson;
+
+@override String get identifier; String get code;@override DeviceRequest get device;
+/// Create a copy of AttemptFirstFactorBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$EmailLinkAttemptFirstFactorBodyImplCopyWith<_$EmailLinkAttemptFirstFactorBodyImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
 
@@ -2194,30 +2317,30 @@ int get hashCode => Object.hash(runtimeType,identifier,code,device);
 _$$PhoneCodeAttemptFirstFactorBodyImplCopyWith<_$PhoneCodeAttemptFirstFactorBodyImpl> get copyWith => __$$PhoneCodeAttemptFirstFactorBodyImplCopyWithImpl<_$PhoneCodeAttemptFirstFactorBodyImpl>(this, _$identity);
 
 @override
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) {
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String identifier,  String password,  DeviceRequest device)  password,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailCode,required TResult Function( String identifier,  String code,  DeviceRequest device)  emailLink,required TResult Function( String identifier,  String code,  DeviceRequest device)  phoneCode,}) {
   return phoneCode(identifier,code,device);
 }
 @override
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) {
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String identifier,  String password,  DeviceRequest device)?  password,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult? Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult? Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,}) {
   return phoneCode?.call(identifier,code,device);
 }
 @override
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String identifier,  String password,  DeviceRequest device)?  password,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailCode,TResult Function( String identifier,  String code,  DeviceRequest device)?  emailLink,TResult Function( String identifier,  String code,  DeviceRequest device)?  phoneCode,required TResult orElse(),}) {
   if (phoneCode != null) {
     return phoneCode(identifier,code,device);
   }
   return orElse();
 }
 @override
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) {
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PasswordAttemptFirstFactorBody value)  password,required TResult Function( EmailCodeAttemptFirstFactorBody value)  emailCode,required TResult Function( EmailLinkAttemptFirstFactorBody value)  emailLink,required TResult Function( PhoneCodeAttemptFirstFactorBody value)  phoneCode,}) {
   return phoneCode(this);
 }
 @override
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) {
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PasswordAttemptFirstFactorBody value)?  password,TResult? Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult? Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult? Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,}) {
   return phoneCode?.call(this);
 }
 @override
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) {
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PasswordAttemptFirstFactorBody value)?  password,TResult Function( EmailCodeAttemptFirstFactorBody value)?  emailCode,TResult Function( EmailLinkAttemptFirstFactorBody value)?  emailLink,TResult Function( PhoneCodeAttemptFirstFactorBody value)?  phoneCode,required TResult orElse(),}) {
   if (phoneCode != null) {
     return phoneCode(this);
   }
@@ -4453,6 +4576,311 @@ abstract class _UpdateUserBody implements UpdateUserBody {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$UpdateUserBodyImplCopyWith<_$UpdateUserBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+UpdateUserImageBody _$UpdateUserImageBodyFromJson(Map<String, dynamic> json) {
+return _UpdateUserImageBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UpdateUserImageBody {
+
+ ImageBody? get image => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this UpdateUserImageBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$UpdateUserImageBodyCopyWith<UpdateUserImageBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $UpdateUserImageBodyCopyWith<$Res>  {
+  factory $UpdateUserImageBodyCopyWith(UpdateUserImageBody value, $Res Function(UpdateUserImageBody) then) = _$UpdateUserImageBodyCopyWithImpl<$Res, UpdateUserImageBody>;
+@useResult
+$Res call({
+ ImageBody? image
+});
+
+
+$ImageBodyCopyWith<$Res>? get image;
+}
+
+/// @nodoc
+class _$UpdateUserImageBodyCopyWithImpl<$Res,$Val extends UpdateUserImageBody> implements $UpdateUserImageBodyCopyWith<$Res> {
+  _$UpdateUserImageBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? image = freezed,}) {
+  return _then(_value.copyWith(
+image: freezed == image ? _value.image : image // ignore: cast_nullable_to_non_nullable
+as ImageBody?,
+  )as $Val);
+}
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ImageBodyCopyWith<$Res>? get image {
+    if (_value.image == null) {
+    return null;
+  }
+
+  return $ImageBodyCopyWith<$Res>(_value.image!, (value) {
+    return _then(_value.copyWith(image: value) as $Val);
+  });
+}
+}
+
+
+/// @nodoc
+abstract class _$$UpdateUserImageBodyImplCopyWith<$Res> implements $UpdateUserImageBodyCopyWith<$Res> {
+  factory _$$UpdateUserImageBodyImplCopyWith(_$UpdateUserImageBodyImpl value, $Res Function(_$UpdateUserImageBodyImpl) then) = __$$UpdateUserImageBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ ImageBody? image
+});
+
+
+@override $ImageBodyCopyWith<$Res>? get image;
+}
+
+/// @nodoc
+class __$$UpdateUserImageBodyImplCopyWithImpl<$Res> extends _$UpdateUserImageBodyCopyWithImpl<$Res, _$UpdateUserImageBodyImpl> implements _$$UpdateUserImageBodyImplCopyWith<$Res> {
+  __$$UpdateUserImageBodyImplCopyWithImpl(_$UpdateUserImageBodyImpl _value, $Res Function(_$UpdateUserImageBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? image = freezed,}) {
+  return _then(_$UpdateUserImageBodyImpl(
+image: freezed == image ? _value.image : image // ignore: cast_nullable_to_non_nullable
+as ImageBody?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$UpdateUserImageBodyImpl  implements _UpdateUserImageBody {
+  const _$UpdateUserImageBodyImpl({required this.image});
+
+  factory _$UpdateUserImageBodyImpl.fromJson(Map<String, dynamic> json) => _$$UpdateUserImageBodyImplFromJson(json);
+
+@override final  ImageBody? image;
+
+@override
+String toString() {
+  return 'UpdateUserImageBody(image: $image)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$UpdateUserImageBodyImpl&&(identical(other.image, image) || other.image == image));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,image);
+
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$UpdateUserImageBodyImplCopyWith<_$UpdateUserImageBodyImpl> get copyWith => __$$UpdateUserImageBodyImplCopyWithImpl<_$UpdateUserImageBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$UpdateUserImageBodyImplToJson(this, );
+}
+}
+
+
+abstract class _UpdateUserImageBody implements UpdateUserImageBody {
+  const factory _UpdateUserImageBody({required final  ImageBody? image}) = _$UpdateUserImageBodyImpl;
+  
+
+  factory _UpdateUserImageBody.fromJson(Map<String, dynamic> json) = _$UpdateUserImageBodyImpl.fromJson;
+
+@override ImageBody? get image;
+/// Create a copy of UpdateUserImageBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$UpdateUserImageBodyImplCopyWith<_$UpdateUserImageBodyImpl> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+ImageBody _$ImageBodyFromJson(Map<String, dynamic> json) {
+return _ImageBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ImageBody {
+
+ String get type => throw _privateConstructorUsedError; int get length => throw _privateConstructorUsedError;
+
+
+
+
+
+
+/// Serializes this ImageBody to a JSON map.
+Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+$ImageBodyCopyWith<ImageBody> get copyWith => throw _privateConstructorUsedError;
+
+}
+
+/// @nodoc
+abstract class $ImageBodyCopyWith<$Res>  {
+  factory $ImageBodyCopyWith(ImageBody value, $Res Function(ImageBody) then) = _$ImageBodyCopyWithImpl<$Res, ImageBody>;
+@useResult
+$Res call({
+ String type, int length
+});
+
+
+
+}
+
+/// @nodoc
+class _$ImageBodyCopyWithImpl<$Res,$Val extends ImageBody> implements $ImageBodyCopyWith<$Res> {
+  _$ImageBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? length = null,}) {
+  return _then(_value.copyWith(
+type: null == type ? _value.type : type // ignore: cast_nullable_to_non_nullable
+as String,length: null == length ? _value.length : length // ignore: cast_nullable_to_non_nullable
+as int,
+  )as $Val);
+}
+
+}
+
+
+/// @nodoc
+abstract class _$$ImageBodyImplCopyWith<$Res> implements $ImageBodyCopyWith<$Res> {
+  factory _$$ImageBodyImplCopyWith(_$ImageBodyImpl value, $Res Function(_$ImageBodyImpl) then) = __$$ImageBodyImplCopyWithImpl<$Res>;
+@override @useResult
+$Res call({
+ String type, int length
+});
+
+
+
+}
+
+/// @nodoc
+class __$$ImageBodyImplCopyWithImpl<$Res> extends _$ImageBodyCopyWithImpl<$Res, _$ImageBodyImpl> implements _$$ImageBodyImplCopyWith<$Res> {
+  __$$ImageBodyImplCopyWithImpl(_$ImageBodyImpl _value, $Res Function(_$ImageBodyImpl) _then)
+      : super(_value, _then);
+
+
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? length = null,}) {
+  return _then(_$ImageBodyImpl(
+type: null == type ? _value.type : type // ignore: cast_nullable_to_non_nullable
+as String,length: null == length ? _value.length : length // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _$ImageBodyImpl  implements _ImageBody {
+  const _$ImageBodyImpl({required this.type, required this.length});
+
+  factory _$ImageBodyImpl.fromJson(Map<String, dynamic> json) => _$$ImageBodyImplFromJson(json);
+
+@override final  String type;
+@override final  int length;
+
+@override
+String toString() {
+  return 'ImageBody(type: $type, length: $length)';
+}
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _$ImageBodyImpl&&(identical(other.type, type) || other.type == type)&&(identical(other.length, length) || other.length == length));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type,length);
+
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$ImageBodyImplCopyWith<_$ImageBodyImpl> get copyWith => __$$ImageBodyImplCopyWithImpl<_$ImageBodyImpl>(this, _$identity);
+
+
+
+
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$$ImageBodyImplToJson(this, );
+}
+}
+
+
+abstract class _ImageBody implements ImageBody {
+  const factory _ImageBody({required final  String type, required final  int length}) = _$ImageBodyImpl;
+  
+
+  factory _ImageBody.fromJson(Map<String, dynamic> json) = _$ImageBodyImpl.fromJson;
+
+@override String get type;@override int get length;
+/// Create a copy of ImageBody
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+_$$ImageBodyImplCopyWith<_$ImageBodyImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
 

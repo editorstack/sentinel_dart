@@ -55,7 +55,7 @@ class User with _$User {
 @drift.DataClassName('DUser')
 class Users extends drift.Table {
   @override
-  String get tableName => 'studioUser';
+  String get tableName => 'user';
 
   /// Unique identifier for the user.
   drift.TextColumn get id => text()();
@@ -102,7 +102,7 @@ extension UserConverter on User {
   /// Converts an [User] instance to an [DUser] instance.
   ///
   /// Returns an [DUser] object that can be stored in the Drift database.
-  DUser toDrift() {
+  UsersCompanion toDrift() {
     return DUser(
       id: id,
       firstName: firstName,
@@ -116,7 +116,7 @@ extension UserConverter on User {
       updatedAt: updatedAt,
       factors: factors,
       devices: devices,
-    );
+    ).toCompanion(false);
   }
 }
 

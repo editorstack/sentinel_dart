@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
-import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/database/database.dart';
 import 'package:sentinel/src/models/factor.dart';
 import 'package:sentinel/src/models/session.dart';
 import 'package:sentinel/src/models/user.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Class for signing in a user
 class SignIn {
@@ -118,6 +118,23 @@ class SignIn {
     }
   }
 
+  /// Verifies email link sign in
+  Future<UserSession> verifyEmailLink({required String email, required String code}) async {
+    try {
+      final device = await _deviceInfo();
+      final session = await _sentinel.attemptFirstFactor(
+        AttemptFirstFactorBody.emailLink(identifier: email, code: code, device: device),
+      );
+      _tokenChanged(session.token);
+
+      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.users.insertOnConflictUpdate(session.user.toDrift());
+      return session;
+    } catch (e) {
+      throw SentinelException(exceptionMessage(e is DioException ? e : null));
+    }
+  }
+
   /// Signs in a user using the phone number code
   Future<bool> withPhoneCode({required String phoneNumber}) async {
     try {
@@ -164,7 +181,7 @@ class SignIn {
 
       final device = await _deviceInfo();
       final url = Uri.parse(
-        '$baseURL/socials/${provider.name}'
+        '$baseURL/sentinel/socials/${provider.name}'
         '?deviceID=${device.deviceID}'
         '&deviceName=${device.name}'
         '&deviceType=${device.type.name}'
@@ -175,11 +192,9 @@ class SignIn {
         '${scopes != null ? '&${scopes.map((s) => 'scopes=$s').join('&')}' : ''}',
       );
 
-      await FlutterWebAuth2.authenticate(
-        url: url.toString(),
-        callbackUrlScheme: success ?? 'nexus-callback-$applicationID',
-      );
-      return true;
+      final result =
+          await launchUrl(url, mode: LaunchMode.externalApplication, webOnlyWindowName: '_self');
+      return result;
     } catch (e) {
       log(e.toString());
       throw const SentinelException('server_error');

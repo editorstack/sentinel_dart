@@ -108,7 +108,7 @@ class Factors {
   }
 
   /// Deletes a factor for the current user
-  Future<bool> deleteFactor({required String factorID}) async {
+  Future<User> deleteFactor({required String factorID}) async {
     try {
       return await _sentinel.deleteFactor(factorID);
     } catch (e) {

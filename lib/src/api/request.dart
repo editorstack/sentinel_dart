@@ -134,6 +134,13 @@ sealed class AttemptFirstFactorBody with _$AttemptFirstFactorBody {
     required DeviceRequest device,
   }) = EmailCodeAttemptFirstFactorBody;
 
+  /// Attempts first factor for email code sign in
+  const factory AttemptFirstFactorBody.emailLink({
+    required String identifier,
+    required String code,
+    required DeviceRequest device,
+  }) = EmailLinkAttemptFirstFactorBody;
+
   /// Attempts first factor for phone code sign in
   const factory AttemptFirstFactorBody.phoneCode({
     required String identifier,
@@ -285,6 +292,32 @@ class UpdateUserBody with _$UpdateUserBody {
 
   /// Used to serialize [UpdateUserBody] object to and from JSON.
   factory UpdateUserBody.fromJson(Map<String, dynamic> json) => _$UpdateUserBodyFromJson(json);
+}
+
+/// Body for updating user image
+@freezed
+class UpdateUserImageBody with _$UpdateUserImageBody {
+  /// Creates a new instance of [UpdateUserImageBody] with the specified parameters.
+  const factory UpdateUserImageBody({
+    required ImageBody? image,
+  }) = _UpdateUserImageBody;
+
+  /// Used to serialize [UpdateUserImageBody] object to and from JSON.
+  factory UpdateUserImageBody.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserImageBodyFromJson(json);
+}
+
+/// Body for updating user image
+@freezed
+class ImageBody with _$ImageBody {
+  /// Creates a new instance of [ImageBody] with the specified parameters.
+  const factory ImageBody({
+    required String type,
+    required int length,
+  }) = _ImageBody;
+
+  /// Used to serialize [ImageBody] object to and from JSON.
+  factory ImageBody.fromJson(Map<String, dynamic> json) => _$ImageBodyFromJson(json);
 }
 
 /// Body to change password

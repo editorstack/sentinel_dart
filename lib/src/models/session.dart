@@ -78,14 +78,14 @@ class UserSession with _$UserSession {
   factory UserSession.fromJson(Map<String, Object?> json) => _$UserSessionFromJson(json);
 }
 
-/// Represents a user's' session in the Drift database.
+/// Represents a user's session in the Drift database.
 ///
 /// This class is used to store session information in the Drift database,
 /// allowing for efficient querying and persistence of session data.
 @drift.DataClassName('DSession')
 class Sessions extends drift.Table {
   @override
-  String get tableName => 'studioSession';
+  String get tableName => 'session';
 
   /// The unique identifier for the session.
   drift.TextColumn get id => text()();
@@ -146,7 +146,7 @@ extension SessionConverter on Session {
   ///
   /// Returns an [DSession] object that can be stored in the Drift
   /// database.
-  DSession toDrift() {
+  SessionsCompanion toDrift() {
     return DSession(
       id: id,
       appID: appID,
@@ -162,7 +162,7 @@ extension SessionConverter on Session {
       expiresAt: expiresAt,
       createdAt: createdAt,
       updatedAt: updatedAt,
-    );
+    ).toCompanion(false);
   }
 }
 
