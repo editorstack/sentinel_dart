@@ -322,7 +322,16 @@ Future<DeviceRequest> deviceInfo() async {
 
     return DeviceRequest(
       deviceID: deviceID,
-      name: webInfo.userAgent!,
+      name: switch (webInfo.browserName) {
+        BrowserName.chrome => 'Chrome',
+        BrowserName.firefox => 'Firefox',
+        BrowserName.safari => 'Safari',
+        BrowserName.edge => 'Edge',
+        BrowserName.opera => 'Opera',
+        BrowserName.msie => 'Microsoft Internet Explorer',
+        BrowserName.samsungInternet => 'Samsung Internet',
+        BrowserName.unknown => 'Unknown',
+      },
       type: DeviceType.web,
     );
   }
