@@ -123,7 +123,8 @@ class Sentinel {
           driftWorker: Uri.parse('drift_worker.js'),
           onResult: (result) {
             if (result.missingFeatures.isNotEmpty) {
-              debugPrint('Using ${result.chosenImplementation} due to unsupported '
+              debugPrint(
+                  'Using ${result.chosenImplementation} due to unsupported '
                   'browser features: ${result.missingFeatures}');
             }
           },
@@ -152,7 +153,8 @@ class Sentinel {
           .build(),
     );
 
-    _session = (await _database.sessions.select().getSingleOrNull())?.toObject();
+    _session =
+        (await _database.sessions.select().getSingleOrNull())?.toObject();
     _user = (await _database.users.select().getSingleOrNull())?.toObject();
 
     _updateToken(_session?.token);
@@ -161,8 +163,12 @@ class Sentinel {
       try {
         _session = await sessions.getSession(sessionID: 'current');
         _user = await users.getUserDetails();
-        if (_user != null) await _database.users.insertOnConflictUpdate(_user!.toDrift());
-        if (_session != null) await _database.sessions.insertOnConflictUpdate(_session!.toDrift());
+        if (_user != null) {
+          await _database.users.insertOnConflictUpdate(_user!.toDrift());
+        }
+        if (_session != null) {
+          await _database.sessions.insertOnConflictUpdate(_session!.toDrift());
+        }
         await _startAutoRefresh();
       } catch (e) {
         await _database.users.deleteAll();
@@ -232,17 +238,20 @@ class Sentinel {
       return;
     }
 
-    final expiresInTicks =
-        (expiresAt.difference(now).inMilliseconds / _autoRefreshTickDuration.inMilliseconds)
-            .floor();
+    final expiresInTicks = (expiresAt.difference(now).inMilliseconds /
+            _autoRefreshTickDuration.inMilliseconds)
+        .floor();
 
     if (expiresInTicks <= _autoRefreshTickThreshold) {
       try {
         await _sentinel.extendSession();
       } catch (e) {
-        final exception = SentinelException(exceptionMessage(e is DioException ? e : null));
+        final exception =
+            SentinelException(exceptionMessage(e is DioException ? e : null));
         _stopAutoRefresh();
-        if (exception.isUnauthenticated) await _database.managers.users.delete();
+        if (exception.isUnauthenticated) {
+          await _database.managers.users.delete();
+        }
       }
     }
   }
@@ -281,7 +290,8 @@ class Sentinel {
       ..on(RealtimeChannels.saveSession, (data) async {
         final session = UserSession.fromJson(data as Map<String, dynamic>);
         await _database.users.insertOnConflictUpdate(session.user.toDrift());
-        await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+        await _database.sessions
+            .insertOnConflictUpdate(session.toSession().toDrift());
       })
       ..on('error', (error) {
         _database.users.deleteAll();
@@ -291,7 +301,9 @@ class Sentinel {
 
   /// Returns a stream of changes to the authenticated user.
   Stream<User?> userChanges() {
-    return _database.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
+    return _database.managers.users
+        .watch(limit: 1)
+        .map((event) => event.firstOrNull?.toObject());
   }
 
   /// Returns a stream of changes to the current session.
@@ -338,9 +350,11 @@ Future<DeviceRequest> deviceInfo() async {
 
   if (Platform.isAndroid) {
     final androidInfo = await deviceInfo.androidInfo;
+    final brand = androidInfo.brand;
     return DeviceRequest(
       deviceID: androidInfo.id,
-      name: androidInfo.product,
+      name:
+          '${brand.replaceFirst(brand[0], brand[0].toUpperCase())} ${androidInfo.model}',
       type: DeviceType.android,
     );
   } else if (Platform.isIOS) {
