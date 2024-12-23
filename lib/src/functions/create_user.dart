@@ -8,7 +8,12 @@ import 'package:sentinel/src/models/user.dart';
 /// Class for creating a new user
 class CreateUser {
   /// Creates a new instance of [CreateUser].
-  const CreateUser(this._sentinel, this._database, this._deviceInfo, this._tokenChanged);
+  const CreateUser(
+    this._sentinel,
+    this._database,
+    this._deviceInfo,
+    this._tokenChanged,
+  );
 
   final SentinelApi _sentinel;
   final SentinelDatabase _database;
@@ -19,10 +24,12 @@ class CreateUser {
   Future<UserSession> anonymously() async {
     try {
       final device = await _deviceInfo();
-      final session = await _sentinel.signUp(SignUpBody.anonymous(device: device));
+      final session =
+          await _sentinel.signUp(SignUpBody.anonymous(device: device));
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -51,7 +58,8 @@ class CreateUser {
       );
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -80,7 +88,8 @@ class CreateUser {
       );
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -107,7 +116,8 @@ class CreateUser {
       );
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -124,7 +134,8 @@ class CreateUser {
     try {
       return await _sentinel.prepareSignUpVerification(
         switch (strategy) {
-          EmailVerificationStrategy.code => const PrepareVerificationBody.emailCode(),
+          EmailVerificationStrategy.code =>
+            const PrepareVerificationBody.emailCode(),
           EmailVerificationStrategy.link =>
             PrepareVerificationBody.emailLink(redirectUrl: redirectUrl!),
         },
@@ -137,7 +148,8 @@ class CreateUser {
   /// Attempts verification for sign up with a given email using a code
   Future<UserSession> attemptEmailVerification({required String code}) async {
     try {
-      return await _sentinel.attemptSignUpVerification(AttemptVerificationBody(code: code));
+      return await _sentinel
+          .attemptSignUpVerification(AttemptVerificationBody(code: code));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -161,7 +173,8 @@ class CreateUser {
       );
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -189,7 +202,8 @@ class CreateUser {
       );
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -201,16 +215,20 @@ class CreateUser {
   /// Prepares verification for sign up with a given phone number using a code
   Future<bool> preparePhoneNumberVerification() async {
     try {
-      return await _sentinel.prepareSignUpVerification(const PrepareVerificationBody.phoneCode());
+      return await _sentinel
+          .prepareSignUpVerification(const PrepareVerificationBody.phoneCode());
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
   /// Attempts verification for sign up with a given phone number using a code
-  Future<UserSession> attemptPhoneNumberVerification({required String code}) async {
+  Future<UserSession> attemptPhoneNumberVerification({
+    required String code,
+  }) async {
     try {
-      return await _sentinel.attemptSignUpVerification(AttemptVerificationBody(code: code));
+      return await _sentinel
+          .attemptSignUpVerification(AttemptVerificationBody(code: code));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }

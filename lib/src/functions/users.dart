@@ -29,8 +29,8 @@ class Users {
   /// Update user's name
   Future<User> updateName({String? firstName, String? lastName}) async {
     try {
-      final user =
-          await _sentinel.updateUser(UpdateUserBody(firstName: firstName, lastName: lastName));
+      final user = await _sentinel
+          .updateUser(UpdateUserBody(firstName: firstName, lastName: lastName));
       await _database.users.insertOnConflictUpdate(user.toDrift());
       return user;
     } catch (e) {
@@ -41,7 +41,8 @@ class Users {
   /// Update user's primary email address
   Future<User> updateEmail(String emailFactorID) async {
     try {
-      final user = await _sentinel.updateUser(UpdateUserBody(emailFactorID: emailFactorID));
+      final user = await _sentinel
+          .updateUser(UpdateUserBody(emailFactorID: emailFactorID));
       await _database.users.insertOnConflictUpdate(user.toDrift());
       return user;
     } catch (e) {
@@ -52,8 +53,8 @@ class Users {
   /// Update user's primary phone number
   Future<User> updatePhoneNumber(String phoneNumberFactorID) async {
     try {
-      final user =
-          await _sentinel.updateUser(UpdateUserBody(phoneNumberFactorID: phoneNumberFactorID));
+      final user = await _sentinel
+          .updateUser(UpdateUserBody(phoneNumberFactorID: phoneNumberFactorID));
       await _database.users.insertOnConflictUpdate(user.toDrift());
       return user;
     } catch (e) {
@@ -62,10 +63,17 @@ class Users {
   }
 
   /// Update user's password
-  Future<bool> updatePassword({required String password, required String newPassword}) async {
+  Future<bool> updatePassword({
+    required String password,
+    required String newPassword,
+  }) async {
     try {
-      return await _sentinel
-          .changePassword(ChangePasswordBody(currentPassword: password, newPassword: newPassword));
+      return await _sentinel.changePassword(
+        ChangePasswordBody(
+          currentPassword: password,
+          newPassword: newPassword,
+        ),
+      );
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -74,14 +82,18 @@ class Users {
   /// Remove user's password
   Future<bool> removePassword({required String password}) async {
     try {
-      return await _sentinel.removePassword(RemovePasswordBody(currentPassword: password));
+      return await _sentinel
+          .removePassword(RemovePasswordBody(currentPassword: password));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
   }
 
   /// Update user's image
-  Future<bool> updateImage(File image, [void Function(int sent, int total)? onProgress]) async {
+  Future<bool> updateImage(
+    File image, [
+    void Function(int sent, int total)? onProgress,
+  ]) async {
     try {
       final fileType = lookupMimeType(image.path);
       final contentLength = image.lengthSync();

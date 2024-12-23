@@ -12,7 +12,13 @@ import 'package:url_launcher/url_launcher.dart';
 /// Class for signing in a user
 class SignIn {
   /// Creates a new instance of [SignIn]
-  const SignIn(this._sentinel, this._dio, this._database, this._deviceInfo, this._tokenChanged);
+  const SignIn(
+    this._sentinel,
+    this._dio,
+    this._database,
+    this._deviceInfo,
+    this._tokenChanged,
+  );
 
   final SentinelApi _sentinel;
   final Dio _dio;
@@ -36,7 +42,8 @@ class SignIn {
       );
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -61,7 +68,8 @@ class SignIn {
       );
 
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       _tokenChanged(session.token);
 
       return session;
@@ -83,16 +91,24 @@ class SignIn {
   }
 
   /// Verifies email code sign in
-  Future<UserSession> verifyEmailCode({required String email, required String code}) async {
+  Future<UserSession> verifyEmailCode({
+    required String email,
+    required String code,
+  }) async {
     try {
       final device = await _deviceInfo();
       final session = await _sentinel.attemptFirstFactor(
-        AttemptFirstFactorBody.emailCode(identifier: email, code: code, device: device),
+        AttemptFirstFactorBody.emailCode(
+          identifier: email,
+          code: code,
+          device: device,
+        ),
       );
       _tokenChanged(session.token);
 
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -119,16 +135,24 @@ class SignIn {
   }
 
   /// Verifies email link sign in
-  Future<UserSession> verifyEmailLink({required String email, required String code}) async {
+  Future<UserSession> verifyEmailLink({
+    required String email,
+    required String code,
+  }) async {
     try {
       final device = await _deviceInfo();
       final session = await _sentinel.attemptFirstFactor(
-        AttemptFirstFactorBody.emailLink(identifier: email, code: code, device: device),
+        AttemptFirstFactorBody.emailLink(
+          identifier: email,
+          code: code,
+          device: device,
+        ),
       );
       _tokenChanged(session.token);
 
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -151,16 +175,24 @@ class SignIn {
   }
 
   /// Verifies phone code sign in
-  Future<UserSession> verifyPhoneCode({required String phoneNumber, required String code}) async {
+  Future<UserSession> verifyPhoneCode({
+    required String phoneNumber,
+    required String code,
+  }) async {
     try {
       final device = await _deviceInfo();
       final session = await _sentinel.attemptFirstFactor(
-        AttemptFirstFactorBody.phoneCode(identifier: phoneNumber, code: code, device: device),
+        AttemptFirstFactorBody.phoneCode(
+          identifier: phoneNumber,
+          code: code,
+          device: device,
+        ),
       );
       _tokenChanged(session.token);
 
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       await _database.users.insertOnConflictUpdate(session.user.toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -192,8 +224,11 @@ class SignIn {
         '${scopes != null ? '&${scopes.map((s) => 'scopes=$s').join('&')}' : ''}',
       );
 
-      final result =
-          await launchUrl(url, mode: LaunchMode.externalApplication, webOnlyWindowName: '_self');
+      final result = await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication,
+        webOnlyWindowName: '_self',
+      );
       return result;
     } catch (e) {
       log(e.toString());
@@ -209,8 +244,10 @@ class SignIn {
     try {
       return await _sentinel.prepareSecondFactor(
         switch (strategy) {
-          CodeVerificationStrategy.emailCode => PrepareSecondFactorBody.emailCode(identifier),
-          CodeVerificationStrategy.phoneCode => PrepareSecondFactorBody.phoneCode(identifier),
+          CodeVerificationStrategy.emailCode =>
+            PrepareSecondFactorBody.emailCode(identifier),
+          CodeVerificationStrategy.phoneCode =>
+            PrepareSecondFactorBody.phoneCode(identifier),
         },
       );
     } catch (e) {
@@ -228,13 +265,20 @@ class SignIn {
       final session = await _sentinel.attemptSecondFactor(
         switch (strategy) {
           CodeVerificationStrategy.emailCode =>
-            AttemptSecondFactorBody.emailCode(code: code, identifier: identifier),
+            AttemptSecondFactorBody.emailCode(
+              code: code,
+              identifier: identifier,
+            ),
           CodeVerificationStrategy.phoneCode =>
-            AttemptSecondFactorBody.phoneCode(code: code, identifier: identifier),
+            AttemptSecondFactorBody.phoneCode(
+              code: code,
+              identifier: identifier,
+            ),
         },
       );
 
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -248,7 +292,8 @@ class SignIn {
         AttemptSecondFactorBody.totp(code),
       );
 
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -256,12 +301,15 @@ class SignIn {
   }
 
   /// Attempts second factor using recovery code
-  Future<UserSession> attemptRecoveryCodeSecondFactor({required String code}) async {
+  Future<UserSession> attemptRecoveryCodeSecondFactor({
+    required String code,
+  }) async {
     try {
-      final session =
-          await _sentinel.attemptSecondFactor(AttemptSecondFactorBody.recoveryCode(code));
+      final session = await _sentinel
+          .attemptSecondFactor(AttemptSecondFactorBody.recoveryCode(code));
 
-      await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
+      await _database.sessions
+          .insertOnConflictUpdate(session.toSession().toDrift());
       return session;
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -271,7 +319,8 @@ class SignIn {
   /// Prepares reset password for sign in
   Future<bool> prepareResetPassword({required String identifier}) async {
     try {
-      return await _sentinel.prepareResetPassword(PrepareResetPasswordBody(identifier));
+      return await _sentinel
+          .prepareResetPassword(PrepareResetPasswordBody(identifier));
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
     }
@@ -285,7 +334,11 @@ class SignIn {
   }) async {
     try {
       return await _sentinel.attemptResetPassword(
-        AttemptResetPasswordBody(identifier: identifier, code: code, password: password),
+        AttemptResetPasswordBody(
+          identifier: identifier,
+          code: code,
+          password: password,
+        ),
       );
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));

@@ -22,7 +22,9 @@ class Factors {
 
   /// Returns all the factors that are available for a user to sign in with
   /// using the phone number
-  Future<UserFactorsResponse> getPhoneNumberFactors({required String phoneNumber}) async {
+  Future<UserFactorsResponse> getPhoneNumberFactors({
+    required String phoneNumber,
+  }) async {
     try {
       return await _sentinel.getUserFactors(phoneNumber);
     } catch (e) {
@@ -49,7 +51,8 @@ class Factors {
       return await _sentinel.prepareFactorVerification(
         factorID,
         switch (strategy) {
-          EmailVerificationStrategy.code => const PrepareVerificationBody.emailCode(),
+          EmailVerificationStrategy.code =>
+            const PrepareVerificationBody.emailCode(),
           EmailVerificationStrategy.link =>
             PrepareVerificationBody.emailLink(redirectUrl: redirectUrl!),
         },
@@ -60,7 +63,10 @@ class Factors {
   }
 
   /// Attempts verification for the email factor
-  Future<User> attemptEmailVerification({required String factorID, required String code}) async {
+  Future<User> attemptEmailVerification({
+    required String factorID,
+    required String code,
+  }) async {
     try {
       return await _sentinel.attemptFactorVerification(
         factorID,
@@ -81,7 +87,9 @@ class Factors {
   }
 
   /// Prepares verification for the phone number factor
-  Future<bool> preparePhoneNumberVerification({required String factorID}) async {
+  Future<bool> preparePhoneNumberVerification({
+    required String factorID,
+  }) async {
     try {
       return await _sentinel.prepareFactorVerification(
         factorID,

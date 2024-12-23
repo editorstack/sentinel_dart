@@ -15,7 +15,10 @@ class ReAuthentication {
   }) async {
     try {
       return await _sentinel.attemptReAuthentication(
-        AttemptReAuthenticationBody.password(identifier: email, password: password),
+        AttemptReAuthenticationBody.password(
+          identifier: email,
+          password: password,
+        ),
       );
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -29,7 +32,10 @@ class ReAuthentication {
   }) async {
     try {
       return await _sentinel.attemptReAuthentication(
-        AttemptReAuthenticationBody.password(identifier: phoneNumber, password: password),
+        AttemptReAuthenticationBody.password(
+          identifier: phoneNumber,
+          password: password,
+        ),
       );
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
@@ -48,7 +54,10 @@ class ReAuthentication {
   }
 
   /// Attempts re-authentication using the email code
-  Future<bool> attemptEmailCode({required String email, required String code}) async {
+  Future<bool> attemptEmailCode({
+    required String email,
+    required String code,
+  }) async {
     try {
       return await _sentinel.attemptReAuthentication(
         AttemptReAuthenticationBody.emailCode(identifier: email, code: code),
@@ -70,10 +79,16 @@ class ReAuthentication {
   }
 
   /// Attempts re-authentication using the phone code
-  Future<bool> attemptPhoneCode({required String phoneNumber, required String code}) async {
+  Future<bool> attemptPhoneCode({
+    required String phoneNumber,
+    required String code,
+  }) async {
     try {
       return await _sentinel.attemptReAuthentication(
-        AttemptReAuthenticationBody.phoneCode(identifier: phoneNumber, code: code),
+        AttemptReAuthenticationBody.phoneCode(
+          identifier: phoneNumber,
+          code: code,
+        ),
       );
     } catch (e) {
       throw SentinelException(exceptionMessage(e is DioException ? e : null));
