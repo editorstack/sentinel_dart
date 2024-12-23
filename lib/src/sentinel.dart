@@ -153,9 +153,9 @@ class Sentinel {
           .build(),
     );
 
+    _user = (await _database.users.select().getSingleOrNull())?.toObject();
     _session =
         (await _database.sessions.select().getSingleOrNull())?.toObject();
-    _user = (await _database.users.select().getSingleOrNull())?.toObject();
 
     _updateToken(_session?.token);
 
