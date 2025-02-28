@@ -1,6 +1,6 @@
 name: sentinel
 description: Official Dart client for Sentinel authentication, providing seamless user authentication and session management integration for applications generated through Nexus.
-version: 1.0.0
+version: 1.0.1
 homepage: https://editorstack.com
 repository: https://github.com/editorstack/sentinel-dart
 
@@ -12,11 +12,11 @@ dependencies:
   cuid2: ^3.1.0
   device_info_plus: ^11.1.1
   dio: ^5.7.0
-  drift: ^2.21.0
-  drift_flutter: ^0.2.1
+  drift: ^2.23.0
+  drift_flutter: ^0.2.4
   flutter:
     sdk: flutter
-  freezed_annotation: ^2.4.4
+  freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
   mime: ^2.0.0
   retrofit: ^4.4.1
@@ -29,8 +29,8 @@ dev_dependencies:
   drift_dev: ^2.21.2
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.7
+  freezed: ^3.0.2
   json_serializable: ^6.8.0
   mocktail: ^1.0.4
   retrofit_generator: ^9.1.5
-  very_good_analysis: ^6.0.0
+  very_good_analysis: ^7.0.0

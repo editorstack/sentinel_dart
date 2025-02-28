@@ -42,12 +42,13 @@ sealed class SignUpBody with _$SignUpBody {
   }) = PhoneCodeSignUpBody;
 
   /// Used to serialize [SignUpBody] object to and from JSON.
-  factory SignUpBody.fromJson(Map<String, dynamic> json) => _$SignUpBodyFromJson(json);
+  factory SignUpBody.fromJson(Map<String, dynamic> json) =>
+      _$SignUpBodyFromJson(json);
 }
 
 /// Body of a device for request
 @freezed
-class DeviceRequest with _$DeviceRequest {
+abstract class DeviceRequest with _$DeviceRequest {
   /// Creates a new instance of [DeviceRequest] with the specified
   /// parameters.
   const factory DeviceRequest({
@@ -57,17 +58,20 @@ class DeviceRequest with _$DeviceRequest {
   }) = _DeviceRequest;
 
   /// Used to serialize [DeviceRequest] object to and from JSON.
-  factory DeviceRequest.fromJson(Map<String, dynamic> json) => _$DeviceRequestFromJson(json);
+  factory DeviceRequest.fromJson(Map<String, dynamic> json) =>
+      _$DeviceRequestFromJson(json);
 }
 
 /// Body for preparing verification for sign up and factor
 @Freezed(unionKey: 'strategy')
 sealed class PrepareVerificationBody with _$PrepareVerificationBody {
   /// Prepares verification for an email code sign up and factor
-  const factory PrepareVerificationBody.emailCode() = EmailCodePrepareVerificationBody;
+  const factory PrepareVerificationBody.emailCode() =
+      EmailCodePrepareVerificationBody;
 
   /// Prepares verification for a phone code sign up and factor
-  const factory PrepareVerificationBody.phoneCode() = PhoneCodePrepareVerificationBody;
+  const factory PrepareVerificationBody.phoneCode() =
+      PhoneCodePrepareVerificationBody;
 
   /// Prepares verification for an email link sign up and factor
   const factory PrepareVerificationBody.emailLink({
@@ -81,9 +85,10 @@ sealed class PrepareVerificationBody with _$PrepareVerificationBody {
 
 /// Body for attempting verification for sign up and factor
 @freezed
-class AttemptVerificationBody with _$AttemptVerificationBody {
+abstract class AttemptVerificationBody with _$AttemptVerificationBody {
   /// Attempts verification for an email code sign up
-  const factory AttemptVerificationBody({required String code}) = _AttemptVerificationBody;
+  const factory AttemptVerificationBody({required String code}) =
+      _AttemptVerificationBody;
 
   /// Used to serialize [AttemptVerificationBody] object to and from JSON.
   factory AttemptVerificationBody.fromJson(Map<String, dynamic> json) =>
@@ -157,7 +162,8 @@ sealed class AttemptFirstFactorBody with _$AttemptFirstFactorBody {
 @Freezed(unionKey: 'strategy')
 sealed class PrepareSecondFactorBody with _$PrepareSecondFactorBody {
   /// Prepares second factor for an email code sign in
-  const factory PrepareSecondFactorBody.emailCode(String email) = EmailCodePrepareSecondFactorBody;
+  const factory PrepareSecondFactorBody.emailCode(String email) =
+      EmailCodePrepareSecondFactorBody;
 
   /// Prepares second factor for a phone code sign in
   const factory PrepareSecondFactorBody.phoneCode(String phoneNumber) =
@@ -184,7 +190,8 @@ sealed class AttemptSecondFactorBody with _$AttemptSecondFactorBody {
   }) = PhoneCodeAttemptSecondFactorBody;
 
   /// Attempts second factor for a totp sign in
-  const factory AttemptSecondFactorBody.totp(String code) = TOTPAttemptSecondFactorBody;
+  const factory AttemptSecondFactorBody.totp(String code) =
+      TOTPAttemptSecondFactorBody;
 
   /// Attempts second factor for a recovery code sign in
   const factory AttemptSecondFactorBody.recoveryCode(String code) =
@@ -197,9 +204,10 @@ sealed class AttemptSecondFactorBody with _$AttemptSecondFactorBody {
 
 /// Body for preparing reset password
 @freezed
-class PrepareResetPasswordBody with _$PrepareResetPasswordBody {
+abstract class PrepareResetPasswordBody with _$PrepareResetPasswordBody {
   /// Creates a new instance of [PrepareResetPasswordBody] with the specified parameters.
-  const factory PrepareResetPasswordBody(String identifier) = _PrepareResetPasswordBody;
+  const factory PrepareResetPasswordBody(String identifier) =
+      _PrepareResetPasswordBody;
 
   /// Used to serialize [PrepareResetPasswordBody] object to and from JSON.
   factory PrepareResetPasswordBody.fromJson(Map<String, dynamic> json) =>
@@ -208,7 +216,7 @@ class PrepareResetPasswordBody with _$PrepareResetPasswordBody {
 
 /// Body for attempting reset password
 @freezed
-class AttemptResetPasswordBody with _$AttemptResetPasswordBody {
+abstract class AttemptResetPasswordBody with _$AttemptResetPasswordBody {
   /// Creates a new instance of [AttemptResetPasswordBody] with the specified parameters.
   const factory AttemptResetPasswordBody({
     required String identifier,
@@ -259,7 +267,8 @@ sealed class AttemptReAuthenticationBody with _$AttemptReAuthenticationBody {
   }) = PhoneCodeAttemptReAuthenticationBody;
 
   /// Attempts re-authentication for a totp sign in
-  const factory AttemptReAuthenticationBody.totp(String code) = TOTPAttemptReAuthenticationBody;
+  const factory AttemptReAuthenticationBody.totp(String code) =
+      TOTPAttemptReAuthenticationBody;
 
   /// Attempts re-authentication for a recovery code sign in
   const factory AttemptReAuthenticationBody.recoveryCode(String code) =
@@ -281,7 +290,7 @@ enum CodeVerificationStrategy {
 
 /// Body for updating user details
 @freezed
-class UpdateUserBody with _$UpdateUserBody {
+abstract class UpdateUserBody with _$UpdateUserBody {
   /// Creates a new instance of [UpdateUserBody] with the specified parameters.
   const factory UpdateUserBody({
     String? firstName,
@@ -291,12 +300,13 @@ class UpdateUserBody with _$UpdateUserBody {
   }) = _UpdateUserBody;
 
   /// Used to serialize [UpdateUserBody] object to and from JSON.
-  factory UpdateUserBody.fromJson(Map<String, dynamic> json) => _$UpdateUserBodyFromJson(json);
+  factory UpdateUserBody.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserBodyFromJson(json);
 }
 
 /// Body for updating user image
 @freezed
-class UpdateUserImageBody with _$UpdateUserImageBody {
+abstract class UpdateUserImageBody with _$UpdateUserImageBody {
   /// Creates a new instance of [UpdateUserImageBody] with the specified parameters.
   const factory UpdateUserImageBody({
     required ImageBody? image,
@@ -309,7 +319,7 @@ class UpdateUserImageBody with _$UpdateUserImageBody {
 
 /// Body for updating user image
 @freezed
-class ImageBody with _$ImageBody {
+abstract class ImageBody with _$ImageBody {
   /// Creates a new instance of [ImageBody] with the specified parameters.
   const factory ImageBody({
     required String type,
@@ -317,12 +327,13 @@ class ImageBody with _$ImageBody {
   }) = _ImageBody;
 
   /// Used to serialize [ImageBody] object to and from JSON.
-  factory ImageBody.fromJson(Map<String, dynamic> json) => _$ImageBodyFromJson(json);
+  factory ImageBody.fromJson(Map<String, dynamic> json) =>
+      _$ImageBodyFromJson(json);
 }
 
 /// Body to change password
 @freezed
-class ChangePasswordBody with _$ChangePasswordBody {
+abstract class ChangePasswordBody with _$ChangePasswordBody {
   /// Creates a new instance of [ChangePasswordBody] with the specified parameters.
   const factory ChangePasswordBody({
     required String currentPassword,
@@ -336,9 +347,10 @@ class ChangePasswordBody with _$ChangePasswordBody {
 
 /// Body to remove password
 @freezed
-class RemovePasswordBody with _$RemovePasswordBody {
+abstract class RemovePasswordBody with _$RemovePasswordBody {
   /// Creates a new instance of [RemovePasswordBody] with the specified parameters.
-  const factory RemovePasswordBody({required String currentPassword}) = _RemovePasswordBody;
+  const factory RemovePasswordBody({required String currentPassword}) =
+      _RemovePasswordBody;
 
   /// Used to serialize [RemovePasswordBody] object to and from JSON.
   factory RemovePasswordBody.fromJson(Map<String, dynamic> json) =>
@@ -347,22 +359,24 @@ class RemovePasswordBody with _$RemovePasswordBody {
 
 /// Body for creating a factor
 @freezed
-class CreateFactorBody with _$CreateFactorBody {
+abstract class CreateFactorBody with _$CreateFactorBody {
   /// Creates a new instance of [CreateFactorBody] with the specified parameters.
   const factory CreateFactorBody(String identifier) = _CreateFactorBody;
 
   /// Used to serialize [CreateFactorBody] object to and from JSON.
-  factory CreateFactorBody.fromJson(Map<String, dynamic> json) => _$CreateFactorBodyFromJson(json);
+  factory CreateFactorBody.fromJson(Map<String, dynamic> json) =>
+      _$CreateFactorBodyFromJson(json);
 }
 
 /// Body for TOTP verification
 @freezed
-class TOTPVerifyBody with _$TOTPVerifyBody {
+abstract class TOTPVerifyBody with _$TOTPVerifyBody {
   /// Creates a new instance of [TOTPVerifyBody] with the specified parameters.
   const factory TOTPVerifyBody({required String code}) = _TOTPVerifyBody;
 
   /// Used to serialize [TOTPVerifyBody] object to and from JSON.
-  factory TOTPVerifyBody.fromJson(Map<String, dynamic> json) => _$TOTPVerifyBodyFromJson(json);
+  factory TOTPVerifyBody.fromJson(Map<String, dynamic> json) =>
+      _$TOTPVerifyBodyFromJson(json);
 }
 
 /// Verification factor for email factor
