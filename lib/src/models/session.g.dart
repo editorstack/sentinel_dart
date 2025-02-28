@@ -6,8 +6,7 @@ part of 'session.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SessionImpl _$$SessionImplFromJson(Map<String, dynamic> json) =>
-    _$SessionImpl(
+Session _$SessionFromJson(Map<String, dynamic> json) => Session(
       id: json['id'] as String,
       appID: json['appID'] as String,
       userID: json['userID'] as String,
@@ -26,8 +25,7 @@ _$SessionImpl _$$SessionImplFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$SessionImplToJson(_$SessionImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SessionToJson(Session instance) => <String, dynamic>{
       'id': instance.id,
       'appID': instance.appID,
       'userID': instance.userID,
@@ -50,8 +48,7 @@ const _$SessionStatusEnumMap = {
   SessionStatus.active: 'active',
 };
 
-_$UserSessionImpl _$$UserSessionImplFromJson(Map<String, dynamic> json) =>
-    _$UserSessionImpl(
+UserSession _$UserSessionFromJson(Map<String, dynamic> json) => UserSession(
       id: json['id'] as String,
       appID: json['appID'] as String,
       userID: json['userID'] as String,
@@ -71,7 +68,7 @@ _$UserSessionImpl _$$UserSessionImplFromJson(Map<String, dynamic> json) =>
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$UserSessionImplToJson(_$UserSessionImpl instance) =>
+Map<String, dynamic> _$UserSessionToJson(UserSession instance) =>
     <String, dynamic>{
       'id': instance.id,
       'appID': instance.appID,

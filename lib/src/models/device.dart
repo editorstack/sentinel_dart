@@ -33,20 +33,32 @@ enum DeviceType {
 /// identifier, name, type, associated user ID, creation time, and the
 /// last time it was used for sign-in.
 @freezed
+@JsonSerializable()
 class Device with _$Device {
   /// Creates a new instance of [Device] with the specified parameters.
-  const factory Device({
-    required String id,
-    required String deviceID,
-    required String name,
-    required DeviceType type,
-    required String userID,
-    required DateTime createdAt,
-    required DateTime lastSignedInAt,
-  }) = _Device;
+  const Device({
+    required this.id,
+    required this.deviceID,
+    required this.name,
+    required this.type,
+    required this.userID,
+    required this.createdAt,
+    required this.lastSignedInAt,
+  });
 
-  /// Used to serialize [Device] object to and from JSON.
+  /// Used to serialize [Device] object from JSON.
   factory Device.fromJson(Map<String, Object?> json) => _$DeviceFromJson(json);
+
+  /// Used to serialize [Device] object to JSON.
+  Map<String, Object?> toJson() => _$DeviceToJson(this);
+
+  final String id;
+  final String deviceID;
+  final String name;
+  final DeviceType type;
+  final String userID;
+  final DateTime createdAt;
+  final DateTime lastSignedInAt;
 }
 
 /// Converter for [Device] enumeration.

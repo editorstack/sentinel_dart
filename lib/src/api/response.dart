@@ -2,7 +2,7 @@ part of 'sentinel_api.dart';
 
 /// Represents the response for the TOTP request.
 @freezed
-class TOTPResponse with _$TOTPResponse {
+abstract class TOTPResponse with _$TOTPResponse {
   /// Creates a new instance of [TOTPResponse] with the specified parameters.
   const factory TOTPResponse({
     required String id,
@@ -64,7 +64,7 @@ enum FirstFactor {
 
 /// Represents the response for the user's factors.
 @freezed
-class UserFactorsResponse with _$UserFactorsResponse {
+abstract class UserFactorsResponse with _$UserFactorsResponse {
   /// Creates a new instance of [UserFactorsResponse] with the specified
   /// parameters.
   const factory UserFactorsResponse({

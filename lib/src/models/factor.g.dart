@@ -6,7 +6,7 @@ part of 'factor.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FactorImpl _$$FactorImplFromJson(Map<String, dynamic> json) => _$FactorImpl(
+Factor _$FactorFromJson(Map<String, dynamic> json) => Factor(
       id: json['id'] as String,
       providerUserID: json['providerUserID'] as String,
       userID: json['userID'] as String,
@@ -17,8 +17,7 @@ _$FactorImpl _$$FactorImplFromJson(Map<String, dynamic> json) => _$FactorImpl(
       lastSignedInAt: DateTime.parse(json['lastSignedInAt'] as String),
     );
 
-Map<String, dynamic> _$$FactorImplToJson(_$FactorImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$FactorToJson(Factor instance) => <String, dynamic>{
       'id': instance.id,
       'providerUserID': instance.providerUserID,
       'userID': instance.userID,
@@ -35,9 +34,8 @@ const _$FactorTypeEnumMap = {
   FactorType.oAuth: 'oAuth',
 };
 
-_$EmailIdentityDataImpl _$$EmailIdentityDataImplFromJson(
-        Map<String, dynamic> json) =>
-    _$EmailIdentityDataImpl(
+EmailIdentityData _$EmailIdentityDataFromJson(Map<String, dynamic> json) =>
+    EmailIdentityData(
       email: json['email'] as String,
       verifiedAt: json['verifiedAt'] == null
           ? null
@@ -45,17 +43,15 @@ _$EmailIdentityDataImpl _$$EmailIdentityDataImplFromJson(
       $type: json['factor'] as String?,
     );
 
-Map<String, dynamic> _$$EmailIdentityDataImplToJson(
-        _$EmailIdentityDataImpl instance) =>
+Map<String, dynamic> _$EmailIdentityDataToJson(EmailIdentityData instance) =>
     <String, dynamic>{
       'email': instance.email,
       'verifiedAt': instance.verifiedAt?.toIso8601String(),
       'factor': instance.$type,
     };
 
-_$PhoneIdentityDataImpl _$$PhoneIdentityDataImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PhoneIdentityDataImpl(
+PhoneIdentityData _$PhoneIdentityDataFromJson(Map<String, dynamic> json) =>
+    PhoneIdentityData(
       phone: json['phone'] as String,
       verifiedAt: json['verifiedAt'] == null
           ? null
@@ -63,17 +59,15 @@ _$PhoneIdentityDataImpl _$$PhoneIdentityDataImplFromJson(
       $type: json['factor'] as String?,
     );
 
-Map<String, dynamic> _$$PhoneIdentityDataImplToJson(
-        _$PhoneIdentityDataImpl instance) =>
+Map<String, dynamic> _$PhoneIdentityDataToJson(PhoneIdentityData instance) =>
     <String, dynamic>{
       'phone': instance.phone,
       'verifiedAt': instance.verifiedAt?.toIso8601String(),
       'factor': instance.$type,
     };
 
-_$OAuthIdentityDataImpl _$$OAuthIdentityDataImplFromJson(
-        Map<String, dynamic> json) =>
-    _$OAuthIdentityDataImpl(
+OAuthIdentityData _$OAuthIdentityDataFromJson(Map<String, dynamic> json) =>
+    OAuthIdentityData(
       provider: $enumDecode(_$OAuthProviderEnumMap, json['provider']),
       sub: json['sub'] as String,
       email: json['email'] as String,
@@ -88,8 +82,7 @@ _$OAuthIdentityDataImpl _$$OAuthIdentityDataImplFromJson(
       $type: json['factor'] as String?,
     );
 
-Map<String, dynamic> _$$OAuthIdentityDataImplToJson(
-        _$OAuthIdentityDataImpl instance) =>
+Map<String, dynamic> _$OAuthIdentityDataToJson(OAuthIdentityData instance) =>
     <String, dynamic>{
       'provider': _$OAuthProviderEnumMap[instance.provider]!,
       'sub': instance.sub,

@@ -6,7 +6,7 @@ part of 'device.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeviceImpl _$$DeviceImplFromJson(Map<String, dynamic> json) => _$DeviceImpl(
+Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       id: json['id'] as String,
       deviceID: json['deviceID'] as String,
       name: json['name'] as String,
@@ -16,8 +16,7 @@ _$DeviceImpl _$$DeviceImplFromJson(Map<String, dynamic> json) => _$DeviceImpl(
       lastSignedInAt: DateTime.parse(json['lastSignedInAt'] as String),
     );
 
-Map<String, dynamic> _$$DeviceImplToJson(_$DeviceImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DeviceToJson(Device instance) => <String, dynamic>{
       'id': instance.id,
       'deviceID': instance.deviceID,
       'name': instance.name,
