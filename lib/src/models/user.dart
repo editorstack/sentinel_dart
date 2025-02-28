@@ -14,27 +14,39 @@ part 'user.g.dart';
 /// identities and devices, and optional personal information such as
 /// name, email, phone, and profile image.
 @freezed
+@JsonSerializable()
 class User with _$User {
   /// Creates a new instance of [User] with the specified parameters.
-  const factory User({
-    required String id,
-    required String? firstName,
-    required String? lastName,
-    required String? email,
-    required String? phoneNumber,
-    required String? image,
-    required bool twoFactor,
-    required bool banned,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    required List<Factor> factors,
-    required List<Device> devices,
-  }) = _User;
+  const User({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phoneNumber,
+    required this.image,
+    required this.twoFactor,
+    required this.banned,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.factors,
+    required this.devices,
+  });
 
   /// Used to serialize [User] object to and from JSON.
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 
-  const User._();
+  final String id;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phoneNumber;
+  final String? image;
+  final bool twoFactor;
+  final bool banned;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final List<Factor> factors;
+  final List<Device> devices;
 
   /// Returns true if the user has a first name, false otherwise.
   bool get isRegistered => firstName != null;
@@ -43,7 +55,8 @@ class User with _$User {
   String get name => '${firstName ?? ''} ${lastName ?? ''}'.trim();
 
   /// Returns the initials of the user's name.
-  String get initials => '${firstName?.substring(0, 1) ?? ''}${lastName?.substring(0, 1) ?? ''}';
+  String get initials =>
+      '${firstName?.substring(0, 1) ?? ''}${lastName?.substring(0, 1) ?? ''}';
 }
 
 /// Represents an authenticated user for Drift database storage.

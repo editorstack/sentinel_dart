@@ -41,6 +41,35 @@ typedef $$SessionsTableUpdateCompanionBuilder = i1.SessionsCompanion Function({
   i0.Value<int> rowid,
 });
 
+final class $$SessionsTableReferences extends i0
+    .BaseReferences<i0.GeneratedDatabase, i1.$SessionsTable, i1.DSession> {
+  $$SessionsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static i3.$UsersTable _userIDTable(i0.GeneratedDatabase db) =>
+      i4.ReadDatabaseContainer(db)
+          .resultSet<i3.$UsersTable>('user')
+          .createAlias(i0.$_aliasNameGenerator(
+              i4.ReadDatabaseContainer(db)
+                  .resultSet<i1.$SessionsTable>('session')
+                  .userID,
+              i4.ReadDatabaseContainer(db)
+                  .resultSet<i3.$UsersTable>('user')
+                  .id));
+
+  i3.$$UsersTableProcessedTableManager get userID {
+    final $_column = $_itemColumn<String>('userID')!;
+
+    final manager = i3
+        .$$UsersTableTableManager($_db,
+            i4.ReadDatabaseContainer($_db).resultSet<i3.$UsersTable>('user'))
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_userIDTable($_db));
+    if (item == null) return manager;
+    return i0.ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
 class $$SessionsTableFilterComposer
     extends i0.Composer<i0.GeneratedDatabase, i1.$SessionsTable> {
   $$SessionsTableFilterComposer({
@@ -269,10 +298,7 @@ class $$SessionsTableTableManager extends i0.RootTableManager<
     i1.$$SessionsTableAnnotationComposer,
     $$SessionsTableCreateCompanionBuilder,
     $$SessionsTableUpdateCompanionBuilder,
-    (
-      i1.DSession,
-      i0.BaseReferences<i0.GeneratedDatabase, i1.$SessionsTable, i1.DSession>
-    ),
+    (i1.DSession, i1.$$SessionsTableReferences),
     i1.DSession,
     i0.PrefetchHooks Function({bool userID})> {
   $$SessionsTableTableManager(i0.GeneratedDatabase db, i1.$SessionsTable table)
@@ -354,9 +380,46 @@ class $$SessionsTableTableManager extends i0.RootTableManager<
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .map((e) => (
+                    e.readTable(table),
+                    i1.$$SessionsTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({userID = false}) {
+            return i0.PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends i0.TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (userID) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.userID,
+                    referencedTable:
+                        i1.$$SessionsTableReferences._userIDTable(db),
+                    referencedColumn:
+                        i1.$$SessionsTableReferences._userIDTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
@@ -369,10 +432,7 @@ typedef $$SessionsTableProcessedTableManager = i0.ProcessedTableManager<
     i1.$$SessionsTableAnnotationComposer,
     $$SessionsTableCreateCompanionBuilder,
     $$SessionsTableUpdateCompanionBuilder,
-    (
-      i1.DSession,
-      i0.BaseReferences<i0.GeneratedDatabase, i1.$SessionsTable, i1.DSession>
-    ),
+    (i1.DSession, i1.$$SessionsTableReferences),
     i1.DSession,
     i0.PrefetchHooks Function({bool userID})>;
 
