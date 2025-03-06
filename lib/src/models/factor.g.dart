@@ -6,7 +6,7 @@ part of 'factor.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Factor _$FactorFromJson(Map<String, dynamic> json) => Factor(
+_Factor _$FactorFromJson(Map<String, dynamic> json) => _Factor(
       id: json['id'] as String,
       providerUserID: json['providerUserID'] as String,
       userID: json['userID'] as String,
@@ -17,7 +17,7 @@ Factor _$FactorFromJson(Map<String, dynamic> json) => Factor(
       lastSignedInAt: DateTime.parse(json['lastSignedInAt'] as String),
     );
 
-Map<String, dynamic> _$FactorToJson(Factor instance) => <String, dynamic>{
+Map<String, dynamic> _$FactorToJson(_Factor instance) => <String, dynamic>{
       'id': instance.id,
       'providerUserID': instance.providerUserID,
       'userID': instance.userID,

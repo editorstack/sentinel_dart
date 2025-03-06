@@ -13,44 +13,28 @@ part 'session.g.dart';
 /// for the session, identity, device, and user, as well as the authentication
 /// token and expiration time.
 @freezed
-@JsonSerializable()
-class Session with _$Session {
+abstract class Session with _$Session {
   /// Creates a new Session instance.
-  const Session({
-    required this.id,
-    required this.appID,
-    required this.userID,
-    required this.deviceID,
-    required this.factorID,
-    required this.status,
-    required this.token,
-    required this.ipAddress,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.expiresAt,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+  const factory Session({
+    required String id,
+    required String appID,
+    required String userID,
+    required String deviceID,
+    required String factorID,
+    required SessionStatus status,
+    required String token,
+    required String? ipAddress,
+    required String? city,
+    required String? state,
+    required String? country,
+    required DateTime? expiresAt,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+  }) = _Session;
 
   /// Used to serialize [Session] object to and from JSON.
   factory Session.fromJson(Map<String, Object?> json) =>
       _$SessionFromJson(json);
-
-  final String id;
-  final String appID;
-  final String userID;
-  final String deviceID;
-  final String factorID;
-  final SessionStatus status;
-  final String token;
-  final String? ipAddress;
-  final String? city;
-  final String? state;
-  final String? country;
-  final DateTime? expiresAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
 }
 
 /// Represents the status of a user's session.
@@ -71,32 +55,29 @@ enum SessionStatus {
 /// Extends the Session class by including the full Auth object associated
 /// with the user, providing more comprehensive session data.
 @freezed
-@JsonSerializable()
-class UserSession extends Session with _$UserSession {
+abstract class UserSession with _$UserSession {
   /// Creates a new AuthSession instance.
-  const UserSession({
-    required super.id,
-    required super.appID,
-    required super.userID,
-    required super.deviceID,
-    required super.factorID,
-    required super.status,
-    required super.token,
-    required super.ipAddress,
-    required super.city,
-    required super.state,
-    required super.country,
-    required super.expiresAt,
-    required super.createdAt,
-    required super.updatedAt,
-    required this.user,
-  });
+  const factory UserSession({
+    required String id,
+    required String appID,
+    required String userID,
+    required String deviceID,
+    required String factorID,
+    required SessionStatus status,
+    required String token,
+    required String? ipAddress,
+    required String? city,
+    required String? state,
+    required String? country,
+    required DateTime? expiresAt,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    required User user,
+  }) = _UserSession;
 
   /// Used to serialize [UserSession] object to and from JSON.
   factory UserSession.fromJson(Map<String, Object?> json) =>
       _$UserSessionFromJson(json);
-
-  final User user;
 }
 
 /// Represents a user's session in the Drift database.

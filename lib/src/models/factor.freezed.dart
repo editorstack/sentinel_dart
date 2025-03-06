@@ -31,6 +31,9 @@ mixin _$Factor {
   $FactorCopyWith<Factor> get copyWith =>
       _$FactorCopyWithImpl<Factor>(this as Factor, _$identity);
 
+  /// Serializes this Factor to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -75,6 +78,8 @@ abstract mixin class $FactorCopyWith<$Res> {
       FactorData data,
       DateTime createdAt,
       DateTime lastSignedInAt});
+
+  $FactorDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -98,7 +103,7 @@ class _$FactorCopyWithImpl<$Res> implements $FactorCopyWith<$Res> {
     Object? createdAt = null,
     Object? lastSignedInAt = null,
   }) {
-    return _then(Factor(
+    return _then(_self.copyWith(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -132,6 +137,180 @@ class _$FactorCopyWithImpl<$Res> implements $FactorCopyWith<$Res> {
           : lastSignedInAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
+  }
+
+  /// Create a copy of Factor
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FactorDataCopyWith<$Res> get data {
+    return $FactorDataCopyWith<$Res>(_self.data, (value) {
+      return _then(_self.copyWith(data: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Factor implements Factor {
+  const _Factor(
+      {required this.id,
+      required this.providerUserID,
+      required this.userID,
+      required this.factor,
+      required this.identifier,
+      required this.data,
+      required this.createdAt,
+      required this.lastSignedInAt});
+  factory _Factor.fromJson(Map<String, dynamic> json) => _$FactorFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String providerUserID;
+  @override
+  final String userID;
+  @override
+  final FactorType factor;
+  @override
+  final String identifier;
+  @override
+  final FactorData data;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime lastSignedInAt;
+
+  /// Create a copy of Factor
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$FactorCopyWith<_Factor> get copyWith =>
+      __$FactorCopyWithImpl<_Factor>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FactorToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Factor &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.providerUserID, providerUserID) ||
+                other.providerUserID == providerUserID) &&
+            (identical(other.userID, userID) || other.userID == userID) &&
+            (identical(other.factor, factor) || other.factor == factor) &&
+            (identical(other.identifier, identifier) ||
+                other.identifier == identifier) &&
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.lastSignedInAt, lastSignedInAt) ||
+                other.lastSignedInAt == lastSignedInAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, providerUserID, userID,
+      factor, identifier, data, createdAt, lastSignedInAt);
+
+  @override
+  String toString() {
+    return 'Factor(id: $id, providerUserID: $providerUserID, userID: $userID, factor: $factor, identifier: $identifier, data: $data, createdAt: $createdAt, lastSignedInAt: $lastSignedInAt)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$FactorCopyWith<$Res> implements $FactorCopyWith<$Res> {
+  factory _$FactorCopyWith(_Factor value, $Res Function(_Factor) _then) =
+      __$FactorCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String providerUserID,
+      String userID,
+      FactorType factor,
+      String identifier,
+      FactorData data,
+      DateTime createdAt,
+      DateTime lastSignedInAt});
+
+  @override
+  $FactorDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$FactorCopyWithImpl<$Res> implements _$FactorCopyWith<$Res> {
+  __$FactorCopyWithImpl(this._self, this._then);
+
+  final _Factor _self;
+  final $Res Function(_Factor) _then;
+
+  /// Create a copy of Factor
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? providerUserID = null,
+    Object? userID = null,
+    Object? factor = null,
+    Object? identifier = null,
+    Object? data = null,
+    Object? createdAt = null,
+    Object? lastSignedInAt = null,
+  }) {
+    return _then(_Factor(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      providerUserID: null == providerUserID
+          ? _self.providerUserID
+          : providerUserID // ignore: cast_nullable_to_non_nullable
+              as String,
+      userID: null == userID
+          ? _self.userID
+          : userID // ignore: cast_nullable_to_non_nullable
+              as String,
+      factor: null == factor
+          ? _self.factor
+          : factor // ignore: cast_nullable_to_non_nullable
+              as FactorType,
+      identifier: null == identifier
+          ? _self.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: null == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as FactorData,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastSignedInAt: null == lastSignedInAt
+          ? _self.lastSignedInAt
+          : lastSignedInAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+
+  /// Create a copy of Factor
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FactorDataCopyWith<$Res> get data {
+    return $FactorDataCopyWith<$Res>(_self.data, (value) {
+      return _then(_self.copyWith(data: value));
+    });
   }
 }
 

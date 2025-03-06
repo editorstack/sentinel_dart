@@ -11,34 +11,21 @@ part 'factor.g.dart';
 /// An Identity object contains information about a specific authentication
 /// method used by a user, including the provider, user IDs, and timestamps.
 @freezed
-@JsonSerializable()
-class Factor with _$Factor {
+abstract class Factor with _$Factor {
   /// Creates a new instance of [Factor] with the specified parameters.
-  const Factor({
-    required this.id,
-    required this.providerUserID,
-    required this.userID,
-    required this.factor,
-    required this.identifier,
-    required this.data,
-    required this.createdAt,
-    required this.lastSignedInAt,
-  });
+  const factory Factor({
+    required String id,
+    required String providerUserID,
+    required String userID,
+    required FactorType factor,
+    required String identifier,
+    required FactorData data,
+    required DateTime createdAt,
+    required DateTime lastSignedInAt,
+  }) = _Factor;
 
   /// Used to serialize [Factor] object from JSON.
   factory Factor.fromJson(Map<String, Object?> json) => _$FactorFromJson(json);
-
-  /// Used to serialize [Factor] object to JSON.
-  Map<String, Object?> toJson() => _$FactorToJson(this);
-
-  final String id;
-  final String providerUserID;
-  final String userID;
-  final FactorType factor;
-  final String identifier;
-  final FactorData data;
-  final DateTime createdAt;
-  final DateTime lastSignedInAt;
 }
 
 /// Represents the various identity providers and authentication methods
