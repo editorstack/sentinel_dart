@@ -14,607 +14,120 @@ part of 'session.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Session {
+mixin _$SentinelSession {
   String get id;
-  String get appID;
-  String get userID;
-  String get deviceID;
-  String get factorID;
-  SessionStatus get status;
-  String get token;
-  String? get ipAddress;
-  String? get city;
-  String? get state;
-  String? get country;
   DateTime? get expiresAt;
+  String get token;
   DateTime get createdAt;
   DateTime get updatedAt;
+  String? get ipAddress;
+  String get deviceName;
+  DeviceType get deviceType;
+  String get userId;
+  String? get impersonatedBy;
 
-  /// Create a copy of Session
+  /// Create a copy of SentinelSession
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $SessionCopyWith<Session> get copyWith =>
-      _$SessionCopyWithImpl<Session>(this as Session, _$identity);
+  $SentinelSessionCopyWith<SentinelSession> get copyWith =>
+      _$SentinelSessionCopyWithImpl<SentinelSession>(
+          this as SentinelSession, _$identity);
 
-  /// Serializes this Session to a JSON map.
+  /// Serializes this SentinelSession to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Session &&
+            other is SentinelSession &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.appID, appID) || other.appID == appID) &&
-            (identical(other.userID, userID) || other.userID == userID) &&
-            (identical(other.deviceID, deviceID) ||
-                other.deviceID == deviceID) &&
-            (identical(other.factorID, factorID) ||
-                other.factorID == factorID) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.ipAddress, ipAddress) ||
-                other.ipAddress == ipAddress) &&
-            (identical(other.city, city) || other.city == city) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.country, country) || other.country == country) &&
             (identical(other.expiresAt, expiresAt) ||
                 other.expiresAt == expiresAt) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      appID,
-      userID,
-      deviceID,
-      factorID,
-      status,
-      token,
-      ipAddress,
-      city,
-      state,
-      country,
-      expiresAt,
-      createdAt,
-      updatedAt);
-
-  @override
-  String toString() {
-    return 'Session(id: $id, appID: $appID, userID: $userID, deviceID: $deviceID, factorID: $factorID, status: $status, token: $token, ipAddress: $ipAddress, city: $city, state: $state, country: $country, expiresAt: $expiresAt, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
-}
-
-/// @nodoc
-abstract mixin class $SessionCopyWith<$Res> {
-  factory $SessionCopyWith(Session value, $Res Function(Session) _then) =
-      _$SessionCopyWithImpl;
-  @useResult
-  $Res call(
-      {String id,
-      String appID,
-      String userID,
-      String deviceID,
-      String factorID,
-      SessionStatus status,
-      String token,
-      String? ipAddress,
-      String? city,
-      String? state,
-      String? country,
-      DateTime? expiresAt,
-      DateTime createdAt,
-      DateTime updatedAt});
-}
-
-/// @nodoc
-class _$SessionCopyWithImpl<$Res> implements $SessionCopyWith<$Res> {
-  _$SessionCopyWithImpl(this._self, this._then);
-
-  final Session _self;
-  final $Res Function(Session) _then;
-
-  /// Create a copy of Session
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? appID = null,
-    Object? userID = null,
-    Object? deviceID = null,
-    Object? factorID = null,
-    Object? status = null,
-    Object? token = null,
-    Object? ipAddress = freezed,
-    Object? city = freezed,
-    Object? state = freezed,
-    Object? country = freezed,
-    Object? expiresAt = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      appID: null == appID
-          ? _self.appID
-          : appID // ignore: cast_nullable_to_non_nullable
-              as String,
-      userID: null == userID
-          ? _self.userID
-          : userID // ignore: cast_nullable_to_non_nullable
-              as String,
-      deviceID: null == deviceID
-          ? _self.deviceID
-          : deviceID // ignore: cast_nullable_to_non_nullable
-              as String,
-      factorID: null == factorID
-          ? _self.factorID
-          : factorID // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _self.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as SessionStatus,
-      token: null == token
-          ? _self.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      ipAddress: freezed == ipAddress
-          ? _self.ipAddress
-          : ipAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      city: freezed == city
-          ? _self.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      state: freezed == state
-          ? _self.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String?,
-      country: freezed == country
-          ? _self.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expiresAt: freezed == expiresAt
-          ? _self.expiresAt
-          : expiresAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _self.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _Session implements Session {
-  const _Session(
-      {required this.id,
-      required this.appID,
-      required this.userID,
-      required this.deviceID,
-      required this.factorID,
-      required this.status,
-      required this.token,
-      required this.ipAddress,
-      required this.city,
-      required this.state,
-      required this.country,
-      required this.expiresAt,
-      required this.createdAt,
-      required this.updatedAt});
-  factory _Session.fromJson(Map<String, dynamic> json) =>
-      _$SessionFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String appID;
-  @override
-  final String userID;
-  @override
-  final String deviceID;
-  @override
-  final String factorID;
-  @override
-  final SessionStatus status;
-  @override
-  final String token;
-  @override
-  final String? ipAddress;
-  @override
-  final String? city;
-  @override
-  final String? state;
-  @override
-  final String? country;
-  @override
-  final DateTime? expiresAt;
-  @override
-  final DateTime createdAt;
-  @override
-  final DateTime updatedAt;
-
-  /// Create a copy of Session
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$SessionCopyWith<_Session> get copyWith =>
-      __$SessionCopyWithImpl<_Session>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$SessionToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Session &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.appID, appID) || other.appID == appID) &&
-            (identical(other.userID, userID) || other.userID == userID) &&
-            (identical(other.deviceID, deviceID) ||
-                other.deviceID == deviceID) &&
-            (identical(other.factorID, factorID) ||
-                other.factorID == factorID) &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.ipAddress, ipAddress) ||
-                other.ipAddress == ipAddress) &&
-            (identical(other.city, city) || other.city == city) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.country, country) || other.country == country) &&
-            (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      appID,
-      userID,
-      deviceID,
-      factorID,
-      status,
-      token,
-      ipAddress,
-      city,
-      state,
-      country,
-      expiresAt,
-      createdAt,
-      updatedAt);
-
-  @override
-  String toString() {
-    return 'Session(id: $id, appID: $appID, userID: $userID, deviceID: $deviceID, factorID: $factorID, status: $status, token: $token, ipAddress: $ipAddress, city: $city, state: $state, country: $country, expiresAt: $expiresAt, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
-  factory _$SessionCopyWith(_Session value, $Res Function(_Session) _then) =
-      __$SessionCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String appID,
-      String userID,
-      String deviceID,
-      String factorID,
-      SessionStatus status,
-      String token,
-      String? ipAddress,
-      String? city,
-      String? state,
-      String? country,
-      DateTime? expiresAt,
-      DateTime createdAt,
-      DateTime updatedAt});
-}
-
-/// @nodoc
-class __$SessionCopyWithImpl<$Res> implements _$SessionCopyWith<$Res> {
-  __$SessionCopyWithImpl(this._self, this._then);
-
-  final _Session _self;
-  final $Res Function(_Session) _then;
-
-  /// Create a copy of Session
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? appID = null,
-    Object? userID = null,
-    Object? deviceID = null,
-    Object? factorID = null,
-    Object? status = null,
-    Object? token = null,
-    Object? ipAddress = freezed,
-    Object? city = freezed,
-    Object? state = freezed,
-    Object? country = freezed,
-    Object? expiresAt = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(_Session(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      appID: null == appID
-          ? _self.appID
-          : appID // ignore: cast_nullable_to_non_nullable
-              as String,
-      userID: null == userID
-          ? _self.userID
-          : userID // ignore: cast_nullable_to_non_nullable
-              as String,
-      deviceID: null == deviceID
-          ? _self.deviceID
-          : deviceID // ignore: cast_nullable_to_non_nullable
-              as String,
-      factorID: null == factorID
-          ? _self.factorID
-          : factorID // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _self.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as SessionStatus,
-      token: null == token
-          ? _self.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      ipAddress: freezed == ipAddress
-          ? _self.ipAddress
-          : ipAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      city: freezed == city
-          ? _self.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      state: freezed == state
-          ? _self.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String?,
-      country: freezed == country
-          ? _self.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expiresAt: freezed == expiresAt
-          ? _self.expiresAt
-          : expiresAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _self.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
-}
-
-/// @nodoc
-mixin _$UserSession {
-  String get id;
-  String get appID;
-  String get userID;
-  String get deviceID;
-  String get factorID;
-  SessionStatus get status;
-  String get token;
-  String? get ipAddress;
-  String? get city;
-  String? get state;
-  String? get country;
-  DateTime? get expiresAt;
-  DateTime get createdAt;
-  DateTime get updatedAt;
-  User get user;
-
-  /// Create a copy of UserSession
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $UserSessionCopyWith<UserSession> get copyWith =>
-      _$UserSessionCopyWithImpl<UserSession>(this as UserSession, _$identity);
-
-  /// Serializes this UserSession to a JSON map.
-  Map<String, dynamic> toJson();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is UserSession &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.appID, appID) || other.appID == appID) &&
-            (identical(other.userID, userID) || other.userID == userID) &&
-            (identical(other.deviceID, deviceID) ||
-                other.deviceID == deviceID) &&
-            (identical(other.factorID, factorID) ||
-                other.factorID == factorID) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.ipAddress, ipAddress) ||
-                other.ipAddress == ipAddress) &&
-            (identical(other.city, city) || other.city == city) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.country, country) || other.country == country) &&
-            (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.ipAddress, ipAddress) ||
+                other.ipAddress == ipAddress) &&
+            (identical(other.deviceName, deviceName) ||
+                other.deviceName == deviceName) &&
+            (identical(other.deviceType, deviceType) ||
+                other.deviceType == deviceType) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.impersonatedBy, impersonatedBy) ||
+                other.impersonatedBy == impersonatedBy));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      appID,
-      userID,
-      deviceID,
-      factorID,
-      status,
-      token,
-      ipAddress,
-      city,
-      state,
-      country,
-      expiresAt,
-      createdAt,
-      updatedAt,
-      user);
+  int get hashCode => Object.hash(runtimeType, id, expiresAt, token, createdAt,
+      updatedAt, ipAddress, deviceName, deviceType, userId, impersonatedBy);
 
   @override
   String toString() {
-    return 'UserSession(id: $id, appID: $appID, userID: $userID, deviceID: $deviceID, factorID: $factorID, status: $status, token: $token, ipAddress: $ipAddress, city: $city, state: $state, country: $country, expiresAt: $expiresAt, createdAt: $createdAt, updatedAt: $updatedAt, user: $user)';
+    return 'SentinelSession(id: $id, expiresAt: $expiresAt, token: $token, createdAt: $createdAt, updatedAt: $updatedAt, ipAddress: $ipAddress, deviceName: $deviceName, deviceType: $deviceType, userId: $userId, impersonatedBy: $impersonatedBy)';
   }
 }
 
 /// @nodoc
-abstract mixin class $UserSessionCopyWith<$Res> {
-  factory $UserSessionCopyWith(
-          UserSession value, $Res Function(UserSession) _then) =
-      _$UserSessionCopyWithImpl;
+abstract mixin class $SentinelSessionCopyWith<$Res> {
+  factory $SentinelSessionCopyWith(
+          SentinelSession value, $Res Function(SentinelSession) _then) =
+      _$SentinelSessionCopyWithImpl;
   @useResult
   $Res call(
       {String id,
-      String appID,
-      String userID,
-      String deviceID,
-      String factorID,
-      SessionStatus status,
-      String token,
-      String? ipAddress,
-      String? city,
-      String? state,
-      String? country,
       DateTime? expiresAt,
+      String token,
       DateTime createdAt,
       DateTime updatedAt,
-      User user});
-
-  $UserCopyWith<$Res> get user;
+      String? ipAddress,
+      String deviceName,
+      DeviceType deviceType,
+      String userId,
+      String? impersonatedBy});
 }
 
 /// @nodoc
-class _$UserSessionCopyWithImpl<$Res> implements $UserSessionCopyWith<$Res> {
-  _$UserSessionCopyWithImpl(this._self, this._then);
+class _$SentinelSessionCopyWithImpl<$Res>
+    implements $SentinelSessionCopyWith<$Res> {
+  _$SentinelSessionCopyWithImpl(this._self, this._then);
 
-  final UserSession _self;
-  final $Res Function(UserSession) _then;
+  final SentinelSession _self;
+  final $Res Function(SentinelSession) _then;
 
-  /// Create a copy of UserSession
+  /// Create a copy of SentinelSession
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? appID = null,
-    Object? userID = null,
-    Object? deviceID = null,
-    Object? factorID = null,
-    Object? status = null,
-    Object? token = null,
-    Object? ipAddress = freezed,
-    Object? city = freezed,
-    Object? state = freezed,
-    Object? country = freezed,
     Object? expiresAt = freezed,
+    Object? token = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? user = null,
+    Object? ipAddress = freezed,
+    Object? deviceName = null,
+    Object? deviceType = null,
+    Object? userId = null,
+    Object? impersonatedBy = freezed,
   }) {
     return _then(_self.copyWith(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      appID: null == appID
-          ? _self.appID
-          : appID // ignore: cast_nullable_to_non_nullable
-              as String,
-      userID: null == userID
-          ? _self.userID
-          : userID // ignore: cast_nullable_to_non_nullable
-              as String,
-      deviceID: null == deviceID
-          ? _self.deviceID
-          : deviceID // ignore: cast_nullable_to_non_nullable
-              as String,
-      factorID: null == factorID
-          ? _self.factorID
-          : factorID // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _self.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as SessionStatus,
-      token: null == token
-          ? _self.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      ipAddress: freezed == ipAddress
-          ? _self.ipAddress
-          : ipAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      city: freezed == city
-          ? _self.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      state: freezed == state
-          ? _self.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String?,
-      country: freezed == country
-          ? _self.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
       expiresAt: freezed == expiresAt
           ? _self.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      token: null == token
+          ? _self.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -623,88 +136,79 @@ class _$UserSessionCopyWithImpl<$Res> implements $UserSessionCopyWith<$Res> {
           ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      user: null == user
-          ? _self.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      ipAddress: freezed == ipAddress
+          ? _self.ipAddress
+          : ipAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceName: null == deviceName
+          ? _self.deviceName
+          : deviceName // ignore: cast_nullable_to_non_nullable
+              as String,
+      deviceType: null == deviceType
+          ? _self.deviceType
+          : deviceType // ignore: cast_nullable_to_non_nullable
+              as DeviceType,
+      userId: null == userId
+          ? _self.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      impersonatedBy: freezed == impersonatedBy
+          ? _self.impersonatedBy
+          : impersonatedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
-  }
-
-  /// Create a copy of UserSession
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_self.user, (value) {
-      return _then(_self.copyWith(user: value));
-    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _UserSession implements UserSession {
-  const _UserSession(
+class _SentinelSession implements SentinelSession {
+  const _SentinelSession(
       {required this.id,
-      required this.appID,
-      required this.userID,
-      required this.deviceID,
-      required this.factorID,
-      required this.status,
-      required this.token,
-      required this.ipAddress,
-      required this.city,
-      required this.state,
-      required this.country,
       required this.expiresAt,
+      required this.token,
       required this.createdAt,
       required this.updatedAt,
-      required this.user});
-  factory _UserSession.fromJson(Map<String, dynamic> json) =>
-      _$UserSessionFromJson(json);
+      required this.ipAddress,
+      required this.deviceName,
+      required this.deviceType,
+      required this.userId,
+      required this.impersonatedBy});
+  factory _SentinelSession.fromJson(Map<String, dynamic> json) =>
+      _$SentinelSessionFromJson(json);
 
   @override
   final String id;
   @override
-  final String appID;
-  @override
-  final String userID;
-  @override
-  final String deviceID;
-  @override
-  final String factorID;
-  @override
-  final SessionStatus status;
+  final DateTime? expiresAt;
   @override
   final String token;
-  @override
-  final String? ipAddress;
-  @override
-  final String? city;
-  @override
-  final String? state;
-  @override
-  final String? country;
-  @override
-  final DateTime? expiresAt;
   @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
   @override
-  final User user;
+  final String? ipAddress;
+  @override
+  final String deviceName;
+  @override
+  final DeviceType deviceType;
+  @override
+  final String userId;
+  @override
+  final String? impersonatedBy;
 
-  /// Create a copy of UserSession
+  /// Create a copy of SentinelSession
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$UserSessionCopyWith<_UserSession> get copyWith =>
-      __$UserSessionCopyWithImpl<_UserSession>(this, _$identity);
+  _$SentinelSessionCopyWith<_SentinelSession> get copyWith =>
+      __$SentinelSessionCopyWithImpl<_SentinelSession>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$UserSessionToJson(
+    return _$SentinelSessionToJson(
       this,
     );
   }
@@ -713,162 +217,95 @@ class _UserSession implements UserSession {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserSession &&
+            other is _SentinelSession &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.appID, appID) || other.appID == appID) &&
-            (identical(other.userID, userID) || other.userID == userID) &&
-            (identical(other.deviceID, deviceID) ||
-                other.deviceID == deviceID) &&
-            (identical(other.factorID, factorID) ||
-                other.factorID == factorID) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.ipAddress, ipAddress) ||
-                other.ipAddress == ipAddress) &&
-            (identical(other.city, city) || other.city == city) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.country, country) || other.country == country) &&
             (identical(other.expiresAt, expiresAt) ||
                 other.expiresAt == expiresAt) &&
+            (identical(other.token, token) || other.token == token) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.ipAddress, ipAddress) ||
+                other.ipAddress == ipAddress) &&
+            (identical(other.deviceName, deviceName) ||
+                other.deviceName == deviceName) &&
+            (identical(other.deviceType, deviceType) ||
+                other.deviceType == deviceType) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.impersonatedBy, impersonatedBy) ||
+                other.impersonatedBy == impersonatedBy));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      appID,
-      userID,
-      deviceID,
-      factorID,
-      status,
-      token,
-      ipAddress,
-      city,
-      state,
-      country,
-      expiresAt,
-      createdAt,
-      updatedAt,
-      user);
+  int get hashCode => Object.hash(runtimeType, id, expiresAt, token, createdAt,
+      updatedAt, ipAddress, deviceName, deviceType, userId, impersonatedBy);
 
   @override
   String toString() {
-    return 'UserSession(id: $id, appID: $appID, userID: $userID, deviceID: $deviceID, factorID: $factorID, status: $status, token: $token, ipAddress: $ipAddress, city: $city, state: $state, country: $country, expiresAt: $expiresAt, createdAt: $createdAt, updatedAt: $updatedAt, user: $user)';
+    return 'SentinelSession(id: $id, expiresAt: $expiresAt, token: $token, createdAt: $createdAt, updatedAt: $updatedAt, ipAddress: $ipAddress, deviceName: $deviceName, deviceType: $deviceType, userId: $userId, impersonatedBy: $impersonatedBy)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$UserSessionCopyWith<$Res>
-    implements $UserSessionCopyWith<$Res> {
-  factory _$UserSessionCopyWith(
-          _UserSession value, $Res Function(_UserSession) _then) =
-      __$UserSessionCopyWithImpl;
+abstract mixin class _$SentinelSessionCopyWith<$Res>
+    implements $SentinelSessionCopyWith<$Res> {
+  factory _$SentinelSessionCopyWith(
+          _SentinelSession value, $Res Function(_SentinelSession) _then) =
+      __$SentinelSessionCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
-      String appID,
-      String userID,
-      String deviceID,
-      String factorID,
-      SessionStatus status,
-      String token,
-      String? ipAddress,
-      String? city,
-      String? state,
-      String? country,
       DateTime? expiresAt,
+      String token,
       DateTime createdAt,
       DateTime updatedAt,
-      User user});
-
-  @override
-  $UserCopyWith<$Res> get user;
+      String? ipAddress,
+      String deviceName,
+      DeviceType deviceType,
+      String userId,
+      String? impersonatedBy});
 }
 
 /// @nodoc
-class __$UserSessionCopyWithImpl<$Res> implements _$UserSessionCopyWith<$Res> {
-  __$UserSessionCopyWithImpl(this._self, this._then);
+class __$SentinelSessionCopyWithImpl<$Res>
+    implements _$SentinelSessionCopyWith<$Res> {
+  __$SentinelSessionCopyWithImpl(this._self, this._then);
 
-  final _UserSession _self;
-  final $Res Function(_UserSession) _then;
+  final _SentinelSession _self;
+  final $Res Function(_SentinelSession) _then;
 
-  /// Create a copy of UserSession
+  /// Create a copy of SentinelSession
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? appID = null,
-    Object? userID = null,
-    Object? deviceID = null,
-    Object? factorID = null,
-    Object? status = null,
-    Object? token = null,
-    Object? ipAddress = freezed,
-    Object? city = freezed,
-    Object? state = freezed,
-    Object? country = freezed,
     Object? expiresAt = freezed,
+    Object? token = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? user = null,
+    Object? ipAddress = freezed,
+    Object? deviceName = null,
+    Object? deviceType = null,
+    Object? userId = null,
+    Object? impersonatedBy = freezed,
   }) {
-    return _then(_UserSession(
+    return _then(_SentinelSession(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      appID: null == appID
-          ? _self.appID
-          : appID // ignore: cast_nullable_to_non_nullable
-              as String,
-      userID: null == userID
-          ? _self.userID
-          : userID // ignore: cast_nullable_to_non_nullable
-              as String,
-      deviceID: null == deviceID
-          ? _self.deviceID
-          : deviceID // ignore: cast_nullable_to_non_nullable
-              as String,
-      factorID: null == factorID
-          ? _self.factorID
-          : factorID // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _self.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as SessionStatus,
-      token: null == token
-          ? _self.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      ipAddress: freezed == ipAddress
-          ? _self.ipAddress
-          : ipAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      city: freezed == city
-          ? _self.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      state: freezed == state
-          ? _self.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String?,
-      country: freezed == country
-          ? _self.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
       expiresAt: freezed == expiresAt
           ? _self.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      token: null == token
+          ? _self.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -877,21 +314,27 @@ class __$UserSessionCopyWithImpl<$Res> implements _$UserSessionCopyWith<$Res> {
           ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      user: null == user
-          ? _self.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      ipAddress: freezed == ipAddress
+          ? _self.ipAddress
+          : ipAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceName: null == deviceName
+          ? _self.deviceName
+          : deviceName // ignore: cast_nullable_to_non_nullable
+              as String,
+      deviceType: null == deviceType
+          ? _self.deviceType
+          : deviceType // ignore: cast_nullable_to_non_nullable
+              as DeviceType,
+      userId: null == userId
+          ? _self.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      impersonatedBy: freezed == impersonatedBy
+          ? _self.impersonatedBy
+          : impersonatedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
-  }
-
-  /// Create a copy of UserSession
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_self.user, (value) {
-      return _then(_self.copyWith(user: value));
-    });
   }
 }
 

@@ -1,11 +1,12 @@
-import 'package:drift/drift.dart' as drift;
-import 'package:sentinel/src/database/database.drift.dart';
-import 'package:sentinel/src/models/session.dart';
-import 'package:sentinel/src/models/user.dart';
+import 'package:drift/drift.dart';
+import 'package:sentinel/src/models/session.drift.dart';
+import 'package:sentinel/src/models/user.drift.dart';
+
+part 'database.g.dart';
 
 /// Local database for Editorstack Sentinel.
-@drift.DriftDatabase(tables: [Users, Sessions])
-class SentinelDatabase extends $SentinelDatabase {
+@DriftDatabase(tables: [SentinelUsers, SentinelSessions])
+class SentinelDatabase extends _$SentinelDatabase {
   /// Construct a new instance of [SentinelDatabase].
   SentinelDatabase(super.e);
 
@@ -13,8 +14,8 @@ class SentinelDatabase extends $SentinelDatabase {
   int get schemaVersion => 1;
 
   @override
-  drift.MigrationStrategy get migration {
-    return drift.MigrationStrategy(
+  MigrationStrategy get migration {
+    return MigrationStrategy(
       beforeOpen: (_) async {
         await customStatement('PRAGMA foreign_keys = ON');
       },

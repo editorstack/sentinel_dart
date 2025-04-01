@@ -8,23 +8,12 @@ import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sentinel/src/api/realtime.dart';
-import 'package:sentinel/src/api/sentinel_api.dart';
 import 'package:sentinel/src/database/database.dart';
-import 'package:sentinel/src/functions/create_user.dart';
-import 'package:sentinel/src/functions/factors.dart';
-import 'package:sentinel/src/functions/mfa.dart';
-import 'package:sentinel/src/functions/re_authentication.dart';
-import 'package:sentinel/src/functions/sessions.dart';
 import 'package:sentinel/src/functions/sign_in.dart';
-import 'package:sentinel/src/functions/users.dart';
-import 'package:sentinel/src/models/device.dart';
-import 'package:sentinel/src/models/session.dart' hide Sessions;
-import 'package:sentinel/src/models/user.dart' hide Users;
+import 'package:sentinel/src/models/session.dart';
+import 'package:sentinel/src/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
-
-const _autoRefreshTickDuration = Duration(seconds: 10);
-const _autoRefreshTickThreshold = 3;
 
 /// The main class for interacting with the Sentinel authentication system.
 ///
@@ -62,35 +51,14 @@ class Sentinel {
   late SentinelDatabase _database;
   late SentinelApi _sentinel;
 
-  User? _user;
-  Session? _session;
+  SentinelUser? _user;
+  SentinelSession? _session;
 
   /// Details of the currently authenticated user.
-  User? get user => _user;
+  SentinelUser? get user => _user;
 
   /// Details of the current session.
-  Session? get session => _session;
-
-  /// Functions to manage user sessions.
-  late final Sessions sessions;
-
-  /// Functions to create new users.
-  late final CreateUser createUser;
-
-  /// Functions to sign in users.
-  late final SignIn signIn;
-
-  /// Functions to manage factors.
-  late final Factors factors;
-
-  /// Functions to manage multi-factor authentication.
-  late final MFA mfa;
-
-  /// Functions to re-authenticate users.
-  late final ReAuthentication reAuthenticate;
-
-  /// Functions to manage users.
-  late final Users users;
+  SentinelSession? get session => _session;
 
   late io.Socket _socket;
 
@@ -106,6 +74,10 @@ class Sentinel {
     await _instance._init(dio: dio, url: url, applicationID: applicationID);
     return _instance;
   }
+
+  Future<void> sendVerificationEmail() async {}
+  Future<void> verifyVerificationEmail() async {}
+  Future<void> signOut() async {}
 
   Future<void> _init({
     required Dio dio,
@@ -123,8 +95,7 @@ class Sentinel {
           driftWorker: Uri.parse('drift_worker.js'),
           onResult: (result) {
             if (result.missingFeatures.isNotEmpty) {
-              debugPrint(
-                  'Using ${result.chosenImplementation} due to unsupported '
+              debugPrint('Using ${result.chosenImplementation} due to unsupported '
                   'browser features: ${result.missingFeatures}');
             }
           },
@@ -133,14 +104,6 @@ class Sentinel {
       ),
     );
     _sentinel = SentinelApi(dio);
-
-    sessions = Sessions(_sentinel);
-    createUser = CreateUser(_sentinel, _database, deviceInfo, _updateToken);
-    signIn = SignIn(_sentinel, _dio, _database, deviceInfo, _updateToken);
-    factors = Factors(_sentinel);
-    mfa = MFA(_sentinel);
-    reAuthenticate = ReAuthentication(_sentinel);
-    users = Users(_sentinel, _database);
 
     _socket = io.io(
       _dio.options.baseUrl,
@@ -154,8 +117,7 @@ class Sentinel {
     );
 
     _user = (await _database.users.select().getSingleOrNull())?.toObject();
-    _session =
-        (await _database.sessions.select().getSingleOrNull())?.toObject();
+    _session = (await _database.sessions.select().getSingleOrNull())?.toObject();
 
     _updateToken(_session?.token);
 
@@ -238,16 +200,15 @@ class Sentinel {
       return;
     }
 
-    final expiresInTicks = (expiresAt.difference(now).inMilliseconds /
-            _autoRefreshTickDuration.inMilliseconds)
-        .floor();
+    final expiresInTicks =
+        (expiresAt.difference(now).inMilliseconds / _autoRefreshTickDuration.inMilliseconds)
+            .floor();
 
     if (expiresInTicks <= _autoRefreshTickThreshold) {
       try {
         await _sentinel.extendSession();
       } catch (e) {
-        final exception =
-            SentinelException(exceptionMessage(e is DioException ? e : null));
+        final exception = SentinelException(exceptionMessage(e is DioException ? e : null));
         _stopAutoRefresh();
         if (exception.isUnauthenticated) {
           await _database.managers.users.delete();
@@ -256,7 +217,7 @@ class Sentinel {
     }
   }
 
-  Future<void> _initSocket([Session? session]) async {
+  Future<void> _initSocket([SentinelSession? session]) async {
     final device = await deviceInfo();
 
     _socket.io.options?['extraHeaders'] = session != null
@@ -279,7 +240,7 @@ class Sentinel {
 
     _socket
       ..on(RealtimeChannels.saveAuth, (data) async {
-        final user = User.fromJson(data as Map<String, dynamic>);
+        final user = SentinelUser.fromJson(data as Map<String, dynamic>);
         if (_user == null || _user!.id == user.id) {
           await _database.users.insertOnConflictUpdate(user.toDrift());
         }
@@ -290,8 +251,7 @@ class Sentinel {
       ..on(RealtimeChannels.saveSession, (data) async {
         final session = UserSession.fromJson(data as Map<String, dynamic>);
         await _database.users.insertOnConflictUpdate(session.user.toDrift());
-        await _database.sessions
-            .insertOnConflictUpdate(session.toSession().toDrift());
+        await _database.sessions.insertOnConflictUpdate(session.toSession().toDrift());
       })
       ..on('error', (error) {
         _database.users.deleteAll();
@@ -300,21 +260,19 @@ class Sentinel {
   }
 
   /// Returns a stream of changes to the authenticated user.
-  Stream<User?> userChanges() {
-    return _database.managers.users
-        .watch(limit: 1)
-        .map((event) => event.firstOrNull?.toObject());
+  Stream<SentinelUser?> userChanges() {
+    return _database.managers.users.watch(limit: 1).map((event) => event.firstOrNull?.toObject());
   }
 
   /// Returns a stream of changes to the current session.
-  Stream<Session?> sessionChanges() {
+  Stream<SentinelSession?> sessionChanges() {
     return _database.managers.sessions
         .watch(limit: 1)
         .map((event) => event.firstOrNull?.toObject());
   }
 
-  StreamSubscription<User?>? _authSubscription;
-  StreamSubscription<Session?>? _sessionSubscription;
+  StreamSubscription<SentinelUser?>? _authSubscription;
+  StreamSubscription<SentinelSession?>? _sessionSubscription;
 }
 
 /// Returns the device information for the current platform.
@@ -353,8 +311,7 @@ Future<DeviceRequest> deviceInfo() async {
     final brand = androidInfo.brand;
     return DeviceRequest(
       deviceID: androidInfo.id,
-      name:
-          '${brand.replaceFirst(brand[0], brand[0].toUpperCase())} ${androidInfo.model}',
+      name: '${brand.replaceFirst(brand[0], brand[0].toUpperCase())} ${androidInfo.model}',
       type: DeviceType.android,
     );
   } else if (Platform.isIOS) {

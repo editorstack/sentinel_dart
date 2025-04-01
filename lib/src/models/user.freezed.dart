@@ -14,53 +14,58 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$User {
+mixin _$SentinelUser {
   String get id;
   String? get firstName;
   String? get lastName;
-  String? get email;
-  String? get phoneNumber;
+  String get email;
+  bool get emailVerified;
   String? get image;
-  bool get twoFactor;
-  bool get banned;
   DateTime get createdAt;
   DateTime get updatedAt;
-  List<Factor> get factors;
-  List<Device> get devices;
+  bool get twoFactorEnabled;
+  UserRole get role;
+  bool get banned;
+  String? get banReason;
+  DateTime? get banExpires;
 
-  /// Create a copy of User
+  /// Create a copy of SentinelUser
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $UserCopyWith<User> get copyWith =>
-      _$UserCopyWithImpl<User>(this as User, _$identity);
+  $SentinelUserCopyWith<SentinelUser> get copyWith =>
+      _$SentinelUserCopyWithImpl<SentinelUser>(
+          this as SentinelUser, _$identity);
 
-  /// Serializes this User to a JSON map.
+  /// Serializes this SentinelUser to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is User &&
+            other is SentinelUser &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
+            (identical(other.emailVerified, emailVerified) ||
+                other.emailVerified == emailVerified) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.twoFactor, twoFactor) ||
-                other.twoFactor == twoFactor) &&
-            (identical(other.banned, banned) || other.banned == banned) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(other.factors, factors) &&
-            const DeepCollectionEquality().equals(other.devices, devices));
+            (identical(other.twoFactorEnabled, twoFactorEnabled) ||
+                other.twoFactorEnabled == twoFactorEnabled) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.banned, banned) || other.banned == banned) &&
+            (identical(other.banReason, banReason) ||
+                other.banReason == banReason) &&
+            (identical(other.banExpires, banExpires) ||
+                other.banExpires == banExpires));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -71,49 +76,52 @@ mixin _$User {
       firstName,
       lastName,
       email,
-      phoneNumber,
+      emailVerified,
       image,
-      twoFactor,
-      banned,
       createdAt,
       updatedAt,
-      const DeepCollectionEquality().hash(factors),
-      const DeepCollectionEquality().hash(devices));
+      twoFactorEnabled,
+      role,
+      banned,
+      banReason,
+      banExpires);
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, image: $image, twoFactor: $twoFactor, banned: $banned, createdAt: $createdAt, updatedAt: $updatedAt, factors: $factors, devices: $devices)';
+    return 'SentinelUser(id: $id, firstName: $firstName, lastName: $lastName, email: $email, emailVerified: $emailVerified, image: $image, createdAt: $createdAt, updatedAt: $updatedAt, twoFactorEnabled: $twoFactorEnabled, role: $role, banned: $banned, banReason: $banReason, banExpires: $banExpires)';
   }
 }
 
 /// @nodoc
-abstract mixin class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) _then) =
-      _$UserCopyWithImpl;
+abstract mixin class $SentinelUserCopyWith<$Res> {
+  factory $SentinelUserCopyWith(
+          SentinelUser value, $Res Function(SentinelUser) _then) =
+      _$SentinelUserCopyWithImpl;
   @useResult
   $Res call(
       {String id,
       String? firstName,
       String? lastName,
-      String? email,
-      String? phoneNumber,
+      String email,
+      bool emailVerified,
       String? image,
-      bool twoFactor,
-      bool banned,
       DateTime createdAt,
       DateTime updatedAt,
-      List<Factor> factors,
-      List<Device> devices});
+      bool twoFactorEnabled,
+      UserRole role,
+      bool banned,
+      String? banReason,
+      DateTime? banExpires});
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._self, this._then);
+class _$SentinelUserCopyWithImpl<$Res> implements $SentinelUserCopyWith<$Res> {
+  _$SentinelUserCopyWithImpl(this._self, this._then);
 
-  final User _self;
-  final $Res Function(User) _then;
+  final SentinelUser _self;
+  final $Res Function(SentinelUser) _then;
 
-  /// Create a copy of User
+  /// Create a copy of SentinelUser
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -121,15 +129,16 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? id = null,
     Object? firstName = freezed,
     Object? lastName = freezed,
-    Object? email = freezed,
-    Object? phoneNumber = freezed,
+    Object? email = null,
+    Object? emailVerified = null,
     Object? image = freezed,
-    Object? twoFactor = null,
-    Object? banned = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? factors = null,
-    Object? devices = null,
+    Object? twoFactorEnabled = null,
+    Object? role = null,
+    Object? banned = null,
+    Object? banReason = freezed,
+    Object? banExpires = freezed,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -144,26 +153,18 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _self.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: freezed == email
+      email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _self.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      emailVerified: null == emailVerified
+          ? _self.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
       image: freezed == image
           ? _self.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      twoFactor: null == twoFactor
-          ? _self.twoFactor
-          : twoFactor // ignore: cast_nullable_to_non_nullable
-              as bool,
-      banned: null == banned
-          ? _self.banned
-          : banned // ignore: cast_nullable_to_non_nullable
-              as bool,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -172,38 +173,50 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      factors: null == factors
-          ? _self.factors
-          : factors // ignore: cast_nullable_to_non_nullable
-              as List<Factor>,
-      devices: null == devices
-          ? _self.devices
-          : devices // ignore: cast_nullable_to_non_nullable
-              as List<Device>,
+      twoFactorEnabled: null == twoFactorEnabled
+          ? _self.twoFactorEnabled
+          : twoFactorEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      role: null == role
+          ? _self.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as UserRole,
+      banned: null == banned
+          ? _self.banned
+          : banned // ignore: cast_nullable_to_non_nullable
+              as bool,
+      banReason: freezed == banReason
+          ? _self.banReason
+          : banReason // ignore: cast_nullable_to_non_nullable
+              as String?,
+      banExpires: freezed == banExpires
+          ? _self.banExpires
+          : banExpires // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _User extends User {
-  const _User(
+class _SentinelUser extends SentinelUser {
+  const _SentinelUser(
       {required this.id,
       required this.firstName,
       required this.lastName,
       required this.email,
-      required this.phoneNumber,
+      required this.emailVerified,
       required this.image,
-      required this.twoFactor,
-      required this.banned,
       required this.createdAt,
       required this.updatedAt,
-      required final List<Factor> factors,
-      required final List<Device> devices})
-      : _factors = factors,
-        _devices = devices,
-        super._();
-  factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+      required this.twoFactorEnabled,
+      required this.role,
+      required this.banned,
+      required this.banReason,
+      required this.banExpires})
+      : super._();
+  factory _SentinelUser.fromJson(Map<String, dynamic> json) =>
+      _$SentinelUserFromJson(json);
 
   @override
   final String id;
@@ -212,46 +225,37 @@ class _User extends User {
   @override
   final String? lastName;
   @override
-  final String? email;
+  final String email;
   @override
-  final String? phoneNumber;
+  final bool emailVerified;
   @override
   final String? image;
-  @override
-  final bool twoFactor;
-  @override
-  final bool banned;
   @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
-  final List<Factor> _factors;
   @override
-  List<Factor> get factors {
-    if (_factors is EqualUnmodifiableListView) return _factors;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_factors);
-  }
-
-  final List<Device> _devices;
+  final bool twoFactorEnabled;
   @override
-  List<Device> get devices {
-    if (_devices is EqualUnmodifiableListView) return _devices;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_devices);
-  }
+  final UserRole role;
+  @override
+  final bool banned;
+  @override
+  final String? banReason;
+  @override
+  final DateTime? banExpires;
 
-  /// Create a copy of User
+  /// Create a copy of SentinelUser
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$UserCopyWith<_User> get copyWith =>
-      __$UserCopyWithImpl<_User>(this, _$identity);
+  _$SentinelUserCopyWith<_SentinelUser> get copyWith =>
+      __$SentinelUserCopyWithImpl<_SentinelUser>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$UserToJson(
+    return _$SentinelUserToJson(
       this,
     );
   }
@@ -260,25 +264,28 @@ class _User extends User {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _User &&
+            other is _SentinelUser &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
+            (identical(other.emailVerified, emailVerified) ||
+                other.emailVerified == emailVerified) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.twoFactor, twoFactor) ||
-                other.twoFactor == twoFactor) &&
-            (identical(other.banned, banned) || other.banned == banned) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(other._factors, _factors) &&
-            const DeepCollectionEquality().equals(other._devices, _devices));
+            (identical(other.twoFactorEnabled, twoFactorEnabled) ||
+                other.twoFactorEnabled == twoFactorEnabled) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.banned, banned) || other.banned == banned) &&
+            (identical(other.banReason, banReason) ||
+                other.banReason == banReason) &&
+            (identical(other.banExpires, banExpires) ||
+                other.banExpires == banExpires));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -289,50 +296,55 @@ class _User extends User {
       firstName,
       lastName,
       email,
-      phoneNumber,
+      emailVerified,
       image,
-      twoFactor,
-      banned,
       createdAt,
       updatedAt,
-      const DeepCollectionEquality().hash(_factors),
-      const DeepCollectionEquality().hash(_devices));
+      twoFactorEnabled,
+      role,
+      banned,
+      banReason,
+      banExpires);
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, image: $image, twoFactor: $twoFactor, banned: $banned, createdAt: $createdAt, updatedAt: $updatedAt, factors: $factors, devices: $devices)';
+    return 'SentinelUser(id: $id, firstName: $firstName, lastName: $lastName, email: $email, emailVerified: $emailVerified, image: $image, createdAt: $createdAt, updatedAt: $updatedAt, twoFactorEnabled: $twoFactorEnabled, role: $role, banned: $banned, banReason: $banReason, banExpires: $banExpires)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$UserCopyWith(_User value, $Res Function(_User) _then) =
-      __$UserCopyWithImpl;
+abstract mixin class _$SentinelUserCopyWith<$Res>
+    implements $SentinelUserCopyWith<$Res> {
+  factory _$SentinelUserCopyWith(
+          _SentinelUser value, $Res Function(_SentinelUser) _then) =
+      __$SentinelUserCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
       String? firstName,
       String? lastName,
-      String? email,
-      String? phoneNumber,
+      String email,
+      bool emailVerified,
       String? image,
-      bool twoFactor,
-      bool banned,
       DateTime createdAt,
       DateTime updatedAt,
-      List<Factor> factors,
-      List<Device> devices});
+      bool twoFactorEnabled,
+      UserRole role,
+      bool banned,
+      String? banReason,
+      DateTime? banExpires});
 }
 
 /// @nodoc
-class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
-  __$UserCopyWithImpl(this._self, this._then);
+class __$SentinelUserCopyWithImpl<$Res>
+    implements _$SentinelUserCopyWith<$Res> {
+  __$SentinelUserCopyWithImpl(this._self, this._then);
 
-  final _User _self;
-  final $Res Function(_User) _then;
+  final _SentinelUser _self;
+  final $Res Function(_SentinelUser) _then;
 
-  /// Create a copy of User
+  /// Create a copy of SentinelUser
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -340,17 +352,18 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
     Object? id = null,
     Object? firstName = freezed,
     Object? lastName = freezed,
-    Object? email = freezed,
-    Object? phoneNumber = freezed,
+    Object? email = null,
+    Object? emailVerified = null,
     Object? image = freezed,
-    Object? twoFactor = null,
-    Object? banned = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? factors = null,
-    Object? devices = null,
+    Object? twoFactorEnabled = null,
+    Object? role = null,
+    Object? banned = null,
+    Object? banReason = freezed,
+    Object? banExpires = freezed,
   }) {
-    return _then(_User(
+    return _then(_SentinelUser(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -363,26 +376,18 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
           ? _self.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: freezed == email
+      email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _self.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      emailVerified: null == emailVerified
+          ? _self.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
       image: freezed == image
           ? _self.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      twoFactor: null == twoFactor
-          ? _self.twoFactor
-          : twoFactor // ignore: cast_nullable_to_non_nullable
-              as bool,
-      banned: null == banned
-          ? _self.banned
-          : banned // ignore: cast_nullable_to_non_nullable
-              as bool,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -391,14 +396,26 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
           ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      factors: null == factors
-          ? _self._factors
-          : factors // ignore: cast_nullable_to_non_nullable
-              as List<Factor>,
-      devices: null == devices
-          ? _self._devices
-          : devices // ignore: cast_nullable_to_non_nullable
-              as List<Device>,
+      twoFactorEnabled: null == twoFactorEnabled
+          ? _self.twoFactorEnabled
+          : twoFactorEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      role: null == role
+          ? _self.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as UserRole,
+      banned: null == banned
+          ? _self.banned
+          : banned // ignore: cast_nullable_to_non_nullable
+              as bool,
+      banReason: freezed == banReason
+          ? _self.banReason
+          : banReason // ignore: cast_nullable_to_non_nullable
+              as String?,
+      banExpires: freezed == banExpires
+          ? _self.banExpires
+          : banExpires // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }

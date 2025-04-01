@@ -5,8 +5,10 @@ analyzer:
     - "build/**"
     - "**/*.g.dart"
     - "**/*.freezed.dart"
-    - "**/*.drift.dart"
   errors:
     invalid_annotation_target: ignore
     avoid_positional_boolean_parameters: ignore
     lines_longer_than_80_chars: ignore
+
+formatter:
+  page_width: 100

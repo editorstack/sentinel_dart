@@ -6,36 +6,43 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_User _$UserFromJson(Map<String, dynamic> json) => _User(
+_SentinelUser _$SentinelUserFromJson(Map<String, dynamic> json) =>
+    _SentinelUser(
       id: json['id'] as String,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
-      email: json['email'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
+      email: json['email'] as String,
+      emailVerified: json['emailVerified'] as bool,
       image: json['image'] as String?,
-      twoFactor: json['twoFactor'] as bool,
-      banned: json['banned'] as bool,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      factors: (json['factors'] as List<dynamic>)
-          .map((e) => Factor.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      devices: (json['devices'] as List<dynamic>)
-          .map((e) => Device.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      twoFactorEnabled: json['twoFactorEnabled'] as bool,
+      role: $enumDecode(_$UserRoleEnumMap, json['role']),
+      banned: json['banned'] as bool,
+      banReason: json['banReason'] as String?,
+      banExpires: json['banExpires'] == null
+          ? null
+          : DateTime.parse(json['banExpires'] as String),
     );
 
-Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
+Map<String, dynamic> _$SentinelUserToJson(_SentinelUser instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'email': instance.email,
-      'phoneNumber': instance.phoneNumber,
+      'emailVerified': instance.emailVerified,
       'image': instance.image,
-      'twoFactor': instance.twoFactor,
-      'banned': instance.banned,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
-      'factors': instance.factors.map((e) => e.toJson()).toList(),
-      'devices': instance.devices.map((e) => e.toJson()).toList(),
+      'twoFactorEnabled': instance.twoFactorEnabled,
+      'role': _$UserRoleEnumMap[instance.role]!,
+      'banned': instance.banned,
+      'banReason': instance.banReason,
+      'banExpires': instance.banExpires?.toIso8601String(),
     };
+
+const _$UserRoleEnumMap = {
+  UserRole.admin: 'admin',
+  UserRole.user: 'user',
+};
