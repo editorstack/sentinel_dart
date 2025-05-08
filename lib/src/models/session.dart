@@ -50,6 +50,25 @@ enum DeviceType {
   linux,
 }
 
+/// Represents data related to an IP address.
+@freezed
+abstract class IPAddressData with _$IPAddressData {
+  /// Creates a new instance of [IPAddressData].
+  const factory IPAddressData({
+    required String ip,
+    required String city,
+    required String region,
+    @JsonKey(name: 'region_code') required String regionCode,
+    @JsonKey(name: 'country_code') required String countryCode,
+    @JsonKey(name: 'country_code_iso3') required String countryCodeIso3,
+    @JsonKey(name: 'country_name') required String countryName,
+    @JsonKey(name: 'country_capital') required String countryCapital,
+  }) = _IPAddressData;
+
+  /// Converts a [IPAddressData] to and from a [Map]
+  factory IPAddressData.fromJson(Map<String, dynamic> json) => _$IPAddressDataFromJson(json);
+}
+
 /// Extension on [SentinelSession] to provide conversion to [DSentinelSession].
 extension SentinelSessionConverter on SentinelSession {
   /// Converts a [SentinelSession] instance to an [DSentinelSession] instance.

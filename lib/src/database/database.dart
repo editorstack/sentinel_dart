@@ -1,5 +1,7 @@
 import 'package:drift/drift.dart';
+import 'package:sentinel/src/models/session.dart';
 import 'package:sentinel/src/models/session.drift.dart';
+import 'package:sentinel/src/models/user.dart';
 import 'package:sentinel/src/models/user.drift.dart';
 
 part 'database.g.dart';

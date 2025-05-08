@@ -54,7 +54,7 @@ enum UserRole {
 }
 
 /// Extension on [SentinelUser] to provide conversion to [DSentinelUser].
-extension UserConverter on SentinelUser {
+extension SentinelUserConverter on SentinelUser {
   /// Converts an [SentinelUser] instance to an [DSentinelUser] instance.
   ///
   /// Returns an [DSentinelUser] object that can be stored in the Drift database.

@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+part of 'sentinel_api.dart';
 
 /// Exception thrown by the functions in the studio_auth package.
 class SentinelException implements Exception {

@@ -44,3 +44,27 @@ const _$DeviceTypeEnumMap = {
   DeviceType.windows: 'windows',
   DeviceType.linux: 'linux',
 };
+
+_IPAddressData _$IPAddressDataFromJson(Map<String, dynamic> json) =>
+    _IPAddressData(
+      ip: json['ip'] as String,
+      city: json['city'] as String,
+      region: json['region'] as String,
+      regionCode: json['region_code'] as String,
+      countryCode: json['country_code'] as String,
+      countryCodeIso3: json['country_code_iso3'] as String,
+      countryName: json['country_name'] as String,
+      countryCapital: json['country_capital'] as String,
+    );
+
+Map<String, dynamic> _$IPAddressDataToJson(_IPAddressData instance) =>
+    <String, dynamic>{
+      'ip': instance.ip,
+      'city': instance.city,
+      'region': instance.region,
+      'region_code': instance.regionCode,
+      'country_code': instance.countryCode,
+      'country_code_iso3': instance.countryCodeIso3,
+      'country_name': instance.countryName,
+      'country_capital': instance.countryCapital,
+    };

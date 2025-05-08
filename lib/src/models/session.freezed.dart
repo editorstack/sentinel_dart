@@ -338,4 +338,299 @@ class __$SentinelSessionCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
+mixin _$IPAddressData {
+  String get ip;
+  String get city;
+  String get region;
+  @JsonKey(name: 'region_code')
+  String get regionCode;
+  @JsonKey(name: 'country_code')
+  String get countryCode;
+  @JsonKey(name: 'country_code_iso3')
+  String get countryCodeIso3;
+  @JsonKey(name: 'country_name')
+  String get countryName;
+  @JsonKey(name: 'country_capital')
+  String get countryCapital;
+
+  /// Create a copy of IPAddressData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $IPAddressDataCopyWith<IPAddressData> get copyWith =>
+      _$IPAddressDataCopyWithImpl<IPAddressData>(
+          this as IPAddressData, _$identity);
+
+  /// Serializes this IPAddressData to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is IPAddressData &&
+            (identical(other.ip, ip) || other.ip == ip) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.region, region) || other.region == region) &&
+            (identical(other.regionCode, regionCode) ||
+                other.regionCode == regionCode) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
+            (identical(other.countryCodeIso3, countryCodeIso3) ||
+                other.countryCodeIso3 == countryCodeIso3) &&
+            (identical(other.countryName, countryName) ||
+                other.countryName == countryName) &&
+            (identical(other.countryCapital, countryCapital) ||
+                other.countryCapital == countryCapital));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, ip, city, region, regionCode,
+      countryCode, countryCodeIso3, countryName, countryCapital);
+
+  @override
+  String toString() {
+    return 'IPAddressData(ip: $ip, city: $city, region: $region, regionCode: $regionCode, countryCode: $countryCode, countryCodeIso3: $countryCodeIso3, countryName: $countryName, countryCapital: $countryCapital)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $IPAddressDataCopyWith<$Res> {
+  factory $IPAddressDataCopyWith(
+          IPAddressData value, $Res Function(IPAddressData) _then) =
+      _$IPAddressDataCopyWithImpl;
+  @useResult
+  $Res call(
+      {String ip,
+      String city,
+      String region,
+      @JsonKey(name: 'region_code') String regionCode,
+      @JsonKey(name: 'country_code') String countryCode,
+      @JsonKey(name: 'country_code_iso3') String countryCodeIso3,
+      @JsonKey(name: 'country_name') String countryName,
+      @JsonKey(name: 'country_capital') String countryCapital});
+}
+
+/// @nodoc
+class _$IPAddressDataCopyWithImpl<$Res>
+    implements $IPAddressDataCopyWith<$Res> {
+  _$IPAddressDataCopyWithImpl(this._self, this._then);
+
+  final IPAddressData _self;
+  final $Res Function(IPAddressData) _then;
+
+  /// Create a copy of IPAddressData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ip = null,
+    Object? city = null,
+    Object? region = null,
+    Object? regionCode = null,
+    Object? countryCode = null,
+    Object? countryCodeIso3 = null,
+    Object? countryName = null,
+    Object? countryCapital = null,
+  }) {
+    return _then(_self.copyWith(
+      ip: null == ip
+          ? _self.ip
+          : ip // ignore: cast_nullable_to_non_nullable
+              as String,
+      city: null == city
+          ? _self.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String,
+      region: null == region
+          ? _self.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String,
+      regionCode: null == regionCode
+          ? _self.regionCode
+          : regionCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
+          ? _self.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCodeIso3: null == countryCodeIso3
+          ? _self.countryCodeIso3
+          : countryCodeIso3 // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryName: null == countryName
+          ? _self.countryName
+          : countryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCapital: null == countryCapital
+          ? _self.countryCapital
+          : countryCapital // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _IPAddressData implements IPAddressData {
+  const _IPAddressData(
+      {required this.ip,
+      required this.city,
+      required this.region,
+      @JsonKey(name: 'region_code') required this.regionCode,
+      @JsonKey(name: 'country_code') required this.countryCode,
+      @JsonKey(name: 'country_code_iso3') required this.countryCodeIso3,
+      @JsonKey(name: 'country_name') required this.countryName,
+      @JsonKey(name: 'country_capital') required this.countryCapital});
+  factory _IPAddressData.fromJson(Map<String, dynamic> json) =>
+      _$IPAddressDataFromJson(json);
+
+  @override
+  final String ip;
+  @override
+  final String city;
+  @override
+  final String region;
+  @override
+  @JsonKey(name: 'region_code')
+  final String regionCode;
+  @override
+  @JsonKey(name: 'country_code')
+  final String countryCode;
+  @override
+  @JsonKey(name: 'country_code_iso3')
+  final String countryCodeIso3;
+  @override
+  @JsonKey(name: 'country_name')
+  final String countryName;
+  @override
+  @JsonKey(name: 'country_capital')
+  final String countryCapital;
+
+  /// Create a copy of IPAddressData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$IPAddressDataCopyWith<_IPAddressData> get copyWith =>
+      __$IPAddressDataCopyWithImpl<_IPAddressData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$IPAddressDataToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _IPAddressData &&
+            (identical(other.ip, ip) || other.ip == ip) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.region, region) || other.region == region) &&
+            (identical(other.regionCode, regionCode) ||
+                other.regionCode == regionCode) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
+            (identical(other.countryCodeIso3, countryCodeIso3) ||
+                other.countryCodeIso3 == countryCodeIso3) &&
+            (identical(other.countryName, countryName) ||
+                other.countryName == countryName) &&
+            (identical(other.countryCapital, countryCapital) ||
+                other.countryCapital == countryCapital));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, ip, city, region, regionCode,
+      countryCode, countryCodeIso3, countryName, countryCapital);
+
+  @override
+  String toString() {
+    return 'IPAddressData(ip: $ip, city: $city, region: $region, regionCode: $regionCode, countryCode: $countryCode, countryCodeIso3: $countryCodeIso3, countryName: $countryName, countryCapital: $countryCapital)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$IPAddressDataCopyWith<$Res>
+    implements $IPAddressDataCopyWith<$Res> {
+  factory _$IPAddressDataCopyWith(
+          _IPAddressData value, $Res Function(_IPAddressData) _then) =
+      __$IPAddressDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String ip,
+      String city,
+      String region,
+      @JsonKey(name: 'region_code') String regionCode,
+      @JsonKey(name: 'country_code') String countryCode,
+      @JsonKey(name: 'country_code_iso3') String countryCodeIso3,
+      @JsonKey(name: 'country_name') String countryName,
+      @JsonKey(name: 'country_capital') String countryCapital});
+}
+
+/// @nodoc
+class __$IPAddressDataCopyWithImpl<$Res>
+    implements _$IPAddressDataCopyWith<$Res> {
+  __$IPAddressDataCopyWithImpl(this._self, this._then);
+
+  final _IPAddressData _self;
+  final $Res Function(_IPAddressData) _then;
+
+  /// Create a copy of IPAddressData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? ip = null,
+    Object? city = null,
+    Object? region = null,
+    Object? regionCode = null,
+    Object? countryCode = null,
+    Object? countryCodeIso3 = null,
+    Object? countryName = null,
+    Object? countryCapital = null,
+  }) {
+    return _then(_IPAddressData(
+      ip: null == ip
+          ? _self.ip
+          : ip // ignore: cast_nullable_to_non_nullable
+              as String,
+      city: null == city
+          ? _self.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String,
+      region: null == region
+          ? _self.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String,
+      regionCode: null == regionCode
+          ? _self.regionCode
+          : regionCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
+          ? _self.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCodeIso3: null == countryCodeIso3
+          ? _self.countryCodeIso3
+          : countryCodeIso3 // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryName: null == countryName
+          ? _self.countryName
+          : countryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCapital: null == countryCapital
+          ? _self.countryCapital
+          : countryCapital // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
 // dart format on
