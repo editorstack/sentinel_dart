@@ -1,93 +1,25 @@
 part of 'sentinel_api.dart';
 
-/// Represents the response for the TOTP request.
+/// Represents a successful response from the Sentinel API.
 @freezed
-abstract class TOTPResponse with _$TOTPResponse {
-  /// Creates a new instance of [TOTPResponse] with the specified parameters.
-  const factory TOTPResponse({
-    required String id,
-    required String secret,
-    required String uri,
-    required bool verified,
-    required List<String> recoveryCodes,
-  }) = _TOTPResponse;
+abstract class SuccessResponse with _$SuccessResponse {
+  /// Represents a successful response from the Sentinel API.
+  const factory SuccessResponse(bool success) = _SuccessResponse;
 
-  /// Used to serialize [TOTPResponse] object to and from JSON.
-  factory TOTPResponse.fromJson(Map<String, dynamic> json) =>
-      _$TOTPResponseFromJson(json);
+  /// Converts a [SuccessResponse] to and from a [Map]
+  factory SuccessResponse.fromJson(Map<String, dynamic> json) => _$SuccessResponseFromJson(json);
 }
 
-/// Represents the different types of first factors supported by the system.
-enum FirstFactor {
-  /// Password-based authentication
-  password,
-
-  /// Email-code based authentication
-  emailCode,
-
-  /// Email-link based authentication
-  emailLink,
-
-  /// Phone-code based authentication
-  phoneCode,
-
-  /// Apple oAuth based authentication
-  apple,
-
-  /// Discord oAuth based authentication
-  discord,
-
-  /// Dropbox oAuth based authentication
-  dropbox,
-
-  /// Facebook oAuth based authentication
-  facebook,
-
-  /// GitHub oAuth based authentication
-  github,
-
-  /// Google oAuth based authentication
-  google,
-
-  /// Microsoft oAuth based authentication
-  microsoft,
-
-  /// Spotify oAuth based authentication
-  spotify,
-
-  /// Twitch oAuth based authentication
-  twitch,
-
-  /// X oAuth based authentication
-  x,
-}
-
-/// Represents the response for the user's factors.
+/// Represents a user session in the Sentinel API.
 @freezed
-abstract class UserFactorsResponse with _$UserFactorsResponse {
-  /// Creates a new instance of [UserFactorsResponse] with the specified
-  /// parameters.
-  const factory UserFactorsResponse({
-    required List<FirstFactor> firstFactors,
-    required List<SecondFactor> secondFactors,
-  }) = _UserFactorsResponse;
+abstract class SentinelUserSession with _$SentinelUserSession {
+  /// Represents a user session in the Sentinel API.
+  const factory SentinelUserSession({
+    required SentinelSession session,
+    required SentinelUser user,
+  }) = _SentinelUserSession;
 
-  /// Used to serialize [UserFactorsResponse] object to and from JSON.
-  factory UserFactorsResponse.fromJson(Map<String, dynamic> json) =>
-      _$UserFactorsResponseFromJson(json);
-}
-
-/// Represents the different types of second factors supported by the system.
-enum SecondFactor {
-  /// Email-code based second factor
-  emailCode,
-
-  /// Phone-code based second factor
-  phoneCode,
-
-  /// TOTP based second factor
-  totp,
-
-  /// Backup code based second factor
-  backupCode,
+  /// Converts a [SentinelUserSession] to and from a [Map]
+  factory SentinelUserSession.fromJson(Map<String, dynamic> json) =>
+      _$SentinelUserSessionFromJson(json);
 }

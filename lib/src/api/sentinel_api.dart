@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:sentinel/src/models/device.dart';
-import 'package:sentinel/src/models/factor.dart';
 import 'package:sentinel/src/models/session.dart';
 import 'package:sentinel/src/models/user.dart';
 
@@ -20,179 +18,78 @@ abstract class SentinelApi {
   /// URL.
   factory SentinelApi(Dio dio, {String? baseUrl}) = _SentinelApi;
 
-  /// Retrieves the current authentication status.
-  @POST('/sentinel/sign-up/')
+  /// Gets the current user's information
+  @GET('/sentinel/user/current-user')
   @Headers({'Content-Type': 'application/json'})
-  Future<UserSession> signUp(@Body() SignUpBody body);
+  Future<SentinelUser> getCurrentUser();
 
-  /// Prepares verification for sign up
-  @POST('/sentinel/sign-up/prepare-verification')
+  /// Updates the user's information
+  @POST('/sentinel/user/update-details')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> prepareSignUpVerification(@Body() PrepareVerificationBody body);
-
-  /// Attempts verification for sign up
-  @POST('/sentinel/sign-up/attempt-verification')
-  @Headers({'Content-Type': 'application/json'})
-  Future<UserSession> attemptSignUpVerification(@Body() AttemptVerificationBody body);
-
-  /// Prepares first factor for sign in
-  @POST('/sentinel/sign-in/prepare-first-factor')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> prepareFirstFactor(@Body() PrepareFirstFactorBody body);
-
-  /// Attempts first factor for sign in
-  @POST('/sentinel/sign-in/attempt-first-factor')
-  @Headers({'Content-Type': 'application/json'})
-  Future<UserSession> attemptFirstFactor(@Body() AttemptFirstFactorBody body);
-
-  /// Prepares second factor for sign in
-  @POST('/sentinel/sign-in/prepare-second-factor')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> prepareSecondFactor(@Body() PrepareSecondFactorBody body);
-
-  /// Attempts second factor for sign in
-  @POST('/sentinel/sign-in/attempt-second-factor')
-  @Headers({'Content-Type': 'application/json'})
-  Future<UserSession> attemptSecondFactor(@Body() AttemptSecondFactorBody body);
-
-  /// Prepares reset password for sign in
-  @POST('/sentinel/sign-in/prepare-reset-password')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> prepareResetPassword(@Body() PrepareResetPasswordBody body);
-
-  /// Attempts reset password for sign in
-  @POST('/sentinel/sign-in/attempt-reset-password')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> attemptResetPassword(@Body() AttemptResetPasswordBody body);
-
-  /// Prepares re-authentication for sign in
-  @POST('/sentinel/sign-in/prepare-re-authentication')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> prepareReAuthentication(@Body() PrepareReAuthenticationBody body);
-
-  /// Attempts re-authentication for sign in
-  @POST('/sentinel/sign-in/attempt-re-authentication')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> attemptReAuthentication(@Body() AttemptReAuthenticationBody body);
-
-  /// Get user details
-  @GET('/sentinel/me')
-  @Headers({'Content-Type': 'application/json'})
-  Future<User> getUser();
-
-  /// Update user details
-  @PATCH('/sentinel/me')
-  @Headers({'Content-Type': 'application/json'})
-  Future<User> updateUser(@Body() UpdateUserBody body);
+  Future<SentinelUser> updateDetails(@Body() UpdateUserRequest body);
 
   /// Update user image
-  @POST('/sentinel/me/image')
+  @POST('/sentinel/user/update-image')
   @Headers({'Content-Type': 'application/json'})
-  Future<String?> updateUserImage(@Body() UpdateUserImageBody body);
+  Future<String?> updateImage(@Body() UpdateImageBody body);
 
-  /// Change password
-  @PATCH('/sentinel/me/change-password')
+  /// Updates the user's email
+  @POST('/sentinel/user/change-email')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> changePassword(@Body() ChangePasswordBody body);
+  Future<SentinelUser> changeEmail(@Body() ChangeEmailRequest body);
 
-  /// Remove password
-  @PATCH('/sentinel/me/remove-password')
+  /// Verify updating user's email
+  @POST('/sentinel/user/change-email/verify')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> removePassword(@Body() RemovePasswordBody body);
+  Future<SentinelUser> verifyChangeEmail(@Body() VerifyTokenRequest body);
 
-  /// Delete user
-  @DELETE('/sentinel/me')
+  /// Deletes the user's account
+  @DELETE('/sentinel/user/delete-user')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> deleteUser();
+  Future<SuccessResponse> deleteUser(@Body() DeleteUserRequest body);
 
-  /// Gets all the available factors to sign in for the user
-  @GET('/sentinel/factors/user-factors')
+  /// Verify deleting user's account
+  @POST('/sentinel/user/delete-user/verify')
   @Headers({'Content-Type': 'application/json'})
-  Future<UserFactorsResponse> getUserFactors(@Query('identifier') String identifier);
+  Future<SuccessResponse> verifyDeleteUser(@Body() VerifyTokenRequest body);
 
-  /// Creates a new factor for the user
-  @POST('/sentinel/factors/identifier')
+  /// Sign in using magic link
+  @POST('/sentinel/sign-in/magic-link')
   @Headers({'Content-Type': 'application/json'})
-  Future<Factor> createFactor(@Body() CreateFactorBody body);
+  Future<SuccessResponse> magicLink(@Body() MagicLinkRequest body);
 
-  /// Prepares factor for verification
-  @POST('/sentinel/factors/{factorID}/prepare-verification')
+  /// Verify magic link sign in
+  @POST('/sentinel/magic-link/verify')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> prepareFactorVerification(
-    @Path() String factorID,
-    @Body() PrepareVerificationBody body,
-  );
+  Future<SentinelUserSession> verifyMagicLink(@Body() VerifyTokenRequest body);
 
-  /// Attempts verification for factor
-  @POST('/sentinel/factors/{factorID}/attempt-verification')
+  /// Sign in using social provider
+  @POST('/sentinel/social/')
   @Headers({'Content-Type': 'application/json'})
-  Future<User> attemptFactorVerification(
-    @Path() String factorID,
-    @Body() AttemptVerificationBody body,
-  );
+  Future<SentinelUser> social(@Body() SocialRequest body);
 
-  /// Deletes a factor
-  @DELETE('/sentinel/factors/{factorID}')
+  /// Gets the current session
+  @GET('/sentinel/session/current-session')
   @Headers({'Content-Type': 'application/json'})
-  Future<User> deleteFactor(@Path() String factorID);
+  Future<SentinelSession> currentSession();
 
-  /// Gets all sessions for the user
-  @GET('/sentinel/sessions/')
+  /// Gets the user's sessions
+  @GET('/sentinel/session/list-sessions')
   @Headers({'Content-Type': 'application/json'})
-  Future<List<Session>> getSessions();
+  Future<List<SentinelSession>> listSessions();
 
-  /// Gets a session by ID
-  @GET('/sentinel/sessions/{sessionID}')
+  /// Revokes a session
+  @POST('/sentinel/session/revoke-session')
   @Headers({'Content-Type': 'application/json'})
-  Future<Session?> getSession(@Path() String sessionID);
+  Future<SuccessResponse> revokeSession(@Body() RevokeSessionRequest body);
 
-  /// Extends a session
-  @PATCH('/sentinel/sessions/extend')
+  /// Revoke all user sessions
+  @POST('/sentinel/session/revoke-sessions')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> extendSession();
+  Future<SuccessResponse> revokeSessions();
 
-  /// Deletes all sessions for the user
-  @DELETE('/sentinel/sessions/')
+  /// Revoke all other user sessions other than the current one
+  @POST('/sentinel/session/revoke-other-sessions')
   @Headers({'Content-Type': 'application/json'})
-  Future<bool> deleteAllSessions();
-
-  /// Deletes other sessions for the user
-  @DELETE('/sentinel/sessions/others')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> deleteOtherSessions();
-
-  /// Deletes a session by ID
-  @DELETE('/sentinel/sessions/{sessionID}')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> deleteSession(@Path() String sessionID);
-
-  /// Enables TOTP for the user
-  @POST('/sentinel/mfa/enable-totp')
-  @Headers({'Content-Type': 'application/json'})
-  Future<TOTPResponse> enableTOTP();
-
-  /// Verifies the TOTP code
-  @POST('/sentinel/mfa/verify-totp')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> verifyTOTP(@Body() TOTPVerifyBody body);
-
-  /// Disables TOTP for the user
-  @DELETE('/sentinel/mfa/disable-totp')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> disableTOTP();
-
-  /// Enables two factor for the user
-  @PATCH('/sentinel/mfa/enable-two-factor')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> enableTwoFactor();
-
-  /// Disables two factor for the user
-  @PATCH('/sentinel/mfa/disable-two-factor')
-  @Headers({'Content-Type': 'application/json'})
-  Future<bool> disableTwoFactor();
-
-  /// Regenerates recovery codes for the user
-  @PATCH('/sentinel/mfa/regenerate-recovery-codes')
-  @Headers({'Content-Type': 'application/json'})
-  Future<List<String>> regenerateRecoveryCodes();
+  Future<SuccessResponse> revokeOtherSessions();
 }
