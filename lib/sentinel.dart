@@ -1,11 +1,9 @@
 /// Support for doing something awesome.
 ///
 /// More dart docs go here.
-library sentinel;
+library;
 
-export 'src/api/sentinel_api.dart' show EmailVerificationStrategy, SentinelException;
-export 'src/models/device.dart' hide DeviceConverter;
-export 'src/models/factor.dart' hide FactorConverter;
-export 'src/models/session.dart' hide DSessionConverter, SessionConverter, Sessions;
-export 'src/models/user.dart' hide DUserConverter, UserConverter, Users;
+export 'src/api/sentinel_api.dart' show SentinelException, SocialProvider;
+export 'src/models/session.dart' hide DSentinelSessionConverter, SentinelSessionConverter;
+export 'src/models/user.dart' hide DSentinelUserConverter, SentinelUserConverter;
 export 'src/sentinel.dart' show Sentinel;

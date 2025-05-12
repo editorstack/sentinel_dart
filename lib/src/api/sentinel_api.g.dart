@@ -6,107 +6,108 @@ part of 'sentinel_api.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AnonymousSignUpBody _$AnonymousSignUpBodyFromJson(Map<String, dynamic> json) =>
-    AnonymousSignUpBody(
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$AnonymousSignUpBodyToJson(
-        AnonymousSignUpBody instance) =>
-    <String, dynamic>{
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-PasswordSignUpBody _$PasswordSignUpBodyFromJson(Map<String, dynamic> json) =>
-    PasswordSignUpBody(
+_UpdateUserRequest _$UpdateUserRequestFromJson(Map<String, dynamic> json) =>
+    _UpdateUserRequest(
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      identifier: json['identifier'] as String,
-      password: json['password'] as String,
-      $type: json['strategy'] as String?,
     );
 
-Map<String, dynamic> _$PasswordSignUpBodyToJson(PasswordSignUpBody instance) =>
+Map<String, dynamic> _$UpdateUserRequestToJson(_UpdateUserRequest instance) =>
     <String, dynamic>{
       'firstName': instance.firstName,
       'lastName': instance.lastName,
-      'device': instance.device.toJson(),
-      'identifier': instance.identifier,
-      'password': instance.password,
-      'strategy': instance.$type,
     };
 
-EmailCodeSignUpBody _$EmailCodeSignUpBodyFromJson(Map<String, dynamic> json) =>
-    EmailCodeSignUpBody(
+_DeleteUserRequest _$DeleteUserRequestFromJson(Map<String, dynamic> json) =>
+    _DeleteUserRequest(
+      callbackUrl: json['callbackUrl'] as String,
+    );
+
+Map<String, dynamic> _$DeleteUserRequestToJson(_DeleteUserRequest instance) =>
+    <String, dynamic>{
+      'callbackUrl': instance.callbackUrl,
+    };
+
+_ChangeEmailRequest _$ChangeEmailRequestFromJson(Map<String, dynamic> json) =>
+    _ChangeEmailRequest(
+      email: json['email'] as String,
+      callbackUrl: json['callbackUrl'] as String,
+    );
+
+Map<String, dynamic> _$ChangeEmailRequestToJson(_ChangeEmailRequest instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'callbackUrl': instance.callbackUrl,
+    };
+
+_MagicLinkRequest _$MagicLinkRequestFromJson(Map<String, dynamic> json) =>
+    _MagicLinkRequest(
+      email: json['email'] as String,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      identifier: json['identifier'] as String,
-      $type: json['strategy'] as String?,
+      callbackUrl: json['callbackUrl'] as String,
     );
 
-Map<String, dynamic> _$EmailCodeSignUpBodyToJson(
-        EmailCodeSignUpBody instance) =>
+Map<String, dynamic> _$MagicLinkRequestToJson(_MagicLinkRequest instance) =>
     <String, dynamic>{
+      'email': instance.email,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'device': instance.device.toJson(),
-      'identifier': instance.identifier,
-      'strategy': instance.$type,
+      'callbackUrl': instance.callbackUrl,
     };
 
-EmailLinkSignUpBody _$EmailLinkSignUpBodyFromJson(Map<String, dynamic> json) =>
-    EmailLinkSignUpBody(
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
+_SocialRequest _$SocialRequestFromJson(Map<String, dynamic> json) =>
+    _SocialRequest(
+      callbackUrl: json['callbackUrl'] as String,
       device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      identifier: json['identifier'] as String,
-      $type: json['strategy'] as String?,
+      provider: $enumDecode(_$SocialProviderEnumMap, json['provider']),
     );
 
-Map<String, dynamic> _$EmailLinkSignUpBodyToJson(
-        EmailLinkSignUpBody instance) =>
+Map<String, dynamic> _$SocialRequestToJson(_SocialRequest instance) =>
     <String, dynamic>{
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'callbackUrl': instance.callbackUrl,
       'device': instance.device.toJson(),
-      'identifier': instance.identifier,
-      'strategy': instance.$type,
+      'provider': _$SocialProviderEnumMap[instance.provider]!,
     };
 
-PhoneCodeSignUpBody _$PhoneCodeSignUpBodyFromJson(Map<String, dynamic> json) =>
-    PhoneCodeSignUpBody(
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      identifier: json['identifier'] as String,
-      $type: json['strategy'] as String?,
+const _$SocialProviderEnumMap = {
+  SocialProvider.google: 'google',
+  SocialProvider.github: 'github',
+};
+
+_RevokeSessionRequest _$RevokeSessionRequestFromJson(
+        Map<String, dynamic> json) =>
+    _RevokeSessionRequest(
+      token: json['token'] as String,
     );
 
-Map<String, dynamic> _$PhoneCodeSignUpBodyToJson(
-        PhoneCodeSignUpBody instance) =>
+Map<String, dynamic> _$RevokeSessionRequestToJson(
+        _RevokeSessionRequest instance) =>
     <String, dynamic>{
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
-      'device': instance.device.toJson(),
-      'identifier': instance.identifier,
-      'strategy': instance.$type,
+      'token': instance.token,
+    };
+
+_VerifyTokenRequest _$VerifyTokenRequestFromJson(Map<String, dynamic> json) =>
+    _VerifyTokenRequest(
+      token: json['token'] as String,
+    );
+
+Map<String, dynamic> _$VerifyTokenRequestToJson(_VerifyTokenRequest instance) =>
+    <String, dynamic>{
+      'token': instance.token,
     };
 
 _DeviceRequest _$DeviceRequestFromJson(Map<String, dynamic> json) =>
     _DeviceRequest(
       name: json['name'] as String,
-      deviceID: json['deviceID'] as String,
       type: $enumDecode(_$DeviceTypeEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$DeviceRequestToJson(_DeviceRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'deviceID': instance.deviceID,
       'type': _$DeviceTypeEnumMap[instance.type]!,
     };
 
@@ -119,424 +120,14 @@ const _$DeviceTypeEnumMap = {
   DeviceType.linux: 'linux',
 };
 
-EmailCodePrepareVerificationBody _$EmailCodePrepareVerificationBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailCodePrepareVerificationBody(
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailCodePrepareVerificationBodyToJson(
-        EmailCodePrepareVerificationBody instance) =>
-    <String, dynamic>{
-      'strategy': instance.$type,
-    };
-
-PhoneCodePrepareVerificationBody _$PhoneCodePrepareVerificationBodyFromJson(
-        Map<String, dynamic> json) =>
-    PhoneCodePrepareVerificationBody(
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$PhoneCodePrepareVerificationBodyToJson(
-        PhoneCodePrepareVerificationBody instance) =>
-    <String, dynamic>{
-      'strategy': instance.$type,
-    };
-
-EmailLinkPrepareVerificationBody _$EmailLinkPrepareVerificationBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailLinkPrepareVerificationBody(
-      redirectUrl: json['redirectUrl'] as String,
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailLinkPrepareVerificationBodyToJson(
-        EmailLinkPrepareVerificationBody instance) =>
-    <String, dynamic>{
-      'redirectUrl': instance.redirectUrl,
-      'strategy': instance.$type,
-    };
-
-_AttemptVerificationBody _$AttemptVerificationBodyFromJson(
-        Map<String, dynamic> json) =>
-    _AttemptVerificationBody(
-      code: json['code'] as String,
-    );
-
-Map<String, dynamic> _$AttemptVerificationBodyToJson(
-        _AttemptVerificationBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-    };
-
-EmailCodePrepareFirstFactorBody _$EmailCodePrepareFirstFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailCodePrepareFirstFactorBody(
-      identifier: json['identifier'] as String,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailCodePrepareFirstFactorBodyToJson(
-        EmailCodePrepareFirstFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-PhoneCodePrepareFirstFactorBody _$PhoneCodePrepareFirstFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    PhoneCodePrepareFirstFactorBody(
-      identifier: json['identifier'] as String,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$PhoneCodePrepareFirstFactorBodyToJson(
-        PhoneCodePrepareFirstFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-EmailLinkPrepareFirstFactorBody _$EmailLinkPrepareFirstFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailLinkPrepareFirstFactorBody(
-      identifier: json['identifier'] as String,
-      redirectUrl: json['redirectUrl'] as String,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailLinkPrepareFirstFactorBodyToJson(
-        EmailLinkPrepareFirstFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'redirectUrl': instance.redirectUrl,
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-PasswordAttemptFirstFactorBody _$PasswordAttemptFirstFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    PasswordAttemptFirstFactorBody(
-      identifier: json['identifier'] as String,
-      password: json['password'] as String,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$PasswordAttemptFirstFactorBodyToJson(
-        PasswordAttemptFirstFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'password': instance.password,
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-EmailCodeAttemptFirstFactorBody _$EmailCodeAttemptFirstFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailCodeAttemptFirstFactorBody(
-      identifier: json['identifier'] as String,
-      code: json['code'] as String,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailCodeAttemptFirstFactorBodyToJson(
-        EmailCodeAttemptFirstFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'code': instance.code,
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-EmailLinkAttemptFirstFactorBody _$EmailLinkAttemptFirstFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailLinkAttemptFirstFactorBody(
-      identifier: json['identifier'] as String,
-      code: json['code'] as String,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailLinkAttemptFirstFactorBodyToJson(
-        EmailLinkAttemptFirstFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'code': instance.code,
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-PhoneCodeAttemptFirstFactorBody _$PhoneCodeAttemptFirstFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    PhoneCodeAttemptFirstFactorBody(
-      identifier: json['identifier'] as String,
-      code: json['code'] as String,
-      device: DeviceRequest.fromJson(json['device'] as Map<String, dynamic>),
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$PhoneCodeAttemptFirstFactorBodyToJson(
-        PhoneCodeAttemptFirstFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'code': instance.code,
-      'device': instance.device.toJson(),
-      'strategy': instance.$type,
-    };
-
-EmailCodePrepareSecondFactorBody _$EmailCodePrepareSecondFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailCodePrepareSecondFactorBody(
-      json['email'] as String,
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailCodePrepareSecondFactorBodyToJson(
-        EmailCodePrepareSecondFactorBody instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'strategy': instance.$type,
-    };
-
-PhoneCodePrepareSecondFactorBody _$PhoneCodePrepareSecondFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    PhoneCodePrepareSecondFactorBody(
-      json['phoneNumber'] as String,
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$PhoneCodePrepareSecondFactorBodyToJson(
-        PhoneCodePrepareSecondFactorBody instance) =>
-    <String, dynamic>{
-      'phoneNumber': instance.phoneNumber,
-      'strategy': instance.$type,
-    };
-
-EmailCodeAttemptSecondFactorBody _$EmailCodeAttemptSecondFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    EmailCodeAttemptSecondFactorBody(
-      code: json['code'] as String,
-      identifier: json['identifier'] as String,
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$EmailCodeAttemptSecondFactorBodyToJson(
-        EmailCodeAttemptSecondFactorBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'identifier': instance.identifier,
-      'strategy': instance.$type,
-    };
-
-PhoneCodeAttemptSecondFactorBody _$PhoneCodeAttemptSecondFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    PhoneCodeAttemptSecondFactorBody(
-      code: json['code'] as String,
-      identifier: json['identifier'] as String,
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$PhoneCodeAttemptSecondFactorBodyToJson(
-        PhoneCodeAttemptSecondFactorBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'identifier': instance.identifier,
-      'strategy': instance.$type,
-    };
-
-TOTPAttemptSecondFactorBody _$TOTPAttemptSecondFactorBodyFromJson(
-        Map<String, dynamic> json) =>
-    TOTPAttemptSecondFactorBody(
-      json['code'] as String,
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$TOTPAttemptSecondFactorBodyToJson(
-        TOTPAttemptSecondFactorBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'strategy': instance.$type,
-    };
-
-RecoveryCodeAttemptSecondFactorBody
-    _$RecoveryCodeAttemptSecondFactorBodyFromJson(Map<String, dynamic> json) =>
-        RecoveryCodeAttemptSecondFactorBody(
-          json['code'] as String,
-          $type: json['strategy'] as String?,
-        );
-
-Map<String, dynamic> _$RecoveryCodeAttemptSecondFactorBodyToJson(
-        RecoveryCodeAttemptSecondFactorBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'strategy': instance.$type,
-    };
-
-_PrepareResetPasswordBody _$PrepareResetPasswordBodyFromJson(
-        Map<String, dynamic> json) =>
-    _PrepareResetPasswordBody(
-      json['identifier'] as String,
-    );
-
-Map<String, dynamic> _$PrepareResetPasswordBodyToJson(
-        _PrepareResetPasswordBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-    };
-
-_AttemptResetPasswordBody _$AttemptResetPasswordBodyFromJson(
-        Map<String, dynamic> json) =>
-    _AttemptResetPasswordBody(
-      identifier: json['identifier'] as String,
-      code: json['code'] as String,
-      password: json['password'] as String,
-    );
-
-Map<String, dynamic> _$AttemptResetPasswordBodyToJson(
-        _AttemptResetPasswordBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'code': instance.code,
-      'password': instance.password,
-    };
-
-EmailCodePrepareReAuthenticationBody
-    _$EmailCodePrepareReAuthenticationBodyFromJson(Map<String, dynamic> json) =>
-        EmailCodePrepareReAuthenticationBody(
-          json['email'] as String,
-          $type: json['strategy'] as String?,
-        );
-
-Map<String, dynamic> _$EmailCodePrepareReAuthenticationBodyToJson(
-        EmailCodePrepareReAuthenticationBody instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'strategy': instance.$type,
-    };
-
-PhoneCodePrepareReAuthenticationBody
-    _$PhoneCodePrepareReAuthenticationBodyFromJson(Map<String, dynamic> json) =>
-        PhoneCodePrepareReAuthenticationBody(
-          json['phoneNumber'] as String,
-          $type: json['strategy'] as String?,
-        );
-
-Map<String, dynamic> _$PhoneCodePrepareReAuthenticationBodyToJson(
-        PhoneCodePrepareReAuthenticationBody instance) =>
-    <String, dynamic>{
-      'phoneNumber': instance.phoneNumber,
-      'strategy': instance.$type,
-    };
-
-PasswordAttemptReAuthenticationBody
-    _$PasswordAttemptReAuthenticationBodyFromJson(Map<String, dynamic> json) =>
-        PasswordAttemptReAuthenticationBody(
-          identifier: json['identifier'] as String,
-          password: json['password'] as String,
-          $type: json['strategy'] as String?,
-        );
-
-Map<String, dynamic> _$PasswordAttemptReAuthenticationBodyToJson(
-        PasswordAttemptReAuthenticationBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-      'password': instance.password,
-      'strategy': instance.$type,
-    };
-
-EmailCodeAttemptReAuthenticationBody
-    _$EmailCodeAttemptReAuthenticationBodyFromJson(Map<String, dynamic> json) =>
-        EmailCodeAttemptReAuthenticationBody(
-          code: json['code'] as String,
-          identifier: json['identifier'] as String,
-          $type: json['strategy'] as String?,
-        );
-
-Map<String, dynamic> _$EmailCodeAttemptReAuthenticationBodyToJson(
-        EmailCodeAttemptReAuthenticationBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'identifier': instance.identifier,
-      'strategy': instance.$type,
-    };
-
-PhoneCodeAttemptReAuthenticationBody
-    _$PhoneCodeAttemptReAuthenticationBodyFromJson(Map<String, dynamic> json) =>
-        PhoneCodeAttemptReAuthenticationBody(
-          code: json['code'] as String,
-          identifier: json['identifier'] as String,
-          $type: json['strategy'] as String?,
-        );
-
-Map<String, dynamic> _$PhoneCodeAttemptReAuthenticationBodyToJson(
-        PhoneCodeAttemptReAuthenticationBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'identifier': instance.identifier,
-      'strategy': instance.$type,
-    };
-
-TOTPAttemptReAuthenticationBody _$TOTPAttemptReAuthenticationBodyFromJson(
-        Map<String, dynamic> json) =>
-    TOTPAttemptReAuthenticationBody(
-      json['code'] as String,
-      $type: json['strategy'] as String?,
-    );
-
-Map<String, dynamic> _$TOTPAttemptReAuthenticationBodyToJson(
-        TOTPAttemptReAuthenticationBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'strategy': instance.$type,
-    };
-
-RecoveryCodeAttemptReAuthenticationBody
-    _$RecoveryCodeAttemptReAuthenticationBodyFromJson(
-            Map<String, dynamic> json) =>
-        RecoveryCodeAttemptReAuthenticationBody(
-          json['code'] as String,
-          $type: json['strategy'] as String?,
-        );
-
-Map<String, dynamic> _$RecoveryCodeAttemptReAuthenticationBodyToJson(
-        RecoveryCodeAttemptReAuthenticationBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'strategy': instance.$type,
-    };
-
-_UpdateUserBody _$UpdateUserBodyFromJson(Map<String, dynamic> json) =>
-    _UpdateUserBody(
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
-      emailFactorID: json['emailFactorID'] as String?,
-      phoneNumberFactorID: json['phoneNumberFactorID'] as String?,
-    );
-
-Map<String, dynamic> _$UpdateUserBodyToJson(_UpdateUserBody instance) =>
-    <String, dynamic>{
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
-      'emailFactorID': instance.emailFactorID,
-      'phoneNumberFactorID': instance.phoneNumberFactorID,
-    };
-
-_UpdateUserImageBody _$UpdateUserImageBodyFromJson(Map<String, dynamic> json) =>
-    _UpdateUserImageBody(
+_UpdateImageBody _$UpdateImageBodyFromJson(Map<String, dynamic> json) =>
+    _UpdateImageBody(
       image: json['image'] == null
           ? null
           : ImageBody.fromJson(json['image'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$UpdateUserImageBodyToJson(
-        _UpdateUserImageBody instance) =>
+Map<String, dynamic> _$UpdateImageBodyToJson(_UpdateImageBody instance) =>
     <String, dynamic>{
       'image': instance.image?.toJson(),
     };
@@ -552,110 +143,29 @@ Map<String, dynamic> _$ImageBodyToJson(_ImageBody instance) =>
       'length': instance.length,
     };
 
-_ChangePasswordBody _$ChangePasswordBodyFromJson(Map<String, dynamic> json) =>
-    _ChangePasswordBody(
-      currentPassword: json['currentPassword'] as String,
-      newPassword: json['newPassword'] as String,
+_SuccessResponse _$SuccessResponseFromJson(Map<String, dynamic> json) =>
+    _SuccessResponse(
+      json['success'] as bool,
     );
 
-Map<String, dynamic> _$ChangePasswordBodyToJson(_ChangePasswordBody instance) =>
+Map<String, dynamic> _$SuccessResponseToJson(_SuccessResponse instance) =>
     <String, dynamic>{
-      'currentPassword': instance.currentPassword,
-      'newPassword': instance.newPassword,
+      'success': instance.success,
     };
 
-_RemovePasswordBody _$RemovePasswordBodyFromJson(Map<String, dynamic> json) =>
-    _RemovePasswordBody(
-      currentPassword: json['currentPassword'] as String,
+_SentinelUserSession _$SentinelUserSessionFromJson(Map<String, dynamic> json) =>
+    _SentinelUserSession(
+      session:
+          SentinelSession.fromJson(json['session'] as Map<String, dynamic>),
+      user: SentinelUser.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$RemovePasswordBodyToJson(_RemovePasswordBody instance) =>
+Map<String, dynamic> _$SentinelUserSessionToJson(
+        _SentinelUserSession instance) =>
     <String, dynamic>{
-      'currentPassword': instance.currentPassword,
+      'session': instance.session.toJson(),
+      'user': instance.user.toJson(),
     };
-
-_CreateFactorBody _$CreateFactorBodyFromJson(Map<String, dynamic> json) =>
-    _CreateFactorBody(
-      json['identifier'] as String,
-    );
-
-Map<String, dynamic> _$CreateFactorBodyToJson(_CreateFactorBody instance) =>
-    <String, dynamic>{
-      'identifier': instance.identifier,
-    };
-
-_TOTPVerifyBody _$TOTPVerifyBodyFromJson(Map<String, dynamic> json) =>
-    _TOTPVerifyBody(
-      code: json['code'] as String,
-    );
-
-Map<String, dynamic> _$TOTPVerifyBodyToJson(_TOTPVerifyBody instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-    };
-
-_TOTPResponse _$TOTPResponseFromJson(Map<String, dynamic> json) =>
-    _TOTPResponse(
-      id: json['id'] as String,
-      secret: json['secret'] as String,
-      uri: json['uri'] as String,
-      verified: json['verified'] as bool,
-      recoveryCodes: (json['recoveryCodes'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-    );
-
-Map<String, dynamic> _$TOTPResponseToJson(_TOTPResponse instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'secret': instance.secret,
-      'uri': instance.uri,
-      'verified': instance.verified,
-      'recoveryCodes': instance.recoveryCodes,
-    };
-
-_UserFactorsResponse _$UserFactorsResponseFromJson(Map<String, dynamic> json) =>
-    _UserFactorsResponse(
-      firstFactors: (json['firstFactors'] as List<dynamic>)
-          .map((e) => $enumDecode(_$FirstFactorEnumMap, e))
-          .toList(),
-      secondFactors: (json['secondFactors'] as List<dynamic>)
-          .map((e) => $enumDecode(_$SecondFactorEnumMap, e))
-          .toList(),
-    );
-
-Map<String, dynamic> _$UserFactorsResponseToJson(
-        _UserFactorsResponse instance) =>
-    <String, dynamic>{
-      'firstFactors':
-          instance.firstFactors.map((e) => _$FirstFactorEnumMap[e]!).toList(),
-      'secondFactors':
-          instance.secondFactors.map((e) => _$SecondFactorEnumMap[e]!).toList(),
-    };
-
-const _$FirstFactorEnumMap = {
-  FirstFactor.password: 'password',
-  FirstFactor.emailCode: 'emailCode',
-  FirstFactor.emailLink: 'emailLink',
-  FirstFactor.phoneCode: 'phoneCode',
-  FirstFactor.apple: 'apple',
-  FirstFactor.discord: 'discord',
-  FirstFactor.dropbox: 'dropbox',
-  FirstFactor.facebook: 'facebook',
-  FirstFactor.github: 'github',
-  FirstFactor.google: 'google',
-  FirstFactor.microsoft: 'microsoft',
-  FirstFactor.spotify: 'spotify',
-  FirstFactor.twitch: 'twitch',
-  FirstFactor.x: 'x',
-};
-
-const _$SecondFactorEnumMap = {
-  SecondFactor.emailCode: 'emailCode',
-  SecondFactor.phoneCode: 'phoneCode',
-  SecondFactor.totp: 'totp',
-  SecondFactor.backupCode: 'backupCode',
-};
 
 // **************************************************************************
 // RetrofitGenerator
@@ -673,378 +183,13 @@ class _SentinelApi implements SentinelApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<UserSession> signUp(SignUpBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<UserSession>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-up/',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserSession _value;
-    try {
-      _value = UserSession.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> prepareSignUpVerification(PrepareVerificationBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-up/prepare-verification',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<UserSession> attemptSignUpVerification(
-    AttemptVerificationBody body,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<UserSession>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-up/attempt-verification',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserSession _value;
-    try {
-      _value = UserSession.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> prepareFirstFactor(PrepareFirstFactorBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/prepare-first-factor',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<UserSession> attemptFirstFactor(AttemptFirstFactorBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<UserSession>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/attempt-first-factor',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserSession _value;
-    try {
-      _value = UserSession.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> prepareSecondFactor(PrepareSecondFactorBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/prepare-second-factor',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<UserSession> attemptSecondFactor(AttemptSecondFactorBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<UserSession>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/attempt-second-factor',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserSession _value;
-    try {
-      _value = UserSession.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> prepareResetPassword(PrepareResetPasswordBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/prepare-reset-password',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> attemptResetPassword(AttemptResetPasswordBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/attempt-reset-password',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> prepareReAuthentication(PrepareReAuthenticationBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/prepare-re-authentication',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> attemptReAuthentication(AttemptReAuthenticationBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sign-in/attempt-re-authentication',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<User> getUser() async {
+  Future<SentinelUser> getCurrentUser() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<User>(
+    final _options = _setStreamType<SentinelUser>(
       Options(
         method: 'GET',
         headers: _headers,
@@ -1053,16 +198,16 @@ class _SentinelApi implements SentinelApi {
       )
           .compose(
             _dio.options,
-            '/sentinel/me',
+            '/sentinel/user/current-user',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late User _value;
+    late SentinelUser _value;
     try {
-      _value = User.fromJson(_result.data!);
+      _value = SentinelUser.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1071,31 +216,31 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<User> updateUser(UpdateUserBody body) async {
+  Future<SentinelUser> updateDetails(UpdateUserRequest body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     final _data = body;
-    final _options = _setStreamType<User>(
+    final _options = _setStreamType<SentinelUser>(
       Options(
-        method: 'PATCH',
+        method: 'POST',
         headers: _headers,
         extra: _extra,
         contentType: 'application/json',
       )
           .compose(
             _dio.options,
-            '/sentinel/me',
+            '/sentinel/user/update-details',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late User _value;
+    late SentinelUser _value;
     try {
-      _value = User.fromJson(_result.data!);
+      _value = SentinelUser.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1104,7 +249,7 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<String?> updateUserImage(UpdateUserImageBody body) async {
+  Future<String?> updateImage(UpdateImageBody body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
@@ -1119,7 +264,7 @@ class _SentinelApi implements SentinelApi {
       )
           .compose(
             _dio.options,
-            '/sentinel/me/image',
+            '/sentinel/user/update-image',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -1137,31 +282,31 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> changePassword(ChangePasswordBody body) async {
+  Future<SentinelUser> changeEmail(ChangeEmailRequest body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     final _data = body;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<SentinelUser>(
       Options(
-        method: 'PATCH',
+        method: 'POST',
         headers: _headers,
         extra: _extra,
         contentType: 'application/json',
       )
           .compose(
             _dio.options,
-            '/sentinel/me/change-password',
+            '/sentinel/user/change-email',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SentinelUser _value;
     try {
-      _value = _result.data!;
+      _value = SentinelUser.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1170,31 +315,31 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> removePassword(RemovePasswordBody body) async {
+  Future<SentinelUser> verifyChangeEmail(VerifyTokenRequest body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     final _data = body;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<SentinelUser>(
       Options(
-        method: 'PATCH',
+        method: 'POST',
         headers: _headers,
         extra: _extra,
         contentType: 'application/json',
       )
           .compose(
             _dio.options,
-            '/sentinel/me/remove-password',
+            '/sentinel/user/change-email/verify',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SentinelUser _value;
     try {
-      _value = _result.data!;
+      _value = SentinelUser.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1203,13 +348,13 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> deleteUser() async {
+  Future<SuccessResponse> deleteUser(DeleteUserRequest body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
+    final _data = body;
+    final _options = _setStreamType<SuccessResponse>(
       Options(
         method: 'DELETE',
         headers: _headers,
@@ -1218,16 +363,16 @@ class _SentinelApi implements SentinelApi {
       )
           .compose(
             _dio.options,
-            '/sentinel/me',
+            '/sentinel/user/delete-user',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SuccessResponse _value;
     try {
-      _value = _result.data!;
+      _value = SuccessResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1236,13 +381,145 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<UserFactorsResponse> getUserFactors(String identifier) async {
+  Future<SuccessResponse> verifyDeleteUser(VerifyTokenRequest body) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'identifier': identifier};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<SuccessResponse>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'application/json',
+      )
+          .compose(
+            _dio.options,
+            '/sentinel/user/delete-user/verify',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SuccessResponse _value;
+    try {
+      _value = SuccessResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SuccessResponse> magicLink(MagicLinkRequest body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<SuccessResponse>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'application/json',
+      )
+          .compose(
+            _dio.options,
+            '/sentinel/sign-in/magic-link',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SuccessResponse _value;
+    try {
+      _value = SuccessResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SentinelUserSession> verifyMagicLink(VerifyTokenRequest body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<SentinelUserSession>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'application/json',
+      )
+          .compose(
+            _dio.options,
+            '/sentinel/magic-link/verify',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SentinelUserSession _value;
+    try {
+      _value = SentinelUserSession.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SentinelUser> social(SocialRequest body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _options = _setStreamType<SentinelUser>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'application/json',
+      )
+          .compose(
+            _dio.options,
+            '/sentinel/social/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SentinelUser _value;
+    try {
+      _value = SentinelUser.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SentinelSession> currentSession() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<UserFactorsResponse>(
+    final _options = _setStreamType<SentinelSession>(
       Options(
         method: 'GET',
         headers: _headers,
@@ -1251,16 +528,16 @@ class _SentinelApi implements SentinelApi {
       )
           .compose(
             _dio.options,
-            '/sentinel/factors/user-factors',
+            '/sentinel/session/current-session',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserFactorsResponse _value;
+    late SentinelSession _value;
     try {
-      _value = UserFactorsResponse.fromJson(_result.data!);
+      _value = SentinelSession.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1269,151 +546,13 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<Factor> createFactor(CreateFactorBody body) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<Factor>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/factors/identifier',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late Factor _value;
-    try {
-      _value = Factor.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> prepareFactorVerification(
-    String factorID,
-    PrepareVerificationBody body,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/factors/${factorID}/prepare-verification',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<User> attemptFactorVerification(
-    String factorID,
-    AttemptVerificationBody body,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<User>(
-      Options(
-        method: 'POST',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/factors/${factorID}/attempt-verification',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late User _value;
-    try {
-      _value = User.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<User> deleteFactor(String factorID) async {
+  Future<List<SentinelSession>> listSessions() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<User>(
-      Options(
-        method: 'DELETE',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/factors/${factorID}',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late User _value;
-    try {
-      _value = User.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<List<Session>> getSessions() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<Session>>(
+    final _options = _setStreamType<List<SentinelSession>>(
       Options(
         method: 'GET',
         headers: _headers,
@@ -1422,17 +561,19 @@ class _SentinelApi implements SentinelApi {
       )
           .compose(
             _dio.options,
-            '/sentinel/sessions/',
+            '/sentinel/session/list-sessions',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Session> _value;
+    late List<SentinelSession> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => Session.fromJson(i as Map<String, dynamic>))
+          .map(
+            (dynamic i) => SentinelSession.fromJson(i as Map<String, dynamic>),
+          )
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -1442,178 +583,13 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<Session?> getSession(String sessionID) async {
+  Future<SuccessResponse> revokeSession(RevokeSessionRequest body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<Session>(
-      Options(
-        method: 'GET',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sessions/${sessionID}',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
-    late Session? _value;
-    try {
-      _value = _result.data == null ? null : Session.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> extendSession() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'PATCH',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sessions/extend',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> deleteAllSessions() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'DELETE',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sessions/',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> deleteOtherSessions() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'DELETE',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sessions/others',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> deleteSession(String sessionID) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'DELETE',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/sessions/${sessionID}',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<TOTPResponse> enableTOTP() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<TOTPResponse>(
+    final _data = body;
+    final _options = _setStreamType<SuccessResponse>(
       Options(
         method: 'POST',
         headers: _headers,
@@ -1622,16 +598,16 @@ class _SentinelApi implements SentinelApi {
       )
           .compose(
             _dio.options,
-            '/sentinel/mfa/enable-totp',
+            '/sentinel/session/revoke-session',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late TOTPResponse _value;
+    late SuccessResponse _value;
     try {
-      _value = TOTPResponse.fromJson(_result.data!);
+      _value = SuccessResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1640,13 +616,13 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> verifyTOTP(TOTPVerifyBody body) async {
+  Future<SuccessResponse> revokeSessions() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _options = _setStreamType<bool>(
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<SuccessResponse>(
       Options(
         method: 'POST',
         headers: _headers,
@@ -1655,16 +631,16 @@ class _SentinelApi implements SentinelApi {
       )
           .compose(
             _dio.options,
-            '/sentinel/mfa/verify-totp',
+            '/sentinel/session/revoke-sessions',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SuccessResponse _value;
     try {
-      _value = _result.data!;
+      _value = SuccessResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1673,130 +649,31 @@ class _SentinelApi implements SentinelApi {
   }
 
   @override
-  Future<bool> disableTOTP() async {
+  Future<SuccessResponse> revokeOtherSessions() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<SuccessResponse>(
       Options(
-        method: 'DELETE',
+        method: 'POST',
         headers: _headers,
         extra: _extra,
         contentType: 'application/json',
       )
           .compose(
             _dio.options,
-            '/sentinel/mfa/disable-totp',
+            '/sentinel/session/revoke-other-sessions',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SuccessResponse _value;
     try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> enableTwoFactor() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'PATCH',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/mfa/enable-two-factor',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<bool> disableTwoFactor() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
-      Options(
-        method: 'PATCH',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/mfa/disable-two-factor',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<List<String>> regenerateRecoveryCodes() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<String>>(
-      Options(
-        method: 'PATCH',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
-          .compose(
-            _dio.options,
-            '/sentinel/mfa/regenerate-recovery-codes',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<String> _value;
-    try {
-      _value = _result.data!.cast<String>();
+      _value = SuccessResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

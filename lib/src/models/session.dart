@@ -1,8 +1,5 @@
-import 'package:drift/drift.dart' as drift;
-import 'package:drift/drift.dart' show KeyAction;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sentinel/src/models/session.drift.dart';
-import 'package:sentinel/src/models/user.dart';
+import 'package:sentinel/src/database/database.dart';
 
 part 'session.freezed.dart';
 part 'session.g.dart';
@@ -13,216 +10,111 @@ part 'session.g.dart';
 /// for the session, identity, device, and user, as well as the authentication
 /// token and expiration time.
 @freezed
-abstract class Session with _$Session {
-  /// Creates a new Session instance.
-  const factory Session({
+abstract class SentinelSession with _$SentinelSession {
+  /// Creates a new [SentinelSession] instance.
+  const factory SentinelSession({
     required String id,
-    required String appID,
-    required String userID,
-    required String deviceID,
-    required String factorID,
-    required SessionStatus status,
-    required String token,
-    required String? ipAddress,
-    required String? city,
-    required String? state,
-    required String? country,
     required DateTime? expiresAt,
+    required String token,
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _Session;
+    required String? ipAddress,
+    required String deviceName,
+    required DeviceType deviceType,
+    required String userId,
+    required String? impersonatedBy,
+  }) = _SentinelSession;
 
-  /// Used to serialize [Session] object to and from JSON.
-  factory Session.fromJson(Map<String, Object?> json) =>
-      _$SessionFromJson(json);
+  /// Used to serialize [SentinelSession] object to and from JSON.
+  factory SentinelSession.fromJson(Map<String, Object?> json) => _$SentinelSessionFromJson(json);
 }
 
-/// Represents the status of a user's session.
-enum SessionStatus {
-  /// The user is logged in but the identifier has to be verified.
-  verification,
+/// Represents the different types of devices supported by the application.
+enum DeviceType {
+  /// Represents an Android mobile device.
+  android,
 
-  /// The user is logged in but has to be verified using a second factor such as
-  /// phoneCode, emailCode or totp.
-  needsSecondFactor,
+  /// Represents an iOS mobile device (iPhone or iPad).
+  ios,
 
-  /// The user is logged in and has a valid session.
-  active,
+  /// Represents a web browser-based client.
+  web,
+
+  /// Represents a macOS desktop computer.
+  macos,
+
+  /// Represents a Windows desktop computer.
+  windows,
+
+  /// Represents a Linux-based computer.
+  linux,
 }
 
-/// Represents a user session with additional user authentication information.
-///
-/// Extends the Session class by including the full Auth object associated
-/// with the user, providing more comprehensive session data.
+/// Represents data related to an IP address.
 @freezed
-abstract class UserSession with _$UserSession {
-  /// Creates a new AuthSession instance.
-  const factory UserSession({
-    required String id,
-    required String appID,
-    required String userID,
-    required String deviceID,
-    required String factorID,
-    required SessionStatus status,
-    required String token,
-    required String? ipAddress,
-    required String? city,
-    required String? state,
-    required String? country,
-    required DateTime? expiresAt,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    required User user,
-  }) = _UserSession;
+abstract class IPAddressData with _$IPAddressData {
+  /// Creates a new instance of [IPAddressData].
+  const factory IPAddressData({
+    required String ip,
+    required String city,
+    required String region,
+    @JsonKey(name: 'region_code') required String regionCode,
+    @JsonKey(name: 'country_code') required String countryCode,
+    @JsonKey(name: 'country_code_iso3') required String countryCodeIso3,
+    @JsonKey(name: 'country_name') required String countryName,
+    @JsonKey(name: 'country_capital') required String countryCapital,
+  }) = _IPAddressData;
 
-  /// Used to serialize [UserSession] object to and from JSON.
-  factory UserSession.fromJson(Map<String, Object?> json) =>
-      _$UserSessionFromJson(json);
+  /// Converts a [IPAddressData] to and from a [Map]
+  factory IPAddressData.fromJson(Map<String, dynamic> json) => _$IPAddressDataFromJson(json);
 }
 
-/// Represents a user's session in the Drift database.
-///
-/// This class is used to store session information in the Drift database,
-/// allowing for efficient querying and persistence of session data.
-@drift.DataClassName('DSession')
-class Sessions extends drift.Table {
-  @override
-  String get tableName => 'session';
-
-  /// The unique identifier for the session.
-  drift.TextColumn get id => text()();
-
-  /// The unique identifier for the application.
-  drift.TextColumn get appID => text()();
-
-  /// The unique identifier for the user.
-  drift.TextColumn get userID => text().references(
-        Users,
-        #id,
-        onDelete: KeyAction.cascade,
-      )();
-
-  /// The unique identifier for the device.
-  drift.TextColumn get deviceID => text()();
-
-  /// The unique identifier for the factor.
-  drift.TextColumn get factorID => text()();
-
-  /// The status of the session.
-  drift.TextColumn get status => textEnum<SessionStatus>()();
-
-  /// The authentication token for the session.
-  drift.TextColumn get token => text()();
-
-  /// The IP address of the user.
-  drift.TextColumn get ipAddress => text().nullable()();
-
-  /// The city of the user.
-  drift.TextColumn get city => text().nullable()();
-
-  /// The state of the user.
-  drift.TextColumn get state => text().nullable()();
-
-  /// The country of the user.
-  drift.TextColumn get country => text().nullable()();
-
-  /// The expiration time of the session.
-  drift.DateTimeColumn get expiresAt => dateTime().nullable()();
-
-  /// The creation time of the session.
-  drift.DateTimeColumn get createdAt => dateTime()();
-
-  /// The update time of the session.
-  drift.DateTimeColumn get updatedAt => dateTime()();
-
-  @override
-  Set<drift.Column> get primaryKey => {id};
-}
-
-/// Extension on [Session] to provide conversion to [DSession].
-extension SessionConverter on Session {
-  /// Converts a [Session] instance to an [DSession] instance.
+/// Extension on [SentinelSession] to provide conversion to [DSentinelSession].
+extension SentinelSessionConverter on SentinelSession {
+  /// Converts a [SentinelSession] instance to an [DSentinelSession] instance.
   ///
-  /// This method creates a new [DSession] object and populates it with
-  /// the data from the current [Session] instance.
+  /// This method creates a new [DSentinelSession] object and populates it with
+  /// the data from the current [SentinelSession] instance.
   ///
-  /// Returns an [DSession] object that can be stored in the Drift
+  /// Returns an [DSentinelSession] object that can be stored in the Drift
   /// database.
-  SessionsCompanion toDrift() {
-    return DSession(
+  SentinelSessionsCompanion toDrift() {
+    return DSentinelSession(
       id: id,
-      appID: appID,
-      userID: userID,
-      deviceID: deviceID,
-      factorID: factorID,
-      status: status,
-      token: token,
-      ipAddress: ipAddress,
-      city: city,
-      state: state,
-      country: country,
       expiresAt: expiresAt,
+      token: token,
       createdAt: createdAt,
       updatedAt: updatedAt,
+      ipAddress: ipAddress,
+      deviceName: deviceName,
+      deviceType: deviceType,
+      userId: userId,
+      impersonatedBy: impersonatedBy,
     ).toCompanion(false);
   }
 }
 
-/// Extension on [DSession] to provide conversion to [Session].
-extension DSessionConverter on DSession {
-  /// Converts an [DSession] instance to a [Session] instance.
+/// Extension on [DSentinelSession] to provide conversion to [SentinelSession].
+extension DSentinelSessionConverter on DSentinelSession {
+  /// Converts an [DSentinelSession] instance to a [SentinelSession] instance.
   ///
-  /// This method creates a new [Session] object using the data
-  /// from the current [DSession] instance.
+  /// This method creates a new [SentinelSession] object using the data
+  /// from the current [DSentinelSession] instance.
   ///
-  /// Returns a [Session] object that can be used in the application
+  /// Returns a [SentinelSession] object that can be used in the application
   /// logic.
-  Session toObject() {
-    return Session(
+  SentinelSession toObject() {
+    return SentinelSession(
       id: id,
-      appID: appID,
-      userID: userID,
-      deviceID: deviceID,
-      factorID: factorID,
-      status: status,
-      token: token,
-      ipAddress: ipAddress,
-      city: city,
-      state: state,
-      country: country,
       expiresAt: expiresAt,
+      token: token,
       createdAt: createdAt,
       updatedAt: updatedAt,
-    );
-  }
-}
-
-/// Extension on [UserSession] to provide conversion to [Session].
-extension UserSessionConverter on UserSession {
-  /// Converts an [UserSession] instance to a [Session] instance.
-  ///
-  /// This method creates a new [Session] object using the data
-  /// from the current [UserSession] instance, excluding the [User]
-  /// object.
-  ///
-  /// Returns a [Session] object that contains only the session-specific
-  /// information.
-  Session toSession() {
-    return Session(
-      id: id,
-      appID: appID,
-      userID: userID,
-      deviceID: deviceID,
-      factorID: factorID,
-      status: status,
-      token: token,
       ipAddress: ipAddress,
-      city: city,
-      state: state,
-      country: country,
-      expiresAt: expiresAt,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
+      deviceName: deviceName,
+      deviceType: deviceType,
+      userId: userId,
+      impersonatedBy: impersonatedBy,
     );
   }
 }

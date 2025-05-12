@@ -6,83 +6,65 @@ part of 'session.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Session _$SessionFromJson(Map<String, dynamic> json) => _Session(
+_SentinelSession _$SentinelSessionFromJson(Map<String, dynamic> json) =>
+    _SentinelSession(
       id: json['id'] as String,
-      appID: json['appID'] as String,
-      userID: json['userID'] as String,
-      deviceID: json['deviceID'] as String,
-      factorID: json['factorID'] as String,
-      status: $enumDecode(_$SessionStatusEnumMap, json['status']),
-      token: json['token'] as String,
-      ipAddress: json['ipAddress'] as String?,
-      city: json['city'] as String?,
-      state: json['state'] as String?,
-      country: json['country'] as String?,
       expiresAt: json['expiresAt'] == null
           ? null
           : DateTime.parse(json['expiresAt'] as String),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-    );
-
-Map<String, dynamic> _$SessionToJson(_Session instance) => <String, dynamic>{
-      'id': instance.id,
-      'appID': instance.appID,
-      'userID': instance.userID,
-      'deviceID': instance.deviceID,
-      'factorID': instance.factorID,
-      'status': _$SessionStatusEnumMap[instance.status]!,
-      'token': instance.token,
-      'ipAddress': instance.ipAddress,
-      'city': instance.city,
-      'state': instance.state,
-      'country': instance.country,
-      'expiresAt': instance.expiresAt?.toIso8601String(),
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-    };
-
-const _$SessionStatusEnumMap = {
-  SessionStatus.verification: 'verification',
-  SessionStatus.needsSecondFactor: 'needsSecondFactor',
-  SessionStatus.active: 'active',
-};
-
-_UserSession _$UserSessionFromJson(Map<String, dynamic> json) => _UserSession(
-      id: json['id'] as String,
-      appID: json['appID'] as String,
-      userID: json['userID'] as String,
-      deviceID: json['deviceID'] as String,
-      factorID: json['factorID'] as String,
-      status: $enumDecode(_$SessionStatusEnumMap, json['status']),
       token: json['token'] as String,
-      ipAddress: json['ipAddress'] as String?,
-      city: json['city'] as String?,
-      state: json['state'] as String?,
-      country: json['country'] as String?,
-      expiresAt: json['expiresAt'] == null
-          ? null
-          : DateTime.parse(json['expiresAt'] as String),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      ipAddress: json['ipAddress'] as String?,
+      deviceName: json['deviceName'] as String,
+      deviceType: $enumDecode(_$DeviceTypeEnumMap, json['deviceType']),
+      userId: json['userId'] as String,
+      impersonatedBy: json['impersonatedBy'] as String?,
     );
 
-Map<String, dynamic> _$UserSessionToJson(_UserSession instance) =>
+Map<String, dynamic> _$SentinelSessionToJson(_SentinelSession instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'appID': instance.appID,
-      'userID': instance.userID,
-      'deviceID': instance.deviceID,
-      'factorID': instance.factorID,
-      'status': _$SessionStatusEnumMap[instance.status]!,
-      'token': instance.token,
-      'ipAddress': instance.ipAddress,
-      'city': instance.city,
-      'state': instance.state,
-      'country': instance.country,
       'expiresAt': instance.expiresAt?.toIso8601String(),
+      'token': instance.token,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
-      'user': instance.user.toJson(),
+      'ipAddress': instance.ipAddress,
+      'deviceName': instance.deviceName,
+      'deviceType': _$DeviceTypeEnumMap[instance.deviceType]!,
+      'userId': instance.userId,
+      'impersonatedBy': instance.impersonatedBy,
+    };
+
+const _$DeviceTypeEnumMap = {
+  DeviceType.android: 'android',
+  DeviceType.ios: 'ios',
+  DeviceType.web: 'web',
+  DeviceType.macos: 'macos',
+  DeviceType.windows: 'windows',
+  DeviceType.linux: 'linux',
+};
+
+_IPAddressData _$IPAddressDataFromJson(Map<String, dynamic> json) =>
+    _IPAddressData(
+      ip: json['ip'] as String,
+      city: json['city'] as String,
+      region: json['region'] as String,
+      regionCode: json['region_code'] as String,
+      countryCode: json['country_code'] as String,
+      countryCodeIso3: json['country_code_iso3'] as String,
+      countryName: json['country_name'] as String,
+      countryCapital: json['country_capital'] as String,
+    );
+
+Map<String, dynamic> _$IPAddressDataToJson(_IPAddressData instance) =>
+    <String, dynamic>{
+      'ip': instance.ip,
+      'city': instance.city,
+      'region': instance.region,
+      'region_code': instance.regionCode,
+      'country_code': instance.countryCode,
+      'country_code_iso3': instance.countryCodeIso3,
+      'country_name': instance.countryName,
+      'country_capital': instance.countryCapital,
     };

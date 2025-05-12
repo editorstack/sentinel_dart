@@ -1,8 +1,5 @@
-import 'package:drift/drift.dart' as drift;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sentinel/src/models/device.dart';
-import 'package:sentinel/src/models/factor.dart';
-import 'package:sentinel/src/models/user.drift.dart';
+import 'package:sentinel/src/database/database.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -14,27 +11,28 @@ part 'user.g.dart';
 /// identities and devices, and optional personal information such as
 /// name, email, phone, and profile image.
 @freezed
-abstract class User with _$User {
-  /// Creates a new instance of [User] with the specified parameters.
-  const factory User({
+abstract class SentinelUser with _$SentinelUser {
+  /// Creates a new instance of [SentinelUser] with the specified parameters.
+  const factory SentinelUser({
     required String id,
     required String? firstName,
     required String? lastName,
-    required String? email,
-    required String? phoneNumber,
+    required String email,
+    required bool emailVerified,
     required String? image,
-    required bool twoFactor,
-    required bool banned,
     required DateTime createdAt,
     required DateTime updatedAt,
-    required List<Factor> factors,
-    required List<Device> devices,
-  }) = _User;
+    required bool twoFactorEnabled,
+    required UserRole role,
+    required bool banned,
+    required String? banReason,
+    required DateTime? banExpires,
+  }) = _SentinelUser;
 
-  /// Used to serialize [User] object to and from JSON.
-  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
+  /// Used to serialize [SentinelUser] object to and from JSON.
+  factory SentinelUser.fromJson(Map<String, Object?> json) => _$SentinelUserFromJson(json);
 
-  const User._();
+  const SentinelUser._();
 
   /// Returns true if the user has a first name, false otherwise.
   bool get isRegistered => firstName != null;
@@ -43,106 +41,65 @@ abstract class User with _$User {
   String get name => '${firstName ?? ''} ${lastName ?? ''}'.trim();
 
   /// Returns the initials of the user's name.
-  String get initials =>
-      '${firstName?.substring(0, 1) ?? ''}${lastName?.substring(0, 1) ?? ''}';
+  String get initials => '${firstName?.substring(0, 1) ?? ''}${lastName?.substring(0, 1) ?? ''}';
 }
 
-/// Represents an authenticated user for Drift database storage.
-///
-/// This class is used to persist authenticated user information in the Drift
-/// database.
-/// It mirrors the structure of the [User] class but is optimized for Drift
-/// storage.
-@drift.DataClassName('DUser')
-class Users extends drift.Table {
-  @override
-  String get tableName => 'user';
+/// Role of the user.
+enum UserRole {
+  /// He/She is an admin of the app.
+  admin,
 
-  /// Unique identifier for the user.
-  drift.TextColumn get id => text()();
-
-  /// User's first name, if provided.
-  drift.TextColumn get firstName => text().nullable()();
-
-  /// User's last name, if provided.
-  drift.TextColumn get lastName => text().nullable()();
-
-  /// User's email address, if provided.
-  drift.TextColumn get email => text().nullable()();
-
-  /// User's phone number, if provided.
-  drift.TextColumn get phoneNumber => text().nullable()();
-
-  /// User's profile image URL, if provided.
-  drift.TextColumn get image => text().nullable()();
-
-  /// Whether two factor authentication is enabled for the user.
-  drift.BoolColumn get twoFactor => boolean()();
-
-  /// Whether the user account is banned.
-  drift.BoolColumn get banned => boolean()();
-
-  /// Date and time when the user account was created.
-  drift.DateTimeColumn get createdAt => dateTime()();
-
-  /// Date and time when the user account was last updated.
-  drift.DateTimeColumn get updatedAt => dateTime()();
-
-  /// List of associated factors for the user.
-  drift.TextColumn get factors => text().map(const FactorConverter())();
-
-  /// List of associated devices for the user.
-  drift.TextColumn get devices => text().map(const DeviceConverter())();
-
-  @override
-  Set<drift.Column> get primaryKey => {id};
+  /// He/She is a normal user in the app.
+  user
 }
 
-/// Extension on [User] to provide conversion to [DUser].
-extension UserConverter on User {
-  /// Converts an [User] instance to an [DUser] instance.
+/// Extension on [SentinelUser] to provide conversion to [DSentinelUser].
+extension SentinelUserConverter on SentinelUser {
+  /// Converts an [SentinelUser] instance to an [DSentinelUser] instance.
   ///
-  /// Returns an [DUser] object that can be stored in the Drift database.
-  UsersCompanion toDrift() {
-    return DUser(
+  /// Returns an [DSentinelUser] object that can be stored in the Drift database.
+  SentinelUsersCompanion toDrift() {
+    return DSentinelUser(
       id: id,
       firstName: firstName,
       lastName: lastName,
       email: email,
-      phoneNumber: phoneNumber,
+      emailVerified: emailVerified,
       image: image,
-      twoFactor: twoFactor,
-      banned: banned,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      factors: factors,
-      devices: devices,
+      twoFactorEnabled: twoFactorEnabled,
+      role: role,
+      banned: banned,
+      banReason: banReason,
+      banExpires: banExpires,
     ).toCompanion(false);
   }
 }
 
-/// Extension on [DUser] to provide conversion to [User].
-extension DUserConverter on DUser {
-  /// Converts an [DUser] instance to an [User] instance.
+/// Extension on [DSentinelUser] to provide conversion to [SentinelUser].
+extension DSentinelUserConverter on DSentinelUser {
+  /// Converts an [DSentinelUser] instance to an [SentinelUser] instance.
   ///
-  /// This method creates a new [User] object using the data
-  /// from the current [DUser] instance.
+  /// This method creates a new [SentinelUser] object using the data
+  /// from the current [DSentinelUser] instance.
   ///
-  /// Returns an [User] object that can be used in the application logic.
-  User toObject() {
-    return User(
+  /// Returns an [SentinelUser] object that can be used in the application logic.
+  SentinelUser toObject() {
+    return SentinelUser(
       id: id,
       firstName: firstName,
       lastName: lastName,
       email: email,
-      phoneNumber: phoneNumber,
+      emailVerified: emailVerified,
       image: image,
-      twoFactor: twoFactor,
-      banned: banned,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      factors: factors,
-      devices: devices,
+      twoFactorEnabled: twoFactorEnabled,
+      role: role,
+      banned: banned,
+      banReason: banReason,
+      banExpires: banExpires,
     );
   }
 }
